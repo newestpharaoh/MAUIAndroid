@@ -20,6 +20,7 @@
     <Color x:Key="Green3">#90C73E</Color>
 
     <Color x:Key="Red1">#CF1B00</Color>
+    <Color x:Key="Orange1">#f78c26</Color>
 
     <!--#endregion-->
 

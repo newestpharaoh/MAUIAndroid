@@ -11,6 +11,7 @@ namespace AndroidPatientApp.Helpers
         //To Manage User Info
         public static int UserId = 0;
         public static string Token = string.Empty;
+        public static string LoginEmail = string.Empty;
         public static DateTime? TokenExpirationDate;
     }
 }

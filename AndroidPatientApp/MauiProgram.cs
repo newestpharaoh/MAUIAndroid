@@ -33,7 +33,7 @@ namespace AndroidPatientApp
 #endif
 
 #if ANDROID
-           // builder.Services.AddSingleton(UserDialogs.Instance);
+            // builder.Services.AddSingleton(UserDialogs.Instance);
 #endif
             return builder.Build();
         }

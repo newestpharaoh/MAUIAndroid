@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientApp.Views.Account.VerificationCodePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:AndroidPatientApp.CustomControls"
+    Title="VerificationCodePage">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="10"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Please Varify"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray2}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+        <!--  Body Section  -->
+        <Grid
+            Grid.Row="2"
+            Padding="20,0"
+            HorizontalOptions="FillAndExpand"
+            RowDefinitions="250,Auto,Auto,10,60"
+            RowSpacing="20"
+            VerticalOptions="FillAndExpand">
+
+            <!--  Logo image  -->
+            <Image
+                Grid.Row="0"
+                Aspect="AspectFit"
+                HorizontalOptions="FillAndExpand"
+                Source="nmd.png"
+                VerticalOptions="CenterAndExpand" />
+
+            <!--  verification code Section  -->
+            <Grid
+                Grid.Row="1"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto"
+                RowSpacing="5"
+                VerticalOptions="FillAndExpand">
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Please enter verification code"
+                    TextColor="Black"
+                    VerticalOptions="FillAndExpand" />
+                <Grid
+                    Grid.Row="1"
+                    Padding="10,0"
+                    BackgroundColor="{StaticResource Gray1}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <controls:CustomEntry
+                        FontSize="14"
+                        HeightRequest="45"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Default"
+                        Text="{Binding VerificationCode}"
+                        VerticalOptions="FillAndExpand" />
+                </Grid>
+            </Grid>
+
+            <!--  Error Section  -->
+            <Label
+                Grid.Row="2"
+                FontAttributes="Bold"
+                FontSize="14"
+                HorizontalTextAlignment="Start"
+                IsVisible="false"
+                Text="Please enter the verification code."
+                TextColor="{StaticResource Red1}"
+                VerticalTextAlignment="Center">
+                <Label.Triggers>
+                    <DataTrigger
+                        Binding="{Binding VerificationCodeError}"
+                        TargetType="Label"
+                        Value="true">
+                        <Setter Property="IsVisible" Value="true" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+            <!--  Submit Button Section  -->
+            <Button
+                Grid.Row="4"
+                BackgroundColor="{StaticResource Green1}"
+                Command="{Binding VerifySignInCommand}"
+                FontFamily="SanchezSlab"
+                FontSize="14"
+                HeightRequest="55"
+                HorizontalOptions="FillAndExpand"
+                Text="Verify &amp; Sign In"
+                TextColor="{StaticResource White}"
+                VerticalOptions="FillAndExpand"
+                WidthRequest="180" />
+        </Grid>
+    </Grid>
+</ContentPage>

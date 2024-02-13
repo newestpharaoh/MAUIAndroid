@@ -64,6 +64,7 @@
 	  <None Remove="Resources\Images\ic_launcher.png" />
 	  <None Remove="Resources\Images\infoicon.svg" />
 	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\nmd.png" />
 	  <None Remove="Resources\Images\openeye.svg" />
 	  <None Remove="Resources\Splash\nmdsplash.svg" />
@@ -96,6 +97,9 @@
  
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Account\EmailVerifyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Account\ForgotPasswordPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -103,6 +107,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Account\RegistrationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Account\VerificationCodePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Home\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

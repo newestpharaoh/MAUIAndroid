@@ -41,7 +41,7 @@ namespace AndroidPatientApp.ViewModels.Account
 
         #region Properties
 
-        private string _Email;
+        private string _Email = "testusermed25@gmail.com";
         public string Email
         {
             get { return _Email; }
@@ -55,7 +55,7 @@ namespace AndroidPatientApp.ViewModels.Account
             }
         }
 
-        private string _Password;
+        private string _Password = "SomePassword9!";
         public string Password
         {
             get { return _Password; }
@@ -102,7 +102,7 @@ namespace AndroidPatientApp.ViewModels.Account
         #region Methods
 
         public async Task GetAppSettings()
-        { 
+        {
             // Get App settings api..
             try
             {
@@ -129,7 +129,7 @@ namespace AndroidPatientApp.ViewModels.Account
 
                             if (showUpdateDialog)
                             {
-                            } 
+                            }
                             UserDialog.HideLoading();
                         });
                     }).ConfigureAwait(false);
@@ -225,9 +225,16 @@ namespace AndroidPatientApp.ViewModels.Account
                             }
                             else if (!string.IsNullOrEmpty(resp.access_token) && resp.expires_in != null)
                             {
-                                AndroidPatientApp.Helpers.AppGlobalConstants.Token = resp.access_token;
-                                AndroidPatientApp.Helpers.AppGlobalConstants.UserId = resp.userid;
-                                AndroidPatientApp.Helpers.AppGlobalConstants.TokenExpirationDate = DateTime.Now.AddSeconds(Convert.ToInt32(resp.expires_in));
+                                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                {
+                                    AndroidPatientApp.Helpers.AppGlobalConstants.Token = resp.access_token;
+                                    AndroidPatientApp.Helpers.AppGlobalConstants.UserId = resp.userid;
+                                    AndroidPatientApp.Helpers.AppGlobalConstants.TokenExpirationDate = DateTime.Now.AddSeconds(Convert.ToInt32(resp.expires_in));
+
+                                    AndroidPatientApp.Helpers.AppGlobalConstants.LoginEmail = Email;
+                                    await Navigation.PushModalAsync(new Views.Account.EmailVerifyPage(), false);
+                                });
+
                                 //using (SessionStateHelper sessionStateHelper = new SessionStateHelper(this))
                                 //{
                                 //    SessionState sessionState = sessionStateHelper.GetState();
