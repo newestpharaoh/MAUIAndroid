@@ -129,8 +129,7 @@ namespace AndroidPatientApp.ViewModels.Account
 
                             if (showUpdateDialog)
                             {
-                            }
-
+                            } 
                             UserDialog.HideLoading();
                         });
                     }).ConfigureAwait(false);
