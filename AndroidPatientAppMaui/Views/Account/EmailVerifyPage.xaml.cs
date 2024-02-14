@@ -21,6 +21,7 @@ public partial class EmailVerifyPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        await VM.GetUserContactAsync();
         await VM.MaskPhoneNumber();
         await VM.MaskEmail(); 
     }

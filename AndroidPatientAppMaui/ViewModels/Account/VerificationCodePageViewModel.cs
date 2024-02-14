@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using CommonLibraryCoreMaui;
+using CommonLibraryCoreMaui.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +11,19 @@ namespace AndroidPatientAppMaui.ViewModels.Account
 {
     public class VerificationCodePageViewModel : BaseViewModel
     {
+        //To define the class level variable.
+        string Token = string.Empty;
+        int Userid = 0;
+
         #region Constructor
         public VerificationCodePageViewModel(INavigation nav)
         {
             Navigation = nav;
             BackCommand = new Command(BackAsync);
             VerifySignInCommand = new Command(VerifySignInAsync);
+
+            Token = Preferences.Get("AuthToken", string.Empty);
+            Userid = Preferences.Get("UserId", 0);
         }
 
         #endregion
@@ -58,15 +68,61 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         /// To define the verify sign In command.
         /// </summary>
         /// <param name="obj"></param>
-        private void VerifySignInAsync(object obj)
+        private async void VerifySignInAsync(object obj)
         {
-            if (!string.IsNullOrWhiteSpace(VerificationCode))
+            try
             {
-                App.Current.MainPage = new Views.MainTabs.MainTabPage();
+                if (!string.IsNullOrWhiteSpace(VerificationCode))
+                {
+                    GlobalState global;
+                    if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                    {
+                        UserDialog.ShowLoading();
+                        await Task.Run(async () =>
+                        {
+                            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                            {
+                                StatusResponse resp = await DataUtility.UserAccountAuthenticateCode(SettingsValues.ApiURLValue, Userid, VerificationCode);
+
+                                if (resp != null)
+                                {
+                                    if (string.IsNullOrEmpty(resp.ErrorMessage))
+                                    {
+                                        if (resp.StatusCode == StatusCode.Success)
+                                        {
+                                            App.Current.MainPage = new Views.MainTabs.MainTabPage();
+                                        }
+                                        else if (!string.IsNullOrEmpty(resp.Message))
+                                        {
+                                            await UserDialogs.Instance.AlertAsync(resp.Message, "Verification failed", "Ok");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        await UserDialogs.Instance.AlertAsync(resp.ErrorMessage, "Verification failed", "Ok");
+                                    }
+                                }
+                                else
+                                {
+                                    await UserDialogs.Instance.AlertAsync("Verification failed. No response from server.");
+                                }
+                            });
+                        }).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        UserDialogs.Instance.HideLoading();
+                        await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                    }
+                    UserDialog.HideLoading();
+                }
+                else
+                {
+                    VerificationCodeError = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                VerificationCodeError = true;
             }
         }
 

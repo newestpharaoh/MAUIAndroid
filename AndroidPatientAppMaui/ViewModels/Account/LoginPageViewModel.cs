@@ -137,6 +137,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
                 else
                 {
                     UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
                 }
                 UserDialog.HideLoading();
             }
@@ -232,46 +233,20 @@ namespace AndroidPatientAppMaui.ViewModels.Account
                                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.TokenExpirationDate = DateTime.Now.AddSeconds(Convert.ToInt32(resp.expires_in));
 
                                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.LoginEmail = Email;
+
+                                    Preferences.Set("AuthToken", resp.access_token);
+                                    Preferences.Set("UserId", resp.userid);
                                     await Navigation.PushModalAsync(new Views.Account.EmailVerifyPage(), false);
                                 });
-
-                                //using (SessionStateHelper sessionStateHelper = new SessionStateHelper(this))
-                                //{
-                                //    SessionState sessionState = sessionStateHelper.GetState();
-                                //    sessionState.Token = resp.AccessToken;
-                                //    CommonAuthSession.Token = resp.AccessToken;
-                                //    sessionState.TokenExpirationDate = DateTime.Now.AddSeconds(Convert.ToInt32(resp.ExpiresIn));
-                                //    sessionStateHelper.SetState(sessionState);
-                                //}
-
-                                //if (session)
-                                //{
-                                //    //var homeIntent = new Intent(this, typeof(PatientHomeScreenActivity));
-                                //    //homeIntent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask | ActivityFlags.NoAnimation);
-                                //    //StartActivity(homeIntent); //TODO
-                                //    return;
-                                //}
-                                //else
-                                //{
-                                //    using (GlobalsStateHelper globalStateHelper = new GlobalsStateHelper(this))
-                                //    {
-                                //        GlobalState global = globalStateHelper.GetState();
-                                //        global.UserInfo.UserID = resp.UserId;
-                                //        global.UserInfo.ProviderID = null;
-                                //        globalStateHelper.SetState(global);
-                                //    }
-
-                                //    //intent = new Intent(this, typeof(PatientTwoFactorAuthActivity)); //TODO add back
-                                //}
                             }
                             else
                             {
-                                //UtilsUI.ShowMsgOkScreen(this, "Login failed. No token received from server."); //TODO
+                                await UserDialogs.Instance.AlertAsync("Login failed. No token received from server."); //TODO
                             }
                         }
                         else
                         {
-                            //UtilsUI.ShowMsgOkScreen(this, "Login failed. No response from server."); //TODO
+                            await UserDialogs.Instance.AlertAsync("Login failed. No response from server."); //TODO
                         }
 
                     }).ConfigureAwait(false);
@@ -279,6 +254,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
                 else
                 {
                     UserDialogs.Instance.Loading().Hide();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
                 }
                 UserDialog.HideLoading();
             }
