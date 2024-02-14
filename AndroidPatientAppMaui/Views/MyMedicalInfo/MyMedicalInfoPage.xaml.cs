@@ -7,8 +7,15 @@ public partial class MyMedicalInfoPage : ContentPage
     MyMedicalInfoPageViewModel VM;
     public MyMedicalInfoPage()
 	{
-		InitializeComponent();
-        this.BindingContext = VM = new MyMedicalInfoPageViewModel(this.Navigation);
+		try
+		{
+
+			InitializeComponent();
+			this.BindingContext = VM = new MyMedicalInfoPageViewModel(this.Navigation);
+		}
+		catch (Exception)
+		{
+		}
     }
 
 

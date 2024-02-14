@@ -7,10 +7,15 @@ public partial class VisitHistoryPage : ContentPage
     VisitHistoryPageViewModel VM;
     public VisitHistoryPage()
 	{
-		InitializeComponent();
-        this.BindingContext = VM = new VisitHistoryPageViewModel(this.Navigation);
+		try
+		{
+			InitializeComponent();
+			this.BindingContext = VM = new VisitHistoryPageViewModel(this.Navigation);
+		}
+		catch (Exception)
+		{
+		}
     }
-
 
     #region Event Handler
     #endregion
