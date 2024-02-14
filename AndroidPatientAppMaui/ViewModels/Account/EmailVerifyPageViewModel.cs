@@ -154,7 +154,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
             {
             }
         }
-         
+
         /// <summary>
         /// To define the send code button command.
         /// </summary>
@@ -165,45 +165,46 @@ namespace AndroidPatientAppMaui.ViewModels.Account
             {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
+                    UserDialog.ShowLoading();
                     await Navigation.PushModalAsync(new Views.Account.VerificationCodePage(), false);
-                    ////  UserDialog.ShowLoading();
-                    //  await Task.Run(async () =>
-                    //  {
-                    //      Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                    //      {
 
-                    //          //StatusResponse resp = await DataUtility.UserAccountSendCode(SettingsValues.ApiURLValue, Userid, radioButton.Text.ToLower() == "email" ? "email" : "text", "", null);
-                    //          //if (resp != null)
-                    //          //{
-                    //          //    if (string.IsNullOrEmpty(resp.ErrorMessage))
-                    //          //    {
-                    //          //        if (resp.StatusCode == StatusCode.Success)
-                    //          //        {
-                    //          //            await Navigation.PushModalAsync(new Views.Account.VerificationCodePage(), false);
-                    //          //        }
-                    //          //        else if (resp.StatusCode == StatusCode.NotFound)
-                    //          //        {
-                    //          //            await UserDialogs.Instance.AlertAsync("An error occurred when trying to send you a verification code. If the error continues try selecting the opposite communication option.");
-                    //          //        }
-                    //          //        else
-                    //          //        {
-                    //          //            if (!string.IsNullOrEmpty(resp.Message))
-                    //          //            {
-                    //          //                await UserDialogs.Instance.AlertAsync($"Verification code request failed. Reason: {resp.Message}");
-                    //          //            }
-                    //          //        }
-                    //          //    }
-                    //          //    else
-                    //          //    {
-                    //          //        await UserDialogs.Instance.AlertAsync(resp.ErrorMessage);
-                    //          //    }
-                    //          //}
-                    //          //else
-                    //          //{
-                    //          //    await UserDialogs.Instance.AlertAsync("Verification failed. No response from server.");
-                    //          //}
-                    //      });
-                    //  }).ConfigureAwait(false);
+                    //await Task.Run(async () =>
+                    //{
+                    //    Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                    //    {
+                    //        //  StatusResponse resp = await DataUtility.UserAccountSendCode(SettingsValues.ApiURLValue, Userid, radioButton.Text.ToLower() == "email" ? "email" : "text", "", null);
+                    //        StatusResponse resp = await DataUtility.UserAccountSendCode(SettingsValues.ApiURLValue, Userid, "", "", null);
+                    //        if (resp != null)
+                    //        {
+                    //            if (string.IsNullOrEmpty(resp.ErrorMessage))
+                    //            {
+                    //                if (resp.StatusCode == StatusCode.Success)
+                    //                {
+                    //                    await Navigation.PushModalAsync(new Views.Account.VerificationCodePage(), false);
+                    //                }
+                    //                else if (resp.StatusCode == StatusCode.NotFound)
+                    //                {
+                    //                    await UserDialogs.Instance.AlertAsync("An error occurred when trying to send you a verification code. If the error continues try selecting the opposite communication option.");
+                    //                }
+                    //                else
+                    //                {
+                    //                    if (!string.IsNullOrEmpty(resp.Message))
+                    //                    {
+                    //                        await UserDialogs.Instance.AlertAsync($"Verification code request failed. Reason: {resp.Message}");
+                    //                    }
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                await UserDialogs.Instance.AlertAsync(resp.ErrorMessage);
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            await UserDialogs.Instance.AlertAsync("Verification failed. No response from server.");
+                    //        }
+                    //    });
+                    //}).ConfigureAwait(false);
                 }
                 else
                 {
