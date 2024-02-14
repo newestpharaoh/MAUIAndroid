@@ -59,14 +59,22 @@
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\normanmd_icon.png" />
 	  <None Remove="Resources\Fonts\SanchezSlab.ttf" />
+	  <None Remove="Resources\Images\arrowup.svg" />
 	  <None Remove="Resources\Images\backicon.svg" />
+	  <None Remove="Resources\Images\book.svg" />
+	  <None Remove="Resources\Images\cabinet.svg" />
+	  <None Remove="Resources\Images\clipboard.svg" />
 	  <None Remove="Resources\Images\closeeye.svg" />
+	  <None Remove="Resources\Images\creditcard.svg" />
+	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\ic_launcher.png" />
 	  <None Remove="Resources\Images\infoicon.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logout.png" />
+	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\nmd.png" />
 	  <None Remove="Resources\Images\openeye.svg" />
+	  <None Remove="Resources\Images\user.svg" />
 	  <None Remove="Resources\Splash\nmdsplash.svg" />
 	</ItemGroup>
 
