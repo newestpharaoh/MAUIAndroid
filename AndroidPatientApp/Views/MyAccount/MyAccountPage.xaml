@@ -37,7 +37,7 @@
                 FontAttributes="Bold"
                 FontSize="18"
                 HorizontalTextAlignment="Center"
-                Text="Please Varify"
+                Text="My Account"
                 TextColor="Black"
                 VerticalTextAlignment="Center" />
         </Grid>
@@ -51,9 +51,9 @@
         <!--  Body Section  -->
         <Grid
             Grid.Row="2"
-            Padding="20,0"
+            Padding="10,0"
             HorizontalOptions="FillAndExpand"
-            RowDefinitions="250,Auto,Auto,10,60"
+            RowDefinitions="Auto,Auto,Auto,10,60"
             RowSpacing="20"
             VerticalOptions="FillAndExpand" />
     </Grid>
