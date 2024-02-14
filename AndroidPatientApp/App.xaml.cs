@@ -16,7 +16,7 @@ namespace AndroidPatientApp
             Handlers.ModifyDatePicker();
 
             //MainPage = new AppShell();
-            MainPage = new HomePage();
+            MainPage = new LoginPage();
         }
     }
 }
