@@ -66,6 +66,8 @@
 	  <None Remove="Resources\Images\clipboard.svg" />
 	  <None Remove="Resources\Images\closeeye.svg" />
 	  <None Remove="Resources\Images\creditcard.svg" />
+	  <None Remove="Resources\Images\emptycreditcard.svg" />
+	  <None Remove="Resources\Images\handshake.svg" />
 	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\ic_launcher.png" />
 	  <None Remove="Resources\Images\infoicon.svg" />
@@ -126,6 +128,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MainTabs\MainTabPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyAccount\FinePrintPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MyAccount\MyAccountPage.xaml">

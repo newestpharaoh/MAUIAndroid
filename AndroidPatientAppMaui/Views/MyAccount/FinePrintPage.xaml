@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="AndroidPatientAppMaui.Views.MyAccount.MyAccountPage"
+    x:Class="AndroidPatientAppMaui.Views.MyAccount.FinePrintPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="MyAccountPage">
+    Title="FinePrintPage">
     <!--  Main Grid  -->
     <Grid
         HorizontalOptions="FillAndExpand"
@@ -37,7 +37,7 @@
                 FontAttributes="Bold"
                 FontSize="18"
                 HorizontalTextAlignment="Center"
-                Text="My Account"
+                Text="Fine Print"
                 TextColor="Black"
                 VerticalTextAlignment="Center" />
         </Grid>
@@ -53,10 +53,10 @@
             Grid.Row="2"
             Padding="0,15"
             HorizontalOptions="FillAndExpand"
-            RowDefinitions="Auto,1,Auto,1,Auto,1,Auto,1,Auto"
+            RowDefinitions="Auto,1,Auto,1,Auto"
             RowSpacing="18"
             VerticalOptions="FillAndExpand">
-            <!--  Account Profile Section  -->
+            <!--  Term Of Use Section  -->
             <Grid
                 Grid.Row="0"
                 Margin="10,0"
@@ -69,7 +69,7 @@
                     Margin="0,0,10,0"
                     HeightRequest="22"
                     HorizontalOptions="StartAndExpand"
-                    Source="user.png"
+                    Source="handshake.png"
                     VerticalOptions="CenterAndExpand"
                     WidthRequest="22" />
                 <Label
@@ -77,7 +77,7 @@
                     Padding="3"
                     FontSize="15"
                     HorizontalOptions="CenterAndExpand"
-                    Text="Account Profiles"
+                    Text="Terms Of Use"
                     TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
 
@@ -95,7 +95,7 @@
                 HeightRequest="1"
                 HorizontalOptions="FillAndExpand" />
 
-            <!--  Manage Subscription Section  -->
+            <!--  Billing Policies Section  -->
             <Grid
                 Grid.Row="2"
                 Margin="10,0"
@@ -108,7 +108,7 @@
                     Margin="0,0,10,0"
                     HeightRequest="22"
                     HorizontalOptions="StartAndExpand"
-                    Source="creditcard.png"
+                    Source="emptycreditcard.png"
                     VerticalOptions="CenterAndExpand"
                     WidthRequest="22" />
                 <Label
@@ -116,7 +116,7 @@
                     Padding="3"
                     FontSize="15"
                     HorizontalOptions="CenterAndExpand"
-                    Text="Manage Subscription"
+                    Text="Billing Policies"
                     TextColor="Black"
                     VerticalOptions="CenterAndExpand" />
 
@@ -133,84 +133,6 @@
                 BackgroundColor="#E7E7E7"
                 HeightRequest="1"
                 HorizontalOptions="FillAndExpand" />
-
-            <!--  Fine Print Section  -->
-            <Grid
-                Grid.Row="4"
-                Margin="10,0"
-                ColumnDefinitions="30,Auto,*"
-                ColumnSpacing="10"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-                <Image
-                    Grid.Column="0"
-                    Margin="0,0,10,0"
-                    HeightRequest="22"
-                    HorizontalOptions="StartAndExpand"
-                    Source="book.png"
-                    VerticalOptions="CenterAndExpand"
-                    WidthRequest="22" />
-                <Label
-                    Grid.Column="1"
-                    Padding="3"
-                    FontSize="15"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="Fine Print"
-                    TextColor="Black"
-                    VerticalOptions="CenterAndExpand" />
-
-                <Image
-                    Grid.Column="2"
-                    HeightRequest="22"
-                    HorizontalOptions="EndAndExpand"
-                    Source="arrowup.png"
-                    VerticalOptions="EndAndExpand"
-                    WidthRequest="22" />
-
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding FinePrintCommand}" />
-                </Grid.GestureRecognizers>
-            </Grid>
-            <BoxView
-                Grid.Row="5"
-                BackgroundColor="#E7E7E7"
-                HeightRequest="1"
-                HorizontalOptions="FillAndExpand" />
-
-            <!--  SignOut Section  -->
-            <Grid
-                Grid.Row="6"
-                Margin="10,0"
-                ColumnDefinitions="30,Auto"
-                ColumnSpacing="10"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-                <Image
-                    Grid.Column="0"
-                    Margin="0,0,10,0"
-                    HeightRequest="22"
-                    HorizontalOptions="StartAndExpand"
-                    Source="logout.png"
-                    VerticalOptions="CenterAndExpand"
-                    WidthRequest="22" />
-                <Label
-                    Grid.Column="1"
-                    Padding="3"
-                    FontSize="15"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="Sign Out"
-                    TextColor="Black"
-                    VerticalOptions="CenterAndExpand" />
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SignOutCommand}" />
-                </Grid.GestureRecognizers>
-            </Grid>
-            <BoxView
-                Grid.Row="7"
-                BackgroundColor="#E7E7E7"
-                HeightRequest="1"
-                HorizontalOptions="FillAndExpand" />
         </Grid>
     </Grid>
-
 </ContentPage>

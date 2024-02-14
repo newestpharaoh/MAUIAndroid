@@ -6,9 +6,15 @@ public partial class MyAccountPage : ContentPage
 {
     MyAccountPageViewModel VM;
     public MyAccountPage()
-	{
-		InitializeComponent();
-        this.BindingContext = VM = new MyAccountPageViewModel(this.Navigation);
+    {
+        try
+        {
+            InitializeComponent();
+            this.BindingContext = VM = new MyAccountPageViewModel(this.Navigation);
+        }
+        catch (Exception)
+        {
+        }
     }
 
     #region Event Handler

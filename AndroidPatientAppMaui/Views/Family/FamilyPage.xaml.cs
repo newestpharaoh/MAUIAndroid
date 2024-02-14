@@ -8,8 +8,14 @@ public partial class FamilyPage : ContentPage
     FamilyPageViewModel VM;
     public FamilyPage()
 	{
-		InitializeComponent();
-        this.BindingContext = VM = new FamilyPageViewModel(this.Navigation);
+		try
+		{
+			InitializeComponent();
+			this.BindingContext = VM = new FamilyPageViewModel(this.Navigation);
+		}
+		catch (Exception)
+		{
+		}
     }
 
     #region Event Handler
