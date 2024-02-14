@@ -135,6 +135,9 @@
 	  <MauiXaml Update="Views\VisitHistory\VisitHistoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MainTabs\MainTabPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
  
 
