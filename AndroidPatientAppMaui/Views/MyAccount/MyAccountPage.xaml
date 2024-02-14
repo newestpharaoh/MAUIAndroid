@@ -18,7 +18,7 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
             <!--  Back image Section  -->
-            <Grid
+            <!--<Grid
                 Grid.Column="0"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
@@ -31,7 +31,7 @@
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding BackCommand}" />
                 </Grid.GestureRecognizers>
-            </Grid>
+            </Grid>-->
             <Label
                 Grid.Column="1"
                 FontAttributes="Bold"
