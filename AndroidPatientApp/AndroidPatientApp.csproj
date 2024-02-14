@@ -70,7 +70,6 @@
 	  <None Remove="Resources\Images\ic_launcher.png" />
 	  <None Remove="Resources\Images\infoicon.svg" />
 	  <None Remove="Resources\Images\logo.png" />
-	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\nmd.png" />
 	  <None Remove="Resources\Images\openeye.svg" />
