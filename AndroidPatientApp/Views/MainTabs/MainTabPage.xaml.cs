@@ -1,6 +1,6 @@
 namespace AndroidPatientApp.Views.MainTabs;
 
-public partial class MainTabPage : ContentPage
+public partial class MainTabPage : TabbedPage
 {
 	public MainTabPage()
 	{
