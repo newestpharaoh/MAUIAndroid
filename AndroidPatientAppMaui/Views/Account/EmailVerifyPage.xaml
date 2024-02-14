@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.Account.EmailVerifyPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
+    Title="EmailVerifyPage"
+    Background="white">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="ThemeRadioTemplate">
+            <Grid
+                Padding="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid>
+                    <Grid
+                        HeightRequest="25"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        WidthRequest="25">
+                        <Ellipse
+                            Fill="White"
+                            HeightRequest="21"
+                            Stroke="#000000"
+                            StrokeThickness="5"
+                            WidthRequest="21" />
+
+                        <Ellipse
+                            x:Name="check"
+                            Fill="#000000"
+                            HeightRequest="10"
+                            Stroke="#000000"
+                            WidthRequest="10" />
+                    </Grid>
+                    <!--  This enables us to put in dynamic content  -->
+                    <ContentPresenter />
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="check" Property="Opacity" Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="check" Property="Opacity" Value="0" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+        </ControlTemplate>
+    </ContentPage.Resources>
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="10"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Please Varify"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray2}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+        <!--  Body Section  -->
+        <Grid
+            Grid.Row="2"
+            Padding="20,0"
+            HorizontalOptions="FillAndExpand"
+            RowDefinitions="250,Auto,Auto,10,60"
+            RowSpacing="20"
+            VerticalOptions="FillAndExpand">
+
+            <!--  Logo image  -->
+            <Image
+                Grid.Row="0"
+                Aspect="AspectFit"
+                HorizontalOptions="FillAndExpand"
+                Source="nmd.png"
+                VerticalOptions="CenterAndExpand" />
+
+            <Label
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="15"
+                HorizontalOptions="FillAndExpand"
+                Text="Would you prefer to receive the verification code by text message or email?"
+                TextColor="{StaticResource Black}"
+                VerticalOptions="FillAndExpand" />
+
+            <Grid
+                Grid.Row="2"
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="0"
+                RadioButtonGroup.GroupName="CancellationReasons"
+                RadioButtonGroup.SelectedValue="{Binding SendingCodeVia}"
+                RowDefinitions="35,35"
+                RowSpacing="0">
+                <RadioButton
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                    GroupName="CancellationReasons"
+                    Value="Text" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontSize="15"
+                    HorizontalOptions="StartAndExpand"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Text  " />
+                            <Span Text="{Binding ResultPhonenumber}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <RadioButton
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                    Value="Email" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontSize="15"
+                    HorizontalOptions="StartAndExpand"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Email  " />
+                            <Span Text="{Binding ResultEmail}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+
+
+            <!--  Submit Button Section  -->
+            <Button
+                Grid.Row="4"
+                BackgroundColor="{StaticResource Green1}"
+                Command="{Binding SendCodeCommand}"
+                FontFamily="SanchezSlab"
+                FontSize="14"
+                HeightRequest="55"
+                HorizontalOptions="FillAndExpand"
+                Text="Send Code"
+                TextColor="{StaticResource White}"
+                VerticalOptions="FillAndExpand"
+                WidthRequest="180" />
+        </Grid>
+    </Grid>
+</ContentPage>
