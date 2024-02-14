@@ -2,6 +2,7 @@
 using AndroidPatientAppMaui.Views;
 using AndroidPatientAppMaui.Views.Account;
 using AndroidPatientAppMaui.Views.Home;
+using AndroidPatientAppMaui.Views.MainTabs;
 using Microsoft.Maui.Controls.Platform;
 
 namespace AndroidPatientAppMaui

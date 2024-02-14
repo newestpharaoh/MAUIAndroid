@@ -3,14 +3,24 @@
     x:Class="AndroidPatientAppMaui.Views.MainTabs.MainTabPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:family="clr-namespace:AndroidPatientAppMaui.Views.Family"
     xmlns:home="clr-namespace:AndroidPatientAppMaui.Views.Home"
+    xmlns:medicalinfo="clr-namespace:AndroidPatientAppMaui.Views.MyMedicalInfo"
     xmlns:myaccount="clr-namespace:AndroidPatientAppMaui.Views.MyAccount"
-    Title="MainTabPage">
+    xmlns:visit="clr-namespace:AndroidPatientAppMaui.Views.VisitHistory"
+    Title="MainTabPage"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    SelectedTabColor="{StaticResource Black}"
+    UnselectedTabColor="Gray">
 
 
     <TabbedPage.Children>
-        <home:HomePage Title="Home" />
-        <myaccount:MyAccountPage Title="My Account" />
+        <home:HomePage Title="Home" IconImageSource="home.png" />
+        <visit:VisitHistoryPage Title="Visit History" IconImageSource="cabinet.png" />
+        <family:FamilyPage Title="Family" IconImageSource="clipboard.png" />
+        <medicalinfo:MyMedicalInfoPage Title="My Medical Page" IconImageSource="clipboard.png" />
+        <myaccount:MyAccountPage Title="My Account" IconImageSource="user.png" />
     </TabbedPage.Children>
 
 </TabbedPage>

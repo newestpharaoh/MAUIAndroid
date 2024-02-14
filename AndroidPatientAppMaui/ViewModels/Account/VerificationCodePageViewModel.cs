@@ -62,7 +62,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         {
             if (!string.IsNullOrWhiteSpace(VerificationCode))
             {
-
+                App.Current.MainPage = new Views.MainTabs.MainTabPage();
             }
             else
             {
