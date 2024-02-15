@@ -6,7 +6,6 @@
     xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
     Title="LoginPage"
     Background="white">
-
     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <!--  Main Grid  -->
