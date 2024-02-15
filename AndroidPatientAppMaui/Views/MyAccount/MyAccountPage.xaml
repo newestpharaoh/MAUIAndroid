@@ -127,6 +127,9 @@
                     Source="arrowup.png"
                     VerticalOptions="EndAndExpand"
                     WidthRequest="22" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ManageSubscriptionCommand}" />
+                </Grid.GestureRecognizers>
             </Grid>
             <BoxView
                 Grid.Row="3"

@@ -18,6 +18,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             BackCommand = new Command(BackAsync);
             FinePrintCommand = new Command(FinePrintAsync);
             SignOutCommand = new Command(SignOutAsync);
+            ManageSubscriptionCommand = new Command(ManageSubscriptionAsync);
         }
         #endregion
 
@@ -25,6 +26,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         public Command BackCommand { get; set; }
         public Command FinePrintCommand { get; set; }
         public Command SignOutCommand { get; set; }
+        public Command ManageSubscriptionCommand { get; set; }
         #endregion
 
         #region Properties
@@ -49,7 +51,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         }
 
         /// <summary>
-        /// To Do: To define Fine Print command
+        /// To Do: To define Sign Out command
         /// </summary>
         /// <param name="obj"></param>
 
@@ -57,6 +59,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
+                await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes","No");
             }
             catch (Exception ex)
             {
@@ -64,16 +67,31 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
         }
 
-         /// <summary>
-        /// To Do: To define Sign Out command
+        /// <summary>
+        /// To Do: To define Fine Print command
         /// </summary>
         /// <param name="obj"></param>
-
         private async void FinePrintAsync(object obj)
         {
             try
             {
                 await Navigation.PushModalAsync(new Views.MyAccount.FinePrintPage(), false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
+        /// To Do: To define Manage Subscription command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void ManageSubscriptionAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new Views.MyAccount.ManageSubscriptionPage(), false);
             }
             catch (Exception ex)
             {

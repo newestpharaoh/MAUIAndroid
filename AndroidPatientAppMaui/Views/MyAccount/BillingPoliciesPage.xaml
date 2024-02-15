@@ -62,7 +62,7 @@
                 RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,1,Auto,1,Auto,1,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
                 RowSpacing="15"
                 VerticalOptions="FillAndExpand">
-                <!--  Terms Header Section  -->
+                <!--  Billing Header Section  -->
                 <Label
                     Grid.Row="0"
                     FontAttributes="Bold"
@@ -71,7 +71,7 @@
                     Text="Billing Policies"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
-                <!--  Welcome Header Section  -->
+                <!--  Monthly Header Section  -->
                 <Label
                     Grid.Row="1"
                     FontAttributes="Bold"
@@ -96,7 +96,6 @@
                     Text="&#x2022; Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
-
                 <Label
                     Grid.Row="4"
                     FontSize="13"
@@ -104,8 +103,7 @@
                     Text=" &#x2022; Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
-
-                <!--  Welcome Header Section  -->
+                <!--  Purchase Date Section  -->
                 <Label
                     Grid.Row="5"
                     FontAttributes="Bold"
@@ -114,7 +112,6 @@
                     Text="Purchase Date Auto-Renewal Date"
                     TextColor="{StaticResource Gray4}"
                     VerticalTextAlignment="Center" />
-
                 <!--  BoxView Section  -->
                 <BoxView
                     Grid.Row="6"
@@ -122,6 +119,7 @@
                     HeightRequest="1"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" />
+                <!--  Table Section  -->
                 <Grid
                     Grid.Row="7"
                     ColumnDefinitions="Auto,*"
@@ -225,12 +223,14 @@
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
                 </Grid>
+                <!--  Boxview Section  -->
                 <BoxView
                     Grid.Row="14"
                     BackgroundColor="{StaticResource Gray3}"
                     HeightRequest="1"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" />
+                <!--  Updating Credit Card Section  -->
                 <Label
                     Grid.Row="15"
                     FontAttributes="Bold"
@@ -239,7 +239,6 @@
                     Text="Updating Credit Card"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
-                <!--  Sub Header Section  -->
                 <Label
                     Grid.Row="16"
                     FontSize="13"
@@ -247,7 +246,7 @@
                     Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
-
+                <!--  Paid Plan Section  -->
                 <Label
                     Grid.Row="17"
                     FontAttributes="Bold"
@@ -256,7 +255,6 @@
                     Text="Paid Plan Changes"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
-                <!--  Sub Header Section  -->
                 <Label
                     Grid.Row="18"
                     FontSize="13"
@@ -264,16 +262,15 @@
                     Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
-
+                <!--  Paid Plan Cancellation Section  -->
                 <Label
                     Grid.Row="19"
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalTextAlignment="Start"
-                    Text="Paid Plan Changes"
+                    Text="Paid Plan Cancellation"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
-                <!--  Sub Header Section  -->
                 <Label
                     Grid.Row="20"
                     FontSize="13"

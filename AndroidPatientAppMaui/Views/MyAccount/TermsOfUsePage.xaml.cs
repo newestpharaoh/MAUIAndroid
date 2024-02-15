@@ -17,7 +17,6 @@ public partial class TermsOfUsePage : ContentPage
 
 		}
 	}
-
     #region Event Handler
     #endregion
 }

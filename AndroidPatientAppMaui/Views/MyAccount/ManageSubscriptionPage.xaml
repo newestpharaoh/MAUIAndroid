@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.MyAccount.ManageSubscriptionPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="ManageSubscriptionPage">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Manage Subscriptions"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="12,10"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="10"
+                VerticalOptions="FillAndExpand">
+                <!--  Subscription Header Section  -->
+                <Label
+                    Grid.Row="0"
+                    FontSize="20"
+                    HorizontalTextAlignment="Start"
+                    Text="Your Subscription"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <Grid
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="4"
+                    VerticalOptions="FillAndExpand">
+                    <!--  Sub Header Section  -->
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        Text="Your Current Subscription :"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                    <!--  Sub Header Section  -->
+                    <Label
+                        Grid.Row="1"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        Text="individual 365 Plan"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <!--  Total Section  -->
+                <Grid
+                    Grid.Row="2"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        HorizontalTextAlignment="Start"
+                        Text="Total:"
+                        TextColor="#3DA687"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        Text="$120.00"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <!--  Expiration Date Section  -->
+                <Grid
+                    Grid.Row="3"
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        HorizontalTextAlignment="Start"
+                        Text="Expiration Date"
+                        TextColor="#3DA687"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        Text="2/7/2025"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <!--  Plan Description Section  -->
+                <Label
+                    Grid.Row="4"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
+                    TextColor="#464646"
+                    VerticalTextAlignment="Center" />
+                <!--  Change Plan Button Section  -->
+                <Button
+                    Grid.Row="5"
+                    Margin="50,0"
+                    BackgroundColor="#15B287"
+                    Command="{Binding ChangePlanCommand}"
+                    FontSize="14"
+                    HeightRequest="55"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Change Plan"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="180" />
+                <Grid
+                    Grid.Row="6"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="4"
+                    VerticalOptions="FillAndExpand">
+                    <!--  Payment Header Section  -->
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        HorizontalTextAlignment="Start"
+                        Text="Your Payment Method"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                    <!--  Info Image Section  -->
+                    <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="Auto,auto"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Column="0"
+                            Margin="0,0,0,0"
+                            FontSize="13"
+                            HorizontalTextAlignment="Start"
+                            Text="Subscriptions are renewed monthly."
+                            TextColor="{StaticResource Black}"
+                            VerticalTextAlignment="Center" />
+                        <Grid
+                            Grid.Column="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Image
+                                HeightRequest="25"
+                                HorizontalOptions="CenterAndExpand"
+                                Source="greyinfoicon.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="25" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding InfoCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <!--  Payment Description  -->
+                <Label
+                    Grid.Row="7"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
+                    TextColor="#464646"
+                    VerticalTextAlignment="Center" />
+                <!--  Update Payment Button Section  -->
+                <Button
+                    Grid.Row="8"
+                    Margin="50,0"
+                    BackgroundColor="#15B287"
+                    Command="{Binding UpdatePaymentCommand}"
+                    FontSize="14"
+                    HeightRequest="55"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Update Payment Method"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="200" />
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
