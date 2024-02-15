@@ -18,7 +18,6 @@ public partial class MyMedicalInfoPage : ContentPage
 		}
     }
 
-
     #region Event Handler
     #endregion
 }

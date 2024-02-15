@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.MyAccount.BillingPoliciesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="BillingPoliciesPage">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Billing Policies"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="12,20"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,1,Auto,1,Auto,1,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="15"
+                VerticalOptions="FillAndExpand">
+                <!--  Terms Header Section  -->
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Billing Policies"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Welcome Header Section  -->
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Monthly Subscription Plan Billing Schedule"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="2"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+
+                <Label
+                    Grid.Row="3"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="&#x2022; Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+
+                <Label
+                    Grid.Row="4"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text=" &#x2022; Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+
+                <!--  Welcome Header Section  -->
+                <Label
+                    Grid.Row="5"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HorizontalTextAlignment="Start"
+                    Text="Purchase Date Auto-Renewal Date"
+                    TextColor="{StaticResource Gray4}"
+                    VerticalTextAlignment="Center" />
+
+                <!--  BoxView Section  -->
+                <BoxView
+                    Grid.Row="6"
+                    BackgroundColor="{StaticResource Gray3}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                <Grid
+                    Grid.Row="7"
+                    ColumnDefinitions="Auto,*"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="1st - 28th"
+                        TextColor="LightGray"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="13"
+                        HorizontalTextAlignment="End"
+                        Text="Subscription the plan is cancelled."
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <BoxView
+                    Grid.Row="8"
+                    BackgroundColor="{StaticResource Gray3}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                <Grid
+                    Grid.Row="9"
+                    ColumnDefinitions="Auto,*"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="1st - 28th"
+                        TextColor="LightGray"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="13"
+                        HorizontalTextAlignment="End"
+                        Text="Subscription the plan is cancelled."
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+
+                <BoxView
+                    Grid.Row="10"
+                    BackgroundColor="{StaticResource Gray3}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                <Grid
+                    Grid.Row="11"
+                    ColumnDefinitions="Auto,*"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="1st - 28th"
+                        TextColor="LightGray"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="13"
+                        HorizontalTextAlignment="End"
+                        Text="Subscription the plan is cancelled."
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <BoxView
+                    Grid.Row="12"
+                    BackgroundColor="{StaticResource Gray3}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                <Grid
+                    Grid.Row="13"
+                    ColumnDefinitions="Auto,*"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalTextAlignment="Start"
+                        Text="1st - 28th"
+                        TextColor="LightGray"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Column="1"
+                        FontSize="13"
+                        HorizontalTextAlignment="End"
+                        Text="Subscription the plan is cancelled."
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <BoxView
+                    Grid.Row="14"
+                    BackgroundColor="{StaticResource Gray3}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                <Label
+                    Grid.Row="15"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Updating Credit Card"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="16"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+
+                <Label
+                    Grid.Row="17"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Paid Plan Changes"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="18"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+
+                <Label
+                    Grid.Row="19"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Paid Plan Changes"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="20"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
+

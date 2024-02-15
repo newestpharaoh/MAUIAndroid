@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.MyAccount.TermsOfUsePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="TermsOfUsePage">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Terms of Use"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="12,20"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,auto"
+                RowSpacing="15"
+                VerticalOptions="FillAndExpand">
+                <!--  Terms Header Section  -->
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Terms of Use"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Welcome Header Section  -->
+                <Label
+                    Grid.Row="1"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Welcome to NormanMD"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="2"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <!--  Subscription Header Section  -->
+                <Label
+                    Grid.Row="3"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Subscription and Registration for Texas Residents"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Account Header Section  -->
+                <Label
+                    Grid.Row="4"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Account"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="5"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <!--  Membership Header Section  -->
+                <Label
+                    Grid.Row="6"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Membership Access"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="7"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="8"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <!--  Paid Header Section  -->
+                <Label
+                    Grid.Row="9"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Paid Access"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="10"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="11"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="12"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    Grid.Row="13"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontFamily="SanchezSlab"
+                                Text="Please review our "
+                                TextColor="{StaticResource Black}" />
+                            <Span
+                                FontAttributes="Italic"
+                                Text="Billing Policies "
+                                TextColor="{StaticResource Green1}" />
+                            <Span
+                                FontFamily="SanchezSlab"
+                                Text="for a detailed biling schedule."
+                                TextColor="{StaticResource Black}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <!--  Refunds Header Section  -->
+                <Label
+                    Grid.Row="14"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="Refunds/Cancellations"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="15"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully  in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

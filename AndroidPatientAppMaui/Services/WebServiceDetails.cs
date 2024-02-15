@@ -8,5 +8,6 @@ namespace AndroidPatientAppMaui.Services
 {
     public class WebServiceDetails
     {
+
     }
 }

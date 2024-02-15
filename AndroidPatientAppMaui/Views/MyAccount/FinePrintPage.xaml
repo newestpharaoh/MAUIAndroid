@@ -88,6 +88,9 @@
                     Source="arrowup.png"
                     VerticalOptions="EndAndExpand"
                     WidthRequest="22" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TermsOfUseCommand}" />
+                </Grid.GestureRecognizers>
             </Grid>
             <BoxView
                 Grid.Row="1"
@@ -127,6 +130,9 @@
                     Source="arrowup.png"
                     VerticalOptions="EndAndExpand"
                     WidthRequest="22" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BillingPoliciesCommand}" />
+                </Grid.GestureRecognizers>
             </Grid>
             <BoxView
                 Grid.Row="3"

@@ -13,11 +13,15 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             Navigation = nav;
             BackCommand = new Command(BackAsync);
+            TermsOfUseCommand = new Command(TermsOfUseAsync);
+            BillingPoliciesCommand = new Command(BillingPoliciesAsync);
         }
         #endregion
 
         #region Command
         public Command BackCommand { get; set; }
+        public Command TermsOfUseCommand { get; set; }
+        public Command BillingPoliciesCommand { get; set; }
         #endregion
 
         #region Properties
@@ -41,6 +45,39 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
         }
 
+        /// <summary>
+        /// To Do: To define TermsOfUse command
+        /// </summary>
+        /// <param name="obj"></param>
+
+        private async void TermsOfUseAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new Views.MyAccount.TermsOfUsePage(), false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
+        /// To Do: To define BillingPolicies command
+        /// </summary>
+        /// <param name="obj"></param>
+
+        private async void BillingPoliciesAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new Views.MyAccount.BillingPoliciesPage(), false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
         #endregion
     }
 }

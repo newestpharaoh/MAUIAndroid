@@ -6,7 +6,7 @@ public partial class FamilyPage : ContentPage
 {
 
     FamilyPageViewModel VM;
-    public FamilyPage()
+    public  FamilyPage()
 	{
 		try
 		{
