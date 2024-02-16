@@ -134,6 +134,9 @@
 	  <MauiXaml Update="Views\MyAccount\BillingPoliciesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MyAccount\ChangePlanPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\MyAccount\FinePrintPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
