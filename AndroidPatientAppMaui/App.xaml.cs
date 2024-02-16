@@ -14,8 +14,8 @@ namespace AndroidPatientAppMaui
             InitializeComponent();
             Handlers.ModifyEntry();
 
-            MainPage = new LoginPage();
-          // MainPage = new Views.MyAccount.MyAccountPage();
+           //MainPage = new LoginPage();
+           MainPage = new Views.MyAccount.MyAccountPage();
         }
     }
 }

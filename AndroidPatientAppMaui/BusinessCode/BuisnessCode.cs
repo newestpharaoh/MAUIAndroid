@@ -42,7 +42,6 @@ namespace AndroidPatientAppMaui.BusinessCode
 
         #region  Apis Definations Methods
 
-
         #region Account
         public async Task<TokenResponse> CustomerLoginEmail(string email, string password, Action<object> success, Action<object> failed)
         {
@@ -77,8 +76,6 @@ namespace AndroidPatientAppMaui.BusinessCode
         }
 
         #endregion
-
-
 
         #endregion
     }

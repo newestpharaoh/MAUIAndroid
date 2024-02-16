@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.MyAccount.UpdateCardInformationPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
+    Title="UpdateCardInformationPage">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Update Card information"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="8,10"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,auto"
+                RowSpacing="15"
+                VerticalOptions="FillAndExpand">
+                <!--  Header Section  -->
+                <Label
+                    Grid.Row="0"
+                    FontSize="15"
+                    HorizontalOptions="StartAndExpand"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Providing Care for Patients Currently in Texas: " />
+                            <Span Text="In compilance with" />
+                            <Span
+                                FontAttributes="Italic"
+                                Text=" governing rules and regulations"
+                                TextColor="{StaticResource Green1}" />
+                            <Span Text=",physicians can only prescribe for and treat* patients currently located within the state of Texas at the time of service." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="1"
+                    FontSize="15"
+                    HorizontalOptions="StartAndExpand"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="HSA/FSA Disclaimer: " />
+                            <Span Text="eMD Access cannot guarantee HSA/FSA eligibility or reimbursement. At this time, we cannot accept HSA/FSA cards as payment for services." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <!--  Credit Card Information Section  -->
+                <Grid
+                    Grid.Row="2"
+                    ColumnDefinitions="Auto,*"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Column="0"
+                        Margin="0,0,0,0"
+                        FontSize="13"
+                        HorizontalTextAlignment="Start"
+                        Text="Credit Card Information."
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center" />
+                    <Grid
+                        Grid.Column="1"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Image
+                            HeightRequest="25"
+                            HorizontalOptions="EndAndExpand"
+                            Source="greyinfoicon.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding InfoCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Grid>
+                <!--  First Name Section  -->
+                <Grid
+                    Grid.Row="3"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="FirstName*"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray1}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            FontSize="14"
+                            HeightRequest="45"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding FirstName}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+                <!--  Last Name Section  -->
+                <Grid
+                    Grid.Row="4"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="LastName*"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray1}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            FontSize="14"
+                            HeightRequest="45"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding LastName}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+                <!--  Credit Card Section  -->
+                <Grid
+                    Grid.Row="5"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Credit Card Number*"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray1}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            FontSize="14"
+                            HeightRequest="45"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding CreditcardNumber}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+                <!--  Expiration Date Section  -->
+                <Grid
+                    Grid.Row="5"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Credit Card Number*"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray1}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            FontSize="14"
+                            HeightRequest="45"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding CreditcardNumber}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

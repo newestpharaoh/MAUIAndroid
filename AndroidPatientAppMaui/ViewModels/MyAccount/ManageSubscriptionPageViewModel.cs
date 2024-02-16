@@ -49,7 +49,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// </summary>
         /// <param name="obj"></param>
 
-        private  void ChangePlanAsync(object obj)
+        private void ChangePlanAsync(object obj)
         {
             try
             {
@@ -64,10 +64,11 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// </summary>
         /// <param name="obj"></param>
 
-        private  void UpdatePaymentAsync(object obj)
+        private async void UpdatePaymentAsync(object obj)
         {
             try
             {
+                await Navigation.PushModalAsync(new Views.MyAccount.UpdateCardInformationPage(), false);
             }
             catch (Exception ex)
             {
