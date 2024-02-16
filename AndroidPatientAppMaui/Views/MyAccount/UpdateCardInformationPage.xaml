@@ -106,7 +106,7 @@
                         Margin="0,0,0,0"
                         FontSize="13"
                         HorizontalTextAlignment="Start"
-                        Text="Credit Card Information."
+                        Text="Credit Card Information"
                         TextColor="{StaticResource Blue1}"
                         VerticalTextAlignment="Center" />
                     <Grid
@@ -216,7 +216,7 @@
                 </Grid>
                 <!--  Expiration Date Section  -->
                 <Grid
-                    Grid.Row="5"
+                    Grid.Row="6"
                     HorizontalOptions="FillAndExpand"
                     RowDefinitions="Auto,Auto"
                     RowSpacing="5"
@@ -226,7 +226,7 @@
                         FontAttributes="Bold"
                         FontSize="12"
                         HorizontalOptions="FillAndExpand"
-                        Text="Credit Card Number*"
+                        Text="Expiration Date*"
                         TextColor="Black"
                         VerticalOptions="FillAndExpand" />
                     <Grid
@@ -241,6 +241,120 @@
                             HorizontalOptions="FillAndExpand"
                             Keyboard="Default"
                             Text="{Binding CreditcardNumber}"
+                            VerticalOptions="FillAndExpand" />
+                        <Image
+                            HeightRequest="20"
+                            HorizontalOptions="EndAndExpand"
+                            Source="downarrow.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="20" />
+                        <Picker Title="Select an item">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Option 1</x:String>
+                                    <x:String>Option 2</x:String>
+                                    <x:String>Option 3</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Grid>
+                </Grid>
+                <!--  Security Code Section  -->
+                <Grid
+                    Grid.Row="7"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Security Code*"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray1}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            FontSize="14"
+                            HeightRequest="45"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding SecurityCode}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+                <!--  Billing Information  -->
+                <Label
+                    Grid.Row="8"
+                    Margin="0,0,0,0"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="Billing Information"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <!--  Address Section  -->
+                <Grid
+                    Grid.Row="9"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Address*"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray1}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            FontSize="14"
+                            HeightRequest="45"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding Address}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+                <!--  City Section  -->
+                <Grid
+                    Grid.Row="10"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="City*"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray1}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            FontSize="14"
+                            HeightRequest="45"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding City}"
                             VerticalOptions="FillAndExpand" />
                     </Grid>
                 </Grid>

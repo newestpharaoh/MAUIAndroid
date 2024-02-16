@@ -66,6 +66,7 @@
 	  <None Remove="Resources\Images\clipboard.svg" />
 	  <None Remove="Resources\Images\closeeye.svg" />
 	  <None Remove="Resources\Images\creditcard.svg" />
+	  <None Remove="Resources\Images\downarrow.svg" />
 	  <None Remove="Resources\Images\emptycreditcard.svg" />
 	  <None Remove="Resources\Images\greyinfoicon.svg" />
 	  <None Remove="Resources\Images\handshake.svg" />

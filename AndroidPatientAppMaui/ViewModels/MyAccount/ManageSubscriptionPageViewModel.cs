@@ -60,7 +60,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
         }
         /// <summary>
-        /// To Do: To define Update Paymnet command
+        /// To Do: To define Update Payment command
         /// </summary>
         /// <param name="obj"></param>
 
