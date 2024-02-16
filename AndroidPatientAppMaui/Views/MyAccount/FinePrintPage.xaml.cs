@@ -4,7 +4,10 @@ namespace AndroidPatientAppMaui.Views.MyAccount;
 
 public partial class FinePrintPage : ContentPage
 {
+    //To define the class lavel variable.
     FinePrintPageViewModel VM;
+
+    #region Constructor
     public FinePrintPage()
 	{
 		try
@@ -16,6 +19,7 @@ public partial class FinePrintPage : ContentPage
 		{			
 		}
     }
+    #endregion
 
     #region Event Handler
     #endregion

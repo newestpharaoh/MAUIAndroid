@@ -4,7 +4,10 @@ namespace AndroidPatientAppMaui.Views.MyAccount;
 
 public partial class TermsOfUsePage : ContentPage
 {
+    //To define the class lavel variable.
     TermsOfUsePageViewModel VM;
+
+    #region Constructor
     public TermsOfUsePage()
     {
 		try
@@ -17,6 +20,8 @@ public partial class TermsOfUsePage : ContentPage
 
 		}
 	}
+    #endregion
+
     #region Event Handler
     #endregion
 }

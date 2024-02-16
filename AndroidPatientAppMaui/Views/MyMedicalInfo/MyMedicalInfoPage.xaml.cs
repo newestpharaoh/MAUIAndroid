@@ -4,8 +4,11 @@ namespace AndroidPatientAppMaui.Views.MyMedicalInfo;
 
 public partial class MyMedicalInfoPage : ContentPage
 {
-    MyMedicalInfoPageViewModel VM;
-    public MyMedicalInfoPage()
+	//To define the class lavel variable.
+	MyMedicalInfoPageViewModel VM;
+
+	#region Constructor
+	public MyMedicalInfoPage()
 	{
 		try
 		{
@@ -17,6 +20,7 @@ public partial class MyMedicalInfoPage : ContentPage
 		{
 		}
     }
+    #endregion
 
     #region Event Handler
     #endregion

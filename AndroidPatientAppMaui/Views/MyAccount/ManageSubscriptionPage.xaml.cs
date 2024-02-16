@@ -4,8 +4,10 @@ namespace AndroidPatientAppMaui.Views.MyAccount;
 
 public partial class ManageSubscriptionPage : ContentPage
 {
+    //To define the class lavel variable.
     ManageSubscriptionPageViewModel VM;
 
+    #region Constructor
     public ManageSubscriptionPage()
     {
         try
@@ -18,6 +20,8 @@ public partial class ManageSubscriptionPage : ContentPage
 
         }
     }
-        #region Event Handler
-        #endregion
-    }
+    #endregion
+
+    #region Event Handler
+    #endregion
+}

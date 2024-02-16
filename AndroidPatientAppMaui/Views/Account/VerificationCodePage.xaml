@@ -38,14 +38,14 @@
                 FontAttributes="Bold"
                 FontSize="18"
                 HorizontalTextAlignment="Center"
-                Text="Please Varify"
+                Text="Please Verify"
                 TextColor="Black"
                 VerticalTextAlignment="Center" />
         </Grid>
         <!--  BoxView Section  -->
         <BoxView
             Grid.Row="1"
-            BackgroundColor="{StaticResource Gray2}"
+            BackgroundColor="{StaticResource Gray1}"
             HeightRequest="1"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand" />

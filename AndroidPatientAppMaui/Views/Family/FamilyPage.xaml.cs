@@ -4,9 +4,11 @@ namespace AndroidPatientAppMaui.Views.Family;
 
 public partial class FamilyPage : ContentPage
 {
-
+    //To define the class lavel variable.
     FamilyPageViewModel VM;
-    public  FamilyPage()
+
+    #region Constructor
+    public FamilyPage()
 	{
 		try
 		{
@@ -17,6 +19,7 @@ public partial class FamilyPage : ContentPage
 		{
 		}
     }
+    #endregion
 
     #region Event Handler
     #endregion

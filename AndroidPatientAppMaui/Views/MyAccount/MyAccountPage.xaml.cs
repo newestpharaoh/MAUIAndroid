@@ -4,7 +4,9 @@ namespace AndroidPatientAppMaui.Views.MyAccount;
 
 public partial class MyAccountPage : ContentPage
 {
+    //To define the class lavel variable.
     MyAccountPageViewModel VM;
+    #region Constructor
     public MyAccountPage()
     {
         try
@@ -16,6 +18,7 @@ public partial class MyAccountPage : ContentPage
         {
         }
     }
+    #endregion
 
     #region Event Handler
     #endregion

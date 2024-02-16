@@ -4,8 +4,10 @@ namespace AndroidPatientAppMaui.Views.MyAccount;
 
 public partial class BillingPoliciesPage : ContentPage
 {
+    //To define the class lavel variable.
     BilingPoliciesPageViewModel VM;
 
+    #region Constructor
     public BillingPoliciesPage()
     {
         try
@@ -18,6 +20,7 @@ public partial class BillingPoliciesPage : ContentPage
 
         }
     }
+    #endregion
 
     #region Event Handler
     #endregion
