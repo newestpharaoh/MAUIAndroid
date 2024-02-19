@@ -190,7 +190,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
                                     else
                                     {
                                         if (!string.IsNullOrEmpty(resp.Message))
-                                        {
+                                        {    
                                             await UserDialogs.Instance.AlertAsync($"Verification code request failed. Reason: {resp.Message}");
                                         }
                                     }

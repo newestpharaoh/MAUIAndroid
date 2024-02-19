@@ -153,6 +153,24 @@
                     Text="Allergies:"
                     TextColor="{StaticResource Blue1}"
                     VerticalTextAlignment="Center" />
+                <!--  Medications Section  -->
+                <Label
+                    Grid.Row="7"
+                    FontFamily="SanchezSlab"
+                    FontSize="17"
+                    HorizontalTextAlignment="Start"
+                    Text="Medications:"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <!--  Surgery Section  -->
+                <Label
+                    Grid.Row="8"
+                    FontFamily="SanchezSlab"
+                    FontSize="17"
+                    HorizontalTextAlignment="Start"
+                    Text="Surgery:"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
             </Grid>
         </ScrollView>
     </Grid>
