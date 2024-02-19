@@ -13,6 +13,18 @@ public partial class HomePage : ContentPage
     }
 
     #region Event Handler
+
+    protected async override void OnAppearing()
+    {
+        try
+        {
+            base.OnAppearing();
+            await VM.GetUserInfo();
+        }
+        catch (Exception ex)
+        {
+        }
+    }
     private async void PhoneDialer_Tapped(object sender, TappedEventArgs e)
 
     {

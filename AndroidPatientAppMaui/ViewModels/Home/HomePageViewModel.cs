@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using CommonLibraryCoreMaui;
+using CommonLibraryCoreMaui.Models;
+using FM.LiveSwitch;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +12,18 @@ namespace AndroidPatientAppMaui.ViewModels.Home
 {
     public class HomePageViewModel : BaseViewModel
     {
+        //To define the class level variable.
+        string Token = string.Empty;
+        int Userid = 0;
+
         #region Constructor
         public HomePageViewModel(INavigation nav)
         {
             Navigation = nav;
-            SignOutCommand = new Command(SignOutAsync);    
+            SignOutCommand = new Command(SignOutAsync);
+
+            Token = Preferences.Get("AuthToken", string.Empty);
+            Userid = Preferences.Get("UserId", 0);
         }
         #endregion
 
@@ -35,9 +46,106 @@ namespace AndroidPatientAppMaui.ViewModels.Home
                 }
             }
         }
+        private string _UserName;
+        public string UserName
+        {
+            get { return _UserName; }
+            set
+            {
+                if (_UserName != value)
+                {
+                    _UserName = value;
+                    OnPropertyChanged("UserName");
+                }
+            }
+        }
+        private string _Insurance;
+        public string Insurance
+        {
+            get { return _Insurance; }
+            set
+            {
+                if (_Insurance != value)
+                {
+                    _Insurance = value;
+                    OnPropertyChanged("Insurance");
+                }
+            }
+        }
+        private string _Account;
+        public string Account
+        {
+            get { return _Account; }
+            set
+            {
+                if (_Account != value)
+                {
+                    _Account = value;
+                    OnPropertyChanged("Account");
+                }
+            }
+        }
+
+        private string _Version;
+        public string Version
+        {
+            get { return _Version; }
+            set
+            {
+                if (_Version != value)
+                {
+                    _Version = value;
+                    OnPropertyChanged("Version");
+                }
+            }
+        }
         #endregion
 
         #region Methods
+
+        public async Task GetUserInfo()
+        {
+            // Get App settings api..
+            try
+            {
+
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, Userid, true, Token).ConfigureAwait(false);
+                            try
+                            {
+
+                                UserName = $"Welcome, {userInfo.Name}";
+                                 
+                                string accountStatus = userInfo.IsActive ? "Active" : "Deactivated";
+                                Account = accountStatus;
+                                Insurance = $"You are covered by: {userInfo.Domain}";
+
+                                Version = $"Version {AppInfo.VersionString}";
+                            }
+                            catch { }
+                        }); 
+
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+            }
+        }
+
         /// <summary>
         /// To Do: To define Sign Out command
         /// </summary>
