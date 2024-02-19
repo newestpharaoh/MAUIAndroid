@@ -18,7 +18,7 @@
                     ColumnSpacing="0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
-                    <!--  Back image Section  -->
+                    <!--  Logout image Section  -->
                     <Grid
                         Grid.Column="2"
                         HorizontalOptions="FillAndExpand"
@@ -30,7 +30,7 @@
                             VerticalOptions="CenterAndExpand"
                             WidthRequest="28" />
                         <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            <TapGestureRecognizer Command="{Binding SignOutCommand}" />
                         </Grid.GestureRecognizers>
                     </Grid>
                 </Grid>
@@ -138,7 +138,11 @@
                                 <Span
                                     FontFamily="SanchezSlab"
                                     Text="512-421-5678"
-                                    TextColor="{StaticResource Blue1}" />
+                                    TextColor="{StaticResource Blue1}">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="PhoneDialer_Tapped" />
+                                    </Span.GestureRecognizers>
+                                </Span>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

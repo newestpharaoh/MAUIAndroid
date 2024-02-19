@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommonLibraryCoreMaui;
 
 namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
@@ -20,7 +21,52 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         public Command BackCommand { get; set; }
         #endregion
 
+        
         #region Properties
+        private List<string> _StatesList=  CommonLibraryCoreMaui.Theme.Values.States;
+        public List<string>  StatesList
+        {
+            get { return _StatesList; }
+            set
+            {
+                if (_StatesList != value)
+
+                {
+                    _StatesList = value;
+                    OnPropertyChanged("StatesList");
+                }
+            }
+        }
+
+        private List<string> _CCYearsList = CommonLibraryCoreMaui.Theme.Values.CCYears;
+        public List<string> CCYearsList
+        {
+            get { return _CCYearsList; }
+            set
+            {
+                if (_CCYearsList != value)
+
+                {
+                    _CCYearsList = value;
+                    OnPropertyChanged("CCYearsList");
+                }
+            }
+        }
+
+        private List<string> _MonthsNumericList = CommonLibraryCoreMaui.Theme.Values.MonthsNumeric;
+        public List<string> MonthsNumericList
+        {
+            get { return _MonthsNumericList; }
+            set
+            {
+                if (_MonthsNumericList != value)
+
+                {
+                    _MonthsNumericList = value;
+                    OnPropertyChanged("MonthsNumericList");
+                }
+            }
+        }
         #endregion
 
         #region Methods

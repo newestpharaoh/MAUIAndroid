@@ -1,12 +1,159 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AndroidPatientAppMaui.Views.MyMedicalInfo.MyMedicalInfoPage"
-             Title="MyMedicalInfoPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.MyMedicalInfo.MyMedicalInfoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="MyMedicalInfoPage">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Test User25"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="12,17"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="15"
+                VerticalOptions="FillAndExpand">
+                <!--  Edit image Section  -->
+                <Grid
+                    Grid.Row="0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="EndAndExpand"
+                        Source="edit.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="25" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <!--  Medical Section  -->
+                <Label
+                    Grid.Row="1"
+                    FontFamily="SanchezSlab"
+                    FontSize="17"
+                    HorizontalTextAlignment="Start"
+                    Text="Medical History:"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <!--  None Section  -->
+                <Label
+                    Grid.Row="2"
+                    FontSize="14"
+                    HorizontalTextAlignment="Start"
+                    Text="None"
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <!--  Primary Care Provider Section  -->
+                <Label
+                    Grid.Row="3"
+                    FontFamily="SanchezSlab"
+                    FontSize="17"
+                    HorizontalTextAlignment="Start"
+                    Text="Primary Care Provider:"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <!--  Detail Section  -->
+                <Grid
+                    Grid.Row="4"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <!--  Name Section  -->
+                    <Label
+                        Grid.Row="0"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        Text="Name: TERRY L TURNER"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                    <!--  City Section  -->
+                    <Label
+                        Grid.Row="1"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        Text="City: HORSESHOE BAY"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                    <!--  State Section  -->
+                    <Label
+                        Grid.Row="2"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        Text="State: Texas"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <!--  Pharmacy Section  -->
+                <Label
+                    Grid.Row="5"
+                    FontFamily="SanchezSlab"
+                    FontSize="17"
+                    HorizontalTextAlignment="Start"
+                    Text="Pharmacy:"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <!--  Allergies Section  -->
+                <Label
+                    Grid.Row="6"
+                    FontFamily="SanchezSlab"
+                    FontSize="17"
+                    HorizontalTextAlignment="Start"
+                    Text="Allergies:"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </ScrollView>
+    </Grid>
 </ContentPage>

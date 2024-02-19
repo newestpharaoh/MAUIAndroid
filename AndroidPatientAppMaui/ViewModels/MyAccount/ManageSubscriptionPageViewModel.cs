@@ -49,10 +49,12 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// </summary>
         /// <param name="obj"></param>
 
-        private void ChangePlanAsync(object obj)
+        private async void ChangePlanAsync(object obj)
         {
             try
             {
+                await Navigation.PushModalAsync(new Views.MyAccount.ChangePlanPage(), false);
+
             }
             catch (Exception ex)
             {

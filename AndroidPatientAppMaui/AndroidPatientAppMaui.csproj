@@ -67,6 +67,7 @@
 	  <None Remove="Resources\Images\closeeye.svg" />
 	  <None Remove="Resources\Images\creditcard.svg" />
 	  <None Remove="Resources\Images\downarrow.svg" />
+	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\emptycreditcard.svg" />
 	  <None Remove="Resources\Images\greyinfoicon.svg" />
 	  <None Remove="Resources\Images\handshake.svg" />
@@ -89,6 +90,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.7" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" /> 
 	</ItemGroup>
 

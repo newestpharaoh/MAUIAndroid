@@ -1,5 +1,6 @@
 using AndroidPatientAppMaui.ViewModels.MyAccount;
 
+
 namespace AndroidPatientAppMaui.Views.MyAccount;
 
 public partial class UpdateCardInformationPage : ContentPage
