@@ -124,7 +124,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
                             }
                             if (pi != null)
                             {
-                                showUpdateDialog = await DataUtility.IsAppVersionLessThanRecommendation(SettingsValues.ApiURLValue, pi, "Android Patient").ConfigureAwait(false); //<--This is Bryans update //await DataUtility.CheckIfLatestAppVersionAsync(SettingsValues.ApiURLValue, pi.VersionName).ConfigureAwait(false);
+                                showUpdateDialog = await DataUtility.IsAppVersionLessThanRecommendation(SettingsValues.ApiURLValue, pi, "Patient").ConfigureAwait(false); //<--This is Bryans update //await DataUtility.CheckIfLatestAppVersionAsync(SettingsValues.ApiURLValue, pi.VersionName).ConfigureAwait(false);
                             }
 
                             if (showUpdateDialog)

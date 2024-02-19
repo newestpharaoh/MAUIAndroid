@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using CommonLibraryCoreMaui.Models;
+using FM.LiveSwitch;
 using Newtonsoft.Json;
 
 //using FM.LiveSwitch;
@@ -57,9 +58,12 @@ namespace CommonLibraryCoreMaui
                 }
                 else
                 {
-                    request.AddHeader("Accept", "application/json");
-                    //  request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                    request.AddHeader("Content-Type", "application/json");
+                    if (method != Method.Get)
+                    {
+                        request.AddHeader("Accept", "application/json");
+                        //  request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                        request.AddHeader("Content-Type", "application/json");
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(sToken))
@@ -95,8 +99,16 @@ namespace CommonLibraryCoreMaui
                         request.AddJsonBody(body);
                     }
                 }
-
-                resp = await restclient.ExecuteTaskAsync(request).ConfigureAwait(false);
+                var url = restclient.BuildUri(request);
+                //resp = await restclient.ExecuteTaskAsync(request).ConfigureAwait(false);
+                if (method == Method.Get)
+                { 
+                    resp = await restclient.ExecuteAsync(request).ConfigureAwait(false);
+                }
+                else if(method==Method.Post)
+                {
+                    resp = await restclient.PostAsync(request).ConfigureAwait(false);
+                }
 
                 if (resp != null)
                 {
