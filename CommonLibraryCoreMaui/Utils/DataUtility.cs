@@ -39,7 +39,7 @@ namespace CommonLibraryCoreMaui
 
         public static async Task<StatusResponse> UserAccountSendCode(string sApiDomainURL, int userId, string sendMethod, string optionalEmailForTesting, string token)
         {
-            return await ApiUtility.SendApiRequestAsync<StatusResponse>(sApiDomainURL, string.Format("/UserAccount/SendCode?UserID={0}&sendMethod={1}&optionalEmailForTesting={2}&IsPatient=true", userId, sendMethod, optionalEmailForTesting), null, null, RestSharp.Method.Get);
+            return await ApiUtility.SendApiRequestAsync<StatusResponse>(sApiDomainURL, string.Format("/UserAccount/SendCode?UserID={0}&sendMethod={1}&optionalEmailForTesting={2}&IsPatient=true&locale=en", userId, sendMethod, optionalEmailForTesting), null, null, RestSharp.Method.Get);
         }
 
         public static async Task<StatusResponse> UserAccountAuthenticateCode(string sApiDomainURL, int userId, string code)
@@ -398,7 +398,7 @@ namespace CommonLibraryCoreMaui
 
         public static async Task<SiteSettings> GetSiteSettingsAsync(string sApiDomainURL)
         {
-            SiteSettings resp = await ApiUtility.SendApiRequestAsync<SiteSettings>(sApiDomainURL, "/Settings/GetSiteSettings?ID=1", null, null, RestSharp.Method.Get);
+            SiteSettings resp = await ApiUtility.SendApiRequestAsync<SiteSettings>(sApiDomainURL, "/Settings/GetSiteSettings?Id=1", null, null, RestSharp.Method.Get);
             return resp;
         }
 
