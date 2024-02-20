@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using AndroidPatientAppMaui.Helpers;
 using CommonLibraryCoreMaui;
 using CommonLibraryCoreMaui.Models;
 using FM.LiveSwitch;
@@ -119,17 +120,16 @@ namespace AndroidPatientAppMaui.ViewModels.Home
                             UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, Userid, true, Token).ConfigureAwait(false);
                             try
                             {
-
+                                Preferences.Set("PatientID", userInfo.PatientID);
+                                AppGlobalConstants.userInfo = userInfo;
                                 UserName = $"Welcome, {userInfo.Name}";
-                                 
                                 string accountStatus = userInfo.IsActive ? "Active" : "Deactivated";
                                 Account = accountStatus;
                                 Insurance = $"You are covered by: {userInfo.Domain}";
-
                                 Version = $"Version {AppInfo.VersionString}";
                             }
-                            catch { }
-                        }); 
+                            catch (Exception ex) { }
+                        });
 
                     }).ConfigureAwait(false);
                 }

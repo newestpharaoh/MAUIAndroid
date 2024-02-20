@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonLibraryCoreMaui.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace AndroidPatientAppMaui.Helpers
         public static string Token = string.Empty;
         public static string LoginEmail = string.Empty;
         public static DateTime? TokenExpirationDate;
+        public static UserInfo userInfo = new UserInfo();
     }
 }
