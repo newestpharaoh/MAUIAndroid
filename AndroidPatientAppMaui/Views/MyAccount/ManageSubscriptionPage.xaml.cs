@@ -23,5 +23,10 @@ public partial class ManageSubscriptionPage : ContentPage
     #endregion
 
     #region Event Handler
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await VM.GetPatientSubscriptionInfo();
+    }
     #endregion
 }

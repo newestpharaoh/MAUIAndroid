@@ -6,9 +6,10 @@ public partial class MyMedicalInfoPage : ContentPage
 {
 	//To define the class lavel variable.
 	MyMedicalInfoPageViewModel VM;
+	int patientId;
 
-	#region Constructor
-	public MyMedicalInfoPage()
+    #region Constructor
+    public MyMedicalInfoPage()
 	{
 		try
 		{
@@ -19,9 +20,15 @@ public partial class MyMedicalInfoPage : ContentPage
 		catch (Exception)
 		{
 		}
-    }
+	}
     #endregion
 
     #region Event Handler
+	 
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        await VM.DisplayMedicalInfo(patientId);
+    }
     #endregion
 }
