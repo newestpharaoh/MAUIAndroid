@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.MyAccount.AccountProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="AccountProfilePage">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="19"
+                HorizontalTextAlignment="Center"
+                Text="Account Profiles"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="0,10"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,*"
+                RowSpacing="16"
+                VerticalOptions="FillAndExpand">
+                <!--  plan Header Section  -->
+                <Label
+                    Grid.Row="0"
+                    Margin="10,0"
+                    FontFamily="SanchezSlab"
+                    FontSize="25"
+                    HorizontalTextAlignment="Start"
+                    Text="Plan: Individual 365 Plan"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <!--  Suscription And Account Holder  -->
+                <Grid
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <!--  Subscription Section  -->
+                    <Grid
+                        Grid.Row="0"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Grid
+                            Grid.Row="0"
+                            Padding="10,0"
+                            BackgroundColor="#CCCCCC"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                FontSize="20"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Name"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="CenterAndExpand" />
+                            <Label
+                                Margin="0,0,20,0"
+                                FontSize="20"
+                                HorizontalOptions="EndAndExpand"
+                                Text="Subscription"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="CenterAndExpand" />
+                        </Grid>
+                        <!--  Account Holder Section  -->
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            HeightRequest="25"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                FontSize="16"
+                                HorizontalOptions="FillAndExpand"
+                                Text="TestUser25"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="CenterAndExpand" />
+                            <Label
+                                Margin="0,0,20,0"
+                                FontSize="16"
+                                HorizontalOptions="EndAndExpand"
+                                Text="Account Holder"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="CenterAndExpand" />
+                            <Image
+                                x:Name="arrowimg"
+                                HeightRequest="15"
+                                HorizontalOptions="EndAndExpand"
+                                Source="rightarrow.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="12" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="DownArrow_Tapped" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Grid>
+                    <BoxView
+                        Grid.Row="1"
+                        BackgroundColor="{StaticResource Gray1}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                    <!--  Update Section  -->
+                    <Grid
+                        x:Name="updateGrid"
+                        Grid.Row="2"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="false"
+                        RowDefinitions="Auto,Auto,Auto,Auto"
+                        RowSpacing="20"
+                        VerticalOptions="FillAndExpand">
+                        <!--  Update Demographics Section  -->
+                        <Grid
+                            Grid.Row="0"
+                            Margin="10,0"
+                            ColumnDefinitions="Auto,*"
+                            ColumnSpacing="10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+
+                            <Label
+                                Grid.Column="0"
+                                FontSize="15"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Update Demographics"
+                                TextColor="Black"
+                                VerticalOptions="CenterAndExpand" />
+
+                            <Image
+                                Grid.Column="1"
+                                HeightRequest="22"
+                                HorizontalOptions="EndAndExpand"
+                                Source="arrowup.png"
+                                VerticalOptions="EndAndExpand"
+                                WidthRequest="22" />
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UpdateDemographicsCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <!--  Update Medical Information Section  -->
+                        <Grid
+                            Grid.Row="1"
+                            Margin="10,0"
+                            ColumnDefinitions="Auto,*"
+                            ColumnSpacing="10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+
+                            <Label
+                                Grid.Column="0"
+                                Padding="3"
+                                FontSize="15"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Update Medical Information"
+                                TextColor="Black"
+                                VerticalOptions="CenterAndExpand" />
+
+                            <Image
+                                Grid.Column="1"
+                                HeightRequest="22"
+                                HorizontalOptions="EndAndExpand"
+                                Source="arrowup.png"
+                                VerticalOptions="EndAndExpand"
+                                WidthRequest="22" />
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UpdateMedicalInformationCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <!--  Update Account Access Section  -->
+                        <Grid
+                            Grid.Row="2"
+                            Margin="10,0"
+                            ColumnDefinitions="Auto,*"
+                            ColumnSpacing="10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+
+                            <Label
+                                Grid.Column="0"
+                                Padding="3"
+                                FontSize="15"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Update Account Access"
+                                TextColor="Black"
+                                VerticalOptions="CenterAndExpand" />
+
+                            <Image
+                                Grid.Column="1"
+                                HeightRequest="22"
+                                HorizontalOptions="EndAndExpand"
+                                Source="arrowup.png"
+                                VerticalOptions="EndAndExpand"
+                                WidthRequest="22" />
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UpdateAccountAccessCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+
+                        <BoxView
+                            Grid.Row="3"
+                            BackgroundColor="{StaticResource Gray2}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -100,7 +100,6 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         #endregion
 
         #region Methods
-
         public async Task GetAppSettings()
         {
             // Get App settings api..

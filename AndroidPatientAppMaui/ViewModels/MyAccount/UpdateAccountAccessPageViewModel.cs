@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
+namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
-    public class MyMedicalInfoPageViewModel : BaseViewModel
+    public class UpdateAccountAccessPageViewModel :BaseViewModel
     {
         #region Constructor
-        public MyMedicalInfoPageViewModel(INavigation nav)
+        public UpdateAccountAccessPageViewModel(INavigation nav)
         {
             Navigation = nav;
             BackCommand = new Command(BackAsync);
@@ -17,7 +17,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         #endregion
 
         #region Command
-
         public Command BackCommand { get; set; }
         #endregion
 
@@ -26,17 +25,21 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 
         #region Methods
         /// <summary>
-        /// To define the back button command.
+        /// To Do: To define back command
         /// </summary>
         /// <param name="obj"></param>
+
         private async void BackAsync(object obj)
         {
             try
             {
                 await Navigation.PopModalAsync();
             }
-            catch (Exception ex) { }
-        }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }    
         #endregion
     }
 }

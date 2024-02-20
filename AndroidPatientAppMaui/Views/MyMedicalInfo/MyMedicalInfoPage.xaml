@@ -140,7 +140,7 @@
                     Grid.Row="5"
                     FontFamily="SanchezSlab"
                     FontSize="17"
-                    HorizontalTextAlignment="Start"
+                    HorizontalTextAlignment="Start" 
                     Text="Pharmacy:"
                     TextColor="{StaticResource Blue1}"
                     VerticalTextAlignment="Center" />
@@ -160,7 +160,7 @@
                     FontSize="17"
                     HorizontalTextAlignment="Start"
                     Text="Medications:"
-                    TextColor="{StaticResource Blue1}"
+                    TextColor="{StaticResource Blue1}"  
                     VerticalTextAlignment="Center" />
                 <!--  Surgery Section  -->
                 <Label

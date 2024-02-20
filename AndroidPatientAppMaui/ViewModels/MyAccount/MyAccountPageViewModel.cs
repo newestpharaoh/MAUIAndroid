@@ -19,6 +19,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             FinePrintCommand = new Command(FinePrintAsync);
             SignOutCommand = new Command(SignOutAsync);
             ManageSubscriptionCommand = new Command(ManageSubscriptionAsync);
+            AccountProfilesCommand = new Command(AccountProfilesAsync);
         }
         #endregion
 
@@ -27,6 +28,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         public Command FinePrintCommand { get; set; }
         public Command SignOutCommand { get; set; }
         public Command ManageSubscriptionCommand { get; set; }
+        public Command AccountProfilesCommand { get; set; }
         #endregion
 
         #region Properties
@@ -60,6 +62,23 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             try
             {
                 await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes","No");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
+        /// To Do: To define Account Profiles command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void AccountProfilesAsync(object obj)
+        {
+            try
+            {
+                //App.Current.MainPage = new Views.MainTabs.MainTabPage();
+                await Navigation.PushModalAsync(new Views.MyAccount.AccountProfilePage(), false);
             }
             catch (Exception ex)
             {

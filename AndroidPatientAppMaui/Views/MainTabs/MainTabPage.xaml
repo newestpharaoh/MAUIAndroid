@@ -14,7 +14,6 @@
     SelectedTabColor="{StaticResource Black}"
     UnselectedTabColor="Gray">
 
-
     <TabbedPage.Children>
         <home:HomePage Title="Home" IconImageSource="home.png" />
         <visit:VisitHistoryPage Title="Visit History" IconImageSource="cabinet.png" />

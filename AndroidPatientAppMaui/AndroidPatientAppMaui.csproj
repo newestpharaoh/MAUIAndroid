@@ -69,6 +69,7 @@
 	  <None Remove="Resources\Images\downarrow.svg" />
 	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\emptycreditcard.svg" />
+	  <None Remove="Resources\Images\greeninfoicon.svg" />
 	  <None Remove="Resources\Images\greyinfoicon.svg" />
 	  <None Remove="Resources\Images\handshake.svg" />
 	  <None Remove="Resources\Images\home.svg" />
@@ -78,7 +79,11 @@
 	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\nmd.png" />
 	  <None Remove="Resources\Images\openeye.svg" />
+	  <None Remove="Resources\Images\rightarrow.svg" />
 	  <None Remove="Resources\Images\user.svg" />
+	  <None Remove="Resources\Images\usercancel.svg" />
+	  <None Remove="Resources\Images\userdelete.svg" />
+	  <None Remove="Resources\Images\userlock.svg" />
 	  <None Remove="Resources\Splash\nmdsplash.svg" />
 	</ItemGroup>
 
@@ -134,6 +139,9 @@
 	  <MauiXaml Update="Views\MainTabs\MainTabPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MyAccount\AccountProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\MyAccount\BillingPoliciesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -150,6 +158,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MyAccount\TermsOfUsePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyAccount\UpdateAccountAccessPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MyAccount\UpdateCardInformationPage.xaml">

@@ -40,6 +40,11 @@ public partial class LoginPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// TODO: To Define Website Tapped
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void Website_click(object sender, TappedEventArgs e)
     {
         try

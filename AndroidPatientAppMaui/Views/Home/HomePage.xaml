@@ -1,120 +1,120 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-	x:Class="AndroidPatientAppMaui.Views.Home.HomePage"
-	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	Title="HomePage">
-	<StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-		<ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-			<Grid
-				HorizontalOptions="FillAndExpand"
-				RowDefinitions="50,*"
-				RowSpacing="10"
-				VerticalOptions="FillAndExpand">
-				<!--  Header Section  -->
-				<Grid
-					Grid.Row="0"
-					ColumnDefinitions="50,*,50"
-					ColumnSpacing="0"
-					HorizontalOptions="FillAndExpand"
-					VerticalOptions="FillAndExpand">
-					<!--  Logout image Section  -->
-					<Grid
-						Grid.Column="2"
-						HorizontalOptions="FillAndExpand"
-						VerticalOptions="FillAndExpand">
-						<Image
-							HeightRequest="28"
-							HorizontalOptions="FillAndExpand"
-							Source="logout.png"
-							VerticalOptions="CenterAndExpand"
-							WidthRequest="28" />
-						<Grid.GestureRecognizers>
-							<TapGestureRecognizer Command="{Binding SignOutCommand}" />
-						</Grid.GestureRecognizers>
-					</Grid>
-				</Grid>
+    x:Class="AndroidPatientAppMaui.Views.Home.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="HomePage">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="50,*"
+                RowSpacing="10"
+                VerticalOptions="FillAndExpand">
+                <!--  Header Section  -->
+                <Grid
+                    Grid.Row="0"
+                    ColumnDefinitions="50,*,50"
+                    ColumnSpacing="0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <!--  Logout image Section  -->
+                    <Grid
+                        Grid.Column="2"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Image
+                            HeightRequest="28"
+                            HorizontalOptions="FillAndExpand"
+                            Source="logout.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="28" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SignOutCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Grid>
 
-				<!--  Body Section  -->
-				<Grid
-					Grid.Row="2"
-					Padding="20,0"
-					HorizontalOptions="FillAndExpand"
-					RowDefinitions="230,Auto,40,Auto,Auto,Auto,Auto,60,Auto"
-					RowSpacing="20"
-					VerticalOptions="FillAndExpand">
+                <!--  Body Section  -->
+                <Grid
+                    Grid.Row="2"
+                    Padding="20,0"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="230,Auto,40,Auto,Auto,Auto,Auto,60,Auto"
+                    RowSpacing="20"
+                    VerticalOptions="FillAndExpand">
 
-					<!--  Logo image  -->
-					<Image
-						Grid.Row="0"
-						Aspect="AspectFit"
-						HorizontalOptions="FillAndExpand"
-						Source="nmd.png"
-						VerticalOptions="CenterAndExpand" />
+                    <!--  Logo image  -->
+                    <Image
+                        Grid.Row="0"
+                        Aspect="AspectFit"
+                        HorizontalOptions="FillAndExpand"
+                        Source="nmd.png"
+                        VerticalOptions="CenterAndExpand" />
 
-					<!--  On-demand secure chat text Section  -->
-					<Label
-						Grid.Row="1"
-						FontAttributes="Bold"
-						FontFamily="SanchezSlab"
-						FontSize="18"
-						HorizontalTextAlignment="Center"
-						Text="On-demand secure chat with a doctor"
-						TextColor="{StaticResource Black}"
-						VerticalTextAlignment="Center" />
+                    <!--  On-demand secure chat text Section  -->
+                    <Label
+                        Grid.Row="1"
+                        FontAttributes="Bold"
+                        FontFamily="SanchezSlab"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="On-demand secure chat with a doctor"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
 
-					<!--  Welcome Text Section  -->
-					<Label
-						Grid.Row="3"
-						FontAttributes="Bold"
-						FontFamily="SanchezSlab"
-						FontSize="22"
-						HorizontalTextAlignment="Center"
-						Text="{Binding UserName}"
-						TextColor="{StaticResource Blue1}"
-						VerticalTextAlignment="Center">
-						<!--<Label.FormattedText>
+                    <!--  Welcome Text Section  -->
+                    <Label
+                        Grid.Row="3"
+                        FontAttributes="Bold"
+                        FontFamily="SanchezSlab"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding UserName}"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center">
+                        <!--<Label.FormattedText>
 							<FormattedString>
 								<Span Text="Welcome, " />
 								<Span Text="{Binding UserName}" />
 							</FormattedString>
 						</Label.FormattedText>-->
-					</Label>
+                    </Label>
 
-					<!--  Your Account Section  -->
-					<StackLayout
-						Grid.Row="4"
-						HorizontalOptions="FillAndExpand"
-						Spacing="0"
-						VerticalOptions="Center">
-						<Label
-							FontAttributes="Bold"
-							FontFamily="SanchezSlab"
-							HorizontalTextAlignment="Center"
-							VerticalTextAlignment="Center">
-							<Label.FormattedText>
-								<FormattedString>
-									<Span
-										FontFamily="SanchezSlab"
-										FontSize="16"
-										Text="Your Account is: "
-										TextColor="{StaticResource Blue1}" />
-									<Span
-										FontFamily="SanchezSlab"
-										FontSize="18"
-										Text="{Binding Account}"
-										TextColor="{StaticResource Blue1}" />
-								</FormattedString>
-							</Label.FormattedText>
-						</Label>
-						<Label
-							FontAttributes="Bold"
-							FontSize="16"
-							HorizontalTextAlignment="Center"
-							Text="{Binding Insurance}"
-							TextColor="{StaticResource Blue1}"
-							VerticalTextAlignment="Center">
-							<!--<Label.FormattedText>
+                    <!--  Your Account Section  -->
+                    <StackLayout
+                        Grid.Row="4"
+                        HorizontalOptions="FillAndExpand"
+                        Spacing="0"
+                        VerticalOptions="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="SanchezSlab"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontFamily="SanchezSlab"
+                                        FontSize="16"
+                                        Text="Your Account is: "
+                                        TextColor="{StaticResource Blue1}" />
+                                    <Span
+                                        FontFamily="SanchezSlab"
+                                        FontSize="18"
+                                        Text="{Binding Account}"
+                                        TextColor="{StaticResource Blue1}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding Insurance}"
+                            TextColor="{StaticResource Blue1}"
+                            VerticalTextAlignment="Center">
+                            <!--<Label.FormattedText>
 								<FormattedString>
 									<Span
 										FontFamily="SanchezSlab"
@@ -128,85 +128,85 @@
 										TextColor="{StaticResource Blue1}" />
 								</FormattedString>
 							</Label.FormattedText>-->
-						</Label>
-					</StackLayout>
+                        </Label>
+                    </StackLayout>
 
-					<!--  If any of the information is incorrect Section  -->
-					<Label
-						Grid.Row="5"
-						FontAttributes="Bold"
-						FontFamily="SanchezSlab"
-						FontSize="14"
-						HorizontalTextAlignment="Center"
-						VerticalTextAlignment="Center">
-						<Label.FormattedText>
-							<FormattedString>
-								<Span
-									FontFamily="SanchezSlab"
-									Text="If any of the information is incorrect, &#10; please contact customer service. &#10; "
-									TextColor="{StaticResource Black}" />
-								<Span
-									FontFamily="SanchezSlab"
-									Text="512-421-5678"
-									TextColor="{StaticResource Blue1}">
-									<Span.GestureRecognizers>
-										<TapGestureRecognizer Tapped="PhoneDialer_Tapped" />
-									</Span.GestureRecognizers>
-								</Span>
-							</FormattedString>
-						</Label.FormattedText>
-					</Label>
+                    <!--  If any of the information is incorrect Section  -->
+                    <Label
+                        Grid.Row="5"
+                        FontAttributes="Bold"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontFamily="SanchezSlab"
+                                    Text="If any of the information is incorrect, &#10; please contact customer service. &#10; "
+                                    TextColor="{StaticResource Black}" />
+                                <Span
+                                    FontFamily="SanchezSlab"
+                                    Text="512-421-5678"
+                                    TextColor="{StaticResource Blue1}">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="PhoneDialer_Tapped" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
-					<!--  Customer Service Hours Section  -->
-					<Label
-						Grid.Row="6"
-						FontAttributes="Bold"
-						FontFamily="SanchezSlab"
-						FontSize="14"
-						HorizontalTextAlignment="Center"
-						VerticalTextAlignment="Center">
-						<Label.FormattedText>
-							<FormattedString>
-								<Span
-									FontFamily="SanchezSlab"
-									Text="Customer Service Hours &#10;"
-									TextColor="{StaticResource Black}" />
-								<Span
-									FontFamily="SanchezSlab"
-									Text="Monday - Friday &#10;"
-									TextColor="{StaticResource Black}" />
-								<Span
-									FontFamily="SanchezSlab"
-									Text="8 AM - 5 PM CST"
-									TextColor="{StaticResource Black}" />
-							</FormattedString>
-						</Label.FormattedText>
-					</Label>
+                    <!--  Customer Service Hours Section  -->
+                    <Label
+                        Grid.Row="6"
+                        FontAttributes="Bold"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontFamily="SanchezSlab"
+                                    Text="Customer Service Hours &#10;"
+                                    TextColor="{StaticResource Black}" />
+                                <Span
+                                    FontFamily="SanchezSlab"
+                                    Text="Monday - Friday &#10;"
+                                    TextColor="{StaticResource Black}" />
+                                <Span
+                                    FontFamily="SanchezSlab"
+                                    Text="8 AM - 5 PM CST"
+                                    TextColor="{StaticResource Black}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
 
-					<!--  Submit Button Section  -->
-					<Button
-						Grid.Row="7"
-						BackgroundColor="{StaticResource Orange1}"
-						Command="{Binding StartVisitCommand}"
-						FontFamily="SanchezSlab"
-						FontSize="14"
-						HeightRequest="55"
-						HorizontalOptions="FillAndExpand"
-						Text="Start Visit"
-						TextColor="{StaticResource White}"
-						VerticalOptions="FillAndExpand"
-						WidthRequest="180" />
-					<!--  Version Section  -->
-					<Label
-						Grid.Row="8"
-						FontFamily="SanchezSlab"
-						FontSize="14"
-						HorizontalTextAlignment="Center"
-						Text="{Binding Version}"
-						VerticalTextAlignment="Center" />
-				</Grid>
-			</Grid>
-		</ScrollView>
-	</StackLayout>
+                    <!--  Submit Button Section  -->
+                    <Button
+                        Grid.Row="7"
+                        BackgroundColor="{StaticResource Orange1}"
+                        Command="{Binding StartVisitCommand}"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HeightRequest="55"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Start Visit"
+                        TextColor="{StaticResource White}"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="180" />
+                    <!--  Version Section  -->
+                    <Label
+                        Grid.Row="8"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding Version}"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </StackLayout>
 </ContentPage>
