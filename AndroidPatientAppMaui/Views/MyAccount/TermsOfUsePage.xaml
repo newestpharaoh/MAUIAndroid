@@ -68,7 +68,7 @@
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalTextAlignment="Start"
-                    Text="Terms of Use"
+                    Text="{Binding TermsOfUseName}"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
                 <!--  Welcome Header Section  -->
@@ -77,7 +77,7 @@
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalTextAlignment="Start"
-                    Text="Welcome to NormanMD"
+                    Text="{Binding PageTitle}"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
                 <!--  Sub Header Section  -->
@@ -85,7 +85,7 @@
                     Grid.Row="2"
                     FontSize="13"
                     HorizontalTextAlignment="Start"
-                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    Text="{Binding PageAccess}"
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
                 <!--  Subscription Header Section  -->
@@ -94,7 +94,7 @@
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalTextAlignment="Start"
-                    Text="Subscription and Registration for Texas Residents"
+                    Text="{Binding Subscription}"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
                 <!--  Account Header Section  -->
@@ -103,7 +103,7 @@
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalTextAlignment="Start"
-                    Text="Account"
+                    Text="{Binding Account}"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
                 <!--  Sub Header Section  -->
@@ -111,7 +111,7 @@
                     Grid.Row="5"
                     FontSize="13"
                     HorizontalTextAlignment="Start"
-                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    Text="{Binding TexasResistent}"
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
                 <!--  Membership Header Section  -->
@@ -120,7 +120,7 @@
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalTextAlignment="Start"
-                    Text="Membership Access"
+                    Text="{Binding MembershipAccess}"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
                 <!--  Sub Header Section  -->
@@ -128,56 +128,42 @@
                     Grid.Row="7"
                     FontSize="13"
                     HorizontalTextAlignment="Start"
-                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
-                    TextColor="{StaticResource Black}"
-                    VerticalTextAlignment="Center" />
-                <!--  Sub Header Section  -->
-                <Label
-                    Grid.Row="8"
-                    FontSize="13"
-                    HorizontalTextAlignment="Start"
-                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    Text="{Binding UseOfService}"
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
                 <!--  Paid Header Section  -->
                 <Label
-                    Grid.Row="9"
+                    Grid.Row="8"
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalTextAlignment="Start"
-                    Text="Paid Access"
+                    Text="{Binding PaidAccess}"
                     TextColor="Black"
+                    VerticalTextAlignment="Center" />
+                <!--  Sub Header Section  -->
+                <Label
+                    Grid.Row="9"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding PurchaseInfo}"
+                    TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
                 <!--  Sub Header Section  -->
                 <Label
                     Grid.Row="10"
                     FontSize="13"
                     HorizontalTextAlignment="Start"
-                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    Text="{Binding SeventyTwoHourPlan}"
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
-                <!--  Sub Header Section  -->
                 <Label
                     Grid.Row="11"
                     FontSize="13"
                     HorizontalTextAlignment="Start"
-                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    Text="{Binding IndividualFamily365Plan}"
                     TextColor="{StaticResource Black}"
-                    VerticalTextAlignment="Center" />
-                <!--  Sub Header Section  -->
-                <Label
-                    Grid.Row="12"
-                    FontSize="13"
-                    HorizontalTextAlignment="Start"
-                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully."
-                    TextColor="{StaticResource Black}"
-                    VerticalTextAlignment="Center" />
-                <Label
-                    Grid.Row="13"
-                    FontSize="13"
-                    HorizontalTextAlignment="Start"
                     VerticalTextAlignment="Center">
-                    <Label.FormattedText>
+                    <!--<Label.FormattedText>
                         <FormattedString>
                             <Span
                                 FontFamily="SanchezSlab"
@@ -192,23 +178,30 @@
                                 Text="for a detailed biling schedule."
                                 TextColor="{StaticResource Black}" />
                         </FormattedString>
-                    </Label.FormattedText>
+                    </Label.FormattedText>-->
                 </Label>
+                <Label
+                    Grid.Row="12"
+                    FontSize="13"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding MonthlySubscrPlan}"
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
                 <!--  Refunds Header Section  -->
                 <Label
-                    Grid.Row="14"
+                    Grid.Row="13"
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalTextAlignment="Start"
-                    Text="Refunds/Cancellations"
+                    Text="{Binding RefundsCancellations}"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
                 <!--  Sub Header Section  -->
                 <Label
-                    Grid.Row="15"
+                    Grid.Row="14"
                     FontSize="13"
                     HorizontalTextAlignment="Start"
-                    Text="This application ('Site') and related services are provided by eMD Access, in cooperation with Austin Regional Clinic. Please read the following information carefully  in cooperation with Austin Regional Clinic. Please read the following information carefully."
+                    Text="{Binding CancelPolicies}"
                     TextColor="{StaticResource Black}"
                     VerticalTextAlignment="Center" />
 
