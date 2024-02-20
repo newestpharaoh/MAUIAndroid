@@ -120,7 +120,7 @@
                         Grid.Row="2"
                         Margin="50,0"
                         Background="#DDDDDD"
-                        Command="{Binding UpdatePaymentCommand}"
+                        Command="{Binding PrivatizeUserCommand}"
                         FontFamily="SanchezSlab"
                         FontSize="14"
                         HeightRequest="55"
@@ -177,7 +177,7 @@
                         Grid.Row="2"
                         Margin="50,0"
                         Background="{StaticResource Green1}"
-                        Command="{Binding UpdatePaymentCommand}"
+                        Command="{Binding DeactivateNowCommand}"
                         FontFamily="SanchezSlab"
                         FontSize="14"
                         HeightRequest="55"
@@ -187,7 +187,7 @@
                         VerticalOptions="FillAndExpand"
                         WidthRequest="200" />
                 </Grid>
-                <!--  Remove  User Account  -->
+                <!--  Remove User Account  -->
                 <Grid
                     Grid.Row="3"
                     HorizontalOptions="FillAndExpand"
@@ -234,7 +234,7 @@
                         Grid.Row="2"
                         Margin="50,0"
                         Background="#DDDDDD"
-                        Command="{Binding UpdatePaymentCommand}"
+                        Command="{Binding RemoveUserCommand}"
                         FontFamily="SanchezSlab"
                         FontSize="14"
                         HeightRequest="55"

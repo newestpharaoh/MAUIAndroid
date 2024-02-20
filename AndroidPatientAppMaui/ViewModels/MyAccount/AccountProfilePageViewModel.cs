@@ -15,6 +15,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             BackCommand = new Command(BackAsync);
             UpdateAccountAccessCommand = new Command(UpdateAccountAccessAsync);
             UpdateMedicalInformationCommand = new Command(UpdateMedicalInformationAsync);
+            UpdateDemographicsCommand = new Command(UpdateDemographicsAsync);
         }
         #endregion
 
@@ -22,6 +23,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         public Command BackCommand { get; set; }
         public Command UpdateAccountAccessCommand { get; set; }
         public Command UpdateMedicalInformationCommand { get; set; }
+        public Command UpdateDemographicsCommand { get; set; }
         #endregion
 
         #region Properties
@@ -64,7 +66,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         }
 
         /// <summary>
-        /// To Do: To define Update  command
+        /// To Do: To define Update Account Access command
         /// </summary>
         /// <param name="obj"></param>
 
@@ -73,6 +75,24 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             try
             {
                 await Navigation.PushModalAsync(new Views.MyAccount.UpdateAccountAccessPage(), false);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+
+        /// <summary>
+        /// To Do: To define Update Demographics command
+        /// </summary>
+        /// <param name="obj"></param>
+
+        private async void UpdateDemographicsAsync(object obj)
+        {
+            try
+            {
 
             }
             catch (Exception ex)
