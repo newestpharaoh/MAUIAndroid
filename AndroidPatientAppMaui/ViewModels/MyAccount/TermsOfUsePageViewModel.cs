@@ -304,8 +304,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                 RefundsCancellations = refundsCancellations;
                                 CancelPolicies = myCancelPolicies;
                             }
-                        });
-
+                        }); 
                     }).ConfigureAwait(false);
                 }
                 else
