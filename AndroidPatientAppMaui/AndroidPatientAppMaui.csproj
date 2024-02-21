@@ -82,6 +82,7 @@
 	  <None Remove="Resources\Images\rightarrow.svg" />
 	  <None Remove="Resources\Images\user.svg" />
 	  <None Remove="Resources\Images\usercancel.svg" />
+	  <None Remove="Resources\Images\usercircle.svg" />
 	  <None Remove="Resources\Images\userdelete.svg" />
 	  <None Remove="Resources\Images\userlock.svg" />
 	  <None Remove="Resources\Splash\nmdsplash.svg" />
@@ -143,6 +144,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MyAccount\BillingPoliciesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyAccount\ChangePasswordPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MyAccount\ChangePlanPage.xaml">

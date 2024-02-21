@@ -2,17 +2,17 @@ using AndroidPatientAppMaui.ViewModels.MyAccount;
 
 namespace AndroidPatientAppMaui.Views.MyAccount;
 
-public partial class UpdateDemographicsPage : ContentPage
+public partial class ChangePasswordPage : ContentPage
 {
     //To define the class lavel variable.
-    UpdateDemographicsPageViewModel VM;
+    ChangePasswordPageViewModel VM;
     #region Constructor
-    public UpdateDemographicsPage()
-	{
+    public ChangePasswordPage()
+    {
         try
         {
             InitializeComponent();
-            this.BindingContext = VM = new UpdateDemographicsPageViewModel(this.Navigation);
+            this.BindingContext = VM = new ChangePasswordPageViewModel(this.Navigation);
         }
         catch (Exception)
         {
