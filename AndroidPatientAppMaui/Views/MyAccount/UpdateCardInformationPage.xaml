@@ -474,7 +474,6 @@
 
                     </Grid>
                 </Grid>
-
                 <!--  Save Changes Button Section  -->
                 <Button
                     Grid.Row="14"
@@ -489,7 +488,6 @@
                     TextColor="{StaticResource White}"
                     VerticalOptions="FillAndExpand"
                     WidthRequest="180" />
-
                 <Label
                     Grid.Row="15"
                     FontSize="12"

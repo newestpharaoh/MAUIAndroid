@@ -56,7 +56,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
-                App.Current.MainPage = new Views.MyMedicalInfo.MyMedicalInfoPage();
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoPage(), false);
 
             }
             catch (Exception ex)
@@ -93,6 +93,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
+                await Navigation.PushModalAsync(new Views.MyAccount.UpdateDemographicsPage(), false);
 
             }
             catch (Exception ex)
