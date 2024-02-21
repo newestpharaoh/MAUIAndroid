@@ -17,8 +17,8 @@ namespace AndroidPatientAppMaui
                 .UseMauiCompatibility()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                   // fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                   // fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("SanchezSlab.ttf", "SanchezSlab");
                 })
                 .ConfigureLifecycleEvents(events =>
