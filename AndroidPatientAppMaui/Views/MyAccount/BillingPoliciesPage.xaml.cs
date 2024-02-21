@@ -23,5 +23,10 @@ public partial class BillingPoliciesPage : ContentPage
     #endregion
 
     #region Event Handler
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await VM.GetBillingPoliciesInfo();
+    }
     #endregion
 }

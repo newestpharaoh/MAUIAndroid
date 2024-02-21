@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using CommonLibraryCoreMaui;
+using CommonLibraryCoreMaui.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,9 +24,115 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #endregion
 
         #region Properties
+        private string _BillingPoliciesName;
+        public string BillingPoliciesName
+        {
+            get { return _BillingPoliciesName; }
+            set
+            {
+                if (_BillingPoliciesName != value)
+                {
+                    _BillingPoliciesName = value;
+                    OnPropertyChanged("BillingPoliciesName");
+                }
+            }
+        }
+        private string _MonthlySubscriptionPlan;
+        public string MonthlySubscriptionPlan
+        {
+            get { return _MonthlySubscriptionPlan; }
+            set
+            {
+                if (_MonthlySubscriptionPlan != value)
+                {
+                    _MonthlySubscriptionPlan = value;
+                    OnPropertyChanged("MonthlySubscriptionPlan");
+                }
+            }
+        }
+         private string _MonthlySubscriptionPlanP1;
+        public string MonthlySubscriptionPlanP1
+        {
+            get { return _MonthlySubscriptionPlanP1; }
+            set
+            {
+                if (_MonthlySubscriptionPlanP1 != value)
+                {
+                    _MonthlySubscriptionPlanP1 = value;
+                    OnPropertyChanged("MonthlySubscriptionPlanP1");
+                }
+            }
+        }
+
         #endregion
 
         #region Methods
+
+        public async Task GetBillingPoliciesInfo()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            UITopic TermsOfUse = await Globals.Instance.GetUTText("TermsOfUse", "en");
+                            if (TermsOfUse != null)
+                            {
+                                //Headers
+                                string billingPolicies = TermsOfUse.UITextList.Find(i => i.TagName == "BillingPolicies").Text;
+                                string updatingCreditCard = TermsOfUse.UITextList.Find(i => i.TagName == "UpdatingCreditCard").Text;
+                                string cancellation = TermsOfUse.UITextList.Find(i => i.TagName == "Cancellation").Text;
+                                string subscriptionPlanChanges = TermsOfUse.UITextList.Find(i => i.TagName == "SubscriptionPlanChanges").Text;
+                                string monthlySubscriptionPlan = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule").Text;
+
+                                string tablePurchaseDate = TermsOfUse.UITextList.Find(i => i.TagName == "Table_PurchaseDate").Text;
+                                string tableAutoRenewalDate = TermsOfUse.UITextList.Find(i => i.TagName == "Table_AutoRenewalDate").Text;
+                                //
+
+
+                                //Paragraphs
+                                string updateCC = TermsOfUse.UITextList.Find(i => i.TagName == "CreditCardInfo").Text;
+                                string noRefunds = TermsOfUse.UITextList.Find(i => i.TagName == "CancelPolicies").Text;
+                                string changePlanInfo = TermsOfUse.UITextList.Find(i => i.TagName == "ChangePlanInfo").Text;
+                                string monthlySubscriptionPlanP1 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1").Text;
+                                string monthlySubscriptionPlanP1B1 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1_B1").Text;
+                                string monthlySubscriptionPlanP1B2 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1_B2").Text;
+                                string table_1st_28_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_1st_28_Col1").Text;
+                                string table_29th_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_29th_Col1").Text;
+                                string table_30th_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_30th_Col1").Text;
+                                string table_31st_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_31st_Col1").Text;
+
+                                string table_1st_28_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_1st_28_Col2").Text.Replace("{break}", "\n\n");
+                                string table_29th_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_29th_Col2").Text.Replace("{break}", "\n\n");
+                                string table_30th_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_30th_Col2").Text.Replace("{break}", "\n\n");
+                                string table_31st_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_31st_Col2").Text.Replace("{break}", "\n\n");
+
+                                BillingPoliciesName = billingPolicies;
+                                MonthlySubscriptionPlan = monthlySubscriptionPlan;
+                                MonthlySubscriptionPlanP1 = monthlySubscriptionPlanP1;
+                            }
+                        });
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+            }
+        }
+
+
         /// <summary>
         /// To Do: To define back command
         /// </summary>
