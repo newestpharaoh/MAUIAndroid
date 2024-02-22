@@ -281,9 +281,8 @@
                                 Margin="10,0,0,0"
                                 Padding="90,7,20,10"
                                 FontAttributes="Bold"
-                                IsEnabled="False"
                                 Text="{Binding txtTotalUsed}"
-                                TextColor="Black" />
+                                TextColor="#000000" />
                         </StackLayout>
 
                         <StackLayout
@@ -301,9 +300,8 @@
                                 Margin="10,0,0,0"
                                 Padding="30,7,20,10"
                                 FontAttributes="Bold"
-                                IsEnabled="False"
                                 Text="{Binding txtExpDate}"
-                                TextColor="Black" />
+                                TextColor="#000000" />
                         </StackLayout>
 
                         <!--  Commented out due to unknown resource  -->
@@ -334,9 +332,8 @@
                             FontSize="14"
                             HeightRequest="55"
                             HorizontalOptions="FillAndExpand"
-                            IsEnabled="{Binding btnChangePlan}"
                             Text="Change Plan"
-                            TextColor="{StaticResource White}"
+                            TextColor="#FFFFFF"
                             VerticalOptions="FillAndExpand"
                             WidthRequest="180" />
                     </StackLayout>
@@ -373,17 +370,48 @@
 
                         <StackLayout
                             Margin="0,0,0,0"
+                            HorizontalOptions="FillAndExpand"
                             IsVisible="True"
                             Orientation="Horizontal"
-                            VerticalOptions="Center">
-                            <Label
+                            VerticalOptions="FillAndExpand">
+                            <Grid
+                                ColumnDefinitions="Auto,auto"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Label
+                                    x:Name="managesubscription_yourpaymentmethod"
+                                    Grid.Column="0"
+                                    Margin="0,0,0,2"
+                                    HorizontalTextAlignment="Start"
+                                    Text="{Binding managesubscription_yourpaymentmethod}"
+                                    TextColor="{StaticResource Black}"
+                                    VerticalTextAlignment="Center" />
+                                <Grid
+                                    Grid.Column="1"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                                    <Image
+                                        x:Name="iconInfo"
+                                        Margin="0,0,40,0"
+                                        HeightRequest="25"
+                                        HorizontalOptions="EndAndExpand"
+                                        Source="greyinfoicon.png"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="25" />
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding InfoCommand}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </Grid>
+                            <!--<Label
                                 x:Name="managesubscription_yourpaymentmethod"
                                 Margin="0,0,0,2"
-                                HorizontalOptions="StartAndExpand"
-                                Text="{Binding managesubscription_yourpaymentmethod}" />
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding managesubscription_yourpaymentmethod}"
+                                VerticalOptions="FillAndExpand" />
                             <Image
                                 x:Name="iconInfo"
-                                Margin="0,0,65,0"
+                                Margin="0,0,40,0"
                                 HeightRequest="25"
                                 HorizontalOptions="EndAndExpand"
                                 Source="greyinfoicon.png"
@@ -391,7 +419,7 @@
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding InfoCommand}" />
                                 </Image.GestureRecognizers>
-                            </Image>
+                            </Image>-->
                         </StackLayout>
 
                         <StackLayout

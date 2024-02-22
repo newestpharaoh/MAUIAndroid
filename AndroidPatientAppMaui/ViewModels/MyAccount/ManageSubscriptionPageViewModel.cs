@@ -683,8 +683,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 
                                     });
                                     //
-                                    lblCurrentSubscription = info.CurrentSubscriptionPlan;
-                                    lblPlanDescription = info.CurrentSubscriptionPlanDescription;
+                                    //lblCurrentSubscription = info.CurrentSubscriptionPlan;
+                                    //lblPlanDescription = info.CurrentSubscriptionPlanDescription;
 
                                     if (info.IsPrepay)
                                     {
@@ -695,6 +695,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                     }
                                     else
                                     {
+                                        lblPlanDescription = info.CurrentSubscriptionPlanDescription;
                                         // if (!string.IsNullOrEmpty(info.CurrentSubscriptionPlanDescription)) lblPlanDescriptionFormatted = Html.FromHtml("<span>" + info.CurrentSubscriptionPlanDescription.Replace("\\n", "\n") + "</span>");
                                         lblCurrentSubscription = info.CurrentSubscriptionPlan;
                                     }
