@@ -26,12 +26,12 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             ChangePlanCommand = new Command(ChangePlanAsync);
             UpdatePaymentCommand = new Command(UpdatePaymentAsync);
             DownloadOrderSummary = new Command(DownloadOrderSummaryAsync);
+            InfoCommand = new Command(InfoAsync);
 
 
             Token = Preferences.Get("AuthToken", string.Empty);
             Userid = Preferences.Get("UserId", 0);
         }
-
 
         #endregion
 
@@ -40,6 +40,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         public Command ChangePlanCommand { get; set; }
         public Command UpdatePaymentCommand { get; set; }
         public Command DownloadOrderSummary { get; set; }
+        public Command InfoCommand { get; set; }
         #endregion
 
         #region Properties
@@ -719,8 +720,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
         }
 
-
-
+        /// <summary>
+        /// To Do: To define Download Order command
+        /// </summary>
+        /// <param name="obj"></param> 
         private async void DownloadOrderSummaryAsync(object obj)
         {
             try
@@ -736,8 +739,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             {
             }
         }
+
         /// <summary>
-        /// To Do: To define back command
+        /// To Do: To define Back command
         /// </summary>
         /// <param name="obj"></param> 
         private async void BackAsync(object obj)
@@ -778,6 +782,23 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             try
             {
                 await Navigation.PushModalAsync(new Views.MyAccount.UpdateCardInformationPage(), false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
+        /// To Do: To define Info command
+        /// </summary>
+        /// <param name="obj"></param>
+
+        private async void InfoAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new Views.Popup.InfoPopupPage(), false);
             }
             catch (Exception ex)
             {
