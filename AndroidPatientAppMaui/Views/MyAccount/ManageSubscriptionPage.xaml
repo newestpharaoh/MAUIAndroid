@@ -101,7 +101,6 @@
                         FontSize="14"
                         HorizontalOptions="Center"
                         Text="Download Order Summary"
-                        TextColor="{StaticResource colorPrimary}"
                         TextDecorations="Underline"
                         VerticalOptions="Start">
                         <Label.GestureRecognizers>

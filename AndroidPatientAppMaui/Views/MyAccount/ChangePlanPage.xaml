@@ -6,19 +6,24 @@
     xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
     Title="ChangePlanPage">
     <!--  Main Grid  -->
+
     <Grid
         HorizontalOptions="FillAndExpand"
         RowDefinitions="50,1,*"
         RowSpacing="0"
         VerticalOptions="FillAndExpand">
+
         <!--  Header Section  -->
+
         <Grid
             Grid.Row="0"
             ColumnDefinitions="50,*,50"
             ColumnSpacing="0"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
+
             <!--  Back image Section  -->
+
             <Grid
                 Grid.Column="0"
                 HorizontalOptions="FillAndExpand"
@@ -42,7 +47,9 @@
                 TextColor="Black"
                 VerticalTextAlignment="Center" />
         </Grid>
+
         <!--  BoxView Section  -->
+
         <BoxView
             Grid.Row="1"
             BackgroundColor="{StaticResource Gray1}"
@@ -50,20 +57,234 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand" />
 
+
         <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            BackgroundColor="White"
+            HorizontalOptions="FillAndExpand"
+            HorizontalScrollBarVisibility="Never"
+            VerticalOptions="FillAndExpand">
+
+            <StackLayout
+                Margin="10"
+                HorizontalOptions="FillAndExpand"
+                Spacing="5"
+                VerticalOptions="StartAndExpand">
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+
+                    <Label
+                        x:Name="lblHeader"
+                        FontFamily="SanchezSlab"
+                        FontSize="20"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding lblHeader}"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalOptions="Start" />
+
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="lytPrepay"
+                    Margin="0,10,0,10"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding lytPrepay}"
+                    VerticalOptions="StartAndExpand">
+
+                    <Label
+                        HorizontalOptions="FillAndExpand"
+                        Text="Because your access to eMD Access is a covered benefit through your insurance plan or employer, you cannot change your plan for this account."
+                        VerticalOptions="Start" />
+
+                </StackLayout>
+
+                <StackLayout
+                    Margin="0,5,0,5"
+                    Padding="5,0"
+                    Background="{StaticResource Gray3}"
+                    HeightRequest="35"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                        <Picker
+                            x:Name="spnrPaymentPlans"
+                            FontSize="12"
+                            IsEnabled="{Binding spnrPaymentPlans}"
+                            ItemsSource="{Binding PaymentPlansList}"
+                            SelectedIndex="{Binding pickerPaymentPlans}"
+                            SelectedIndexChanged="spnrPaymentPlans_SelectedIndexChanged"
+                            SelectedItem="{Binding PaymentPlansSelectedItems}"
+                            VerticalOptions="CenterAndExpand" />
+                        <Image
+                            HeightRequest="15"
+                            HorizontalOptions="EndAndExpand"
+                            Source="downarrow.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="12" />
+                    </Grid>
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="lytDescription"
+                    Margin="0,5,0,5"
+                    Padding="5,0"
+                    Background="{StaticResource Gray3}"
+                    HeightRequest="35"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            x:Name="promoCode"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="Apply Promo Code"
+                            Text="{Binding promoCode}"
+                            TextColor="#000000"
+                            VerticalOptions="CenterAndExpand" />
+                        <Label
+                            x:Name="lblError"
+                            Margin="12,0,0,0"
+                            Padding="0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="CenterAndExpand" />
+                    </Grid>
+                </StackLayout>
+
+                <StackLayout
+                    Margin="0,5,0,5"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+
+                    <Label
+                        x:Name="lblPlanDescription"
+                        HorizontalOptions="FillAndExpand"
+                        MaxLines="100"
+                        VerticalOptions="FillAndExpand" />
+
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="lytContinue"
+                    Margin="0,20,0,20"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="False"
+                    VerticalOptions="Center">
+
+                    <Button
+                        x:Name="btnContinue"
+                        Margin="50,0"
+                        Background="#15B287"
+                        Command="{Binding ContinueCommand}"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HeightRequest="55"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Continue"
+                        TextColor="#FFFFFF"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="180" />
+
+                </StackLayout>
+
+                <StackLayout
+                    Margin="0,40,0,0"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="True"
+                    VerticalOptions="StartAndExpand">
+
+                    <Label
+                        x:Name="lblCancelPlan"
+                        HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding lblCancelPlan}"
+                        Text="Cancel Plan"
+                        TextColor="Black"
+                        TextDecorations="Underline"
+                        VerticalOptions="Start">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CancelPlanCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </StackLayout>
+
+            </StackLayout>
+
+        </ScrollView>
+    </Grid>
+    <!--  Main Grid  -->
+    <!--
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+    -->
+    <!--  Header Section  -->
+    <!--
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+    -->
+    <!--  Back image Section  -->
+    <!--
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="16"
+                HorizontalTextAlignment="Center"
+                Text="Manage Subscriptions"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+    -->
+    <!--  BoxView Section  -->
+    <!--
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+
+    -->
+    <!--  ScrollView Section  -->
+    <!--
         <ScrollView
             Grid.Row="2"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             VerticalScrollBarVisibility="Never">
-            <!--  Body Section  -->
+    -->
+    <!--  Body Section  -->
+    <!--
             <Grid
                 Padding="12,10"
                 HorizontalOptions="FillAndExpand"
                 RowDefinitions="Auto,*"
                 RowSpacing="10"
                 VerticalOptions="FillAndExpand">
-                <!--  Subscription Header Section  -->
+    -->
+    <!--  Subscription Header Section  -->
+    <!--
                 <Label
                     Grid.Row="0"
                     FontFamily="SanchezSlab"
@@ -129,7 +350,9 @@
                         Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
-                    <!--  Change Plan Button Section  -->
+    -->
+    <!--  Change Plan Button Section  -->
+    <!--
                     <Button
                         Grid.Row="2"
                         Margin="50,25"
@@ -155,5 +378,5 @@
 
             </Grid>
         </ScrollView>
-    </Grid>
+    </Grid>-->
 </ContentPage>

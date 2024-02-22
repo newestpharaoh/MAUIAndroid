@@ -13,7 +13,7 @@ public partial class ManageSubscriptionPage : ContentPage
         try
         {
             InitializeComponent();
-            this.BindingContext = VM = new ManageSubscriptionPageViewModel(this.Navigation);
+            this.BindingContext = VM = new ManageSubscriptionPageViewModel(this.Navigation, this);
         }
         catch (Exception ex)
         {
@@ -25,8 +25,15 @@ public partial class ManageSubscriptionPage : ContentPage
     #region Event Handler
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
-        await VM.GetPatientSubscriptionInfo();
+        try
+        {
+            base.OnAppearing();
+            await VM.GetPatientSubscriptionInfo();
+        }
+        catch (Exception ex)
+        {
+             
+        }
     }
     #endregion
 }
