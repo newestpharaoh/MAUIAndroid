@@ -328,8 +328,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                 string tablePurchaseDate = TermsOfUse.UITextList.Find(i => i.TagName == "Table_PurchaseDate").Text;
                                 string tableAutoRenewalDate = TermsOfUse.UITextList.Find(i => i.TagName == "Table_AutoRenewalDate").Text;
                                 //
-
-
                                 //Paragraphs
                                 string updateCC = TermsOfUse.UITextList.Find(i => i.TagName == "CreditCardInfo").Text;
                                 string noRefunds = TermsOfUse.UITextList.Find(i => i.TagName == "CancelPolicies").Text;
@@ -385,7 +383,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 UserDialog.HideLoading();
             }
         }
-
 
         /// <summary>
         /// To Do: To define back command
