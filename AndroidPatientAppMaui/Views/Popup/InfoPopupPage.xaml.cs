@@ -10,10 +10,10 @@ public partial class InfoPopupPage : CommunityToolkit.Maui.Views.Popup
     InfoPopupPageViewModel VM;
     ManageSubscriptionPageViewModel ManageVM;
     public InfoPopupPage(ManageSubscriptionPageViewModel manageVM, ManageSubscriptionPage manageSubscriptionPage)
-    {
+	{
         try
         {
-            InitializeComponent();
+		InitializeComponent();
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
             var Width = (mainDisplayInfo.Width / mainDisplayInfo.Density) - 30;
             InfoGrid.WidthRequest = Width;
@@ -29,7 +29,7 @@ public partial class InfoPopupPage : CommunityToolkit.Maui.Views.Popup
         {
 
         }
-    }
+	}
 
     #region Event Handler
 

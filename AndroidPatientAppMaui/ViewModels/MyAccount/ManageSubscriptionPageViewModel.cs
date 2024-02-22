@@ -725,8 +725,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
         }
 
-
-
+        /// <summary>
+        /// To Do: To define Download Order command
+        /// </summary>
+        /// <param name="obj"></param> 
         private async void DownloadOrderSummaryAsync(object obj)
         {
             try
@@ -742,8 +744,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             {
             }
         }
+
         /// <summary>
-        /// To Do: To define back command
+        /// To Do: To define Back command
         /// </summary>
         /// <param name="obj"></param> 
         private async void BackAsync(object obj)
