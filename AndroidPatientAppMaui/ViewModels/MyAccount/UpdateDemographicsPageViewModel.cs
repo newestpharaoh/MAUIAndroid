@@ -149,7 +149,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                 {
                     //Ask the user if they want to use the camera or pick from the gallery
-                    var action = await UserDialogs.Instance.ActionSheetAsync("Add Photo", "Cancel", "", null, "Choose Existing", "Take Photo");
+                    var action = await UserDialogs.Instance.ActionSheetAsync("Add Photo", "Cancel", "", null, "Choose Existing");
                     if ((action == "Choose Existing"))
                     {
                         try
