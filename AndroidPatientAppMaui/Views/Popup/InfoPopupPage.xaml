@@ -2,7 +2,7 @@
 <toolkit:Popup
     x:Class="AndroidPatientAppMaui.Views.Popup.InfoPopupPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     HorizontalOptions="Fill"
     VerticalOptions="Center"
@@ -316,7 +316,7 @@
                             TextColor="Black"
                             VerticalOptions="FillAndExpand"
                             VerticalTextAlignment="Center" />
-        <Label 
+                        <Label
                             Grid.Row="20"
                             FontSize="13"
                             HorizontalOptions="FillAndExpand"

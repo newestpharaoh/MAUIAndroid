@@ -4,258 +4,327 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="UpdateAccountAccessPage">
-    <!--  Main Grid  -->
-    <Grid
-        HorizontalOptions="FillAndExpand"
-        RowDefinitions="50,1,*"
-        RowSpacing="0"
-        VerticalOptions="FillAndExpand">
-        <!--  Header Section  -->
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <!--  Main Grid  -->
         <Grid
-            Grid.Row="0"
-            ColumnDefinitions="50,*,50"
-            ColumnSpacing="0"
             HorizontalOptions="FillAndExpand"
+            RowDefinitions="50,1,*"
+            RowSpacing="0"
             VerticalOptions="FillAndExpand">
-            <!--  Back image Section  -->
+            <!--  Header Section  -->
             <Grid
-                Grid.Column="0"
+                Grid.Row="0"
+                ColumnDefinitions="50,*,50"
+                ColumnSpacing="0"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
-                <Image
-                    HeightRequest="25"
+                <!--  Back image Section  -->
+                <Grid
+                    Grid.Column="0"
                     HorizontalOptions="FillAndExpand"
-                    Source="backicon.png"
-                    VerticalOptions="CenterAndExpand"
-                    WidthRequest="25" />
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BackCommand}" />
-                </Grid.GestureRecognizers>
-            </Grid>
-            <!--  Label Section  -->
-            <Label
-                Grid.Column="1"
-                FontAttributes="Bold"
-                FontSize="19"
-                HorizontalTextAlignment="Center"
-                Text="Update Account Access"
-                TextColor="Black"
-                VerticalTextAlignment="Center" />
-        </Grid>
-        <!--  BoxView Section  -->
-        <BoxView
-            Grid.Row="1"
-            BackgroundColor="{StaticResource Gray1}"
-            HeightRequest="1"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand" />
-
-        <!--  ScrollView Section  -->
-        <ScrollView
-            Grid.Row="2"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Never">
-            <!--  Body Section  -->
-            <Grid
-                Padding="20,10"
-                HorizontalOptions="FillAndExpand"
-                RowDefinitions="Auto,Auto,Auto,Auto,Auto"
-                RowSpacing="16"
-                VerticalOptions="FillAndExpand">
-                <!--  Sub Header Section  -->
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="FillAndExpand"
+                        Source="backicon.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="25" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <!--  Label Section  -->
                 <Label
-                    Grid.Row="0"
-                    Margin="10,0"
-                    FontFamily="SanchezSlab"
-                    FontSize="20"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="19"
                     HorizontalTextAlignment="Center"
-                    Text="Test User25"
-                    TextColor="{StaticResource Blue1}"
-                    VerticalTextAlignment="Center" />
-                <!--  Privatize User Account  -->
-                <Grid
-                    Grid.Row="1"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto,Auto"
-                    RowSpacing="15"
-                    VerticalOptions="FillAndExpand">
-                    <Image
-                        Grid.Row="0"
-                        HeightRequest="100"
-                        HorizontalOptions="CenterAndExpand"
-                        Source="userlock.png"
-                        VerticalOptions="CenterAndExpand"
-                        WidthRequest="100" />
-                    <Grid
-                        Grid.Row="1"
-                        ColumnDefinitions="Auto,Auto"
-                        ColumnSpacing="0"
-                        HorizontalOptions="Center"
-                        VerticalOptions="FillAndExpand">
-                        <Label
-                            Grid.Column="0"
-                            FontFamily="SanchezSlab"
-                            FontSize="20"
-                            HorizontalTextAlignment="Center"
-                            Text="PRIVATIZE User Account"
-                            TextColor="{StaticResource Blue1}"
-                            VerticalTextAlignment="Center" />
-                        <Grid
-                            Grid.Column="1"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
-                            <Image
-                                HeightRequest="25"
-                                HorizontalOptions="CenterAndExpand"
-                                Source="greeninfoicon.png"
-                                VerticalOptions="CenterAndExpand"
-                                WidthRequest="25" />
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding InfoCommand}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                    </Grid>
-                    <!--  PrivatizeUser Button Section  -->
-                    <Button
-                        Grid.Row="2"
-                        Margin="50,0"
-                        Background="#DDDDDD"
-                        Command="{Binding PrivatizeUserCommand}"
-                        FontFamily="SanchezSlab"
-                        FontSize="14"
-                        HeightRequest="55"
-                        HorizontalOptions="FillAndExpand"
-                        Text=" Privatize User"
-                        TextColor="White"
-                        VerticalOptions="FillAndExpand"
-                        WidthRequest="200" />
-                </Grid>
-                <!--  Deactivate User Account  -->
-                <Grid
-                    Grid.Row="2"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto,Auto"
-                    RowSpacing="15"
-                    VerticalOptions="FillAndExpand">
-                    <Image
-                        Grid.Row="0"
-                        HeightRequest="100"
-                        HorizontalOptions="CenterAndExpand"
-                        Source="userdelete.png"
-                        VerticalOptions="CenterAndExpand"
-                        WidthRequest="100" />
-                    <Grid
-                        Grid.Row="1"
-                        ColumnDefinitions="Auto,Auto"
-                        ColumnSpacing="0"
-                        HorizontalOptions="Center"
-                        VerticalOptions="FillAndExpand">
-                        <Label
-                            Grid.Column="0"
-                            FontFamily="SanchezSlab"
-                            FontSize="20"
-                            HorizontalTextAlignment="Center"
-                            Text="DEACTIVATE User Account"
-                            TextColor="{StaticResource Blue1}"
-                            VerticalTextAlignment="Center" />
-                        <Grid
-                            Grid.Column="1"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
-                            <Image
-                                HeightRequest="25"
-                                HorizontalOptions="CenterAndExpand"
-                                Source="greeninfoicon.png"
-                                VerticalOptions="CenterAndExpand"
-                                WidthRequest="25" />
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding InfoCommand}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                    </Grid>
-                    <!--  Deactivate Now Button Section  -->
-                    <Button
-                        Grid.Row="2"
-                        Margin="50,0"
-                        Background="{StaticResource Green1}"
-                        Command="{Binding DeactivateNowCommand}"
-                        FontFamily="SanchezSlab"
-                        FontSize="14"
-                        HeightRequest="55"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Deactivate Now"
-                        TextColor="White"
-                        VerticalOptions="FillAndExpand"
-                        WidthRequest="200" />
-                </Grid>
-                <!--  Remove User Account  -->
-                <Grid
-                    Grid.Row="3"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto,Auto"
-                    RowSpacing="15"
-                    VerticalOptions="FillAndExpand">
-                    <Image
-                        Grid.Row="0"
-                        HeightRequest="100"
-                        HorizontalOptions="CenterAndExpand"
-                        Source="usercancel.png"
-                        VerticalOptions="CenterAndExpand"
-                        WidthRequest="100" />
-                    <Grid
-                        Grid.Row="1"
-                        ColumnDefinitions="Auto,Auto"
-                        ColumnSpacing="0"
-                        HorizontalOptions="Center"
-                        VerticalOptions="FillAndExpand">
-                        <Label
-                            Grid.Column="0"
-                            FontFamily="SanchezSlab"
-                            FontSize="20"
-                            HorizontalTextAlignment="Center"
-                            Text="DEACTIVATE User Account"
-                            TextColor="{StaticResource Blue1}"
-                            VerticalTextAlignment="Center" />
-                        <Grid
-                            Grid.Column="1"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
-                            <Image
-                                HeightRequest="25"
-                                HorizontalOptions="CenterAndExpand"
-                                Source="greeninfoicon.png"
-                                VerticalOptions="CenterAndExpand"
-                                WidthRequest="25" />
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding InfoCommand}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                    </Grid>
-                    <!--  Remove User Button Section  -->
-                    <Button
-                        Grid.Row="2"
-                        Margin="50,0"
-                        Background="#DDDDDD"
-                        Command="{Binding RemoveUserCommand}"
-                        FontFamily="SanchezSlab"
-                        FontSize="14"
-                        HeightRequest="55"
-                        HorizontalOptions="FillAndExpand"
-                        Text=" Remove User"
-                        TextColor="White"
-                        VerticalOptions="FillAndExpand"
-                        WidthRequest="200" />
-                </Grid>
-                <!--  Assistance Label Section  -->
-                <Label
-                    Grid.Row="4"
-                    FontSize="14"
-                    HorizontalTextAlignment="Start"
-                    Text="For assistance in updating a user's account access, please call customer service 512-421-5678(Mon-Fri, 8am-5pm)"
+                    Text="Update Account Access"
                     TextColor="Black"
                     VerticalTextAlignment="Center" />
             </Grid>
-        </ScrollView>
+            <!--  BoxView Section  -->
+            <BoxView
+                Grid.Row="1"
+                BackgroundColor="{StaticResource Gray1}"
+                HeightRequest="1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
+
+            <!--  ScrollView Section  -->
+            <ScrollView
+                Grid.Row="2"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                VerticalScrollBarVisibility="Never">
+                <!--  Body Section  -->
+                <Grid
+                    Padding="20,10"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                    RowSpacing="16"
+                    VerticalOptions="FillAndExpand">
+                    <!--  Sub Header Section  -->
+                    <Label
+                        Grid.Row="0"
+                        Margin="10,0"
+                        FontFamily="SanchezSlab"
+                        FontSize="20"
+                        HorizontalTextAlignment="Center"
+                        Text="Test User25"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center" />
+                    <!--  Privatize User Account  -->
+                    <Grid
+                        Grid.Row="1"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto,Auto"
+                        RowSpacing="15"
+                        VerticalOptions="FillAndExpand">
+                        <Image
+                            Grid.Row="0"
+                            HeightRequest="100"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="userlock.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="100" />
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="Auto,Auto"
+                            ColumnSpacing="0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontFamily="SanchezSlab"
+                                FontSize="20"
+                                HorizontalTextAlignment="Center"
+                                Text="PRIVATIZE User Account"
+                                TextColor="{StaticResource Blue1}"
+                                VerticalTextAlignment="Center" />
+                            <Grid
+                                Grid.Column="1"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Image
+                                    HeightRequest="25"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="greeninfoicon.png"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="25" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Info_Tapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                        <!--  PrivatizeUser Button Section  -->
+                        <Button
+                            Grid.Row="2"
+                            Margin="50,0"
+                            Background="#DDDDDD"
+                            Command="{Binding PrivatizeUserCommand}"
+                            FontFamily="SanchezSlab"
+                            FontSize="14"
+                            HeightRequest="55"
+                            HorizontalOptions="FillAndExpand"
+                            Text=" Privatize User"
+                            TextColor="White"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="200" />
+                    </Grid>
+                    <!--  Deactivate User Account  -->
+                    <Grid
+                        Grid.Row="2"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto,Auto"
+                        RowSpacing="15"
+                        VerticalOptions="FillAndExpand">
+                        <Image
+                            Grid.Row="0"
+                            HeightRequest="100"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="userdelete.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="100" />
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="Auto,Auto"
+                            ColumnSpacing="0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontFamily="SanchezSlab"
+                                FontSize="20"
+                                HorizontalTextAlignment="Center"
+                                Text="DEACTIVATE User Account"
+                                TextColor="{StaticResource Blue1}"
+                                VerticalTextAlignment="Center" />
+                            <Grid
+                                Grid.Column="1"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Image
+                                    HeightRequest="25"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="greeninfoicon.png"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="25" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding InfoCommand}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                        <!--  Deactivate Now Button Section  -->
+                        <Button
+                            Grid.Row="2"
+                            Margin="50,0"
+                            Background="{StaticResource Green1}"
+                            Command="{Binding DeactivateNowCommand}"
+                            FontFamily="SanchezSlab"
+                            FontSize="14"
+                            HeightRequest="55"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Deactivate Now"
+                            TextColor="White"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="200" />
+                    </Grid>
+                    <!--  Remove User Account  -->
+                    <Grid
+                        Grid.Row="3"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto,Auto"
+                        RowSpacing="15"
+                        VerticalOptions="FillAndExpand">
+                        <Image
+                            Grid.Row="0"
+                            HeightRequest="100"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="usercancel.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="100" />
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="Auto,Auto"
+                            ColumnSpacing="0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontFamily="SanchezSlab"
+                                FontSize="20"
+                                HorizontalTextAlignment="Center"
+                                Text="DEACTIVATE User Account"
+                                TextColor="{StaticResource Blue1}"
+                                VerticalTextAlignment="Center" />
+                            <Grid
+                                Grid.Column="1"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Image
+                                    HeightRequest="25"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="greeninfoicon.png"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="25" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding InfoCommand}" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </Grid>
+                        <!--  Remove User Button Section  -->
+                        <Button
+                            Grid.Row="2"
+                            Margin="50,0"
+                            Background="#DDDDDD"
+                            Command="{Binding RemoveUserCommand}"
+                            FontFamily="SanchezSlab"
+                            FontSize="14"
+                            HeightRequest="55"
+                            HorizontalOptions="FillAndExpand"
+                            Text=" Remove User"
+                            TextColor="White"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="200" />
+                    </Grid>
+                    <!--  Assistance Label Section  -->
+                    <Label
+                        Grid.Row="4"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        Text="For assistance in updating a user's account access, please call customer service 512-421-5678(Mon-Fri, 8am-5pm)"
+                        TextColor="Black"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+            </ScrollView>
+        </Grid>
+
+        <!--  Opacity Section  -->
+        <Grid
+            x:Name="opacitygrid"
+            BackgroundColor="{StaticResource Gray950}"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            Opacity="0.7"
+            VerticalOptions="FillAndExpand">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="opacitygrid_Tapped" />
+            </Grid.GestureRecognizers>
+        </Grid>
+        <!--  PancakeView for round corner  -->
+        <Border
+            x:Name="privatizeBorder"
+            Padding="5"
+            Background="White"
+            HeightRequest="300"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <Grid
+                Padding="8,10"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto"
+                RowSpacing="15"
+                VerticalOptions="FillAndExpand">
+                <!--  PRIVATIZE Section  -->
+                <Label
+                    Grid.Row="0"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="PRIVATIZE: " />
+                            <Span Text="What does thie mean?" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <!--  PRIVATIZE Content Section  -->
+                <Label
+                    Grid.Row="1"
+                    FontSize="13"
+                    HorizontalOptions="StartAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Privatizing a user's account will allow them to create a separate login to fully privatize their medical information, including demographics, medical information, and visit history. The user will remain listed on this family account"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+                <!--  PRIVATIZE Content Section  -->
+                <Label
+                    Grid.Row="2"
+                    FontSize="13"
+                    HorizontalOptions="StartAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Account owners cannot be privatized. If you are the account owner, and would like to conceal your medical information, please privatize each individual user under Account Profiles"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+            </Grid>
+        </Border>
     </Grid>
 </ContentPage>

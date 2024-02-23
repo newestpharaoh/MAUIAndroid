@@ -262,6 +262,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
         }
 
+        /// <summary>
+        /// TODO : To Define Continue Command...
+        /// </summary>
+        /// <returns></returns>
         private async void ContinueCommandAsync(object obj)
         {
             try
@@ -431,6 +435,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             {
             }
         }
+
         /// <summary>
         /// TODO : To Define Cancel Plan Command...
         /// </summary>
@@ -514,7 +519,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
             catch (Exception ex)
             {
-                
+
             }
         }
 
@@ -533,6 +538,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 Console.WriteLine(ex);
             }
         }
+
         #endregion
     }
 }
