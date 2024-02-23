@@ -91,7 +91,7 @@
                         FontSize="14"
                         HeightRequest="45"
                         HorizontalOptions="FillAndExpand"
-                        Keyboard="Default"
+                        Keyboard="Numeric"
                         Text="{Binding VerificationCode}"
                         VerticalOptions="FillAndExpand" />
                 </Grid>

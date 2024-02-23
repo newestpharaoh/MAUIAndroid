@@ -6,33 +6,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
+using AndroidPatientAppMaui.Views.Popup;
+using AndroidPatientAppMaui.Views.MyAccount;
+using CommunityToolkit.Maui.Views;
 
 namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
     public class ManageSubscriptionPageViewModel : BaseViewModel
     {
-        #region Constructor
-
+        #region Constructor 
         //To define the class level variable.
         public string AppName = Preferences.Get("AppName", string.Empty);
         string Token = string.Empty;
         int Userid = 0;
         UserInfo userInfo;
+        AccountSubscriptionInfo info;
         bool hasPromoCode;
-        public ManageSubscriptionPageViewModel(INavigation nav)
+        public ManageSubscriptionPage manageSubscriptionP;
+        public ManageSubscriptionPageViewModel(INavigation nav, ManageSubscriptionPage manageSubscriptionPage)
         {
             Navigation = nav;
             BackCommand = new Command(BackAsync);
             ChangePlanCommand = new Command(ChangePlanAsync);
             UpdatePaymentCommand = new Command(UpdatePaymentAsync);
             DownloadOrderSummary = new Command(DownloadOrderSummaryAsync);
-            InfoCommand = new Command(InfoAsync);
-
+            InfoCommand = new Command(InfoCommandAsync);
 
             Token = Preferences.Get("AuthToken", string.Empty);
             Userid = Preferences.Get("UserId", 0);
+            manageSubscriptionP = manageSubscriptionPage;
         }
-
+         
         #endregion
 
         #region Command
@@ -493,7 +497,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                         Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                         {
                             UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, Userid, true, Token).ConfigureAwait(false);
-                            AccountSubscriptionInfo info = await DataUtility.PatientGetSubscriptionInfoAsync(SettingsValues.ApiURLValue, userInfo.PatientID, Token).ConfigureAwait(false);
+                            info = await DataUtility.PatientGetSubscriptionInfoAsync(SettingsValues.ApiURLValue, userInfo.PatientID, Token).ConfigureAwait(false);
                             if (info != null)
                             {
                                 Subscription currentSubscription = SubscriptionsFactory.Get(info);
@@ -765,7 +769,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyAccount.ChangePlanPage(), false);
+                var isPlanChange = true;
+                await Navigation.PushModalAsync(new Views.MyAccount.ChangePlanPage(info, isPlanChange), false);
 
             }
             catch (Exception ex)
@@ -789,17 +794,17 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 Console.WriteLine(ex);
             }
         }
-
         /// <summary>
         /// To Do: To define Info command
         /// </summary>
         /// <param name="obj"></param>
 
-        private async void InfoAsync(object obj)
+        private async void InfoCommandAsync(object obj)
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.Popup.InfoPopupPage(), false);
+                var infoPopup = new InfoPopupPage(this, manageSubscriptionP);
+                manageSubscriptionP.ShowPopup(infoPopup);
             }
             catch (Exception ex)
             {

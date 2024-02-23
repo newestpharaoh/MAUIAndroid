@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="AndroidPatientAppMaui.Views.Popup.InfoPopupPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    HorizontalOptions="Fill"
+    VerticalOptions="Center"
+    Color="Transparent">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        IsVisible="true"
+        RowSpacing="0"
+        VerticalOptions="CenterAndExpand">
+        <!--  PancakeView for round corner  -->
+        <Border
+            x:Name="InfoGrid"
+            Padding="1,4,1,0"
+            Background="White"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="True"
+            StrokeThickness="0"
+            VerticalOptions="FillAndExpand">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5,5,0,0" />
+            </Border.StrokeShape>
+            <Grid
+                Padding="5,0"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="60,*"
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <!--  Header Label  -->
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Billing Policies"
+                    TextColor="Black"
+                    VerticalOptions="FillAndExpand"
+                    VerticalTextAlignment="Center" />
+                <!--  ScrollView Section  -->
+                <ScrollView
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    IsClippedToBounds="True"
+                    VerticalOptions="FillAndExpand"
+                    VerticalScrollBarVisibility="Never">
+                    <!--  Body Section  -->
+                    <Grid
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,1,Auto,1,Auto,1,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                        RowSpacing="15"
+                        VerticalOptions="FillAndExpand">
+                        <!--  Billing Header Section  -->
+                        <Label
+                            x:Name="Billingheader"
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding BillingPoliciesName}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Monthly Header Section  -->
+                        <Label
+                            x:Name="MonthlySubscriptionPlan"
+                            Grid.Row="1"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding MonthlySubscriptionPlan}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Sub Header Section  -->
+                        <Label
+                            Grid.Row="2"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding MonthlySubscriptionPlanP1}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+
+                        <Label
+                            Grid.Row="3"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding MonthlySubscriptionPlanP1B1}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="4"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding MonthlySubscriptionPlanP1B2}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Purchase Date Section  -->
+                        <Grid
+                            Grid.Row="5"
+                            ColumnDefinitions="135,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding TablePurchaseDate}"
+                                TextColor="{StaticResource Gray4}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding TableAutoRenewalDate}"
+                                TextColor="{StaticResource Gray4}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <!--  BoxView Section  -->
+                        <BoxView
+                            Grid.Row="6"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <!--  Table Section  -->
+                        <Grid
+                            Grid.Row="7"
+                            ColumnDefinitions="100,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_1st_28_Col1}"
+                                TextColor="LightGray"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_1st_28_Col2}"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <BoxView
+                            Grid.Row="8"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="9"
+                            ColumnDefinitions="100,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_29th_Col1}"
+                                TextColor="LightGray"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_29th_Col2}"
+                                TextColor="{StaticResource Black}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+
+                        <BoxView
+                            Grid.Row="10"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="11"
+                            ColumnDefinitions="120,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_30th_Col1}"
+                                TextColor="LightGray"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_30th_Col2}"
+                                TextColor="{StaticResource Black}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <BoxView
+                            Grid.Row="12"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="13"
+                            ColumnDefinitions="120,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_31th_Col1}"
+                                TextColor="LightGray"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_31th_Col2}"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <!--  Boxview Section  -->
+                        <BoxView
+                            Grid.Row="14"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <!--  Updating Credit Card Section  -->
+                        <Label
+                            Grid.Row="15"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding UpdatingCreditCardName}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="16"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding UpdatingCreditCard}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Paid Plan Section  -->
+                        <Label
+                            Grid.Row="17"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding ChangePlanInfo}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="18"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding SubscriptionPlanChanges}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Paid Plan Cancellation Section  -->
+                        <Label
+                            Grid.Row="19"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding NoRefunds}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+        <Label 
+                            Grid.Row="20"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Cancellation}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </ScrollView>
+            </Grid>
+        </Border>
+    </Grid>
+</toolkit:Popup>
