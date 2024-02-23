@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using AndroidPatientAppMaui.Views;
 using CommunityToolkit.Maui.Core.Views;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,12 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
-                await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes","No");
+                bool answer = await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
+                // If the user clicks "Yes", logout
+                if (answer)
+                {
+                    await Navigation.PushModalAsync(new LoginPage(), false);
+                }
             }
             catch (Exception ex)
             {

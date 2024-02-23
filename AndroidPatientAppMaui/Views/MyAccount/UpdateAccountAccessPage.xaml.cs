@@ -12,6 +12,9 @@ public partial class UpdateAccountAccessPage : ContentPage
         try
         {
             InitializeComponent();
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            var Width = (mainDisplayInfo.Width / mainDisplayInfo.Density) - 40;
+            privatizeBorder.WidthRequest = Width;
             this.BindingContext = VM = new UpdateAccountAccessPageViewModel(this.Navigation);
         }
         catch (Exception)
@@ -22,4 +25,16 @@ public partial class UpdateAccountAccessPage : ContentPage
 
     #region Event Handler
     #endregion
+
+    private void opacitygrid_Tapped(object sender, TappedEventArgs e)
+    {
+        opacitygrid.IsVisible = false;
+        privatizeBorder.IsVisible = false;
+    }
+
+    private void Info_Tapped(object sender, TappedEventArgs e)
+    {
+        opacitygrid.IsVisible = true;
+        privatizeBorder.IsVisible = true;
+    }
 }
