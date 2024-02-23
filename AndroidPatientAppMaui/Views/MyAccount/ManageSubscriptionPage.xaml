@@ -6,132 +6,133 @@
     xmlns:local="co"
     Title="ManageSubscriptionPage">
     <!--  Main Grid  -->
-    <Grid
-        HorizontalOptions="FillAndExpand"
-        RowDefinitions="50,1,*"
-        RowSpacing="0"
-        VerticalOptions="FillAndExpand">
-        <!--  Header Section  -->
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Grid
-            Grid.Row="0"
-            ColumnDefinitions="50,*,50"
-            ColumnSpacing="0"
             HorizontalOptions="FillAndExpand"
+            RowDefinitions="50,1,*"
+            RowSpacing="0"
             VerticalOptions="FillAndExpand">
-            <!--  Back image Section  -->
+            <!--  Header Section  -->
             <Grid
-                Grid.Column="0"
+                Grid.Row="0"
+                ColumnDefinitions="50,*,50"
+                ColumnSpacing="0"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
-                <Image
-                    HeightRequest="25"
+                <!--  Back image Section  -->
+                <Grid
+                    Grid.Column="0"
                     HorizontalOptions="FillAndExpand"
-                    Source="backicon.png"
-                    VerticalOptions="CenterAndExpand"
-                    WidthRequest="25" />
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BackCommand}" />
-                </Grid.GestureRecognizers>
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="FillAndExpand"
+                        Source="backicon.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="25" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalTextAlignment="Center"
+                    Text="Manage Subscriptions"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
             </Grid>
-            <Label
-                Grid.Column="1"
-                FontAttributes="Bold"
-                FontSize="18"
-                HorizontalTextAlignment="Center"
-                Text="Manage Subscriptions"
-                TextColor="Black"
-                VerticalTextAlignment="Center" />
-        </Grid>
-        <!--  BoxView Section  -->
-        <BoxView
-            Grid.Row="1"
-            BackgroundColor="{StaticResource Gray1}"
-            HeightRequest="1"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand" />
-
-        <ScrollView
-            Grid.Row="2"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Never">
-            <!--  Body Section  -->
-            <StackLayout
-                Margin="12,10"
+            <!--  BoxView Section  -->
+            <BoxView
+                Grid.Row="1"
+                BackgroundColor="{StaticResource Gray1}"
+                HeightRequest="1"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
+                VerticalOptions="FillAndExpand" />
+
+            <ScrollView
+                Grid.Row="2"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                VerticalScrollBarVisibility="Never">
+                <!--  Body Section  -->
                 <StackLayout
-                    x:Name="lytChangeInfo"
-                    Margin="0,0,0,10"
-                    Padding="10"
-                    BackgroundColor="#eee"
-                    IsVisible="{Binding lytInfoIsVisible}">
-                    <Label
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        IsVisible="True"
-                        Text="There has been a change to your plan."
-                        TextColor="#ff0000"
-                        VerticalOptions="Start" />
+                    Margin="12,10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout
+                        x:Name="lytChangeInfo"
+                        Margin="0,0,0,10"
+                        Padding="10"
+                        BackgroundColor="#eee"
+                        IsVisible="{Binding lytInfoIsVisible}">
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            IsVisible="True"
+                            Text="There has been a change to your plan."
+                            TextColor="#ff0000"
+                            VerticalOptions="Start" />
 
-                    <Label
-                        x:Name="lblChangeInfo"
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        IsVisible="{Binding lblChangeInfo}"
-                        Text="{Binding ChangeInfo}"
-                        VerticalOptions="Start" />
+                        <Label
+                            x:Name="lblChangeInfo"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding lblChangeInfo}"
+                            Text="{Binding ChangeInfo}"
+                            VerticalOptions="Start" />
 
-                    <Label
-                        x:Name="lblChangeInfo1"
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        IsVisible="{Binding lblChangeInfo1}"
-                        Text="{Binding ChangeInfo1}"
-                        VerticalOptions="Start" />
+                        <Label
+                            x:Name="lblChangeInfo1"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding lblChangeInfo1}"
+                            Text="{Binding ChangeInfo1}"
+                            VerticalOptions="Start" />
 
-                    <Label
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        Text="If you did not make a change to your plan, please contact customer service at {customerServicePhone}."
-                        VerticalOptions="Start" />
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="If you did not make a change to your plan, please contact customer service at {customerServicePhone}."
+                            VerticalOptions="Start" />
 
-                    <Label
-                        x:Name="lblDownloadOrderSummary"
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        Text="Download Order Summary"
-                        TextDecorations="Underline"
-                        VerticalOptions="Start">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding DownloadOrderSummary}" />
-                        </Label.GestureRecognizers>
-                    </Label>
+                        <Label
+                            x:Name="lblDownloadOrderSummary"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="Download Order Summary"
+                            TextDecorations="Underline"
+                            VerticalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding DownloadOrderSummary}" />
+                            </Label.GestureRecognizers>
+                        </Label>
 
-                </StackLayout>
+                    </StackLayout>
 
-                <StackLayout
-                    x:Name="lytCancellationInfo"
-                    Margin="0,0,0,10"
-                    Padding="10"
-                    BackgroundColor="#eee"
-                    IsVisible="{Binding lytCancellationInfo}">
+                    <StackLayout
+                        x:Name="lytCancellationInfo"
+                        Margin="0,0,0,10"
+                        Padding="10"
+                        BackgroundColor="#eee"
+                        IsVisible="{Binding lytCancellationInfo}">
 
-                    <Label
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        Text="We're sad to see you go."
-                        TextColor="#ff0000"
-                        VerticalOptions="Center" />
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="We're sad to see you go."
+                            TextColor="#ff0000"
+                            VerticalOptions="Center" />
 
-                    <Label
-                        x:Name="lblCancellationInfo"
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        Text="Your plan is cancelled. You will have access to eMD services until {date}. You can restart your subscription at any time by selecting Choose Plan below. If you did not cancel your plan, please contact customer service at {customerServicePhone}."
-                        VerticalOptions="Center" />
-                </StackLayout>
-                <!--<StackLayout
+                        <Label
+                            x:Name="lblCancellationInfo"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="Your plan is cancelled. You will have access to eMD services until {date}. You can restart your subscription at any time by selecting Choose Plan below. If you did not cancel your plan, please contact customer service at {customerServicePhone}."
+                            VerticalOptions="Center" />
+                    </StackLayout>
+                    <!--<StackLayout
                     x:Name="lytFamilyMemberDeactivated"
                     Margin="0,0,0,10"
                     Padding="10"
@@ -153,256 +154,257 @@
                         VerticalOptions="Center" />
                 </StackLayout>-->
 
-                <StackLayout>
+                    <StackLayout>
 
-                    <StackLayout IsVisible="True">
-                        <Label
-                            FontFamily="SanchezSlab"
-                            FontSize="20"
-                            Text="Your Subscription"
-                            TextColor="{StaticResource Blue1}" />
-                    </StackLayout>
-
-                    <StackLayout
-                        x:Name="lytInactiveNonPayment"
-                        Margin="0,5,0,0"
-                        IsVisible="{Binding lytInactiveNonPayment}">
-                        <Label FontAttributes="Bold" Text="Inactive" />
-                        <Label Text="Your account is inactive due to non-payment. To reactivate your account, please update your payment method." />
-                    </StackLayout>
-
-                    <StackLayout
-                        x:Name="lytInactive"
-                        Margin="0,5,0,0"
-                        IsVisible="{Binding lytInactive}">
+                        <StackLayout IsVisible="True">
+                            <Label
+                                FontFamily="SanchezSlab"
+                                FontSize="20"
+                                Text="Your Subscription"
+                                TextColor="{StaticResource Blue1}" />
+                        </StackLayout>
 
                         <StackLayout
-                            x:Name="lytInactive_Inactive"
-                            Margin="0,0,0,5"
-                            IsVisible="{Binding lytInactive_Inactive}"
-                            Orientation="Horizontal">
-
+                            x:Name="lytInactiveNonPayment"
+                            Margin="0,5,0,0"
+                            IsVisible="{Binding lytInactiveNonPayment}">
                             <Label FontAttributes="Bold" Text="Inactive" />
-
+                            <Label Text="Your account is inactive due to non-payment. To reactivate your account, please update your payment method." />
                         </StackLayout>
 
                         <StackLayout
-                            x:Name="lytInactive_ActiveUntil"
-                            Margin="0,0,0,5"
-                            IsVisible="{Binding lytInactive_ActiveUntil}"
-                            Orientation="Horizontal">
-                            <Label Text="Active" />
-                            <Label
-                                FontAttributes="Italic"
-                                Text=" until @date@"
-                                TextColor="#ff0000" />
+                            x:Name="lytInactive"
+                            Margin="0,5,0,0"
+                            IsVisible="{Binding lytInactive}">
+
+                            <StackLayout
+                                x:Name="lytInactive_Inactive"
+                                Margin="0,0,0,5"
+                                IsVisible="{Binding lytInactive_Inactive}"
+                                Orientation="Horizontal">
+
+                                <Label FontAttributes="Bold" Text="Inactive" />
+
+                            </StackLayout>
+
+                            <StackLayout
+                                x:Name="lytInactive_ActiveUntil"
+                                Margin="0,0,0,5"
+                                IsVisible="{Binding lytInactive_ActiveUntil}"
+                                Orientation="Horizontal">
+                                <Label Text="Active" />
+                                <Label
+                                    FontAttributes="Italic"
+                                    Text=" until @date@"
+                                    TextColor="#ff0000" />
+                            </StackLayout>
+
+                            <Label x:Name="txtAccess" Text="You are not currently paying for an eMD Access subscription. To start a new subscription, please select the &quot;Choose Plan&quot; button below." />
+
                         </StackLayout>
+                        <StackLayout x:Name="lytActive" IsVisible="{Binding lytActive}">
 
-                        <Label x:Name="txtAccess" Text="You are not currently paying for an eMD Access subscription. To start a new subscription, please select the &quot;Choose Plan&quot; button below." />
+                            <StackLayout Margin="0,5,0,0" IsVisible="True">
+                                <Label FontAttributes="Bold" Text="Your Current Subscription:" />
+                            </StackLayout>
 
-                    </StackLayout>
-                    <StackLayout x:Name="lytActive" IsVisible="{Binding lytActive}">
+                            <StackLayout Margin="0,0,0,5" IsVisible="True">
+                                <Label x:Name="lblCurrentSubscription" Text="{Binding lblCurrentSubscription}" />
+                            </StackLayout>
 
-                        <StackLayout Margin="0,5,0,0" IsVisible="True">
-                            <Label FontAttributes="Bold" Text="Your Current Subscription:" />
-                        </StackLayout>
+                            <StackLayout
+                                x:Name="lytPromoCode"
+                                IsVisible="{Binding lytPromoCode}"
+                                Orientation="Horizontal">
+                                <Label
+                                    x:Name="lblPromoCodeUsed"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    Text="Promotional Code:"
+                                    TextColor="#14b38a" />
+                                <Label
+                                    x:Name="txtPromoCodeUsed"
+                                    Margin="10,0,0,0"
+                                    Padding="5,7,20,5"
+                                    IsEnabled="False"
+                                    Text="{Binding txtPromoCodeUsed}"
+                                    TextColor="#333" />
+                            </StackLayout>
 
-                        <StackLayout Margin="0,0,0,5" IsVisible="True">
-                            <Label x:Name="lblCurrentSubscription" Text="{Binding lblCurrentSubscription}" />
-                        </StackLayout>
+                            <StackLayout
+                                x:Name="lytPlanCost"
+                                IsVisible="{Binding lytPlanCost}"
+                                Orientation="Horizontal">
+                                <Label
+                                    x:Name="lblPlanCost"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding lblPlanCost}"
+                                    TextColor="#14b38a" />
+                                <Label
+                                    x:Name="txtPlanCost"
+                                    Margin="10,0,0,0"
+                                    Padding="60,7,20,10"
+                                    IsEnabled="False"
+                                    Text="{Binding txtPlanCost}"
+                                    TextColor="Black" />
+                            </StackLayout>
 
-                        <StackLayout
-                            x:Name="lytPromoCode"
-                            IsVisible="{Binding lytPromoCode}"
-                            Orientation="Horizontal">
-                            <Label
-                                x:Name="lblPromoCodeUsed"
-                                FontAttributes="Bold"
-                                HorizontalTextAlignment="Center"
-                                Text="Promotional Code:"
-                                TextColor="#14b38a" />
-                            <Label
-                                x:Name="txtPromoCodeUsed"
-                                Margin="10,0,0,0"
-                                Padding="5,7,20,5"
-                                IsEnabled="False"
-                                Text="{Binding txtPromoCodeUsed}"
-                                TextColor="#333" />
-                        </StackLayout>
+                            <StackLayout
+                                x:Name="lytDiscountApplied"
+                                IsVisible="{Binding lytDiscountApplied}"
+                                Orientation="Horizontal">
+                                <Label
+                                    x:Name="lblDiscountApplied"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding lblDiscountApplied}"
+                                    TextColor="#14b38a" />
+                                <Label
+                                    x:Name="txtDiscountApplied"
+                                    Margin="10,0,0,0"
+                                    Padding="15,7,20,10"
+                                    IsEnabled="False"
+                                    Text="{Binding txtDiscountApplied}"
+                                    TextColor="#333" />
+                            </StackLayout>
 
-                        <StackLayout
-                            x:Name="lytPlanCost"
-                            IsVisible="{Binding lytPlanCost}"
-                            Orientation="Horizontal">
-                            <Label
-                                x:Name="lblPlanCost"
-                                FontAttributes="Bold"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding lblPlanCost}"
-                                TextColor="#14b38a" />
-                            <Label
-                                x:Name="txtPlanCost"
-                                Margin="10,0,0,0"
-                                Padding="60,7,20,10"
-                                IsEnabled="False"
-                                Text="{Binding txtPlanCost}"
-                                TextColor="Black" />
-                        </StackLayout>
+                            <StackLayout x:Name="lytTotal" Orientation="Horizontal">
+                                <Label
+                                    x:Name="lblTotalUsed"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding lblTotalUsed}"
+                                    TextColor="#3DA687" />
+                                <Label
+                                    x:Name="txtTotalUsed"
+                                    Margin="10,0,0,0"
+                                    Padding="90,7,20,10"
+                                    FontAttributes="Bold"
+                                    Text="{Binding txtTotalUsed}"
+                                    TextColor="#000000" />
+                            </StackLayout>
 
-                        <StackLayout
-                            x:Name="lytDiscountApplied"
-                            IsVisible="{Binding lytDiscountApplied}"
-                            Orientation="Horizontal">
-                            <Label
-                                x:Name="lblDiscountApplied"
-                                FontAttributes="Bold"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding lblDiscountApplied}"
-                                TextColor="#14b38a" />
-                            <Label
-                                x:Name="txtDiscountApplied"
-                                Margin="10,0,0,0"
-                                Padding="15,7,20,10"
-                                IsEnabled="False"
-                                Text="{Binding txtDiscountApplied}"
-                                TextColor="#333" />
-                        </StackLayout>
+                            <StackLayout
+                                x:Name="lytExpDate"
+                                IsVisible="{Binding lytExpDate}"
+                                Orientation="Horizontal">
+                                <Label
+                                    x:Name="lblExpDate"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding lblExpDate}"
+                                    TextColor="#3DA687" />
+                                <Label
+                                    x:Name="txtExpDate"
+                                    Margin="10,0,0,0"
+                                    Padding="30,7,20,10"
+                                    FontAttributes="Bold"
+                                    Text="{Binding txtExpDate}"
+                                    TextColor="#000000" />
+                            </StackLayout>
 
-                        <StackLayout x:Name="lytTotal" Orientation="Horizontal">
-                            <Label
-                                x:Name="lblTotalUsed"
-                                FontAttributes="Bold"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding lblTotalUsed}"
-                                TextColor="#3DA687" />
-                            <Label
-                                x:Name="txtTotalUsed"
-                                Margin="10,0,0,0"
-                                Padding="90,7,20,10"
-                                FontAttributes="Bold"
-                                Text="{Binding txtTotalUsed}"
-                                TextColor="#000000" />
-                        </StackLayout>
-
-                        <StackLayout
-                            x:Name="lytExpDate"
-                            IsVisible="{Binding lytExpDate}"
-                            Orientation="Horizontal">
-                            <Label
-                                x:Name="lblExpDate"
-                                FontAttributes="Bold"
-                                HorizontalTextAlignment="Center"
-                                Text="{Binding lblExpDate}"
-                                TextColor="#3DA687" />
-                            <Label
-                                x:Name="txtExpDate"
-                                Margin="10,0,0,0"
-                                Padding="30,7,20,10"
-                                FontAttributes="Bold"
-                                Text="{Binding txtExpDate}"
-                                TextColor="#000000" />
-                        </StackLayout>
-
-                        <!--  Commented out due to unknown resource  -->
-                        <!-- <StackLayout x:Name="lytMonthlySubscriptionTotal" Orientation="Horizontal" WidthRequest="MatchParent" HeightRequest="WrapContent">
+                            <!--  Commented out due to unknown resource  -->
+                            <!-- <StackLayout x:Name="lytMonthlySubscriptionTotal" Orientation="Horizontal" WidthRequest="MatchParent" HeightRequest="WrapContent">
         <Label Text="Monthly Subscription Total:" x:Name="lblTotalCaption" Style="{StaticResource EMDATextView.Bold}"  HorizontalTextAlignment="Center"  SingleLine="True" />
         <Entry Background="@drawable/monthly_subscription_total_edittext" Style="{StaticResource EMDAEditText}"Margin="10,0,0,0" TextColor="#333" WidthRequest="WrapContent" HeightRequest="WrapContent" SingleLine="True" PaddingRight="20" PaddingLeft="20" Enabled="False" x:Name="lblMonthlySubscriptionTotal" />
     </StackLayout>-->
 
-                        <StackLayout Margin="0,5,0,5" IsVisible="True">
-                            <Label x:Name="lblPlanDescription" Text="{Binding lblPlanDescription}" />
-                        </StackLayout>
+                            <StackLayout Margin="0,5,0,5" IsVisible="True">
+                                <Label x:Name="lblPlanDescription" Text="{Binding lblPlanDescription}" />
+                            </StackLayout>
 
-                    </StackLayout>
-
-                    <StackLayout
-                        x:Name="lytChangePlan"
-                        Margin="0,20,0,20"
-                        HorizontalOptions="CenterAndExpand"
-                        IsVisible="{Binding lytChangePlan}"
-                        Orientation="Horizontal"
-                        VerticalOptions="Center">
-                        <Button
-                            x:Name="btnChangePlan"
-                            Margin="50,0"
-                            Background="#15B287"
-                            Command="{Binding ChangePlanCommand}"
-                            FontFamily="SanchezSlab"
-                            FontSize="14"
-                            HeightRequest="55"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Change Plan"
-                            TextColor="#FFFFFF"
-                            VerticalOptions="FillAndExpand"
-                            WidthRequest="180" />
-                    </StackLayout>
-
-
-                    <StackLayout
-                        x:Name="lytChoosePlan"
-                        Margin="0,20,0,20"
-                        HorizontalOptions="CenterAndExpand"
-                        IsVisible="{Binding lytChoosePlan}"
-                        Orientation="Horizontal"
-                        VerticalOptions="Center">
-                        <Button
-                            x:Name="btnChoosePlan"
-                            Margin="50,0"
-                            BackgroundColor="#15B287"
-                            FontFamily="SanchezSlab"
-                            FontSize="14"
-                            HeightRequest="55"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Choose Plan"
-                            TextColor="{StaticResource White}"
-                            VerticalOptions="FillAndExpand"
-                            WidthRequest="180" />
-                    </StackLayout>
-
-                    <StackLayout x:Name="lytPayment" IsVisible="{Binding lytPayment}">
-                        <StackLayout
-                            Margin="0,5,0,5"
-                            Orientation="Vertical"
-                            VerticalOptions="Center">
-                            <Label FontAttributes="Bold" Text="Your Payment Method" />
                         </StackLayout>
 
                         <StackLayout
-                            Margin="0,0,0,0"
-                            HorizontalOptions="FillAndExpand"
-                            IsVisible="True"
+                            x:Name="lytChangePlan"
+                            Margin="0,20,0,20"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="{Binding lytChangePlan}"
                             Orientation="Horizontal"
-                            VerticalOptions="FillAndExpand">
-                            <Grid
-                                ColumnDefinitions="Auto,auto"
+                            VerticalOptions="Center">
+                            <Button
+                                x:Name="btnChangePlan"
+                                Margin="50,0"
+                                Background="#15B287"
+                                Command="{Binding ChangePlanCommand}"
+                                FontFamily="SanchezSlab"
+                                FontSize="14"
+                                HeightRequest="55"
                                 HorizontalOptions="FillAndExpand"
+                                Text="Change Plan"
+                                TextColor="#FFFFFF"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="180" />
+                        </StackLayout>
+
+
+                        <StackLayout
+                            x:Name="lytChoosePlan"
+                            Margin="0,20,0,20"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="{Binding lytChoosePlan}"
+                            Orientation="Horizontal"
+                            VerticalOptions="Center">
+                            <Button
+                                x:Name="btnChoosePlan"
+                                Margin="50,0"
+                                BackgroundColor="#15B287"
+                                FontFamily="SanchezSlab"
+                                FontSize="14"
+                                HeightRequest="55"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Choose Plan"
+                                TextColor="{StaticResource White}"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="180" />
+                        </StackLayout>
+
+                        <StackLayout x:Name="lytPayment" IsVisible="{Binding lytPayment}">
+                            <StackLayout
+                                Margin="0,5,0,5"
+                                Orientation="Vertical"
+                                VerticalOptions="Center">
+                                <Label FontAttributes="Bold" Text="Your Payment Method" />
+                            </StackLayout>
+
+                            <StackLayout
+                                Margin="0,0,0,0"
+                                HorizontalOptions="FillAndExpand"
+                                IsVisible="True"
+                                Orientation="Horizontal"
                                 VerticalOptions="FillAndExpand">
-                                <Label
-                                    x:Name="managesubscription_yourpaymentmethod"
-                                    Grid.Column="0"
-                                    Margin="0,0,0,2"
-                                    HorizontalTextAlignment="Start"
-                                    Text="{Binding managesubscription_yourpaymentmethod}"
-                                    TextColor="{StaticResource Black}"
-                                    VerticalTextAlignment="Center" />
                                 <Grid
-                                    Grid.Column="1"
+                                    ColumnDefinitions="Auto,auto"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
-                                    <Image
-                                        x:Name="iconInfo"
-                                        Margin="0,0,40,0"
-                                        HeightRequest="25"
-                                        HorizontalOptions="EndAndExpand"
-                                        Source="greyinfoicon.png"
-                                        VerticalOptions="CenterAndExpand"
-                                        WidthRequest="25" />
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding InfoCommand}" />
-                                    </Grid.GestureRecognizers>
+                                    <Label
+                                        x:Name="managesubscription_yourpaymentmethod"
+                                        Grid.Column="0"
+                                        Margin="0,0,0,2"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding managesubscription_yourpaymentmethod}"
+                                        TextColor="{StaticResource Black}"
+                                        VerticalTextAlignment="Center" />
+                                    <Grid
+                                        Grid.Column="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand">
+                                        <Image
+                                            x:Name="iconInfo"
+                                            Margin="0,0,40,0"
+                                            HeightRequest="25"
+                                            HorizontalOptions="EndAndExpand"
+                                            Source="greyinfoicon.png"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="25" />
+                                        <Grid.GestureRecognizers>
+                                            <!--<TapGestureRecognizer Command="{Binding InfoCommand}" />-->
+                                            <TapGestureRecognizer Tapped="IconInfo_Tapped" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                            <!--<Label
+                                <!--<Label
                                 x:Name="managesubscription_yourpaymentmethod"
                                 Margin="0,0,0,2"
                                 HorizontalOptions="FillAndExpand"
@@ -419,62 +421,62 @@
                                     <TapGestureRecognizer Command="{Binding InfoCommand}" />
                                 </Image.GestureRecognizers>
                             </Image>-->
+                            </StackLayout>
+
+                            <StackLayout
+                                Margin="0,0,0,0"
+                                IsVisible="True"
+                                Orientation="Vertical"
+                                VerticalOptions="Center">
+                                <Label Text="At the end of each billing cycle, your subscription plan will be automatically renewed and you will be charged the full subscription plan fee. If you do not wish your subscription to auto-renew, you may cancel your plan any time by selecting Change Plan on this page, then clicking Cancel Plan (you must complete all prompts to process cancellation). Once canceled, your plan will remain active until the end of that billing period." />
+                            </StackLayout>
+
+                            <StackLayout
+                                Margin="0,20,0,20"
+                                IsVisible="True"
+                                Orientation="Horizontal"
+                                VerticalOptions="Center">
+                                <Button
+                                    x:Name="btnUpdatePayment"
+                                    Margin="50,0"
+                                    BackgroundColor="#15B287"
+                                    Command="{Binding UpdatePaymentCommand}"
+                                    FontFamily="SanchezSlab"
+                                    FontSize="14"
+                                    HeightRequest="55"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Update Payment Method"
+                                    TextColor="{StaticResource White}"
+                                    VerticalOptions="FillAndExpand"
+                                    WidthRequest="200" />
+                            </StackLayout>
                         </StackLayout>
 
-                        <StackLayout
-                            Margin="0,0,0,0"
-                            IsVisible="True"
-                            Orientation="Vertical"
-                            VerticalOptions="Center">
-                            <Label Text="At the end of each billing cycle, your subscription plan will be automatically renewed and you will be charged the full subscription plan fee. If you do not wish your subscription to auto-renew, you may cancel your plan any time by selecting Change Plan on this page, then clicking Cancel Plan (you must complete all prompts to process cancellation). Once canceled, your plan will remain active until the end of that billing period." />
-                        </StackLayout>
 
-                        <StackLayout
-                            Margin="0,20,0,20"
-                            IsVisible="True"
-                            Orientation="Horizontal"
-                            VerticalOptions="Center">
-                            <Button
-                                x:Name="btnUpdatePayment"
-                                Margin="50,0"
-                                BackgroundColor="#15B287"
-                                Command="{Binding UpdatePaymentCommand}"
-                                FontFamily="SanchezSlab"
-                                FontSize="14"
-                                HeightRequest="55"
-                                HorizontalOptions="FillAndExpand"
-                                Text="Update Payment Method"
-                                TextColor="{StaticResource White}"
-                                VerticalOptions="FillAndExpand"
-                                WidthRequest="200" />
-                        </StackLayout>
                     </StackLayout>
 
-
                 </StackLayout>
+            </ScrollView>
 
-            </StackLayout>
-        </ScrollView>
-
-        <!--  ScrollView Section  -->
-        <!--
+            <!--  ScrollView Section  -->
+            <!--
         <ScrollView
             Grid.Row="2"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             VerticalScrollBarVisibility="Never">
-        -->
-        <!--  Body Section  -->
-        <!--
+            -->
+            <!--  Body Section  -->
+            <!--
             <Grid
                 Padding="12,10"
                 HorizontalOptions="FillAndExpand"
                 RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
                 RowSpacing="10"
                 VerticalOptions="FillAndExpand">
-        -->
-        <!--  Subscription Header Section  -->
-        <!--
+            -->
+            <!--  Subscription Header Section  -->
+            <!--
                 <Label
                     Grid.Row="0"
                     FontSize="20"
@@ -488,9 +490,9 @@
                     RowDefinitions="Auto,Auto"
                     RowSpacing="4"
                     VerticalOptions="FillAndExpand">
-        -->
-        <!--  Sub Header Section  -->
-        <!--
+            -->
+            <!--  Sub Header Section  -->
+            <!--
                     <Label
                         Grid.Row="0"
                         FontAttributes="Bold"
@@ -499,9 +501,9 @@
                         Text="Your Current Subscription :"
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
-        -->
-        <!--  Sub Header Section  -->
-        <!--
+            -->
+            <!--  Sub Header Section  -->
+            <!--
                     <Label
                         Grid.Row="1"
                         FontSize="14"
@@ -510,9 +512,9 @@
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
                 </Grid>
-        -->
-        <!--  Total Section  -->
-        <!--
+            -->
+            <!--  Total Section  -->
+            <!--
                 <Grid
                     Grid.Row="2"
                     ColumnDefinitions="*,*"
@@ -536,9 +538,9 @@
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
                 </Grid>
-        -->
-        <!--  Expiration Date Section  -->
-        <!--
+            -->
+            <!--  Expiration Date Section  -->
+            <!--
                 <Grid
                     Grid.Row="3"
                     ColumnDefinitions="*,*"
@@ -562,9 +564,9 @@
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
                 </Grid>
-        -->
-        <!--  Plan Description Section  -->
-        <!--
+            -->
+            <!--  Plan Description Section  -->
+            <!--
                 <Label
                     Grid.Row="4"
                     FontSize="13"
@@ -572,9 +574,9 @@
                     Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
                     TextColor="#464646"
                     VerticalTextAlignment="Center" />
-        -->
-        <!--  Change Plan Button Section  -->
-        <!--
+            -->
+            <!--  Change Plan Button Section  -->
+            <!--
                 <Button
                     Grid.Row="5"
                     Margin="50,0"
@@ -594,9 +596,9 @@
                     RowDefinitions="Auto,Auto"
                     RowSpacing="4"
                     VerticalOptions="FillAndExpand">
-        -->
-        <!--  Payment Header Section  -->
-        <!--
+            -->
+            <!--  Payment Header Section  -->
+            <!--
                     <Label
                         Grid.Row="0"
                         FontAttributes="Bold"
@@ -605,9 +607,9 @@
                         Text="Your Payment Method"
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
-        -->
-        <!--  Info Image Section  -->
-        <!--
+            -->
+            <!--  Info Image Section  -->
+            <!--
                     <Grid
                         Grid.Row="1"
                         ColumnDefinitions="Auto,auto"
@@ -637,9 +639,9 @@
                         </Grid>
                     </Grid>
                 </Grid>
-        -->
-        <!--  Payment Description  -->
-        <!--
+            -->
+            <!--  Payment Description  -->
+            <!--
                 <Label
                     Grid.Row="7"
                     FontSize="13"
@@ -647,9 +649,9 @@
                     Text="Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled Individual and Family Monthly Subscription Plans are billed in full at the time of purchase and auto -renew monthly untill the plan is cancelled."
                     TextColor="#464646"
                     VerticalTextAlignment="Center" />
-        -->
-        <!--  Update Payment Button Section  -->
-        <!--
+            -->
+            <!--  Update Payment Button Section  -->
+            <!--
                 <Button
                     Grid.Row="8"
                     Margin="50,0"
@@ -665,5 +667,335 @@
                     WidthRequest="200" />
             </Grid>
         </ScrollView>-->
+        </Grid>
+        <!--  Opacity Section  -->
+        <Grid
+            x:Name="opacitygrid"
+            BackgroundColor="{StaticResource Gray950}"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            Opacity="0.7"
+            VerticalOptions="FillAndExpand">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="opacitygrid_Tapped" />
+            </Grid.GestureRecognizers>
+        </Grid>
+        <!--  Info Section  -->
+        <Border
+            x:Name="InfoBorder"
+            Padding="5"
+            Background="White"
+            HeightRequest="650"
+            HorizontalOptions="CenterAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="CenterAndExpand">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5,5,5,5" />
+            </Border.StrokeShape>
+            <Grid
+                Padding="5,0,5,20"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="60,*"
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <!--  Header Label  -->
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Billing Policies"
+                    TextColor="Black"
+                    VerticalOptions="FillAndExpand"
+                    VerticalTextAlignment="Center" />
+                <!--  ScrollView Section  -->
+                <ScrollView
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    IsClippedToBounds="True"
+                    VerticalOptions="FillAndExpand"
+                    VerticalScrollBarVisibility="Never">
+                    <!--  Body Section  -->
+                    <Grid
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,1,Auto,1,Auto,1,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                        RowSpacing="15"
+                        VerticalOptions="FillAndExpand">
+                        <!--  Billing Header Section  -->
+                        <Label
+                            x:Name="Billingheader"
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding BillingPoliciesName}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Monthly Header Section  -->
+                        <Label
+                            x:Name="MonthlySubscriptionPlan"
+                            Grid.Row="1"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding MonthlySubscriptionPlan}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Sub Header Section  -->
+                        <Label
+                            Grid.Row="2"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding MonthlySubscriptionPlanP1}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+
+                        <Label
+                            Grid.Row="3"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding MonthlySubscriptionPlanP1B1}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="4"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding MonthlySubscriptionPlanP1B2}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Purchase Date Section  -->
+                        <Grid
+                            Grid.Row="5"
+                            ColumnDefinitions="135,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding TablePurchaseDate}"
+                                TextColor="{StaticResource Gray4}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding TableAutoRenewalDate}"
+                                TextColor="{StaticResource Gray4}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <!--  BoxView Section  -->
+                        <BoxView
+                            Grid.Row="6"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <!--  Table Section  -->
+                        <Grid
+                            Grid.Row="7"
+                            ColumnDefinitions="100,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_1st_28_Col1}"
+                                TextColor="LightGray"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_1st_28_Col2}"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <BoxView
+                            Grid.Row="8"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="9"
+                            ColumnDefinitions="100,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_29th_Col1}"
+                                TextColor="LightGray"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_29th_Col2}"
+                                TextColor="{StaticResource Black}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+
+                        <BoxView
+                            Grid.Row="10"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="11"
+                            ColumnDefinitions="120,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_30th_Col1}"
+                                TextColor="LightGray"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_30th_Col2}"
+                                TextColor="{StaticResource Black}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <BoxView
+                            Grid.Row="12"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="13"
+                            ColumnDefinitions="120,*"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_31th_Col1}"
+                                TextColor="LightGray"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Table_31th_Col2}"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <!--  Boxview Section  -->
+                        <BoxView
+                            Grid.Row="14"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        <!--  Updating Credit Card Section  -->
+                        <Label
+                            Grid.Row="15"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding UpdatingCreditCardName}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="16"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding UpdatingCreditCard}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Paid Plan Section  -->
+                        <Label
+                            Grid.Row="17"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding ChangePlanInfo}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="18"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding SubscriptionPlanChanges}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <!--  Paid Plan Cancellation Section  -->
+                        <Label
+                            Grid.Row="19"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding NoRefunds}"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            Grid.Row="20"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Cancellation}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </ScrollView>
+            </Grid>
+        </Border>
     </Grid>
 </ContentPage>

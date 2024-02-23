@@ -13,7 +13,10 @@ public partial class ManageSubscriptionPage : ContentPage
         try
         {
             InitializeComponent();
-            this.BindingContext = VM = new ManageSubscriptionPageViewModel(this.Navigation, this);
+            var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+            var Width = (mainDisplayInfo.Width / mainDisplayInfo.Density) - 40;
+            InfoBorder.WidthRequest = Width;
+            this.BindingContext = VM = new ManageSubscriptionPageViewModel(this.Navigation, this); 
         }
         catch (Exception ex)
         {
@@ -29,6 +32,7 @@ public partial class ManageSubscriptionPage : ContentPage
         {
             base.OnAppearing();
             await VM.GetPatientSubscriptionInfo();
+            VM.GetBillingPoliciesInfo();
         }
         catch (Exception ex)
         {
@@ -36,4 +40,16 @@ public partial class ManageSubscriptionPage : ContentPage
         }
     }
     #endregion
+  
+    private void IconInfo_Tapped(object sender, TappedEventArgs e)
+    {
+        opacitygrid.IsVisible = true;
+        InfoBorder.IsVisible = true;
+    }
+     
+    private void opacitygrid_Tapped(object sender, TappedEventArgs e)
+    {
+        opacitygrid.IsVisible = false;
+        InfoBorder.IsVisible = false;
+    }
 }

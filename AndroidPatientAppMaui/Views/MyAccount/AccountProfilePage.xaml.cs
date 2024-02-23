@@ -1,13 +1,14 @@
 using AndroidPatientAppMaui.ViewModels.MyAccount;
+using CommonLibraryCoreMaui.Models;
 
 namespace AndroidPatientAppMaui.Views.MyAccount;
 
 public partial class AccountProfilePage : ContentPage
-{
+{ //To define the class lavel variable.
+    AccountProfilePageViewModel VM;
     public AccountProfilePage()
     {
-        //To define the class lavel variable.
-        AccountProfilePageViewModel VM;
+       
 
         #region Constructor
         try
@@ -23,6 +24,11 @@ public partial class AccountProfilePage : ContentPage
     #endregion
 
     #region Event Handler
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        VM.GetMembers();
+    }
     /// <summary>
     /// TODO: To Define DownArrow Tapped
     /// </summary>
@@ -40,6 +46,6 @@ public partial class AccountProfilePage : ContentPage
             updateGrid.IsVisible = true;
             arrowimg.Source = "downarrow.png";
         }
-    }
+    } 
     #endregion
 }

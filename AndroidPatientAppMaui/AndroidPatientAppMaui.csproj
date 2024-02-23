@@ -79,6 +79,7 @@
 	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\nmd.png" />
 	  <None Remove="Resources\Images\openeye.svg" />
+	  <None Remove="Resources\Images\plus.svg" />
 	  <None Remove="Resources\Images\rightarrow.svg" />
 	  <None Remove="Resources\Images\user.svg" />
 	  <None Remove="Resources\Images\usercancel.svg" />

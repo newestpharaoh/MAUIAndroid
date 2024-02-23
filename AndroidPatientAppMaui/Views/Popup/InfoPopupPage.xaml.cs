@@ -15,9 +15,10 @@ public partial class InfoPopupPage : CommunityToolkit.Maui.Views.Popup
         {
 		InitializeComponent();
             var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
-            var Width = (mainDisplayInfo.Width / mainDisplayInfo.Density) - 30;
+            var Width = (mainDisplayInfo.Width / mainDisplayInfo.Density) - 50;
             InfoGrid.WidthRequest = Width;
-            MonthlySubscriptionPlan.WidthRequest = Width - 10;
+            InfoBorder.WidthRequest = Width;
+            //MonthlySubscriptionPlan.WidthRequest = Width;
             // BodyGrid.WidthRequest = Width;
             VM = new InfoPopupPageViewModel(null, this, manageSubscriptionPage);
             ManageVM = manageVM;

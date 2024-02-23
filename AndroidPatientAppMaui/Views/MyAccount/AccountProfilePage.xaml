@@ -59,22 +59,49 @@
             <Grid
                 Padding="0,10"
                 HorizontalOptions="FillAndExpand"
-                RowDefinitions="Auto,*"
+                RowDefinitions="Auto,Auto,Auto,Auto"
                 RowSpacing="16"
                 VerticalOptions="FillAndExpand">
                 <!--  plan Header Section  -->
                 <Label
+                    x:Name="lblPlan"
                     Grid.Row="0"
                     Margin="10,0"
                     FontFamily="SanchezSlab"
-                    FontSize="25"
+                    FontSize="22"
                     HorizontalTextAlignment="Start"
-                    Text="Plan: Individual 365 Plan"
+                    Text="{Binding lblPlan}"
                     TextColor="{StaticResource Blue1}"
                     VerticalTextAlignment="Center" />
+                <Grid
+                    x:Name="familyAcctNotice"
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding familyAcctNotice}"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        x:Name="familyAcctNoticeTV"
+                        Grid.Row="0"
+                        Margin="10,0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding familyAcctNoticeTV}"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Label
+                        x:Name="allInfoViewableTV"
+                        Grid.Row="1"
+                        Margin="10,0"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding allInfoViewableTV}"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                </Grid>
                 <!--  Suscription And Account Holder  -->
                 <Grid
-                    Grid.Row="1"
+                    Grid.Row="2"
                     HorizontalOptions="FillAndExpand"
                     RowDefinitions="Auto,Auto,Auto"
                     RowSpacing="10"
@@ -252,6 +279,42 @@
                             VerticalOptions="FillAndExpand" />
                     </Grid>
                 </Grid>
+                <StackLayout
+                    x:Name="lytAdditionalMembersInfo"
+                    Grid.Row="3"
+                    IsVisible="{Binding lytAdditionalMembersInfo}"
+                    Orientation="Vertical">
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            x:Name="lblAdditionalMembersInfo"
+                            Text="{Binding lblAdditionalMembersInfo}"
+                            TextColor="#ff0000" />
+                    </StackLayout>
+
+                    <StackLayout
+                        x:Name="lytAddFamilyMember"
+                        Margin="0,0,0,20"
+                        HorizontalOptions="Center"
+                        Orientation="Horizontal">
+
+                        <Image
+                            Margin="0,0,10,0"
+                            HeightRequest="24"
+                            Source="plus.png"
+                            WidthRequest="24" />
+
+                        <Label
+                            Text="Add Family Member"
+                            TextColor="#333333"
+                            VerticalOptions="Center" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding lytAddFamilyMemberCommond}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+
+                </StackLayout>
+
             </Grid>
         </ScrollView>
     </Grid>
