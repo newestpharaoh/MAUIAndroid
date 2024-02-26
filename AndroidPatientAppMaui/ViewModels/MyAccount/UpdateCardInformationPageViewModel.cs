@@ -112,21 +112,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-
-        //private string _lblEmailAssociatedWithPayment = "Email Associated With Payment :testusermd@gmail.com";
-
-        //public string lblEmailAssociatedWithPayment
-        //{
-        //    get { return _lblEmailAssociatedWithPayment; }
-        //    set
-        //    {
-        //        if (_lblEmailAssociatedWithPayment != value)
-        //        {
-        //            _lblEmailAssociatedWithPayment = value;
-        //            OnPropertyChanged("lblEmailAssociatedWithPayment");
-        //        }
-        //    }
-        //}
+         
         private string _txtFirstName;
         public string txtFirstName
         {

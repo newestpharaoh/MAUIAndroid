@@ -249,8 +249,12 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyAccount.UpdateAccountAccessPage(), false);
-
+                int selectedPatientId = PatientID;
+                AccountMember am = info.AccountMembers.FirstOrDefault(x => PatientID == selectedPatientId);
+                if (am != null)
+                {
+                    await Navigation.PushModalAsync(new Views.MyAccount.UpdateAccountAccessPage(am), false);
+                }
             }
             catch (Exception ex)
             {

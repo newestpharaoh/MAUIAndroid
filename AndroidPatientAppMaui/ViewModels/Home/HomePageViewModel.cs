@@ -103,7 +103,10 @@ namespace AndroidPatientAppMaui.ViewModels.Home
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// TODO : To Define Get User Info Method.......
+        /// </summary>
+        /// <returns></returns>
         public async Task GetUserInfo()
         {
             // Get App settings api..

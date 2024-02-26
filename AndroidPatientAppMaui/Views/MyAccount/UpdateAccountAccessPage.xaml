@@ -3,6 +3,7 @@
     x:Class="AndroidPatientAppMaui.Views.MyAccount.UpdateAccountAccessPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
     Title="UpdateAccountAccessPage">
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <!--  Main Grid  -->
@@ -61,24 +62,25 @@
                 <Grid
                     Padding="20,10"
                     HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
                     RowSpacing="16"
                     VerticalOptions="FillAndExpand">
                     <!--  Sub Header Section  -->
                     <Label
+                        x:Name="lblMemberName"
                         Grid.Row="0"
                         Margin="10,0"
                         FontFamily="SanchezSlab"
-                        FontSize="20"
+                        FontSize="16"
                         HorizontalTextAlignment="Center"
-                        Text="Test User25"
+                        Text="{Binding lblMemberName}"
                         TextColor="{StaticResource Blue1}"
                         VerticalTextAlignment="Center" />
                     <!--  Privatize User Account  -->
                     <Grid
                         Grid.Row="1"
                         HorizontalOptions="FillAndExpand"
-                        RowDefinitions="Auto,Auto,Auto"
+                        RowDefinitions="Auto,Auto,Auto,Auto"
                         RowSpacing="15"
                         VerticalOptions="FillAndExpand">
                         <Image
@@ -96,15 +98,18 @@
                             VerticalOptions="FillAndExpand">
                             <Label
                                 Grid.Column="0"
+                                FontAttributes="Bold"
                                 FontFamily="SanchezSlab"
-                                FontSize="20"
+                                FontSize="16"
                                 HorizontalTextAlignment="Center"
                                 Text="PRIVATIZE User Account"
                                 TextColor="{StaticResource Blue1}"
                                 VerticalTextAlignment="Center" />
                             <Grid
+                                x:Name="imgInfoPrivatize"
                                 Grid.Column="1"
                                 HorizontalOptions="FillAndExpand"
+                                IsVisible="{Binding imgInfoPrivatize}"
                                 VerticalOptions="FillAndExpand">
                                 <Image
                                     HeightRequest="25"
@@ -113,29 +118,54 @@
                                     VerticalOptions="CenterAndExpand"
                                     WidthRequest="25" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="Info_Tapped" />
+                                    <TapGestureRecognizer Tapped="PRIVATIZEInfo_Tapped" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </Grid>
                         <!--  PrivatizeUser Button Section  -->
-                        <Button
+                        <Grid
+                            x:Name="lytPrivatizeButton"
                             Grid.Row="2"
-                            Margin="50,0"
-                            Background="#DDDDDD"
-                            Command="{Binding PrivatizeUserCommand}"
-                            FontFamily="SanchezSlab"
-                            FontSize="14"
-                            HeightRequest="55"
                             HorizontalOptions="FillAndExpand"
-                            Text=" Privatize User"
-                            TextColor="White"
-                            VerticalOptions="FillAndExpand"
-                            WidthRequest="200" />
+                            IsVisible="{Binding lytPrivatizeButton}"
+                            VerticalOptions="FillAndExpand">
+                            <Button
+                                Margin="50,0"
+                                Background="{Binding btnPrivatizeUserBgColor}"
+                                Clicked="PrivatizeUserButton_Clicked"
+                                FontFamily="SanchezSlab"
+                                FontSize="14"
+                                HeightRequest="55"
+                                HorizontalOptions="FillAndExpand"
+                                IsEnabled="{Binding btnPrivatizeUser}"
+                                Text="Privatize User"
+                                TextColor="White"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="200" />
+                        </Grid>
+                        <!--  account has been made PRIVATE Label  -->
+                        <Grid
+                            x:Name="lytPrivatizeInfo"
+                            Grid.Row="3"
+                            ColumnDefinitions="Auto,Auto"
+                            ColumnSpacing="0"
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding lytPrivatizeInfo}"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="This user account has been made PRIVATE. Only the privatized user can make themselves visible."
+                                TextColor="#ff0000"
+                                VerticalOptions="CenterAndExpand" />
+                        </Grid>
                     </Grid>
                     <!--  Deactivate User Account  -->
                     <Grid
+                        x:Name="lytDeactivate"
                         Grid.Row="2"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding lytDeactivate}"
                         RowDefinitions="Auto,Auto,Auto"
                         RowSpacing="15"
                         VerticalOptions="FillAndExpand">
@@ -154,8 +184,9 @@
                             VerticalOptions="FillAndExpand">
                             <Label
                                 Grid.Column="0"
+                                FontAttributes="Bold"
                                 FontFamily="SanchezSlab"
-                                FontSize="20"
+                                FontSize="16"
                                 HorizontalTextAlignment="Center"
                                 Text="DEACTIVATE User Account"
                                 TextColor="{StaticResource Blue1}"
@@ -171,7 +202,7 @@
                                     VerticalOptions="CenterAndExpand"
                                     WidthRequest="25" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding InfoCommand}" />
+                                    <TapGestureRecognizer Tapped="DEACTIVATEInfo_Tapped" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </Grid>
@@ -180,7 +211,7 @@
                             Grid.Row="2"
                             Margin="50,0"
                             Background="{StaticResource Green1}"
-                            Command="{Binding DeactivateNowCommand}"
+                            Clicked="DeactivateButton_Clicked"
                             FontFamily="SanchezSlab"
                             FontSize="14"
                             HeightRequest="55"
@@ -212,10 +243,11 @@
                             VerticalOptions="FillAndExpand">
                             <Label
                                 Grid.Column="0"
+                                FontAttributes="Bold"
                                 FontFamily="SanchezSlab"
-                                FontSize="20"
+                                FontSize="16"
                                 HorizontalTextAlignment="Center"
-                                Text="DEACTIVATE User Account"
+                                Text="REMOVE User from Family Account"
                                 TextColor="{StaticResource Blue1}"
                                 VerticalTextAlignment="Center" />
                             <Grid
@@ -229,33 +261,122 @@
                                     VerticalOptions="CenterAndExpand"
                                     WidthRequest="25" />
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding InfoCommand}" />
+                                    <TapGestureRecognizer Tapped="REMOVEInfo_Tapped" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </Grid>
                         <!--  Remove User Button Section  -->
                         <Button
+                            x:Name="btnRemoveUser"
                             Grid.Row="2"
                             Margin="50,0"
-                            Background="#DDDDDD"
+                            Background="{Binding btnPrivatizeUserBgColor}"
                             Command="{Binding RemoveUserCommand}"
                             FontFamily="SanchezSlab"
                             FontSize="14"
                             HeightRequest="55"
                             HorizontalOptions="FillAndExpand"
-                            Text=" Remove User"
+                            IsEnabled="{Binding btnRemoveUser}"
+                            Text="Remove User"
                             TextColor="White"
                             VerticalOptions="FillAndExpand"
                             WidthRequest="200" />
                     </Grid>
+                    <!--  REACTIVATE User Account  -->
+                    <Grid
+                        x:Name="lytReactivate"
+                        Grid.Row="4"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding lytReactivate}"
+                        RowDefinitions="Auto,Auto,Auto,Auto"
+                        RowSpacing="15"
+                        VerticalOptions="FillAndExpand">
+                        <Image
+                            Grid.Row="0"
+                            HeightRequest="100"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="usercancel.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="100" />
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="Auto,Auto"
+                            ColumnSpacing="0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontAttributes="Bold"
+                                FontFamily="SanchezSlab"
+                                FontSize="16"
+                                HorizontalTextAlignment="Center"
+                                Text="REACTIVATE User Account"
+                                TextColor="{StaticResource Blue1}"
+                                VerticalTextAlignment="Center" />
+                            <Grid
+                                Grid.Column="1"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Image
+                                    HeightRequest="25"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="greeninfoicon.png"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="25" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="REACTIVATEInfo_Tapped" />
+                                </Grid.GestureRecognizers>
+                            </Grid>
+
+                        </Grid>
+                        <!--  Remove User Button Section  -->
+                        <Button
+                            x:Name="btnReactivateUser"
+                            Grid.Row="2"
+                            Margin="50,0"
+                            Background="{Binding btnPrivatizeUserBgColor}"
+                            Command="{Binding ReactivateUserCommand}"
+                            FontFamily="SanchezSlab"
+                            FontSize="14"
+                            HeightRequest="55"
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="{Binding btnRemoveUser}"
+                            Text="Reactivate User"
+                            TextColor="White"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="200" />
+
+                        <Label
+                            x:Name="lblError"
+                            Grid.Row="3"
+                            FontSize="14"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding lblError}"
+                            TextColor="#CF1B00"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
                     <!--  Assistance Label Section  -->
                     <Label
-                        Grid.Row="4"
-                        FontSize="14"
-                        HorizontalTextAlignment="Start"
-                        Text="For assistance in updating a user's account access, please call customer service 512-421-5678(Mon-Fri, 8am-5pm)"
+                        x:Name="lblInfo"
+                        Grid.Row="5"
+                        FontSize="12"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        LineBreakMode="WordWrap"
                         TextColor="Black"
-                        VerticalTextAlignment="Center" />
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="For assistance in updating a user's account access, please &#xA;call Customer Service " TextColor="Black" />
+                                <Span Text="{Binding lblInfo}" TextColor="{StaticResource Blue1}" />
+                                <Span
+                                    FontAttributes="Italic"
+                                    Text="&#xA;(Mon-Fri, 8am-5pm)"
+                                    TextColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </Grid>
             </ScrollView>
         </Grid>
@@ -272,9 +393,431 @@
                 <TapGestureRecognizer Tapped="opacitygrid_Tapped" />
             </Grid.GestureRecognizers>
         </Grid>
-        <!--  PancakeView for round corner  -->
+        <!--  PrivatizeInfoAccountHolderDialogFragment Popup  -->
         <Border
-            x:Name="privatizeBorder"
+            x:Name="PrivatizeInfoAccountHolderDialogFragment"
+            Padding="5"
+            Background="White"
+            HeightRequest="300"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="PRIVATIZE: What does this mean?"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Privatizing a user's account will allow them to create a separate login to fully privatize their medical information, including demographics, medical information, and visit history. The user will remain listed on this family account."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Account owners cannot be privatized. If you are the account owner, and would like to conceal your medical information, please privatize each individual user under Account Profiles."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+            </StackLayout>
+
+        </Border>
+        <!--  PrivatizeInfoDialogFragment Popup  -->
+        <Border
+            x:Name="PrivatizeInfoDialogFragment"
+            Padding="5"
+            Background="White"
+            HeightRequest="300"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="PRIVATIZE: What does this mean?"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Privatizing a user's account will allow them to create a separate login to fully privatize their medical information, including demographics, medical information, and visit history."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="The user will remain listed on this family account."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+            </StackLayout>
+
+        </Border>
+        <!--  DeactivateInfoAccountHolderDialogFragment Popup  -->
+        <Border
+            x:Name="DeactivateInfoAccountHolderDialogFragment"
+            Padding="5"
+            Background="White"
+            HeightRequest="300"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="DEACTIVATE: What does this mean?"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Deactivating a user's account will prevent the user from initiating a visit through your family plan after the current billing cycle."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="At the start of the next billing cycle their visit access will be suspended but their historical medical and visit information will remain available to review. The account holder can reactivate this user at any time."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+            </StackLayout>
+        </Border>
+        <!--  DeactivateInfoDialogFragment Popup  -->
+        <Border
+            x:Name="DeactivateInfoDialogFragment"
+            Padding="5"
+            Background="White"
+            HeightRequest="300"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="DEACTIVATE: What does this mean?"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Deactivating a user's account will prevent the user from initiating a visit through your family plan after the current billing cycle."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="At the start of the next billing cycle their visit access will be suspended but their historical medical and visit information will remain available to review. The account holder can reactivate this user at any time."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+        </Border>
+        <!--  RemoveInfoAccountHolderDialogFragment Popup  -->
+        <Border
+            x:Name="RemoveInfoAccountHolderDialogFragment"
+            Padding="5"
+            Background="White"
+            HeightRequest="300"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <StackLayout
+                x:Name="linearLayout1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="REMOVE: What does this mean?"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Removing a user's account will prevent the user from initiating a visit through your family plan permanently, effective immediately."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="The user will no longer appear under your family subscription but they will have the opportunity to create their own account. If a new account is created, their historical medical and visit information will transfer automatically."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Account owners cannot be removed."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+            </StackLayout>
+
+        </Border>
+        <!--  RemoveInfoDialogFragment Popup  -->
+        <Border
+            x:Name="RemoveInfoDialogFragment"
+            Padding="5"
+            Background="White"
+            HeightRequest="300"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="REMOVE: What does this mean?"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Removing a user's account will prevent the user from initiating a visit through your family plan permanently, effective immediately."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="The user will no longer appear under your family subscription but they will have the opportunity to create their own account. If a new account is created, their historical medical and visit information will transfer automatically."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+            </StackLayout>
+
+        </Border>
+        <!--  ReactivateInfoDialogFragment Popup  -->
+        <Border
+            x:Name="ReactivateInfoDialogFragment"
+            Padding="5"
+            Background="White"
+            HeightRequest="300"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="REACTIVATE: What does this mean?"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Reactivating a user's account will allow a previously-deactivated user to initiate visits again."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="The user's account will be activated immediately. If a user is an add-on outside of your subscription plan, you will be charged the add-on rate at the time of reactivation and your new subscription total will be reflected in the next month's bill."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+        </Border>
+        <!--  PatientSettingsManageSubscriptionMemberPrivateEmail Popup  -->
+        <Border
+            x:Name="PatientSettingsManageSubscriptionMemberPrivateEmail"
+            Margin="0"
+            Padding="5"
+            Background="White"
+            HeightRequest="350"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label
+                    Margin="0,0,0,5"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="PRIVATIZE User Account"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,0,0,20"
+                    FontAttributes="Italic"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="IMPORTANT"
+                    TextColor="#ff0000"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Privatizing a user's account will allow them to create a separate sign-in, where only this user will have access to their medical information and visit history."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,20,0,0"
+                    FontAttributes="Italic"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Want to continue?"
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Margin="0,20,0,0"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Submit the user's email address below. This should be different from the family account primary email address."
+                    TextColor="{StaticResource Black}"
+                    VerticalOptions="CenterAndExpand" />
+                <controls:CustomEntry
+                    x:Name="txtEmail"
+                    Margin="10,20,0,0"
+                    Background="Transparent"
+                    Keyboard="Email"
+                    Placeholder="example@mail.com"
+                    Text="{Binding txtEmail}" />
+                <StackLayout
+                    Margin="0"
+                    Padding="0"
+                    HeightRequest="50"
+                    HorizontalOptions="EndAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Button
+                        Padding="10"
+                        Background="Transparent"
+                        Command="{Binding YesCommand}"
+                        FontFamily="SanchezSlab"
+                        FontSize="12"
+                        HeightRequest="40"
+                        HorizontalOptions="EndAndExpand"
+                        Text="Yes"
+                        TextColor="{StaticResource Green1}"
+                        VerticalOptions="FillAndExpand" />
+                    <Button
+                        Padding="10"
+                        Background="Transparent"
+                        Clicked="NoButton_Clicked"
+                        FontFamily="SanchezSlab"
+                        FontSize="12"
+                        HeightRequest="40"
+                        HorizontalOptions="EndAndExpand"
+                        Text="No"
+                        TextColor="{StaticResource Green1}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </StackLayout>
+
+        </Border>
+        <!--  DeactivateAccountHolderDialogFragment Popup  -->
+        <Border
+            x:Name="DeactivateAccountHolderDialogFragment"
+            Margin="0"
             Padding="5"
             Background="White"
             HeightRequest="300"
@@ -287,44 +830,106 @@
                 <RoundRectangle CornerRadius="5" />
             </Border.StrokeShape>
             <Grid
-                Padding="8,10"
                 HorizontalOptions="FillAndExpand"
-                RowDefinitions="Auto,Auto,Auto"
-                RowSpacing="15"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="10"
                 VerticalOptions="FillAndExpand">
-                <!--  PRIVATIZE Section  -->
                 <Label
                     Grid.Row="0"
+                    Margin="0,10,0,5"
                     FontSize="13"
+                    HeightRequest="30"
                     HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="DEACTIVATE User Account"
                     TextColor="{StaticResource Black}"
-                    VerticalOptions="CenterAndExpand">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="PRIVATIZE: " />
-                            <Span Text="What does thie mean?" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <!--  PRIVATIZE Content Section  -->
+                    VerticalOptions="CenterAndExpand" />
+
                 <Label
                     Grid.Row="1"
+                    FontAttributes="Italic"
                     FontSize="13"
-                    HorizontalOptions="StartAndExpand"
+                    HeightRequest="20"
+                    HorizontalOptions="CenterAndExpand"
                     HorizontalTextAlignment="Center"
-                    Text="Privatizing a user's account will allow them to create a separate login to fully privatize their medical information, including demographics, medical information, and visit history. The user will remain listed on this family account"
-                    TextColor="{StaticResource Black}"
-                    VerticalOptions="CenterAndExpand" />
-                <!--  PRIVATIZE Content Section  -->
+                    Text="IMPORTANT"
+                    TextColor="#ff0000"
+                    VerticalOptions="StartAndExpand" />
+
                 <Label
                     Grid.Row="2"
+                    Margin="0,0,0,0"
                     FontSize="13"
-                    HorizontalOptions="StartAndExpand"
+                    HorizontalOptions="FillAndExpand"
                     HorizontalTextAlignment="Center"
-                    Text="Account owners cannot be privatized. If you are the account owner, and would like to conceal your medical information, please privatize each individual user under Account Profiles"
+                    Text="Account owners cannot deactivate their account. To suspend service the subscription plan must be canceled on the Manage Subscriptions page. Canceling a subscription will turn off access for all users on the account."
                     TextColor="{StaticResource Black}"
+                    VerticalOptions="StartAndExpand"
+                    VerticalTextAlignment="Start" />
+
+                <Label
+                    x:Name="lblContinueToManageSubscriptions"
+                    Grid.Row="3"
+                    Margin="0,20,0,0"
+                    FontAttributes="Italic"
+                    FontSize="13"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Continue to Manage Subscriptions"
+                    TextColor="{StaticResource Blue1}"
+                    TextDecorations="Underline"
                     VerticalOptions="CenterAndExpand" />
+                <StackLayout
+                    Grid.Row="4"
+                    BackgroundColor="Transparent"
+                    HeightRequest="50"
+                    HorizontalOptions="EndAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Button
+                        x:Name="SubmitButton"
+                        Padding="10"
+                        Background="Transparent"
+                        Command="{Binding SubmitCommand}"
+                        FontFamily="SanchezSlab"
+                        FontSize="12"
+                        HeightRequest="40"
+                        HorizontalOptions="EndAndExpand"
+                        IsVisible="false"
+                        Text="Submit"
+                        TextColor="{StaticResource Green1}"
+                        VerticalOptions="FillAndExpand" />
+                    <Button
+                        x:Name="CancelButton"
+                        Padding="10"
+                        Background="Transparent"
+                        Clicked="CancelButton_Clicked"
+                        FontFamily="SanchezSlab"
+                        FontSize="12"
+                        HeightRequest="40"
+                        HorizontalOptions="EndAndExpand"
+                        IsVisible="false"
+                        Text="Cancel"
+                        TextColor="{StaticResource Green1}"
+                        VerticalOptions="FillAndExpand" />
+                    <Button
+                        x:Name="CloseButton"
+                        Padding="10"
+                        Background="Transparent"
+                        Clicked="CloseButton_Clicked"
+                        FontAttributes="Bold"
+                        FontFamily="SanchezSlab"
+                        FontSize="12"
+                        HeightRequest="40"
+                        HorizontalOptions="EndAndExpand"
+                        IsVisible="false"
+                        Text="Close"
+                        TextColor="{StaticResource Green1}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
             </Grid>
+
         </Border>
     </Grid>
 </ContentPage>

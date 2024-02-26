@@ -120,6 +120,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
                             {
                                 Preferences.Set("AppBrandName", AppName.Brand);
                                 Preferences.Set("AppName", AppName.ApplicationName);
+                                Preferences.Set("CustomerServicePhone", AppName.CustomerSupportPhone);
                             }
                             if (pi != null)
                             {

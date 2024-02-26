@@ -3,7 +3,6 @@
     x:Class="AndroidPatientAppMaui.Views.MyAccount.ManageSubscriptionPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="co"
     Title="ManageSubscriptionPage">
     <!--  Main Grid  -->
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

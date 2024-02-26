@@ -7,9 +7,7 @@ public partial class AccountProfilePage : ContentPage
 { //To define the class lavel variable.
     AccountProfilePageViewModel VM;
     public AccountProfilePage()
-    {
-       
-
+    {  
         #region Constructor
         try
         {
@@ -17,9 +15,7 @@ public partial class AccountProfilePage : ContentPage
             this.BindingContext = VM = new AccountProfilePageViewModel(this.Navigation);
         }
         catch (Exception ex)
-        {
-
-        }
+        { }
     }
     #endregion
 
