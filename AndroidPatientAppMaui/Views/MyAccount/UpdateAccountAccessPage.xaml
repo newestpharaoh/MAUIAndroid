@@ -271,7 +271,7 @@
                             Grid.Row="2"
                             Margin="50,0"
                             Background="{Binding btnPrivatizeUserBgColor}"
-                            Command="{Binding RemoveUserCommand}"
+                            Clicked="RemoveUserButton_Clicked"
                             FontFamily="SanchezSlab"
                             FontSize="14"
                             HeightRequest="55"
@@ -335,7 +335,7 @@
                             Grid.Row="2"
                             Margin="50,0"
                             Background="{Binding btnPrivatizeUserBgColor}"
-                            Command="{Binding ReactivateUserCommand}"
+                            Clicked="ReactivateUserButton_Clicked"
                             FontFamily="SanchezSlab"
                             FontSize="14"
                             HeightRequest="55"
@@ -386,7 +386,7 @@
             x:Name="opacitygrid"
             BackgroundColor="{StaticResource Gray950}"
             HorizontalOptions="FillAndExpand"
-            IsVisible="false"
+            IsVisible="{Binding opacitygrid}"
             Opacity="0.7"
             VerticalOptions="FillAndExpand">
             <Grid.GestureRecognizers>
@@ -878,7 +878,11 @@
                     Text="Continue to Manage Subscriptions"
                     TextColor="{StaticResource Blue1}"
                     TextDecorations="Underline"
-                    VerticalOptions="CenterAndExpand" />
+                    VerticalOptions="CenterAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ContinueToManageSubsCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
                 <StackLayout
                     Grid.Row="4"
                     BackgroundColor="Transparent"
@@ -930,6 +934,320 @@
                 </StackLayout>
             </Grid>
 
+        </Border>
+        <!--  RemoveUserFromFamilyAccountDialogFragment Popup  -->
+        <Border
+            x:Name="RemoveUserFromFamilyAccountDialogFragment"
+            Margin="0"
+            Padding="5"
+            Background="White"
+            HeightRequest="420"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <ScrollView
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                VerticalScrollBarVisibility="Never">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        x:Name="removeUserAccount"
+                        Grid.Row="0"
+                        Margin="0,15,0,5"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="REMOVE User Account"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="CenterAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        x:Name="important"
+                        Grid.Row="1"
+                        Margin="0,15,0,0"
+                        FontAttributes="Italic"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding TxtImportant}"
+                        TextColor="#ff0000"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        x:Name="youAreRemoving"
+                        Grid.Row="2"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding tvYouAreRemoving}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+
+                    <Label
+                        x:Name="wantToContinue"
+                        Grid.Row="3"
+                        FontAttributes="Italic"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding WantToContinue}"
+                        Text="{Binding wantToContinueTxt}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        x:Name="submitEmail"
+                        Grid.Row="4"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding tvSubmitEmail}"
+                        Text="{Binding submitEmailTxt}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        x:Name="onceYouClickSubmit"
+                        Grid.Row="5"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding tvOnceYouClickSubmit}"
+                        Text="{Binding onceYouClickSubmitTxt}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        x:Name="activeCoverageAvailable"
+                        Grid.Row="6"
+                        FontAttributes="Italic"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding activeCoverageAvailable}"
+                        Text="{Binding activeCoverageAvailableTxt}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        x:Name="coveredAccess"
+                        Grid.Row="7"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding coveredAccess}"
+                        Text="{Binding coveredAccessTxt}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        x:Name="enterNewEmail"
+                        Grid.Row="8"
+                        Margin="0,20,0,0"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding tvEnterNewEmail}"
+                        Text="{Binding enterNewEmailTxt}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <controls:CustomEntry
+                        x:Name="txtNewEmail"
+                        Grid.Row="9"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding txtNewEmail}"
+                        Placeholder="example@mail.com"
+                        Text="{Binding txtNewEmailTxt}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="FillAndExpand" />
+                    <StackLayout
+                        x:Name="lytPrivateEmail"
+                        Grid.Row="10"
+                        Margin="0,10,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding lytPrivateEmail}"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            x:Name="txtPrivateEmail"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="Confirm your existing email"
+                            Text="{Binding txtPrivateEmail}"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Row="11"
+                        Margin="0,0,0,10"
+                        BackgroundColor="Transparent"
+                        HeightRequest="50"
+                        HorizontalOptions="EndAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="10"
+                        VerticalOptions="FillAndExpand">
+                        <Button
+                            x:Name="RemoveUserSubmitButton"
+                            Padding="10"
+                            Background="Transparent"
+                            Command="{Binding RemoveUserSubmitCommand}"
+                            FontFamily="SanchezSlab"
+                            FontSize="12"
+                            HeightRequest="40"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Submit"
+                            TextColor="{StaticResource Green1}"
+                            VerticalOptions="FillAndExpand" />
+                        <Button
+                            x:Name="RemoveUserCancelButton"
+                            Padding="10"
+                            Background="Transparent"
+                            Clicked="CancelButton_Clicked"
+                            FontFamily="SanchezSlab"
+                            FontSize="12"
+                            HeightRequest="40"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Cancel"
+                            TextColor="{StaticResource Green1}"
+                            VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </Border>
+        <!--  ReactivateUserAccountDialogFragment Popup  -->
+        <Border
+            x:Name="ReactivateUserAccountDialogFragment"
+            Margin="0"
+            Padding="5"
+            Background="White"
+            HeightRequest="420"
+            HorizontalOptions="FillAndExpand"
+            IsVisible="false"
+            StrokeThickness="0"
+            VerticalOptions="Center"
+            WidthRequest="280">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5" />
+            </Border.StrokeShape>
+            <ScrollView
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                VerticalScrollBarVisibility="Never">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        Margin="0,0,0,5"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="REACTIVATE User Account"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+
+                    <Label
+                        Grid.Row="1"
+                        FontAttributes="Italic"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="IMPORTANT"
+                        TextColor="#ff0000"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+
+                    <Label
+                        x:Name="ReactivateUserlblInfo"
+                        Grid.Row="2"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="This family member will be reactivated immediately."
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+
+                    <Label
+                        x:Name="ReactivateUserlblInfo2"
+                        Grid.Row="3"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding ReactivateUserlblInfo2}"
+                        Text="{Binding TxtReactivateUserlblInfo2}"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+
+                    <Label
+                        Grid.Row="4"
+                        FontAttributes="Italic"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="Want to continue?"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        Grid.Row="5"
+                        FontSize="13"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="Click submit."
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="StartAndExpand"
+                        VerticalTextAlignment="Start" />
+                    <StackLayout
+                        Grid.Row="6"
+                        Margin="0,0,0,10"
+                        BackgroundColor="Transparent"
+                        HeightRequest="50"
+                        HorizontalOptions="EndAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="10"
+                        VerticalOptions="FillAndExpand">
+                        <Button
+                            x:Name="ReactivateUserSubmitButton"
+                            Padding="10"
+                            Background="Transparent"
+                            Command="{Binding ReactivateUserSubmitCommand}"
+                            FontFamily="SanchezSlab"
+                            FontSize="12"
+                            HeightRequest="40"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Submit"
+                            TextColor="{StaticResource Green1}"
+                            VerticalOptions="FillAndExpand" />
+                        <Button
+                            x:Name="ReactivateUserCancelButton"
+                            Padding="10"
+                            Background="Transparent"
+                            Clicked="CancelButton_Clicked"
+                            FontFamily="SanchezSlab"
+                            FontSize="12"
+                            HeightRequest="40"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Cancel"
+                            TextColor="{StaticResource Green1}"
+                            VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
         </Border>
     </Grid>
 </ContentPage>

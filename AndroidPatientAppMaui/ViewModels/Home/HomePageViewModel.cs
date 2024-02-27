@@ -111,8 +111,7 @@ namespace AndroidPatientAppMaui.ViewModels.Home
         {
             // Get App settings api..
             try
-            {
-
+            { 
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
                     UserDialog.ShowLoading();

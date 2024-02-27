@@ -33,10 +33,11 @@ public partial class UpdateAccountAccessPage : ContentPage
     #endregion
 
     #region Event Handler
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
-        base.OnAppearing();
-        VM.GetUpdateAccountAccessInfo();
+        base.OnAppearing(); 
+        await VM.GetUpdateAccountAccessInfo();
+       await VM.GetRemoveUserFromFamilyAccountDetails();
     }
     #endregion
 
@@ -52,9 +53,9 @@ public partial class UpdateAccountAccessPage : ContentPage
         ReactivateInfoDialogFragment.IsVisible = false;
         PatientSettingsManageSubscriptionMemberPrivateEmail.IsVisible = false;
         DeactivateAccountHolderDialogFragment.IsVisible = false;
-    }
-
-
+        RemoveUserFromFamilyAccountDialogFragment.IsVisible = false;
+        ReactivateUserAccountDialogFragment.IsVisible = false;
+    } 
     private void PRIVATIZEInfo_Tapped(object sender, TappedEventArgs e)
     {
         if (VM.am != null)
@@ -123,7 +124,7 @@ public partial class UpdateAccountAccessPage : ContentPage
     private void PrivatizeUserButton_Clicked(object sender, EventArgs e)
     {
         opacitygrid.IsVisible = true;
-        PatientSettingsManageSubscriptionMemberPrivateEmail.IsVisible = true;
+        PatientSettingsManageSubscriptionMemberPrivateEmail.IsVisible = true; 
     }
 
     private void DeactivateButton_Clicked(object sender, EventArgs e)
@@ -157,5 +158,25 @@ public partial class UpdateAccountAccessPage : ContentPage
     {
         opacitygrid.IsVisible = false;
         DeactivateAccountHolderDialogFragment.IsVisible = false;
+        RemoveUserFromFamilyAccountDialogFragment.IsVisible = false;
+        ReactivateUserAccountDialogFragment.IsVisible = false;
+    }
+
+    private async void RemoveUserButton_Clicked(object sender, EventArgs e)
+    {
+        opacitygrid.IsVisible = true;
+        RemoveUserFromFamilyAccountDialogFragment.IsVisible = true;
+        await VM.GetRemoveUserButtonAsync();
+    }
+
+    private async void ReactivateUserButton_Clicked(object sender, EventArgs e)
+    {
+      
+        await VM.GetReactivateUserButtonAsync();
+        if(VM.resp.StatusCode != StatusCode.UserCantBeAdded)
+        {
+            opacitygrid.IsVisible = true;
+            ReactivateUserAccountDialogFragment.IsVisible = true;
+        } 
     }
 }
