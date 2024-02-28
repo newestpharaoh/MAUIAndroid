@@ -90,6 +90,7 @@
 	  <None Remove="Resources\Images\usercircle.svg" />
 	  <None Remove="Resources\Images\userdelete.svg" />
 	  <None Remove="Resources\Images\userlock.svg" />
+	  <None Remove="Resources\Images\userreactivate.svg" />
 	  <None Remove="Resources\Splash\nmdsplash.svg" />
 	</ItemGroup>
 

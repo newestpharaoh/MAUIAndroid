@@ -66,7 +66,6 @@
                     <!--  Welcome Text Section  -->
                     <Label
                         Grid.Row="3"
-                        FontAttributes="Bold"
                         FontFamily="SanchezSlab"
                         FontSize="22"
                         HorizontalTextAlignment="Center"
@@ -88,7 +87,6 @@
                         Spacing="0"
                         VerticalOptions="Center">
                         <Label
-                            FontAttributes="Bold"
                             FontFamily="SanchezSlab"
                             HorizontalTextAlignment="Center"
                             VerticalTextAlignment="Center">
@@ -100,6 +98,7 @@
                                         Text="Your Account is: "
                                         TextColor="{StaticResource Blue1}" />
                                     <Span
+                                        FontAttributes="Bold"
                                         FontFamily="SanchezSlab"
                                         FontSize="18"
                                         Text="{Binding Account}"
@@ -108,7 +107,6 @@
                             </Label.FormattedText>
                         </Label>
                         <Label
-                            FontAttributes="Bold"
                             FontSize="16"
                             HorizontalTextAlignment="Center"
                             Text="{Binding Insurance}"

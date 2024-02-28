@@ -1,16 +1,6 @@
 ﻿using Acr.UserDialogs;
 using CommonLibraryCoreMaui;
 using CommonLibraryCoreMaui.Models;
-using FM.LiveSwitch;
-using Microsoft.Maui.Controls.PlatformConfiguration;
-using Microsoft.Maui.Graphics.Text;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {

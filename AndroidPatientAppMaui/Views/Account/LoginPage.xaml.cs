@@ -34,6 +34,10 @@ public partial class LoginPage : ContentPage
         {
             base.OnAppearing();
             await VM.GetAppSettings();
+#if DEBUG
+            VM.Email = "testusermed25@gmail.com";
+            VM.Password = "SomePassword9!";
+#endif
         }
         catch (Exception ex)
         {

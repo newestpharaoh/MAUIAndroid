@@ -41,7 +41,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
 
         #region Properties
 
-        private string _Email = "testusermed25@gmail.com";
+        private string _Email;
         public string Email
         {
             get { return _Email; }
@@ -55,7 +55,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
             }
         }
 
-        private string _Password = "SomePassword9!";
+        private string _Password;
         public string Password
         {
             get { return _Password; }

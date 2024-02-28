@@ -295,7 +295,7 @@
                             Grid.Row="0"
                             HeightRequest="100"
                             HorizontalOptions="CenterAndExpand"
-                            Source="usercancel.png"
+                            Source="userreactivate.png"
                             VerticalOptions="CenterAndExpand"
                             WidthRequest="100" />
                         <Grid
@@ -329,7 +329,7 @@
                             </Grid>
 
                         </Grid>
-                        <!--  Remove User Button Section  -->
+                        <!--  REACTIVATE User Button Section  -->
                         <Button
                             x:Name="btnReactivateUser"
                             Grid.Row="2"
@@ -340,7 +340,6 @@
                             FontSize="14"
                             HeightRequest="55"
                             HorizontalOptions="FillAndExpand"
-                            IsEnabled="{Binding btnRemoveUser}"
                             Text="Reactivate User"
                             TextColor="White"
                             VerticalOptions="FillAndExpand"
