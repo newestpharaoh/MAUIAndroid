@@ -17,9 +17,7 @@ namespace AndroidPatientAppMaui
             Handlers.ModifyDatePicker();
 
             MainPage = new LoginPage();
-            //MainPage = new Views.MyAccount.MyAccountPage();
-             MainPage = new LoginPage();
-            //MainPage = new Views.MyAccount.MyAccountPage();
+            // MainPage = new Views.Home.HomePage();
         }
     }
 }

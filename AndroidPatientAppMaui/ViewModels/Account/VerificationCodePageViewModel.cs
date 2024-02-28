@@ -72,55 +72,55 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         {
             try
             {
-                //App.Current.MainPage = new Views.MainTabs.MainTabPage();
-                if (!string.IsNullOrWhiteSpace(VerificationCode))
-                {
-                    GlobalState global;
-                    if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
-                    {
-                        UserDialog.ShowLoading();
-                        await Task.Run(async () =>
-                        {
-                            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                            {
-                                StatusResponse resp = await DataUtility.UserAccountAuthenticateCode(SettingsValues.ApiURLValue, Userid, VerificationCode);
+                App.Current.MainPage = new Views.MainTabs.MainTabPage();
+                //if (!string.IsNullOrWhiteSpace(VerificationCode))
+                //{
+                //    GlobalState global;
+                //    if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                //    {
+                //        UserDialog.ShowLoading();
+                //        await Task.Run(async () =>
+                //        {
+                //            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                //            {
+                //                StatusResponse resp = await DataUtility.UserAccountAuthenticateCode(SettingsValues.ApiURLValue, Userid, VerificationCode);
 
-                                if (resp != null)
-                                {
-                                    if (string.IsNullOrEmpty(resp.ErrorMessage))
-                                    {
-                                        if (resp.StatusCode == StatusCode.Success)
-                                        {
-                                            App.Current.MainPage = new Views.MainTabs.MainTabPage();
-                                        }
-                                        else if (!string.IsNullOrEmpty(resp.Message))
-                                        {
-                                            await UserDialogs.Instance.AlertAsync(resp.Message, "Verification failed", "Ok");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        await UserDialogs.Instance.AlertAsync(resp.ErrorMessage, "Verification failed", "Ok");
-                                    }
-                                }
-                                else
-                                {
-                                    await UserDialogs.Instance.AlertAsync("Verification failed. No response from server.");
-                                }
-                            });
-                        }).ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        UserDialogs.Instance.HideLoading();
-                        await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
-                    }
-                    UserDialog.HideLoading();
-                }
-                else
-                {
-                    VerificationCodeError = true;
-                }
+                //                if (resp != null)
+                //                {
+                //                    if (string.IsNullOrEmpty(resp.ErrorMessage))
+                //                    {
+                //                        if (resp.StatusCode == StatusCode.Success)
+                //                        {
+                //                            App.Current.MainPage = new Views.MainTabs.MainTabPage();
+                //                        }
+                //                        else if (!string.IsNullOrEmpty(resp.Message))
+                //                        {
+                //                            await UserDialogs.Instance.AlertAsync(resp.Message, "Verification failed", "Ok");
+                //                        }
+                //                    }
+                //                    else
+                //                    {
+                //                        await UserDialogs.Instance.AlertAsync(resp.ErrorMessage, "Verification failed", "Ok");
+                //                    }
+                //                }
+                //                else
+                //                {
+                //                    await UserDialogs.Instance.AlertAsync("Verification failed. No response from server.");
+                //                }
+                //            });
+                //        }).ConfigureAwait(false);
+                //    }
+                //    else
+                //    {
+                //        UserDialogs.Instance.HideLoading();
+                //        await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                //    }
+                //    UserDialog.HideLoading();
+                //}
+                //else
+                //{
+                //    VerificationCodeError = true;
+                //}
             }
             catch (Exception ex)
             {

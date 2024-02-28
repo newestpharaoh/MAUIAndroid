@@ -40,7 +40,7 @@
                     Grid.Row="2"
                     Padding="20,0"
                     HorizontalOptions="FillAndExpand"
-                    RowDefinitions="230,Auto,40,Auto,Auto,Auto,Auto,60,Auto"
+                    RowDefinitions="180,Auto,20,Auto,Auto,Auto,Auto,60,Auto"
                     RowSpacing="20"
                     VerticalOptions="FillAndExpand">
 

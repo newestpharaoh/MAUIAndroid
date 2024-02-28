@@ -161,62 +161,61 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         /// <param name="obj"></param>
         private async void SendCodeAsync(object obj)
         {
-            try
-            {
-                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
-                {
-                    UserDialog.ShowLoading();
-                    //await Navigation.PushModalAsync(new Views.Account.VerificationCodePage(), false);
+            await Navigation.PushModalAsync(new Views.Account.VerificationCodePage(), false);
 
-                    await Task.Run(async () =>
-                    {
-                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                        {
-                            //  StatusResponse resp = await DataUtility.UserAccountSendCode(SettingsValues.ApiURLValue, Userid, radioButton.Text.ToLower() == "email" ? "email" : "text", "", null);
-
-                            StatusResponse resp = await DataUtility.UserAccountSendCode(SettingsValues.ApiURLValue, Userid, SendingCodeVia, "", null);
-                            if (resp != null)
-                            {
-                                if (string.IsNullOrEmpty(resp.ErrorMessage))
-                                {
-                                    if (resp.StatusCode == StatusCode.Success)
-                                    {
-                                        await Navigation.PushModalAsync(new Views.Account.VerificationCodePage(), false);
-                                    }
-                                    else if (resp.StatusCode == StatusCode.NotFound)
-                                    {
-                                        await UserDialogs.Instance.AlertAsync("An error occurred when trying to send you a verification code. If the error continues try selecting the opposite communication option.");
-                                    }
-                                    else
-                                    {
-                                        if (!string.IsNullOrEmpty(resp.Message))
-                                        {    
-                                            await UserDialogs.Instance.AlertAsync($"Verification code request failed. Reason: {resp.Message}");
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    await UserDialogs.Instance.AlertAsync(resp.ErrorMessage);
-                                }
-                            }
-                            else
-                            {
-                                await UserDialogs.Instance.AlertAsync("Verification failed. No response from server.");
-                            }
-                        });
-                    }).ConfigureAwait(false);
-                }
-                else
-                {
-                    UserDialogs.Instance.HideLoading();
-                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
-                }
-                UserDialog.HideLoading();
-            }
-            catch (Exception ex)
-            {
-            }
+            //try
+            //{
+            //    if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+            //    {
+            //        UserDialog.ShowLoading();
+            //        await Task.Run(async () =>
+            //        {
+            //            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+            //            {
+            //                //  StatusResponse resp = await DataUtility.UserAccountSendCode(SettingsValues.ApiURLValue, Userid, radioButton.Text.ToLower() == "email" ? "email" : "text", "", null);
+            //                StatusResponse resp = await DataUtility.UserAccountSendCode(SettingsValues.ApiURLValue, Userid, SendingCodeVia, "", null);
+            //                if (resp != null)
+            //                {
+            //                    if (string.IsNullOrEmpty(resp.ErrorMessage))
+            //                    {
+            //                        if (resp.StatusCode == StatusCode.Success)
+            //                        {
+            //                            await Navigation.PushModalAsync(new Views.Account.VerificationCodePage(), false);
+            //                        }
+            //                        else if (resp.StatusCode == StatusCode.NotFound)
+            //                        {
+            //                            await UserDialogs.Instance.AlertAsync("An error occurred when trying to send you a verification code. If the error continues try selecting the opposite communication option.");
+            //                        }
+            //                        else
+            //                        {
+            //                            if (!string.IsNullOrEmpty(resp.Message))
+            //                            {
+            //                                await UserDialogs.Instance.AlertAsync($"Verification code request failed. Reason: {resp.Message}");
+            //                            }
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                        await UserDialogs.Instance.AlertAsync(resp.ErrorMessage);
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    await UserDialogs.Instance.AlertAsync("Verification failed. No response from server.");
+            //                }
+            //            });
+            //        }).ConfigureAwait(false);
+            //    }
+            //    else
+            //    {
+            //        UserDialogs.Instance.HideLoading();
+            //        await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+            //    }
+            //    UserDialog.HideLoading();
+            //}
+            //catch (Exception ex)
+            //{
+            //}
         }
 
         /// <summary>
