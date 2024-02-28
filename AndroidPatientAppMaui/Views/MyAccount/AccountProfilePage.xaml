@@ -117,19 +117,22 @@
                             Grid.Row="0"
                             Padding="10,0"
                             BackgroundColor="#CCCCCC"
+                            ColumnDefinitions="*,*"
                             HeightRequest="35"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
                             <Label
+                                Grid.Column="0"
                                 FontSize="20"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Name"
                                 TextColor="{StaticResource Black}"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
+                                Grid.Column="1"
                                 Margin="0,0,20,0"
                                 FontSize="20"
-                                HorizontalOptions="EndAndExpand"
+                                HorizontalOptions="StartAndExpand"
                                 Text="Subscription"
                                 TextColor="{StaticResource Black}"
                                 VerticalOptions="CenterAndExpand" />
@@ -138,29 +141,37 @@
                         <Grid
                             Grid.Row="1"
                             Padding="10,0"
-                            HeightRequest="25"
+                            ColumnDefinitions="*,*"
+                            HeightRequest="30"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
                             <Label
-                                FontSize="16"
+                                Grid.Column="0"
+                                FontSize="14"
                                 HorizontalOptions="FillAndExpand"
-                                Text="TestUser25"
+                                Text="{Binding UserName}"
                                 TextColor="{StaticResource Black}"
                                 VerticalOptions="CenterAndExpand" />
-                            <Label
-                                Margin="0,0,20,0"
-                                FontSize="16"
-                                HorizontalOptions="EndAndExpand"
-                                Text="Account Holder"
-                                TextColor="{StaticResource Black}"
-                                VerticalOptions="CenterAndExpand" />
-                            <Image
-                                x:Name="arrowimg"
-                                HeightRequest="15"
-                                HorizontalOptions="EndAndExpand"
-                                Source="rightarrow.png"
-                                VerticalOptions="CenterAndExpand"
-                                WidthRequest="12" />
+                            <Grid
+                                Grid.Column="1"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Label
+                                    Margin="0,0,20,0"
+                                    FontAttributes="Italic"
+                                    FontSize="14"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="Account Holder"
+                                    TextColor="{StaticResource Black}"
+                                    VerticalOptions="CenterAndExpand" />
+                                <Image
+                                    x:Name="arrowimg"
+                                    HeightRequest="15"
+                                    HorizontalOptions="EndAndExpand"
+                                    Source="rightarrow.png"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="12" />
+                            </Grid>
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="DownArrow_Tapped" />
                             </Grid.GestureRecognizers>
@@ -179,7 +190,7 @@
                         HorizontalOptions="FillAndExpand"
                         IsVisible="false"
                         RowDefinitions="Auto,Auto,Auto,Auto"
-                        RowSpacing="20"
+                        RowSpacing="0"
                         VerticalOptions="FillAndExpand">
                         <!--  Update Demographics Section  -->
                         <Grid
@@ -187,6 +198,7 @@
                             Margin="10,0"
                             ColumnDefinitions="Auto,*"
                             ColumnSpacing="10"
+                            HeightRequest="50"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
 
@@ -200,11 +212,11 @@
 
                             <Image
                                 Grid.Column="1"
-                                HeightRequest="22"
+                                HeightRequest="18"
                                 HorizontalOptions="EndAndExpand"
                                 Source="arrowup.png"
-                                VerticalOptions="EndAndExpand"
-                                WidthRequest="22" />
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="18" />
 
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding UpdateDemographicsCommand}" />
@@ -216,6 +228,7 @@
                             Margin="10,0"
                             ColumnDefinitions="Auto,*"
                             ColumnSpacing="10"
+                            HeightRequest="50"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
 
@@ -230,11 +243,11 @@
 
                             <Image
                                 Grid.Column="1"
-                                HeightRequest="22"
+                                HeightRequest="18"
                                 HorizontalOptions="EndAndExpand"
                                 Source="arrowup.png"
-                                VerticalOptions="EndAndExpand"
-                                WidthRequest="22" />
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="18" />
 
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding UpdateMedicalInformationCommand}" />
@@ -246,6 +259,7 @@
                             Margin="10,0"
                             ColumnDefinitions="Auto,*"
                             ColumnSpacing="10"
+                            HeightRequest="50"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
 
@@ -260,11 +274,11 @@
 
                             <Image
                                 Grid.Column="1"
-                                HeightRequest="22"
+                                HeightRequest="18"
                                 HorizontalOptions="EndAndExpand"
                                 Source="arrowup.png"
-                                VerticalOptions="EndAndExpand"
-                                WidthRequest="22" />
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="18" />
 
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding UpdateAccountAccessCommand}" />

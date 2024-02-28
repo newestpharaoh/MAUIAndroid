@@ -12,6 +12,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
     public class AccountProfilePageViewModel : BaseViewModel
     {  //To define the class level variable.
+        AccountMember am;
         AccountSubscriptionInfo info;
         AccountAddFamilyMemberInfo aafmi;
         string familyAccountNoticeString;
@@ -43,6 +44,19 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #endregion
 
         #region Properties  
+        private string _UserName;
+        public string UserName
+        {
+            get { return _UserName; }
+            set
+            {
+                if (_UserName != value)
+                {
+                    _UserName = value;
+                    OnPropertyChanged("UserName");
+                }
+            }
+        }
         private string _lblPlan;
         public string lblPlan
         {
@@ -142,39 +156,48 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             info = await DataUtility.PatientGetSubscriptionInfoAsync(SettingsValues.ApiURLValue, PatientID, Token).ConfigureAwait(false);
                             if (info != null)
                             {
-                                lblPlan = $"Plan: {info.CurrentSubscriptionPlan}";
-                                if (info.CanAddFamilyMembers)
+                                try
                                 {
-                                    aafmi = await DataUtility.PatientGetAddFamilyMemberInfoAsync(SettingsValues.ApiURLValue, PatientID, Token).ConfigureAwait(false);
-                                    Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                    UserName = Helpers.AppGlobalConstants.userInfo.Name;
+                                    lblPlan = $"Plan: {info.CurrentSubscriptionPlan}";
+                                    if (info.CanAddFamilyMembers)
                                     {
-
-                                        await Task.Run(async () =>
+                                        aafmi = await DataUtility.PatientGetAddFamilyMemberInfoAsync(SettingsValues.ApiURLValue, PatientID, Token).ConfigureAwait(false);
+                                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                                         {
-                                            UITopic FamilyAccountNotice = await Globals.Instance.GetUTText("FamilyAccountNotice", "en");
 
-                                            if (FamilyAccountNotice != null)
+                                            await Task.Run(async () =>
                                             {
-                                                familyAccountNoticeString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "FamilyAccountNotice").Text; //Header
-                                                allInfoViewableString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "AllInfoViewable").Text; //Paragraph
+                                                UITopic FamilyAccountNotice = await Globals.Instance.GetUTText("FamilyAccountNotice", "en");
+
+                                                if (FamilyAccountNotice != null)
+                                                {
+                                                    familyAccountNoticeString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "FamilyAccountNotice").Text; //Header
+                                                    allInfoViewableString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "AllInfoViewable").Text; //Paragraph
+                                                }
+                                            });
+
+                                            lblPlan = $"Plan: {info.CurrentSubscriptionPlan}";
+                                            familyAcctNoticeTV = familyAccountNoticeString;
+                                            allInfoViewableTV = allInfoViewableString;
+
+                                            //list.SetAdapter(new Adapters.AccountProfilesExpandableListAdapter(this, info.AccountMembers, Resources));
+                                            if (info.IsFamilyPlan)//(info.CurrentSubscriptionPlan == "Family Subscription" || info.CurrentSubscriptionPlan == "Family 365 Plan")
+                                            {
+                                                familyAcctNotice = true;
+                                            }
+                                            lytAdditionalMembersInfo = info.CanAddFamilyMembers ? true : false;
+
+                                            if (aafmi != null)
+                                            {
+                                                lblAdditionalMembersInfo = $"You have room for {aafmi.FreeFamilyMembersRemaining} additional family member{(aafmi.FreeFamilyMembersRemaining == 1 ? "" : "s")} with your current plan.";
                                             }
                                         });
-
-                                        lblPlan = $"Plan: {info.CurrentSubscriptionPlan}";
-                                        familyAcctNoticeTV = familyAccountNoticeString;
-                                        allInfoViewableTV = allInfoViewableString;
-                                        //list.SetAdapter(new Adapters.AccountProfilesExpandableListAdapter(this, info.AccountMembers, Resources));
-                                        if (info.IsFamilyPlan)//(info.CurrentSubscriptionPlan == "Family Subscription" || info.CurrentSubscriptionPlan == "Family 365 Plan")
-                                        {
-                                            familyAcctNotice = true;
-                                        }
-                                        lytAdditionalMembersInfo = info.CanAddFamilyMembers ? true : false;
-
-                                        if (aafmi != null)
-                                        {
-                                            lblAdditionalMembersInfo = $"You have room for {aafmi.FreeFamilyMembersRemaining} additional family member{(aafmi.FreeFamilyMembersRemaining == 1 ? "" : "s")} with your current plan.";
-                                        }
-                                    });
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                     
                                 }
                             }
                         });
@@ -250,7 +273,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             try
             {
                 int selectedPatientId = PatientID;
-                AccountMember am = info.AccountMembers.FirstOrDefault(x => PatientID == selectedPatientId);
+                am = info.AccountMembers.FirstOrDefault(x => PatientID == selectedPatientId);
                 if (am != null)
                 {
                     await Navigation.PushModalAsync(new Views.MyAccount.UpdateAccountAccessPage(am), false);

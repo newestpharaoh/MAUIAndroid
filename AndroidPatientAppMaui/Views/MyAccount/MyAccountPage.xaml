@@ -51,10 +51,10 @@
         <!--  Body Section  -->
         <Grid
             Grid.Row="2"
-            Padding="0,15"
+            Padding="0"
             HorizontalOptions="FillAndExpand"
             RowDefinitions="Auto,1,Auto,1,Auto,1,Auto,1,Auto"
-            RowSpacing="18"
+            RowSpacing="0"
             VerticalOptions="FillAndExpand">
             <!--  Account Profile Section  -->
             <Grid
@@ -62,6 +62,7 @@
                 Margin="10,0"
                 ColumnDefinitions="30,Auto,*"
                 ColumnSpacing="10"
+                HeightRequest="60"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 <Image
@@ -86,7 +87,7 @@
                     HeightRequest="22"
                     HorizontalOptions="EndAndExpand"
                     Source="arrowup.png"
-                    VerticalOptions="EndAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     WidthRequest="22" />
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding AccountProfilesCommand}" />
@@ -104,6 +105,7 @@
                 Margin="10,0"
                 ColumnDefinitions="30,Auto,*"
                 ColumnSpacing="10"
+                HeightRequest="60"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 <Image
@@ -128,7 +130,7 @@
                     HeightRequest="22"
                     HorizontalOptions="EndAndExpand"
                     Source="arrowup.png"
-                    VerticalOptions="EndAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     WidthRequest="22" />
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ManageSubscriptionCommand}" />
@@ -146,6 +148,7 @@
                 Margin="10,0"
                 ColumnDefinitions="30,Auto,*"
                 ColumnSpacing="10"
+                HeightRequest="60"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 <Image
@@ -170,7 +173,7 @@
                     HeightRequest="22"
                     HorizontalOptions="EndAndExpand"
                     Source="arrowup.png"
-                    VerticalOptions="EndAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     WidthRequest="22" />
 
                 <Grid.GestureRecognizers>
@@ -189,6 +192,7 @@
                 Margin="10,0"
                 ColumnDefinitions="30,Auto"
                 ColumnSpacing="10"
+                HeightRequest="60"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 <Image
