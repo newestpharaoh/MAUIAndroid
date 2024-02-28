@@ -5,6 +5,54 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
     Title="UpdateDemographicsPage">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="ThemeRadioTemplate">
+            <Grid
+                Padding="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid>
+                    <Grid
+                        HeightRequest="25"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        WidthRequest="25">
+                        <Ellipse
+                            Fill="White"
+                            HeightRequest="21"
+                            Stroke="#000000"
+                            StrokeThickness="5"
+                            WidthRequest="21" />
+
+                        <Ellipse
+                            x:Name="check"
+                            Fill="#000000"
+                            HeightRequest="10"
+                            Stroke="#000000"
+                            WidthRequest="10" />
+                    </Grid>
+                    <!--  This enables us to put in dynamic content  -->
+                    <ContentPresenter />
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="check" Property="Opacity" Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="check" Property="Opacity" Value="0" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+        </ControlTemplate>
+    </ContentPage.Resources>
     <!--  Main Grid  -->
     <Grid
         HorizontalOptions="FillAndExpand"
@@ -39,7 +87,7 @@
                 FontAttributes="Bold"
                 FontSize="19"
                 HorizontalTextAlignment="Center"
-                Text="Test User25"
+                Text="{Binding UserName}"
                 TextColor="Black"
                 VerticalTextAlignment="Center" />
         </Grid>
@@ -61,625 +109,746 @@
             <Grid
                 Padding="20,10"
                 HorizontalOptions="FillAndExpand"
-                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                RowSpacing="16"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="10"
                 VerticalOptions="FillAndExpand">
                 <!--  User Image Section  -->
                 <Image
                     Grid.Row="0"
-                    HeightRequest="140"
+                    HeightRequest="160"
                     HorizontalOptions="CenterAndExpand"
                     Source="usercircle.png"
                     VerticalOptions="CenterAndExpand"
-                    WidthRequest="140" />
-                <!--  Change Profile Photo Button Section  -->
-                <Button
+                    WidthRequest="160" />
+                <Grid
                     Grid.Row="1"
-                    Margin="50,0"
-                    Background="{StaticResource Green1}"
-                    Command="{Binding ChangeProfilePhotoCommand}"
-                    FontFamily="SanchezSlab"
-                    FontSize="14"
-                    HeightRequest="55"
+                    Margin="0,20,0,0"
                     HorizontalOptions="FillAndExpand"
-                    Text="Change Profile Photo"
-                    TextColor="White"
-                    VerticalOptions="FillAndExpand"
-                    WidthRequest="200" />
-                <!--  Change Password Button Section  -->
-                <Button
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="20"
+                    VerticalOptions="FillAndExpand">
+                    <!--  Change Profile Photo Button Section  -->
+                    <Button
+                        Grid.Row="0"
+                        Margin="50,0"
+                        Background="{StaticResource Green1}"
+                        Command="{Binding ChangeProfilePhotoCommand}"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HeightRequest="55"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Change Profile Photo"
+                        TextColor="White"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="200" />
+                    <!--  Change Password Button Section  -->
+                    <Button
+                        Grid.Row="1"
+                        Margin="50,0"
+                        Background="{StaticResource Green1}"
+                        Command="{Binding ChangePasswordCommand}"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HeightRequest="55"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Change Password"
+                        TextColor="White"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="200" />
+                </Grid>
+                <Grid
+                    x:Name="lytNotificationPreferences"
                     Grid.Row="2"
-                    Margin="50,0"
-                    Background="{StaticResource Green1}"
-                    Command="{Binding ChangePasswordCommand}"
-                    FontFamily="SanchezSlab"
-                    FontSize="14"
-                    HeightRequest="55"
+                    Margin="0,20,0,0"
                     HorizontalOptions="FillAndExpand"
-                    Text="Change Password"
-                    TextColor="White"
-                    VerticalOptions="FillAndExpand"
-                    WidthRequest="200" />
-                <!--  Notification Prefrences Section  -->
-                <Label
+                    IsVisible="{Binding lytNotificationPreferences}"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="20"
+                    VerticalOptions="FillAndExpand">
+                    <!--  Notification Prefrences Section  -->
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Notification Prefrences"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="FillAndExpand" />
+                    <!--  Radio Button Section  -->
+                    <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="0"
+                        RowDefinitions="35,35"
+                        RowSpacing="0">
+                        <RadioButton
+                            x:Name="rbtnTextNotification"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                            IsChecked="{Binding rbtnTextNotification}"
+                            Value="Phone" />
+                        <Label
+                            x:Name="lblText"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="15"
+                            HorizontalOptions="StartAndExpand"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Phone:  " />
+                                    <Span Text="{Binding ResultPhonenumber}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <RadioButton
+                            x:Name="rbtnEmailNotification"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                            IsChecked="{Binding rbtnEmailNotification}"
+                            Value="Email" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            FontSize="15"
+                            HorizontalOptions="StartAndExpand"
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="CenterAndExpand">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Email:  " />
+                                    <Span Text="{Binding ResultEmail}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </Grid>
+                <Grid
                     Grid.Row="3"
-                    FontAttributes="Bold"
-                    FontSize="15"
-                    HorizontalOptions="StartAndExpand"
-                    Text="Notification Prefrences"
-                    TextColor="{StaticResource Black}"
-                    VerticalOptions="FillAndExpand" />
-                <!--  Radio Button Section  -->
-                <Grid
-                    Grid.Row="4"
-                    ColumnDefinitions="Auto,*"
-                    ColumnSpacing="0"
-                    RowDefinitions="35,35"
-                    RowSpacing="0">
-                    <RadioButton
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        IsChecked="False"
-                        Value="Text" />
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        FontSize="15"
-                        HorizontalOptions="StartAndExpand"
-                        TextColor="{StaticResource Black}"
-                        VerticalOptions="CenterAndExpand">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Phone:  " />
-                                <Span Text="(***) **-55555" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <RadioButton
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        IsChecked="False"
-                        Value="Email" />
-                    <Label
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        FontSize="15"
-                        HorizontalOptions="StartAndExpand"
-                        TextColor="{StaticResource Black}"
-                        VerticalOptions="CenterAndExpand">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Email:  " />
-                                <Span Text="*******5@gmail.com" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                </Grid>
-                <!--  Title Section  -->
-                <Grid
-                    Grid.Row="5"
+                    Margin="0,20,0,0"
                     HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                    RowSpacing="20"
                     VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Title *"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
+                    <!--  Title Section  -->
                     <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HeightRequest="35"
+                        Grid.Row="0"
                         HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
                         VerticalOptions="FillAndExpand">
                         <Label
-                            FontSize="14"
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="{Binding Title}"
+                            Text="Title *"
+                            TextColor="Black"
                             VerticalOptions="FillAndExpand" />
-                        <Image
-                            Margin="0,0,10,0"
-                            HeightRequest="10"
-                            HorizontalOptions="EndAndExpand"
-                            Source="downarrow.png"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="15" />
-                        <controls:CustomPicker
-                            Margin="1,10"
-                            HorizontalTextAlignment="Start"
-                            ItemsSource="{Binding UserTitlesList}"
-                            VerticalTextAlignment="Center" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                FontSize="14"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding Title}"
+                                VerticalOptions="FillAndExpand" />
+                            <Image
+                                Margin="0,0,10,0"
+                                HeightRequest="10"
+                                HorizontalOptions="EndAndExpand"
+                                Source="downarrow.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="15" />
+                            <controls:CustomPicker
+                                x:Name="spnrTitle"
+                                Title="Select"
+                                Margin="1,10"
+                                HorizontalTextAlignment="Start"
+                                ItemsSource="{Binding UserTitlesList}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
                     </Grid>
-                </Grid>
-                <!--  First Name Section  -->
-                <Grid
-                    Grid.Row="6"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="FirstName*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
+                    <!--  First Name Section  -->
                     <Grid
                         Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
                         HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
                         VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="FirstName*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                x:Name="txtFirstName"
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding txtFirstName}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  Middle Name Section  -->
+                    <Grid
+                        Grid.Row="2"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="MiddleName*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                x:Name="txtMiddleName"
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding txtMiddleName}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  Last Name Section  -->
+                    <Grid
+                        Grid.Row="3"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="LastName*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                x:Name="txtLastName"
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding txtLastName}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  Prefered Name Section  -->
+                    <Grid
+                        Grid.Row="4"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="PreferredName*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding txtPreferredName}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  Date Picker Section  -->
+                    <Grid
+                        Grid.Row="5"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="13"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Date of Birth*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <!--<controls:CustomEntry
+                            x:Name="txtDOB"
                             FontSize="14"
                             HeightRequest="35"
                             HorizontalOptions="FillAndExpand"
                             Keyboard="Default"
-                            Text="{Binding FirstName}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  Middle Name Section  -->
-                <Grid
-                    Grid.Row="7"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="MiddleName*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
+                            Placeholder="mm/dd/yyyy"
+                            Text="{Binding DOB}"
+                            VerticalOptions="FillAndExpand" />-->
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
                             HeightRequest="35"
                             HorizontalOptions="FillAndExpand"
-                            Keyboard="Default"
-                            Text="{Binding MiddleName}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  Last Name Section  -->
-                <Grid
-                    Grid.Row="8"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="LastName*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
-                            HeightRequest="35"
-                            HorizontalOptions="FillAndExpand"
-                            Keyboard="Default"
-                            Text="{Binding LastName}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  Prefered Name Section  -->
-                <Grid
-                    Grid.Row="9"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="PreferredName*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
-                            HeightRequest="35"
-                            HorizontalOptions="FillAndExpand"
-                            Keyboard="Default"
-                            Text="{Binding PreferredName}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  Date Picker Section  -->
-                <Grid
-                    Grid.Row="10"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="13"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Date of Birth*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HeightRequest="35"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
+                            VerticalOptions="FillAndExpand">
 
-                        <controls:CustomDatePicker x:Name="myDatePicker" HeightRequest="45" />
+                            <controls:CustomDatePicker
+                                x:Name="myDatePicker"
+                                Date="{Binding txtDOB}"
+                                Format="MM-dd-yyyy"
+                                HeightRequest="45" />
+                        </Grid>
                     </Grid>
-                </Grid>
-                <!--  Gender Section  -->
-                <Grid
-                    Grid.Row="11"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Gender *"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
+                    <!--  Gender Section  -->
                     <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HeightRequest="35"
+                        Grid.Row="6"
                         HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
                         VerticalOptions="FillAndExpand">
                         <Label
-                            FontSize="14"
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="{Binding Gender}"
+                            Text="Gender *"
+                            TextColor="Black"
                             VerticalOptions="FillAndExpand" />
-                        <Image
-                            Margin="0,0,10,0"
-                            HeightRequest="10"
-                            HorizontalOptions="EndAndExpand"
-                            Source="downarrow.png"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="15" />
-                        <controls:CustomPicker
-                            Margin="1,10"
-                            HorizontalTextAlignment="Start"
-                            ItemsSource="{Binding GenderOptionsList}"
-                            VerticalTextAlignment="Center" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                FontSize="14"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding spnrGender}"
+                                VerticalOptions="FillAndExpand" />
+                            <Image
+                                Margin="0,0,10,0"
+                                HeightRequest="10"
+                                HorizontalOptions="EndAndExpand"
+                                Source="downarrow.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="15" />
+                            <controls:CustomPicker
+                                Title="Select"
+                                Margin="1,10"
+                                HorizontalTextAlignment="Start"
+                                ItemsSource="{Binding GenderOptionsList}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
                     </Grid>
-                </Grid>
-                <!--  Language Section  -->
-                <Grid
-                    Grid.Row="12"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Language *"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
+                    <!--  Language Section  -->
                     <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HeightRequest="35"
+                        Grid.Row="7"
                         HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
                         VerticalOptions="FillAndExpand">
                         <Label
-                            FontSize="14"
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="{Binding Language}"
+                            Text="Language *"
+                            TextColor="Black"
                             VerticalOptions="FillAndExpand" />
-                        <Image
-                            Margin="0,0,10,0"
-                            HeightRequest="10"
-                            HorizontalOptions="EndAndExpand"
-                            Source="downarrow.png"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="15" />
-                        <controls:CustomPicker
-                            Margin="1,10"
-                            HorizontalTextAlignment="Start"
-                            ItemsSource="{Binding LanguagesList}"
-                            VerticalTextAlignment="Center" />
-                    </Grid>
-                </Grid>
-                <!--  Email Section  -->
-                <Grid
-                    Grid.Row="13"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Email*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
                             HeightRequest="35"
                             HorizontalOptions="FillAndExpand"
-                            Keyboard="Email"
-                            Text="{Binding Email}"
-                            VerticalOptions="FillAndExpand" />
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                FontSize="14"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding spnrLanguage}"
+                                VerticalOptions="FillAndExpand" />
+                            <Image
+                                Margin="0,0,10,0"
+                                HeightRequest="10"
+                                HorizontalOptions="EndAndExpand"
+                                Source="downarrow.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="15" />
+                            <controls:CustomPicker
+                                Margin="1,10"
+                                HorizontalTextAlignment="Start"
+                                ItemsSource="{Binding LanguagesList}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
                     </Grid>
-                </Grid>
-                <!--  Primary Phone Section  -->
-                <Grid
-                    Grid.Row="14"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Primary Phone*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
+                    <!--  Relationship to You Section  -->
                     <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
+                        x:Name="lytRelationship"
+                        Grid.Row="8"
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
-                            HeightRequest="35"
-                            HorizontalOptions="FillAndExpand"
-                            Keyboard="Numeric"
-                            Text="{Binding PrimaryPhone}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  Alternate Phone Section  -->
-                <Grid
-                    Grid.Row="15"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Alternate Phone"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
-                            HeightRequest="35"
-                            HorizontalOptions="FillAndExpand"
-                            Keyboard="Numeric"
-                            Text="{Binding AlternatePhone}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  Address Line1 Section  -->
-                <Grid
-                    Grid.Row="16"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Address Line 1 *"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
-                            HeightRequest="35"
-                            HorizontalOptions="FillAndExpand"
-                            Keyboard="Default"
-                            Text="{Binding AddressLine1}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  Address Line1 Section  -->
-                <Grid
-                    Grid.Row="17"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="Address Line 2 "
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
-                            HeightRequest="35"
-                            HorizontalOptions="FillAndExpand"
-                            Keyboard="Default"
-                            Text="{Binding AddressLine2}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  City Section  -->
-                <Grid
-                    Grid.Row="18"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="City*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
-                            HeightRequest="35"
-                            HorizontalOptions="FillAndExpand"
-                            Keyboard="Default"
-                            Text="{Binding City}"
-                            VerticalOptions="FillAndExpand" />
-                    </Grid>
-                </Grid>
-                <!--  state Section  -->
-                <Grid
-                    Grid.Row="19"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="State*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HeightRequest="35"
-                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding lytRelationship}"
+                        RowDefinitions="Auto,Auto,Auto"
+                        RowSpacing="5"
                         VerticalOptions="FillAndExpand">
                         <Label
-                            FontSize="14"
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="{Binding State}"
+                            Text="Relationship to You *"
+                            TextColor="Black"
                             VerticalOptions="FillAndExpand" />
-                        <Image
-                            Margin="0,0,10,0"
-                            HeightRequest="10"
-                            HorizontalOptions="EndAndExpand"
-                            Source="downarrow.png"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="15" />
-                        <controls:CustomPicker
-                            Margin="1,10"
-                            HorizontalTextAlignment="Start"
-                            ItemsSource="{Binding StatesList}"
-                            VerticalTextAlignment="Center" />
-                    </Grid>
-                </Grid>
-                <!--  ZipCode Section  -->
-                <Grid
-                    Grid.Row="20"
-                    HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto"
-                    RowSpacing="5"
-                    VerticalOptions="FillAndExpand">
-                    <Label
-                        Grid.Row="0"
-                        FontAttributes="Bold"
-                        FontSize="12"
-                        HorizontalOptions="FillAndExpand"
-                        Text="ZipCode*"
-                        TextColor="Black"
-                        VerticalOptions="FillAndExpand" />
-                    <Grid
-                        Grid.Row="1"
-                        Padding="10,0"
-                        BackgroundColor="{StaticResource Gray3}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <controls:CustomEntry
-                            FontSize="14"
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
                             HeightRequest="35"
                             HorizontalOptions="FillAndExpand"
-                            Keyboard="Default"
-                            Text="{Binding ZipCode}"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                FontSize="14"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding spnrRelationship}"
+                                VerticalOptions="FillAndExpand" />
+                            <Image
+                                Margin="0,0,10,0"
+                                HeightRequest="10"
+                                HorizontalOptions="EndAndExpand"
+                                Source="downarrow.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="15" />
+                            <controls:CustomPicker
+                                Margin="1,10"
+                                HorizontalTextAlignment="Start"
+                                ItemsSource="{Binding RelationshipList}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <Grid
+                            x:Name="lytOtherRelationship"
+                            Grid.Row="2"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding lytOtherRelationship}"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                x:Name="txtOtherRelationship"
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                MaxLength="150"
+                                Text="{Binding txtOtherRelationship}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  Email Section  -->
+                    <Grid
+                        Grid.Row="8"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Email*"
+                            TextColor="Black"
                             VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Email"
+                                Text="{Binding Email}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  Primary Phone Section  -->
+                    <Grid
+                        Grid.Row="9"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Primary Phone*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Numeric"
+                                Text="{Binding PrimaryPhone}"
+                                VerticalOptions="FillAndExpand">
+                                <controls:CustomEntry.Behaviors>
+                                    <controls:EntryMaskedBehavior />
+                                </controls:CustomEntry.Behaviors>
+                            </controls:CustomEntry>
+                        </Grid>
+                    </Grid>
+                    <!--  Alternate Phone Section  -->
+                    <Grid
+                        Grid.Row="10"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Alternate Phone"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Numeric"
+                                Placeholder="(___) ___-____"
+                                Text="{Binding AlternatePhone}"
+                                VerticalOptions="FillAndExpand">
+                                <controls:CustomEntry.Behaviors>
+                                    <controls:EntryMaskedBehavior />
+                                </controls:CustomEntry.Behaviors>
+                            </controls:CustomEntry>
+                        </Grid>
+                    </Grid>
+                    <!--  Address Line1 Section  -->
+                    <Grid
+                        Grid.Row="11"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Address Line 1 *"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding AddressLine1}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  Address Line1 Section  -->
+                    <Grid
+                        Grid.Row="12"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Address Line 2 "
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding AddressLine2}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  City Section  -->
+                    <Grid
+                        Grid.Row="13"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="City*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding City}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                    <!--  state Section  -->
+                    <Grid
+                        Grid.Row="14"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="State*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                FontSize="14"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding State}"
+                                VerticalOptions="FillAndExpand" />
+                            <Image
+                                Margin="0,0,10,0"
+                                HeightRequest="10"
+                                HorizontalOptions="EndAndExpand"
+                                Source="downarrow.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="15" />
+                            <controls:CustomPicker
+                                Margin="1,10"
+                                HorizontalTextAlignment="Start"
+                                ItemsSource="{Binding StatesList}"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                    <!--  ZipCode Section  -->
+                    <Grid
+                        Grid.Row="15"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="5"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="ZipCode*"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                        <Grid
+                            Grid.Row="1"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding ZipCode}"
+                                VerticalOptions="FillAndExpand" />
 
+                        </Grid>
                     </Grid>
                 </Grid>
                 <!--  Save Changes Button Section  -->
                 <Button
-                    Grid.Row="21"
-                    Margin="50,0"
+                    Grid.Row="4"
+                    Margin="50,10"
                     BackgroundColor="#15B287"
                     Command="{Binding SaveChangesCommand}"
                     FontFamily="SanchezSlab"
@@ -691,7 +860,8 @@
                     VerticalOptions="FillAndExpand"
                     WidthRequest="180" />
                 <Label
-                    Grid.Row="22"
+                    Grid.Row="5"
+                    Margin="0,20"
                     FontSize="12"
                     HorizontalOptions="FillAndExpand"
                     HorizontalTextAlignment="Center"

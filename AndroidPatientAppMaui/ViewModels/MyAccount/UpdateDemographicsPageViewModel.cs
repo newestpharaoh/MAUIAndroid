@@ -1,15 +1,19 @@
 ﻿using Acr.UserDialogs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Plugin.Media;
-using System.Text;
-using System.Threading.Tasks;
+using CommonLibraryCoreMaui;
+using CommonLibraryCoreMaui.Models; 
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
     public class UpdateDemographicsPageViewModel :BaseViewModel
     {
+        //To define the class level variable.
+       public BasicFamilyMemberInfo member;
+        PatientProfile patientProfile;
+        int PatientID = 0;
+        string Token = string.Empty;
+        string[] titleItems;
         #region Constructor
         public UpdateDemographicsPageViewModel(INavigation nav)
         {
@@ -18,6 +22,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             ChangeProfilePhotoCommand = new Command(ChangeProfilePhotoAsync);
             ChangePasswordCommand = new Command(ChangePasswordAsync);
             SaveChangesCommand = new Command(SaveChangesAsync);
+
+            Token = Preferences.Get("AuthToken", string.Empty);
+            PatientID = Preferences.Get("PatientID", 0);
         }
         #endregion
 
@@ -41,6 +48,20 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 {
                     _UserTitlesList = value;
                     OnPropertyChanged("UserTitlesList");
+                }
+            }
+        }
+        private List<CommonLibraryCoreMaui.Models.GenericRecord> _RelationshipList = CommonLibraryCoreMaui.Theme.Values.Relationships;
+        public List<CommonLibraryCoreMaui.Models.GenericRecord> RelationshipList
+        {
+            get { return _RelationshipList; }
+            set
+            {
+                if (_RelationshipList != value)
+
+                {
+                    _RelationshipList = value;
+                    OnPropertyChanged("RelationshipList");
                 }
             }
         }
@@ -118,9 +139,342 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
+        private string _UserName;
+        public string UserName
+        {
+            get { return _UserName; }
+            set
+            {
+                if (_UserName != value)
+                {
+                    _UserName = value;
+                    OnPropertyChanged("UserName");
+                }
+            }
+        }
+        private bool _lytNotificationPreferences = true;
+        public bool lytNotificationPreferences
+        {
+            get { return _lytNotificationPreferences; }
+            set
+            {
+                if (_lytNotificationPreferences != value)
+                {
+                    _lytNotificationPreferences = value;
+                    OnPropertyChanged("lytNotificationPreferences");
+                }
+            }
+        }
+        private bool _rbtnTextNotification = false;
+        public bool rbtnTextNotification
+        {
+            get { return _rbtnTextNotification; }
+            set
+            {
+                if (_rbtnTextNotification != value)
+                {
+                    _rbtnTextNotification = value;
+                    OnPropertyChanged("rbtnTextNotification");
+                }
+            }
+        }
+        private bool _rbtnEmailNotification = false;
+        public bool rbtnEmailNotification
+        {
+            get { return _rbtnEmailNotification; }
+            set
+            {
+                if (_rbtnEmailNotification != value)
+                {
+                    _rbtnEmailNotification = value;
+                    OnPropertyChanged("rbtnEmailNotification");
+                }
+            }
+        }
+        private bool _lytRelationship = false;
+        public bool lytRelationship
+        {
+            get { return _lytRelationship; }
+            set
+            {
+                if (_lytRelationship != value)
+                {
+                    _lytRelationship = value;
+                    OnPropertyChanged("lytRelationship");
+                }
+            }
+        }
+        private bool _lytOtherRelationship = false;
+        public bool lytOtherRelationship
+        {
+            get { return _lytOtherRelationship; }
+            set
+            {
+                if (_lytOtherRelationship != value)
+                {
+                    _lytOtherRelationship = value;
+                    OnPropertyChanged("lytOtherRelationship");
+                }
+            }
+        }
+        private string _txtOtherRelationship;
+        public string txtOtherRelationship
+        {
+            get { return _txtOtherRelationship; }
+            set
+            {
+                if (_txtOtherRelationship != value)
+                {
+                    _txtOtherRelationship = value;
+                    OnPropertyChanged("txtOtherRelationship");
+                }
+            }
+        } 
+        private string _resultEmail;
+        public string ResultEmail
+        {
+            get { return _resultEmail; }
+            set
+            {
+                if (_resultEmail != value)
+                {
+                    _resultEmail = value;
+                    OnPropertyChanged("ResultEmail");
+                }
+            }
+        } 
+        private string _resultPhonenumber;
+        public string ResultPhonenumber
+        {
+            get { return _resultPhonenumber; }
+            set
+            {
+                if (_resultPhonenumber != value)
+                {
+                    _resultPhonenumber = value;
+                    OnPropertyChanged("ResultPhonenumber");
+                }
+            }
+        }  
+        private string _txtFirstName;
+        public string txtFirstName
+        {
+            get { return _txtFirstName; }
+            set
+            {
+                if (_txtFirstName != value)
+                {
+                    _txtFirstName = value;
+                    OnPropertyChanged("txtFirstName");
+                }
+            }
+        } 
+        private string _txtMiddleName;
+        public string txtMiddleName
+        {
+            get { return _txtMiddleName; }
+            set
+            {
+                if (_txtMiddleName != value)
+                {
+                    _txtMiddleName = value;
+                    OnPropertyChanged("txtMiddleName");
+                }
+            }
+        } 
+        private string _txtLastName;
+        public string txtLastName
+        {
+            get { return _txtLastName; }
+            set
+            {
+                if (_txtLastName != value)
+                {
+                    _txtLastName = value;
+                    OnPropertyChanged("txtLastName");
+                }
+            }
+        } 
+        private string _txtPreferredName;
+        public string txtPreferredName
+        {
+            get { return _txtPreferredName; }
+            set
+            {
+                if (_txtPreferredName != value)
+                {
+                    _txtPreferredName = value;
+                    OnPropertyChanged("txtPreferredName");
+                }
+            }
+        }
+        private DateTime _txtDOB;
+        public DateTime txtDOB
+        {
+            get => _txtDOB;
+            set
+            {
+                if (_txtDOB != value)
+                {
+                    _txtDOB = value;
+                    OnPropertyChanged(nameof(txtDOB));
+                }
+            }
+        }
+        private string _spnrGender;
+        public string spnrGender
+        {
+            get => _spnrGender;
+            set
+            {
+                if (_spnrGender != value)
+                {
+                    _spnrGender = value;
+                    OnPropertyChanged(nameof(spnrGender));
+                }
+            }
+        }
+        private string _spnrLanguage;
+        public string spnrLanguage
+        {
+            get => _spnrLanguage;
+            set
+            {
+                if (_spnrLanguage != value)
+                {
+                    _spnrLanguage = value;
+                    OnPropertyChanged(nameof(spnrLanguage));
+                }
+            }
+        }
+        private string _Email;
+        public string Email
+        {
+            get => _Email;
+            set
+            {
+                if (_Email != value)
+                {
+                    _Email = value;
+                    OnPropertyChanged(nameof(Email));
+                }
+            }
+        }
+        private string _spnrRelationship;
+        public string spnrRelationship
+        {
+            get => _spnrRelationship;
+            set
+            {
+                if (_spnrRelationship != value)
+                {
+                    _spnrRelationship = value;
+                    OnPropertyChanged(nameof(spnrRelationship));
+                }
+            }
+        }
+        private string _PrimaryPhone;
+        public string PrimaryPhone
+        {
+            get => _PrimaryPhone;
+            set
+            {
+                if (_PrimaryPhone != value)
+                {
+                    _PrimaryPhone = value;
+                    OnPropertyChanged(nameof(PrimaryPhone));
+                }
+            }
+        }
+        private string _AlternatePhone;
+        public string AlternatePhone
+        {
+            get => _AlternatePhone;
+            set
+            {
+                if (_AlternatePhone != value)
+                {
+                    _AlternatePhone = value;
+                    OnPropertyChanged(nameof(AlternatePhone));
+                }
+            }
+        }
         #endregion
 
         #region Methods
+
+        public async Task GetUpdateDemographics()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            patientProfile = await DataUtility.GetPatientProfileAsync(SettingsValues.ApiURLValue, Token, member is null ? PatientID : (int)member.PatientID).ConfigureAwait(false);
+                            //await MaskPhoneNumber();
+                            await MaskEmail();
+                            txtFirstName = patientProfile.FirstName;
+                            txtMiddleName = patientProfile.MiddleName;
+                            txtLastName = patientProfile.LastName;
+                            txtPreferredName = patientProfile.PreferredName;
+                            string dateString = patientProfile.DOB;
+                            txtDOB = DateTime.Parse(dateString);
+                            spnrGender = patientProfile.Gender;
+                            spnrLanguage = patientProfile.Language;
+                            spnrRelationship = patientProfile.Relationship;
+                            txtOtherRelationship = patientProfile.OtherRelationship;
+                            Email = patientProfile.Email;
+                            PrimaryPhone = patientProfile.PrimaryPhone;
+                            AlternatePhone = patientProfile.AlternatePhone;
+                        });
+
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+            }
+        }
+        public async Task MaskEmail()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(patientProfile.Email))
+                {
+                    string pattern = @"(?<=[\w]{0})[\w\-._\+%]*(?=[\w]{1}@)";
+                    ResultEmail = Regex.Replace(patientProfile.Email, pattern, m => new string('*', m.Length));
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public async Task MaskPhoneNumber()
+        {
+            try
+            {
+                //if (!string.IsNullOrWhiteSpace(patientProfile.PrimaryPhone))
+                //{
+                //    ResultPhonenumber = "***-***-" + patientProfile.PrimaryPhone.Substring(patientProfile.PrimaryPhone.Length - 4);
+                //}
+            }
+            catch (Exception ex)
+            {
+            }
+        }
         /// <summary>
         /// To Do: To define back command
         /// </summary>

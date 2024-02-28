@@ -1,4 +1,4 @@
-﻿using Acr.UserDialogs; 
+﻿using Acr.UserDialogs;
 using AndroidPatientAppMaui.Views.MyAccount;
 using CommonLibraryCoreMaui;
 using CommonLibraryCoreMaui.Models;
@@ -13,22 +13,22 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
     public class AccountProfilePageViewModel : BaseViewModel
     {  //To define the class level variable.
         AccountMember am;
-        AccountSubscriptionInfo info;
+        public AccountSubscriptionInfo info;
         AccountAddFamilyMemberInfo aafmi;
         string familyAccountNoticeString;
         string allInfoViewableString;
         int PatientID = 0;
-        string Token = string.Empty; 
+        string Token = string.Empty;
 
         #region Constructor
-        public AccountProfilePageViewModel(INavigation nav )
+        public AccountProfilePageViewModel(INavigation nav)
         {
             Navigation = nav;
             BackCommand = new Command(BackAsync);
             UpdateAccountAccessCommand = new Command(UpdateAccountAccessAsync);
             UpdateMedicalInformationCommand = new Command(UpdateMedicalInformationAsync);
             UpdateDemographicsCommand = new Command(UpdateDemographicsAsync);
-            lytAddFamilyMemberCommond = new Command(lytAddFamilyMemberAsync); 
+            lytAddFamilyMemberCommond = new Command(lytAddFamilyMemberAsync);
 
             Token = Preferences.Get("AuthToken", string.Empty);
             PatientID = Preferences.Get("PatientID", 0);
@@ -145,7 +145,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             // Get App settings api..
             try
             {
-
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
                     UserDialog.ShowLoading();
@@ -197,7 +196,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                 }
                                 catch (Exception ex)
                                 {
-                                     
+
                                 }
                             }
                         });
@@ -294,7 +293,20 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyAccount.UpdateDemographicsPage(), false);
+                int selectedPatientId = PatientID;
+                am = info.AccountMembers.FirstOrDefault(x => PatientID == selectedPatientId);
+                if (am != null)
+                {
+                    BasicFamilyMemberInfo bfmi = new BasicFamilyMemberInfo();
+                    bfmi.DisplayName = am.DisplayName;
+                    bfmi.DOB = am.DOB;
+                    bfmi.FirstName = am.FirstName;
+                    bfmi.IsActive = am.IsActive;
+                    bfmi.IsPrimary = am.IsPrimary;
+                    bfmi.LastName = am.LastName;
+                    bfmi.PatientID = am.PatientID;
+                    await Navigation.PushModalAsync(new Views.MyAccount.UpdateDemographicsPage(bfmi), false);
+                }
 
             }
             catch (Exception ex)
@@ -353,12 +365,12 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 
                     if (!proceed)
                     {
-                      //  UtilsUI.ShowMsgOkScreen(this, msg);
+                        //  UtilsUI.ShowMsgOkScreen(this, msg);
                     }
                 });
             }
         }
-         
+
         #endregion
     }
 }

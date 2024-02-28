@@ -23,6 +23,8 @@ public partial class AccountProfilePage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        updateGrid.IsVisible = false;
+        arrowimg.Source = "rightarrow.png";
         VM.GetMembers();
     }
     /// <summary>
