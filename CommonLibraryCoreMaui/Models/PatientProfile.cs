@@ -12,7 +12,7 @@ namespace CommonLibraryCoreMaui.Models
         public string DOB { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
-        public string PrimaryPhone { get; set; }
+        public string? PrimaryPhone { get; set; }
         public string AlternatePhone { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }

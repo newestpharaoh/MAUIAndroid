@@ -1,19 +1,21 @@
 ﻿using Acr.UserDialogs;
 using CommonLibraryCoreMaui;
-using CommonLibraryCoreMaui.Models; 
-using System.Globalization;
+using CommonLibraryCoreMaui.Models;
 using System.Text.RegularExpressions;
 
 namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
-    public class UpdateDemographicsPageViewModel :BaseViewModel
+    public class UpdateDemographicsPageViewModel : BaseViewModel
     {
         //To define the class level variable.
-       public BasicFamilyMemberInfo member;
-        PatientProfile patientProfile;
+        public BasicFamilyMemberInfo member;
+        public PatientProfile patientProfile;
+        UserInfo userInfo;
+        GlobalState global;
         int PatientID = 0;
         string Token = string.Empty;
-        string[] titleItems;
+        public string[] titleItems;
+        public string[] relationships;
         #region Constructor
         public UpdateDemographicsPageViewModel(INavigation nav)
         {
@@ -217,6 +219,84 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
+        private bool _AlternatePhoneIsVisible = true;
+        public bool AlternatePhoneIsVisible
+        {
+            get { return _AlternatePhoneIsVisible; }
+            set
+            {
+                if (_AlternatePhoneIsVisible != value)
+                {
+                    _AlternatePhoneIsVisible = value;
+                    OnPropertyChanged("AlternatePhoneIsVisible");
+                }
+            }
+        }
+        private bool _Address1IsVisible = true;
+        public bool Address1IsVisible
+        {
+            get { return _Address1IsVisible; }
+            set
+            {
+                if (_Address1IsVisible != value)
+                {
+                    _Address1IsVisible = value;
+                    OnPropertyChanged("Address1IsVisible");
+                }
+            }
+        }
+        private bool _Address2IsVisible = true;
+        public bool Address2IsVisible
+        {
+            get { return _Address2IsVisible; }
+            set
+            {
+                if (_Address2IsVisible != value)
+                {
+                    _Address2IsVisible = value;
+                    OnPropertyChanged("Address2IsVisible");
+                }
+            }
+        }
+        private bool _CityIsVisible = true;
+        public bool CityIsVisible
+        {
+            get { return _CityIsVisible; }
+            set
+            {
+                if (_CityIsVisible != value)
+                {
+                    _CityIsVisible = value;
+                    OnPropertyChanged("CityIsVisible");
+                }
+            }
+        }
+        private bool _ZipcodeIsVisble = true;
+        public bool ZipcodeIsVisble
+        {
+            get { return _ZipcodeIsVisble; }
+            set
+            {
+                if (_ZipcodeIsVisble != value)
+                {
+                    _ZipcodeIsVisble = value;
+                    OnPropertyChanged("ZipcodeIsVisble");
+                }
+            }
+        }
+        private bool _spnrStateIsVisble = true;
+        public bool spnrStateIsVisble
+        {
+            get { return _spnrStateIsVisble; }
+            set
+            {
+                if (_spnrStateIsVisble != value)
+                {
+                    _spnrStateIsVisble = value;
+                    OnPropertyChanged("spnrStateIsVisble");
+                }
+            }
+        }
         private string _txtOtherRelationship;
         public string txtOtherRelationship
         {
@@ -229,7 +309,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                     OnPropertyChanged("txtOtherRelationship");
                 }
             }
-        } 
+        }
         private string _resultEmail;
         public string ResultEmail
         {
@@ -242,7 +322,20 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                     OnPropertyChanged("ResultEmail");
                 }
             }
-        } 
+        }
+        private string _spnrState;
+        public string spnrState
+        {
+            get { return _spnrState; }
+            set
+            {
+                if (_spnrState != value)
+                {
+                    _spnrState = value;
+                    OnPropertyChanged("spnrState");
+                }
+            }
+        }
         private string _resultPhonenumber;
         public string ResultPhonenumber
         {
@@ -255,7 +348,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                     OnPropertyChanged("ResultPhonenumber");
                 }
             }
-        }  
+        }
         private string _txtFirstName;
         public string txtFirstName
         {
@@ -268,7 +361,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                     OnPropertyChanged("txtFirstName");
                 }
             }
-        } 
+        }
         private string _txtMiddleName;
         public string txtMiddleName
         {
@@ -281,7 +374,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                     OnPropertyChanged("txtMiddleName");
                 }
             }
-        } 
+        }
         private string _txtLastName;
         public string txtLastName
         {
@@ -294,7 +387,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                     OnPropertyChanged("txtLastName");
                 }
             }
-        } 
+        }
         private string _txtPreferredName;
         public string txtPreferredName
         {
@@ -321,6 +414,19 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
+        private string _Title;
+        public string Title
+        {
+            get => _Title;
+            set
+            {
+                if (_Title != value)
+                {
+                    _Title = value;
+                    OnPropertyChanged(nameof(Title));
+                }
+            }
+        }
         private string _spnrGender;
         public string spnrGender
         {
@@ -343,20 +449,20 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 if (_spnrLanguage != value)
                 {
                     _spnrLanguage = value;
-                    OnPropertyChanged(nameof(spnrLanguage));
+                    OnPropertyChanged("spnrLanguage");
                 }
             }
         }
-        private string _Email;
-        public string Email
+        private string _txtEmail;
+        public string txtEmail
         {
-            get => _Email;
+            get => _txtEmail;
             set
             {
-                if (_Email != value)
+                if (_txtEmail != value)
                 {
-                    _Email = value;
-                    OnPropertyChanged(nameof(Email));
+                    _txtEmail = value;
+                    OnPropertyChanged("txtEmail");
                 }
             }
         }
@@ -369,34 +475,160 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 if (_spnrRelationship != value)
                 {
                     _spnrRelationship = value;
-                    OnPropertyChanged(nameof(spnrRelationship));
+                    OnPropertyChanged("spnrRelationship");
                 }
             }
         }
-        private string _PrimaryPhone;
-        public string PrimaryPhone
+        private int _spnrTitleSelectedIndex;
+        public int spnrTitleSelectedIndex
         {
-            get => _PrimaryPhone;
+            get => _spnrTitleSelectedIndex;
             set
             {
-                if (_PrimaryPhone != value)
+                if (_spnrTitleSelectedIndex != value)
                 {
-                    _PrimaryPhone = value;
-                    OnPropertyChanged(nameof(PrimaryPhone));
+                    _spnrTitleSelectedIndex = value;
+                    OnPropertyChanged("spnrTitleSelectedIndex");
                 }
             }
         }
-        private string _AlternatePhone;
-        public string AlternatePhone
+        private int _spnrRelationshipselectedindex;
+        public int spnrRelationshipselectedindex
         {
-            get => _AlternatePhone;
+            get => _spnrRelationshipselectedindex;
             set
             {
-                if (_AlternatePhone != value)
+                if (_spnrRelationshipselectedindex != value)
                 {
-                    _AlternatePhone = value;
-                    OnPropertyChanged(nameof(AlternatePhone));
+                    _spnrRelationshipselectedindex = value;
+                    OnPropertyChanged("spnrRelationshipselectedindex");
                 }
+            }
+        }
+        private List<string> _spnrTitle = CommonLibraryCoreMaui.Theme.Values.UserTitles;
+        public List<string> spnrTitle
+        {
+            get { return _spnrTitle; }
+            set
+            {
+                if (_spnrTitle != value)
+                {
+                    _spnrTitle = value;
+                    OnPropertyChanged("spnrTitle");
+                }
+            }
+        }
+        private List<string> _GenderList = CommonLibraryCoreMaui.Theme.Values.GenderOptions;
+        public List<string> GenderList
+        {
+            get { return _GenderList; }
+            set
+            {
+                if (_GenderList != value)
+                {
+                    _GenderList = value;
+                    OnPropertyChanged("GenderList");
+                }
+            }
+        }
+        private string[] _languages = { "English", "Spanish" };
+        public string[] Languages
+        {
+            get => _languages;
+            set
+            {
+                _languages = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _selectedLanguage;
+        public string SelectedLanguage
+        {
+            get => _selectedLanguage;
+            set
+            {
+                _selectedLanguage = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _selectedRelationship;
+        public string SelectedRelationship
+        {
+            get => _selectedRelationship;
+            set
+            {
+                _selectedRelationship = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _SelectedState;
+        public string SelectedState
+        {
+            get => _SelectedState;
+            set
+            {
+                _SelectedState = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _txtAddress1;
+        public string txtAddress1
+        {
+            get => _txtAddress1;
+            set
+            {
+                _txtAddress1 = value;
+                OnPropertyChanged("txtAddress1");
+            }
+        }
+        private string _txtAddress2;
+        public string txtAddress2
+        {
+            get => _txtAddress2;
+            set
+            {
+                _txtAddress2 = value;
+                OnPropertyChanged("txtAddress2");
+            }
+        }
+        private string _txtAlternatePhone;
+        public string txtAlternatePhone
+        {
+            get => _txtAlternatePhone;
+            set
+            {
+                _txtAlternatePhone = value;
+                OnPropertyChanged("txtAlternatePhone");
+            }
+        }
+        private string _txtPrimaryPhone;
+        public string txtPrimaryPhone
+        {
+            get => _txtPrimaryPhone;
+            set
+            {
+                _txtPrimaryPhone = value;
+                OnPropertyChanged("txtPrimaryPhone");
+            }
+        }
+        private string _txtCity;
+        public string txtCity
+        {
+            get => _txtCity;
+            set
+            {
+                _txtCity = value;
+                OnPropertyChanged("txtCity");
+            }
+        }
+        private string _txtZipcode;
+        public string txtZipcode
+        {
+            get => _txtZipcode;
+            set
+            {
+                _txtZipcode = value;
+                OnPropertyChanged("txtZipcode");
             }
         }
         #endregion
@@ -415,22 +647,123 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                     {
                         Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                         {
-                            patientProfile = await DataUtility.GetPatientProfileAsync(SettingsValues.ApiURLValue, Token, member is null ? PatientID : (int)member.PatientID).ConfigureAwait(false);
-                            //await MaskPhoneNumber();
-                            await MaskEmail();
-                            txtFirstName = patientProfile.FirstName;
-                            txtMiddleName = patientProfile.MiddleName;
-                            txtLastName = patientProfile.LastName;
-                            txtPreferredName = patientProfile.PreferredName;
-                            string dateString = patientProfile.DOB;
-                            txtDOB = DateTime.Parse(dateString);
-                            spnrGender = patientProfile.Gender;
-                            spnrLanguage = patientProfile.Language;
-                            spnrRelationship = patientProfile.Relationship;
-                            txtOtherRelationship = patientProfile.OtherRelationship;
-                            Email = patientProfile.Email;
-                            PrimaryPhone = patientProfile.PrimaryPhone;
-                            AlternatePhone = patientProfile.AlternatePhone;
+                            try
+                            {
+                                patientProfile = await DataUtility.GetPatientProfileAsync(SettingsValues.ApiURLValue, Token, member is null ? PatientID : (int)member.PatientID).ConfigureAwait(false);
+                                if (patientProfile != null)
+                                {
+                                    //if (string.IsNullOrEmpty(patientProfile.Photo))
+                                    //{
+                                    //    Android.Graphics.Drawables.BitmapDrawable bd = (Android.Graphics.Drawables.BitmapDrawable)sPhoto.Drawable;
+                                    //    //imageBitmap = CropImage.ToOvalBitmap(bd.Bitmap); //TODO
+                                    //}
+                                    //else
+                                    //{
+                                    //    Bitmap bm = await ProfileImageHelper.GetImageBitmapFromUrl(patientProfile.Photo).ConfigureAwait(false);
+                                    //    //imageBitmap = PatientApp.Utils.Resize(CropImage.ToOvalBitmap(bm), 500, 500); //TODO
+                                    //}
+                                    Title = patientProfile.Title;
+                                    await MaskPhoneNumber();
+                                    await MaskEmail();
+                                    txtFirstName = patientProfile.FirstName;
+                                    txtMiddleName = patientProfile.MiddleName;
+                                    txtLastName = patientProfile.LastName;
+                                    txtPreferredName = patientProfile.PreferredName;
+                                    string dateString = patientProfile.DOB;
+                                    txtDOB = DateTime.Parse(dateString);
+                                    spnrGender = patientProfile.Gender;
+                                    spnrState = patientProfile.State;
+                                    spnrLanguage = patientProfile.Language;
+                                    spnrRelationship = patientProfile.Relationship;
+                                    txtOtherRelationship = patientProfile.OtherRelationship;
+                                    txtEmail = patientProfile.Email;
+                                    txtPrimaryPhone = patientProfile.PrimaryPhone;
+                                    txtAlternatePhone = patientProfile.AlternatePhone;
+
+                                    if (!string.IsNullOrEmpty(patientProfile.AlternatePhone)) txtAlternatePhone = patientProfile.AlternatePhone;
+                                    txtAddress1 = patientProfile.Address1;
+                                    txtAddress2 = patientProfile.Address2;
+                                    txtCity = patientProfile.City;
+                                    SelectedState = patientProfile.State;
+                                    if (!string.IsNullOrEmpty(patientProfile.Zip))
+                                    {
+                                        txtZipcode = patientProfile.Zip;
+                                    }
+
+                                    if (string.IsNullOrEmpty(patientProfile.NotificationPreference))
+                                    {
+                                        rbtnEmailNotification = true;
+                                    }
+                                    else
+                                    {
+                                        if (patientProfile.NotificationPreference.ToLower() == "email")
+                                        {
+                                            rbtnEmailNotification = true;
+                                        }
+                                        else
+                                        {
+                                            rbtnTextNotification = true;
+                                        }
+                                    }
+                                    //if (member != null)
+                                    //{
+                                    //    AlternatePhoneIsVisible = false;
+                                    //    Address1IsVisible = false;
+                                    //    Address2IsVisible = false;
+                                    //    CityIsVisible = false;
+                                    //    ZipcodeIsVisble = false;
+                                    //    spnrStateIsVisble = false;
+                                    //}
+                                    if (!string.IsNullOrEmpty(patientProfile.Title))
+                                    {
+                                        int selectedIndex = Array.IndexOf(titleItems, patientProfile.Title) + 1;
+                                        if (selectedIndex >= 0 && selectedIndex < spnrTitle.Count)
+                                        {
+                                            spnrTitleSelectedIndex = selectedIndex;
+                                        }
+                                    }
+                                    // Set the selected language based on the condition
+                                    SelectedLanguage = patientProfile.LanguageID == 1 ? "English" : "Spanish";
+
+                                    if (!string.IsNullOrEmpty(patientProfile.Relationship))
+                                    {
+                                        if (!string.IsNullOrEmpty(patientProfile.OtherRelationship))
+                                        {
+                                            spnrRelationshipselectedindex = relationships.Length - 1;
+                                            txtOtherRelationship = patientProfile.OtherRelationship;
+                                            lytOtherRelationship = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        lytOtherRelationship = false;
+                                        //  string relationship = RelationshipList.FirstOrDefault(x => x.ToLower().Equals(patientProfile.Relationship.ToLower()));
+                                        //var relationship  = RelationshipList.FirstOrDefault(x => x.ToLower().Equals(patientProfile.Relationship, StringComparison.CurrentCultureIgnoreCase));
+                                        //   var relationship = RelationshipList.FirstOrDefault(x => x.Equals(patientProfile.Relationship, StringComparison.OrdinalIgnoreCase));
+
+                                        //if (string.IsNullOrEmpty(relationship))
+                                        //{
+                                        //    spnrRelationshipselectedindex = 0;
+                                        //    lytOtherRelationship = false;
+                                        //    txtOtherRelationship = string.Empty;
+                                        //}
+                                        //else
+                                        //{
+                                        //    int selectedIndex = Array.IndexOf(relationships, patientProfile.Relationship) + 1;
+                                        //    if (selectedIndex >= 0 && selectedIndex < RelationshipList.Count)
+                                        //    {
+                                        //        spnrRelationshipselectedindex = selectedIndex;
+                                        //    }
+                                        //    //spnrRelationship.SetSelection(Array.IndexOf(relationships, patientProfile.Relationship) + 1);
+                                        //}
+                                    }
+
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
                         });
 
                     }).ConfigureAwait(false);
@@ -466,10 +799,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
-                //if (!string.IsNullOrWhiteSpace(patientProfile.PrimaryPhone))
-                //{
-                //    ResultPhonenumber = "***-***-" + patientProfile.PrimaryPhone.Substring(patientProfile.PrimaryPhone.Length - 4);
-                //}
+                if (!string.IsNullOrWhiteSpace(patientProfile.PrimaryPhone))
+                {
+                    ResultPhonenumber = "***-***-" + patientProfile.PrimaryPhone.Substring(patientProfile.PrimaryPhone.Length - 4);
+                }
             }
             catch (Exception ex)
             {
@@ -516,7 +849,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             }
                             MediafileResult = await MediaPicker.PickPhotoAsync();
 
-                           // Helpers.AppGlobalConstants.IsCameraOrGalleryUsed = true;      
+                            // Helpers.AppGlobalConstants.IsCameraOrGalleryUsed = true;      
                             // canceled
                             if (MediafileResult == null)
                             {
@@ -708,6 +1041,83 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
+                //if (patientProfile != null)
+                //{
+                //    bool notvalid = true;
+                //    if (member != null)
+                //    {
+                //    notvalid = string.IsNullOrEmpty(txtFirstName.Trim()) ||
+                //       string.IsNullOrEmpty(txtLastName.Trim()) ||
+                //        string.IsNullOrEmpty(txtDOB.ToString().Trim()) ||
+                //         string.IsNullOrEmpty(txtEmail.Trim());
+                //    }
+                //    else
+                //    {
+                //    notvalid = string.IsNullOrEmpty(txtFirstName.Trim()) ||
+                //       string.IsNullOrEmpty(txtLastName.Trim()) ||
+                //       string.IsNullOrEmpty(txtAddress1.Trim()) ||
+                //       string.IsNullOrEmpty(txtCity.Trim()) ||
+                //       string.IsNullOrEmpty(txtDOB.ToString().Trim()) ||
+                //       string.IsNullOrEmpty(txtEmail.Trim());
+                //    }
+
+                //    if (notvalid)
+                //    {
+                //        UserDialog.Alert("Please fill all the required fields!");
+                //    }
+                //    else
+                //    {
+                //        patientProfile.FirstName = txtFirstName;
+                //        patientProfile.MiddleName = txtMiddleName;
+                //        patientProfile.LastName = txtLastName;
+                //        patientProfile.Email = txtEmail;
+                //        patientProfile.PrimaryPhone = txtPrimaryPhone;
+                //        patientProfile.PreferredName = member != null ? "no-update" : txtPreferredName;
+                //        patientProfile.AlternatePhone = member != null ? "no-update" : txtAlternatePhone;
+                //        patientProfile.Address1 = member != null ? "no-update" : txtAddress1;
+                //        patientProfile.Address2 = member != null ? "no-update" : txtAddress2;
+                //        patientProfile.City = member != null ? "no-update" : txtCity;
+                //        patientProfile.Zip = member != null ? "no-update" : txtZipcode;
+                //        patientProfile.NotificationPreference = member != null ? "no-update" : rbtnEmailNotification ? "email" : "text";
+                //        patientProfile.DOB = txtDOB.ToString(); ;
+                //        if (member != null)
+                //        {
+                //            patientProfile.OtherRelationship = "no-update";
+                //            patientProfile.Relationship = "no-update";
+                //        }
+                //        else
+                //        {
+                //            patientProfile.OtherRelationship = null;
+                //            patientProfile.Relationship = null;
+                //        }
+                //        StatusResponse resp = await DataUtility.UpdatePatientProfileAsync(SettingsValues.ApiURLValue, Token, patientProfile).ConfigureAwait(false);
+                //        if (resp != null)
+                //        {
+                //            if (resp.StatusCode == StatusCode.Success)
+                //            {
+                //                if (member != null)
+                //                {
+                //                    Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                //                    {
+                //                        try
+                //                        {
+                //                            if (Helpers.AppGlobalConstants.userInfo != null)
+                //                            {
+                //                                userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, Helpers.AppGlobalConstants.UserId, true, Token).ConfigureAwait(false);
+                //                                Helpers.AppGlobalConstants.userInfo = userInfo;
+
+                //                                await Navigation.PopModalAsync();
+                //                            }
+                //                        }
+                //                        catch (Exception ex)
+                //                        { 
+                //                        }
+                //                    });
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
 
             }
             catch (Exception ex)

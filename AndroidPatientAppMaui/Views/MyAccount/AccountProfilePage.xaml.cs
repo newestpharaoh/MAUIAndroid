@@ -25,6 +25,7 @@ public partial class AccountProfilePage : ContentPage
         base.OnAppearing();
         updateGrid.IsVisible = false;
         arrowimg.Source = "rightarrow.png";
+
         VM.GetMembers();
     }
     /// <summary>
