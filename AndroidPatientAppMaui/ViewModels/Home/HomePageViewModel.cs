@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using AndroidPatientAppMaui.Helpers;
+using AndroidPatientAppMaui.Views;
 using CommonLibraryCoreMaui;
 using CommonLibraryCoreMaui.Models;
 using FM.LiveSwitch;
@@ -157,7 +158,13 @@ namespace AndroidPatientAppMaui.ViewModels.Home
         {
             try
             {
-                await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
+                bool answer = await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
+                // If the user clicks "Yes", logout
+                if (answer)
+                {
+                    await Navigation.PushModalAsync(new LoginPage(), false);
+                }
+                //  await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
             }
             catch (Exception ex)
             {
