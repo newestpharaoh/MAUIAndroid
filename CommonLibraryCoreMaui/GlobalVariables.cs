@@ -81,11 +81,11 @@ namespace CommonLibraryCoreMaui
         public async Task<UITopic> GetUTText(string strTopicname, string locale="en")
         {
             UITopic pageText =null;
-            //if (string.IsNullOrEmpty(appBrandName))
-            //{
+            if (string.IsNullOrEmpty(appBrandName))
+            {
                 pageText = await DataUtility.GetUITopicListAsync(SettingsValues.ApiURLValue, strTopicname, locale).ConfigureAwait(false);
-               
-            //}
+
+            }
             return pageText;
         }
     }

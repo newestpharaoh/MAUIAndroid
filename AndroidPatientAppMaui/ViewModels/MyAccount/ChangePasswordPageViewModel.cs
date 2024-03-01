@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonLibraryCoreMaui;
+using CommonLibraryCoreMaui.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
-    public class ChangePasswordPageViewModel :BaseViewModel
+    public class ChangePasswordPageViewModel : BaseViewModel
     {
+        //To define the class level variable.....
+        int PatientID = 0;
+        string Token = string.Empty;
         #region Constructor
         public ChangePasswordPageViewModel(INavigation nav)
         {
@@ -17,6 +22,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             ViewNewPasswordCommand = new Command(ViewNewPasswordAsync);
             ViewConfirmPasswordCommand = new Command(ViewConfirmPasswordAsync);
             ConfirmNewPasswordCommand = new Command(ConfirmNewPasswordAsync);
+
+            Token = Preferences.Get("AuthToken", string.Empty);
+            PatientID = Preferences.Get("PatientID", 0);
         }
         #endregion
 
@@ -151,7 +159,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// To DO: Current Password Command
         /// </summary>
         /// <param name="obj"></param>
-        private  void ViewCurrentPasswordAsync(object obj)
+        private void ViewCurrentPasswordAsync(object obj)
         {
             if (IsCurrentPassword == true)
                 IsCurrentPassword = false;
@@ -163,7 +171,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// To DO: New Password Command
         /// </summary>
         /// <param name="obj"></param>
-        private  void ViewNewPasswordAsync(object obj)
+        private void ViewNewPasswordAsync(object obj)
         {
             if (IsNewPassword == true)
                 IsNewPassword = false;
@@ -187,15 +195,66 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// To Do: To define Save Changes command
         /// </summary>
         /// <param name="obj"></param>
-        private  void ConfirmNewPasswordAsync(object obj)
+        private async void ConfirmNewPasswordAsync(object obj)
         {
-            if (!ValidateNewPassword())
-            {
-                return;
-            }
+            //if (!ValidateNewPassword())
+            //{
+            //    return;
+            //}
             //Call api..
             try
             {
+                if (!string.IsNullOrEmpty(NewPassword.Trim()) && !string.IsNullOrEmpty(ConfirmPassword.Trim()))
+                {
+                    if (!NewPassword.Equals(ConfirmPassword))
+                    {
+                        UserDialog.Alert("New Password does not match Confirm Password.");
+                    }
+                    else
+                    {
+                        Password pwd = new Password()
+                        {
+                            CurrentPassword = CurrentPassword,
+                            ID = PatientID,
+                            NewPassword = NewPassword
+                        };
+                        StatusResponse resp = await DataUtility.PatientUpdatePasswordAsync(SettingsValues.ApiURLValue, Token, pwd).ConfigureAwait(false);
+                        if (resp != null)
+                        {
+                            switch (resp.StatusCode)
+                            {
+                                case StatusCode.Success:
+                                    Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                    {
+                                         try
+                                        {
+                                            await Navigation.PushModalAsync(new Views.MyAccount.ChangePasswordSuccessPage(), false);
+
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine(ex);
+                                        }
+                                    });
+                                    break;
+                                case StatusCode.PasswordRequirementNotMet:
+                                case StatusCode.PsswdReqNotMet:
+                                case StatusCode.PsswdAtLeast8Chars:
+                                case StatusCode.PsswdAtLeastOneOfThese:
+                                case StatusCode.PsswdAtLeastOneLowerAndOneUpper:
+                                    UserDialog.Alert("Password must be between 8-10 characters and contain at least 1 capital letter, 1 number, and 1 symbol (e.g. !, ?,.)");
+                                    break;
+                                case StatusCode.IncorrectPassword:
+                                    if (!string.IsNullOrEmpty(resp.Message)) UserDialog.Alert(resp.Message);
+                                    break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    UserDialog.Alert("Please provide new password and / or confirmed password.");
+                }
             }
             catch (Exception ex)
             {

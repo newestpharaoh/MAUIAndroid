@@ -59,7 +59,7 @@
             <Grid
                 Padding="0,10"
                 HorizontalOptions="FillAndExpand"
-                RowDefinitions="Auto,Auto,Auto,Auto"
+                RowDefinitions="Auto,Auto,*,Auto"
                 RowSpacing="16"
                 VerticalOptions="FillAndExpand">
                 <!--  plan Header Section  -->
@@ -297,11 +297,15 @@
                     x:Name="lytAdditionalMembersInfo"
                     Grid.Row="3"
                     IsVisible="{Binding lytAdditionalMembersInfo}"
-                    Orientation="Vertical">
+                    Orientation="Vertical"
+                    VerticalOptions="EndAndExpand">
 
-                    <StackLayout Orientation="Horizontal">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <Label
                             x:Name="lblAdditionalMembersInfo"
+                            Margin="20,0"
+                            HorizontalTextAlignment="Center"
+                            LineBreakMode="WordWrap"
                             Text="{Binding lblAdditionalMembersInfo}"
                             TextColor="#ff0000" />
                     </StackLayout>

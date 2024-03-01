@@ -104,9 +104,7 @@ public partial class UpdateDemographicsPage : ContentPage
     {
         try
         {
-            VM.spnrLanguage = string.Empty;
-            //Picker picker = (Picker)sender;
-            //string selectedLanguage = (string)picker.SelectedItem;
+            VM.spnrLanguage = string.Empty; 
             var item = sender as Picker;
             string selectedLanguage = item.SelectedItem.ToString();
 

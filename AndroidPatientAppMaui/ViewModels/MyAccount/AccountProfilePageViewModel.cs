@@ -109,7 +109,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _lblAdditionalMembersInfo = "You have room for @membersCount@ additional family @member_s@ with your current plan.";
+        private string _lblAdditionalMembersInfo = "You have room for @membersCount@ additional family @member_s@  with your current plan.";
         public string lblAdditionalMembersInfo
         {
             get { return _lblAdditionalMembersInfo; }

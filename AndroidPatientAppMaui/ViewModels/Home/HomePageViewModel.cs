@@ -158,13 +158,19 @@ namespace AndroidPatientAppMaui.ViewModels.Home
         {
             try
             {
-                bool answer = await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
-                // If the user clicks "Yes", logout
+                bool answer = await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No"); 
                 if (answer)
                 {
+                    AndroidPatientAppMaui.Helpers.AppGlobalConstants.Token = "";
+                    AndroidPatientAppMaui.Helpers.AppGlobalConstants.UserId = 0;
+                    AndroidPatientAppMaui.Helpers.AppGlobalConstants.TokenExpirationDate = DateTime.Now;
+                    AndroidPatientAppMaui.Helpers.AppGlobalConstants.LoginEmail = "";
+                    AndroidPatientAppMaui.Helpers.AppGlobalConstants.userInfo =new UserInfo();
+                    Preferences.Set("AuthToken", "");
+                    Preferences.Set("UserId", 0);
+                    Preferences.Set("PatientID", 0);
                     await Navigation.PushModalAsync(new LoginPage(), false);
-                }
-                //  await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
+                } 
             }
             catch (Exception ex)
             {
