@@ -1,6 +1,6 @@
-﻿using Acr.UserDialogs; 
+﻿using Acr.UserDialogs;
 using CommonLibraryCoreMaui;
-using CommonLibraryCoreMaui.Models; 
+using CommonLibraryCoreMaui.Models;
 using System.Text.RegularExpressions;
 
 namespace AndroidPatientAppMaui.ViewModels.MyAccount
@@ -15,7 +15,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         int PatientID = 0;
         int UserId = 0;
         string Token = string.Empty;
-        public string[] titleItems; 
+        public string[] titleItems;
         #region Constructor
         public UpdateDemographicsPageViewModel(INavigation nav)
         {
@@ -708,7 +708,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                         {
                                             rbtnTextNotification = true;
                                         }
-                                    } 
+                                    }
                                     if (!string.IsNullOrEmpty(patientProfile.Title))
                                     {
                                         int selectedIndex = Array.IndexOf(titleItems, patientProfile.Title) + 1;
@@ -719,7 +719,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                     }
                                     // Set the selected language based on the condition
                                     SelectedLanguage = patientProfile.LanguageID == 1 ? "English" : "Spanish";
-                                    
+
                                     if (!string.IsNullOrEmpty(patientProfile.Relationship))
                                     {
                                         if (!string.IsNullOrEmpty(patientProfile.OtherRelationship))
@@ -751,7 +751,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                         //    }
                                         //    //spnrRelationship.SetSelection(Array.IndexOf(relationships, patientProfile.Relationship) + 1);
                                         //} 
-                                         
+
                                     }
 
                                 }
@@ -1039,9 +1039,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             {
                 if (patientProfile != null)
                 {
-
-                    // string isPrimaryPhoneValid = ((MaskHelper.MaskPhoneNumber)txtPrimaryPhone);
-
                     bool bRelationship = false;
                     if (!string.IsNullOrEmpty(patientProfile.Relationship))
                     {
@@ -1059,8 +1056,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                            string.IsNullOrEmpty(txtPrimaryPhone.Trim()) ||
                             string.IsNullOrEmpty(txtDOB.ToString().Trim()) ||
                             bRelationship ||
-                             string.IsNullOrEmpty(txtEmail.Trim()) || 
-                             string.IsNullOrEmpty(patientProfile.Gender); 
+                             string.IsNullOrEmpty(txtEmail.Trim()) ||
+                             string.IsNullOrEmpty(patientProfile.Gender);
                     }
                     else
                     {
@@ -1070,9 +1067,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                            string.IsNullOrEmpty(txtAddress1.Trim()) ||
                            string.IsNullOrEmpty(txtZipcode.Trim()) ||
                            string.IsNullOrEmpty(txtCity.Trim()) ||
-                           string.IsNullOrEmpty(txtAlternatePhone.Trim()) || 
+                           string.IsNullOrEmpty(txtAlternatePhone.Trim()) ||
                            string.IsNullOrEmpty(txtDOB.ToString().Trim()) ||
-                           string.IsNullOrEmpty(txtEmail.Trim())||
+                           string.IsNullOrEmpty(txtEmail.Trim()) ||
                             bRelationship ||
                             string.IsNullOrEmpty(patientProfile.Gender);
 
@@ -1094,7 +1091,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                         patientProfile.Address1 = txtAddress1;
                         patientProfile.Address2 = txtAddress2;
                         patientProfile.City = txtCity;
-                        patientProfile.Zip = txtZipcode; 
+                        patientProfile.Zip = txtZipcode;
                         patientProfile.NotificationPreference = rbtnEmailNotification ? "email" : "text";
                         patientProfile.DOB = txtDOB.ToString();
                         if (member != null)
@@ -1112,28 +1109,58 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                         {
                             if (resp.StatusCode == StatusCode.Success)
                             {
-                                if (member != null)
+                                if (member is null)
+                                {
+
+                                    try
+                                    {
+                                        if (Helpers.AppGlobalConstants.userInfo != null)
+                                        {
+                                            UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, UserId, true, Token).ConfigureAwait(false);
+                                            Helpers.AppGlobalConstants.userInfo = userInfo;
+                                            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                            {
+                                                await Navigation.PopModalAsync();
+                                            });
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                    }
+                                }
+                                else
                                 {
                                     Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                                     {
-                                        try
-                                        {
-                                            await Navigation.PopModalAsync();
-                                            //if (Helpers.AppGlobalConstants.userInfo != null)
-                                            //{
-                                            //    UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, UserId, true, Token).ConfigureAwait(false);
-                                            //    Helpers.AppGlobalConstants.userInfo = userInfo;
-
-                                            //    await Navigation.PopModalAsync();
-
-                                            //} 
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                        }  
+                                        await Navigation.PopModalAsync();
                                     });
                                 }
+
                             }
+                            //if (resp.StatusCode == StatusCode.Success)
+                            //{
+                            //    if (member != null)
+                            //    {
+                            //        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                            //        {
+                            //            try
+                            //            {
+                            //                await Navigation.PopModalAsync();
+                            //                //if (Helpers.AppGlobalConstants.userInfo != null)
+                            //                //{
+                            //                //    UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, UserId, true, Token).ConfigureAwait(false);
+                            //                //    Helpers.AppGlobalConstants.userInfo = userInfo;
+
+                            //                //    await Navigation.PopModalAsync();
+
+                            //                //} 
+                            //            }
+                            //            catch (Exception ex)
+                            //            {
+                            //            }  
+                            //        });
+                            //    }
+                            //}
                         }
                     }
                 }
