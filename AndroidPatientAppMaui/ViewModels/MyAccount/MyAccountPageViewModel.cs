@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using AndroidPatientAppMaui.Views;
+using CommonLibraryCoreMaui.Models;
 using CommunityToolkit.Maui.Core.Views;
 using System;
 using System.Collections.Generic;
