@@ -118,7 +118,7 @@
                     Grid.Row="0"
                     HeightRequest="160"
                     HorizontalOptions="CenterAndExpand"
-                    Source="usercircle.png"
+                    Source="{Binding ProfileImage}"
                     VerticalOptions="CenterAndExpand"
                     WidthRequest="160" />
                 <Grid

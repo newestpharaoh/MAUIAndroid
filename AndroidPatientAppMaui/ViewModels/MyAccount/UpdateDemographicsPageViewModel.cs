@@ -129,7 +129,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         }
 
 
-        private string _ProfileImage;
+        private string _ProfileImage = "usercircle.png";
         public string ProfileImage
         {
             get { return _ProfileImage; }
@@ -669,6 +669,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                     Title = patientProfile.Title;
                                     await MaskPhoneNumber();
                                     await MaskEmail();
+                                    ProfileImage = patientProfile.Photo;
                                     txtFirstName = patientProfile.FirstName;
                                     txtMiddleName = patientProfile.MiddleName;
                                     txtLastName = patientProfile.LastName;
@@ -732,25 +733,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                     else
                                     {
                                         lytOtherRelationship = false;
-                                        //  string relationship = RelationshipList.FirstOrDefault(x => x.ToLower().Equals(patientProfile.Relationship.ToLower()));
-                                        //var relationship  = RelationshipList.FirstOrDefault(x => x.ToLower().Equals(patientProfile.Relationship, StringComparison.CurrentCultureIgnoreCase));
-                                        //   var relationship = RelationshipList.FirstOrDefault(x => x.Equals(patientProfile.Relationship, StringComparison.OrdinalIgnoreCase));
-
-                                        //if (string.IsNullOrEmpty(relationship))
-                                        //{
-                                        //    spnrRelationshipselectedindex = 0;
-                                        //    lytOtherRelationship = false;
-                                        //    txtOtherRelationship = string.Empty;
-                                        //}
-                                        //else
-                                        //{
-                                        //    int selectedIndex = Array.IndexOf(relationships, patientProfile.Relationship) + 1;
-                                        //    if (selectedIndex >= 0 && selectedIndex < RelationshipList.Count)
-                                        //    {
-                                        //        spnrRelationshipselectedindex = selectedIndex;
-                                        //    }
-                                        //    //spnrRelationship.SetSelection(Array.IndexOf(relationships, patientProfile.Relationship) + 1);
-                                        //} 
+                                         
 
                                     }
 
@@ -791,19 +774,42 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
         }
 
+        //public async Task MaskPhoneNumber()
+        //{
+        //    try
+        //    {
+        //        if (!string.IsNullOrWhiteSpace(patientProfile.PrimaryPhone))
+        //        {
+        //           // ResultPhonenumber = "***-***-" + patientProfile.PrimaryPhone.Substring(patientProfile.PrimaryPhone.Length - 4);
+        //            ResultPhonenumber =  Regex.Replace(patientProfile.PrimaryPhone, @"\d(?=(?:\D*\d){0,3}\D*$)", "*");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //    }
+        //}
         public async Task MaskPhoneNumber()
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(patientProfile.PrimaryPhone))
+                if (!string.IsNullOrWhiteSpace(patientProfile.PrimaryPhone) && patientProfile.PrimaryPhone.Length >= 10)
                 {
-                    ResultPhonenumber = "***-***-" + patientProfile.PrimaryPhone.Substring(patientProfile.PrimaryPhone.Length - 4);
+                    string areaCode = patientProfile.PrimaryPhone.Substring(0, 3);
+                    string prefix = patientProfile.PrimaryPhone.Substring(3, 3);
+                    string lastDigits = patientProfile.PrimaryPhone.Substring(10); // Take all digits from the 6th position
+
+                    string maskedAreaCode = "***";
+                    string maskedPrefix = "***";
+
+                    ResultPhonenumber = $"({maskedAreaCode}) {maskedPrefix}-{lastDigits}";
                 }
             }
             catch (Exception ex)
             {
+                // Handle the exception
             }
         }
+
         /// <summary>
         /// To Do: To define back command
         /// </summary>
@@ -884,126 +890,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             await Application.Current.MainPage.DisplayAlert("No Media Results", "Alert" + ex.Message, "OK");
                         }
                     }
-
-                    //else if ((action == "Take Photo"))
-                    //{
-                    //    try
-                    //    {
-                    //        var isPermissionGranted = await Utility.Utilities.RequestCameraAndGalleryPermissions();
-                    //        if (!isPermissionGranted)
-                    //        {
-                    //            await Application.Current.MainPage.DisplayAlert("Warning", "Please allow camera and storage permission to access this functionality.", "OK");
-                    //            return;
-                    //        }
-
-                    //        if (!CrossMedia.Current.IsCameraAvailable ||
-                    //                   !CrossMedia.Current.IsTakePhotoSupported)
-                    //        {
-                    //            await Application.Current.MainPage.DisplayAlert("No Camera", "Sorry! No camera available.", "OK");
-                    //        }
-
-                    //        MediafileResult = await MediaPicker.CapturePhotoAsync();
-                    //      //  Helpers.AppGlobalConstants.IsCameraOrGalleryUsed = true;
-                    //        // canceled
-                    //        if (MediafileResult == null)
-                    //        {
-                    //            return;
-                    //        }
-                    //        //To Save Photo in local storage and get its path 
-                    //        var newFilePath = Path.Combine(FileSystem.AppDataDirectory, MediafileResult.FileName);
-
-                    //        MemoryStream mss = new MemoryStream();
-                    //        var stream = await MediafileResult.OpenReadAsync();
-                    //        byte[] imageArray = new byte[16 * 1024];
-                    //        if (stream != null)
-                    //        {
-                    //            using (MemoryStream ms = new MemoryStream())
-                    //            {
-                    //                int read;
-                    //                while ((read = stream.Read(imageArray, 0, imageArray.Length)) > 0)
-                    //                {
-                    //                    ms.Write(imageArray, 0, read);
-                    //                }
-                    //                mss = ms;
-
-                    //                imageArray = mss.ToArray();
-                    //            }
-                    //        }
-                    //        var imageSource = ImageSource.FromStream(() => new MemoryStream(mss.ToArray()));
-                    //        if (MediafileResult.FullPath != null)
-                    //        {
-                    //            ProfileImage = MediafileResult.FullPath;
-
-                    //            if (ProfileImage != null)
-                    //                Preferences.Set("ProfileImg", ProfileImage);
-                    //        }
-
-                    //        //if (MediafileResult.FullPath != null)
-                    //        //{
-                    //        //    if (Device.RuntimePlatform == Device.iOS)
-                    //        //    {
-                    //        //        //To Save Photo in local storage and get its path 
-                    //        //        var newFilePath = Path.Combine(FileSystem.AppDataDirectory, MediafileResult.FileName);
-
-                    //        //        var img = ImageService.Instance.LoadStream(async c => await MediafileResult.OpenReadAsync());
-
-
-                    //        //       // var img = await MediafileResult.OpenReadAsync();
-
-                    //        //        // iOS doesn't rotate the image to match the device orientation, so we have to rotate it 90 degrees here
-                    //        //        if (Device.RuntimePlatform == Device.iOS)
-                    //        //        {
-                    //        //            if (img.Transformations != null)
-                    //        //            {
-                    //        //                var angle = img.Transformations;
-                    //        //            }
-                    //        //            img.Transform(new RotateTransformation(90));
-                    //        //        }
-
-                    //        //        // Get the transformed image as a PNG
-                    //        //        using var imageStream = await img.AsPNGStreamAsync();
-
-                    //        //        //using (var streamm = await MediafileResult.OpenReadAsync())
-                    //        //        using (var streamm = imageStream)
-                    //        //        {
-                    //        //            File.Create(newFilePath).Dispose();
-                    //        //            using (var writer = new StreamWriter(newFilePath))
-                    //        //            {
-                    //        //                await streamm.CopyToAsync(writer.BaseStream);
-                    //        //                if (newFilePath != null)
-                    //        //                {
-                    //        //                    ProfileImage = newFilePath;
-                    //        //                }
-                    //        //                await UpdateProfilePicture();
-                    //        //            }
-                    //        //        }
-                    //        //    }
-
-                    //        //    else
-                    //        //    {
-                    //        //        ProfileImage = MediafileResult.FullPath;
-
-                    //        //        if (ProfileImage != null)
-                    //        //            await UpdateProfilePicture();
-                    //        //    }
-                    //        //}
-                    //    }
-                    //    //else
-                    //    //{
-                    //    //    var path = DependencyService.Get<IMediaService>().SaveImageFromByte(mss.ToArray(), MediafileResult.FileName, null);
-                    //    //    if (path != null)
-                    //    //    {
-                    //    //        ProfileImage = path;
-
-                    //    //        if (ProfileImage != null)
-                    //    //            UpdateProfilePicture();
-                    //    //    }
-                    //    //}
-                    //    catch (Exception ex)
-                    //    {
-                    //        await Application.Current.MainPage.DisplayAlert("No Media Results", "Alert" + ex.Message, "OK");
-                    //    }
-                    //}
                 });
             }
             catch (Exception ex)
@@ -1093,7 +979,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                         patientProfile.City = txtCity;
                         patientProfile.Zip = txtZipcode;
                         patientProfile.NotificationPreference = rbtnEmailNotification ? "email" : "text";
-                        patientProfile.DOB = txtDOB.ToString();
+                        patientProfile.DOB = txtDOB.ToString(); 
                         if (member != null)
                         {
                             patientProfile.OtherRelationship = "no-update";
@@ -1137,30 +1023,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                 }
 
                             }
-                            //if (resp.StatusCode == StatusCode.Success)
-                            //{
-                            //    if (member != null)
-                            //    {
-                            //        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                            //        {
-                            //            try
-                            //            {
-                            //                await Navigation.PopModalAsync();
-                            //                //if (Helpers.AppGlobalConstants.userInfo != null)
-                            //                //{
-                            //                //    UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, UserId, true, Token).ConfigureAwait(false);
-                            //                //    Helpers.AppGlobalConstants.userInfo = userInfo;
-
-                            //                //    await Navigation.PopModalAsync();
-
-                            //                //} 
-                            //            }
-                            //            catch (Exception ex)
-                            //            {
-                            //            }  
-                            //        });
-                            //    }
-                            //}
                         }
                     }
                 }
