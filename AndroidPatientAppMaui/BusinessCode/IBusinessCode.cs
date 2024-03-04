@@ -1,4 +1,5 @@
-﻿using CommonLibraryCoreMaui.Models;
+﻿using AndroidPatientAppMaui.Models;
+using CommonLibraryCoreMaui.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace AndroidPatientAppMaui.BusinessCode
 
         #region Account
         Task<TokenResponse> CustomerLogin(string email, string password, Action<object> success, Action<object> failed);
+
+        Task<StatusResponse> UpdateProfileImgApi(UpdateProfileImgReqModel request, FileResult MediafileResult, Action<object> success, Action<object> failed);
+
 
         #endregion
 

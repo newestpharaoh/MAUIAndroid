@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using AndroidPatientAppMaui.Models;
 using CommonLibraryCoreMaui;
 using CommonLibraryCoreMaui.Models;
 using System.Text.RegularExpressions;
@@ -733,7 +734,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                     else
                                     {
                                         lytOtherRelationship = false;
-                                         
+
 
                                     }
 
@@ -851,7 +852,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             }
                             MediafileResult = await MediaPicker.PickPhotoAsync();
 
-                            // Helpers.AppGlobalConstants.IsCameraOrGalleryUsed = true;      
                             // canceled
                             if (MediafileResult == null)
                             {
@@ -883,6 +883,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             {
                                 ProfileImage = MediafileResult.FullPath;
                                 Preferences.Set("ProfileImg", ProfileImage);
+                                await UpdateProfilePicture();
                             }
                         }
                         catch (Exception ex)
@@ -897,6 +898,63 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 Console.WriteLine(ex);
             }
         }
+
+
+        /// <summary>
+        /// To update profile picture
+        /// </summary>
+        /// <returns></returns>
+        public async Task UpdateProfilePicture()
+        {
+            //Call api..
+            try
+            {
+                UserDialogs.Instance.ShowLoading("Uploading Image...", MaskType.Clear);
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    await Task.Run(async () =>
+                    {
+                        if (_businessCode != null)
+                        {
+                            UpdateProfileImgReqModel updateprofile = new UpdateProfileImgReqModel()
+                            {
+                                imgPath = ProfileImage,
+                                uri = $"{SettingsValues.ApiURLValue}/Patient/UpdatePhoto?patientID={patientProfile.PatientID}",
+                                token = Preferences.Get("AuthToken", "")
+                            };
+                            await _businessCode.UpdateProfileImgApi(updateprofile, MediafileResult,
+                            async (objRes) =>
+                            {
+                                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                {
+                                    var res = objRes as StatusResponse;
+                                    Preferences.Set("ProfileImg", res.Payload);
+                                    await UserDialogs.Instance.AlertAsync("Patient Profile Photo Updated Successfully.", "Success", "Ok");
+                                    UserDialogs.Instance.HideLoading();
+                                });
+                            }, (objj) =>
+                            {
+                                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                {
+                                    UserDialogs.Instance.HideLoading();
+                                    await UserDialogs.Instance.AlertAsync("Something went wrong!  Please try again.");
+                                });
+                            });
+                        }
+                    }).ConfigureAwait(false);
+
+                    UserDialogs.Instance.HideLoading();
+                }
+                else
+                {
+                    UserDialogs.Instance.Loading().Hide();
+                }
+            }
+            catch (Exception ex)
+            { UserDialog.HideLoading(); await Task.CompletedTask; }
+        }
+
+
         /// <summary>
         /// To Do: To define  Change Password command
         /// </summary>
@@ -979,7 +1037,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                         patientProfile.City = txtCity;
                         patientProfile.Zip = txtZipcode;
                         patientProfile.NotificationPreference = rbtnEmailNotification ? "email" : "text";
-                        patientProfile.DOB = txtDOB.ToString(); 
+                        patientProfile.DOB = txtDOB.ToString();
                         if (member != null)
                         {
                             patientProfile.OtherRelationship = "no-update";

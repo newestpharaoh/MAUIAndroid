@@ -114,13 +114,25 @@
                 RowSpacing="10"
                 VerticalOptions="FillAndExpand">
                 <!--  User Image Section  -->
-                <Image
+
+                <Border
                     Grid.Row="0"
+                    Padding="4"
                     HeightRequest="160"
                     HorizontalOptions="CenterAndExpand"
-                    Source="{Binding ProfileImage}"
+                    Stroke="Black"
+                    StrokeThickness="4"
                     VerticalOptions="CenterAndExpand"
-                    WidthRequest="160" />
+                    WidthRequest="160">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="80" />
+                    </Border.StrokeShape>
+                    <Image
+                        Margin="3"
+                        Aspect="AspectFit"
+                        Source="{Binding ProfileImage}" />
+                </Border>
+
                 <Grid
                     Grid.Row="1"
                     Margin="0,20,0,0"
