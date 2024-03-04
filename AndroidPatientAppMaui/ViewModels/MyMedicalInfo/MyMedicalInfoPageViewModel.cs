@@ -374,6 +374,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     {
                         Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                         {
+                            nonVisit = true;
                             if (nonVisit)
                             {
                                 lytEditMedicalHistory = true;
