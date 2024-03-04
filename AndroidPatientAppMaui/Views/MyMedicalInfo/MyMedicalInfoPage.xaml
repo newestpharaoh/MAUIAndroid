@@ -3,6 +3,7 @@
     x:Class="AndroidPatientAppMaui.Views.MyMedicalInfo.MyMedicalInfoPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:CommonLibraryCoreMaui.Models;assembly=CommonLibraryCoreMaui"
     Title="MyMedicalInfoPage">
     <!--  Main Grid  -->
     <Grid
@@ -37,7 +38,7 @@
                 FontAttributes="Bold"
                 FontSize="18"
                 HorizontalTextAlignment="Center"
-                Text="Test User25"
+                Text="{Binding UserName}"
                 TextColor="Black"
                 VerticalTextAlignment="Center" />
         </Grid>
@@ -64,8 +65,10 @@
                 VerticalOptions="FillAndExpand">
                 <!--  Edit image Section  -->
                 <Grid
+                    x:Name="lytEditMedicalHistory"
                     Grid.Row="0"
                     HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding lytEditMedicalHistory}"
                     VerticalOptions="FillAndExpand">
                     <Image
                         HeightRequest="25"
@@ -74,103 +77,327 @@
                         VerticalOptions="CenterAndExpand"
                         WidthRequest="25" />
                     <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        <TapGestureRecognizer Command="{Binding EditCommand}" />
                     </Grid.GestureRecognizers>
                 </Grid>
-                <!--  Medical Section  -->
-                <Label
-                    Grid.Row="1"
-                    FontFamily="SanchezSlab"
-                    FontSize="17"
-                    HorizontalTextAlignment="Start"
-                    Text="Medical History:"
-                    TextColor="{StaticResource Blue1}"
-                    VerticalTextAlignment="Center" />
-                <!--  None Section  -->
-                <Label
-                    Grid.Row="2"
-                    FontSize="14"
-                    HorizontalTextAlignment="Start"
-                    Text="None"
-                    TextColor="{StaticResource Black}"
-                    VerticalTextAlignment="Center" />
-                <!--  Primary Care Provider Section  -->
-                <Label
-                    Grid.Row="3"
-                    FontFamily="SanchezSlab"
-                    FontSize="17"
-                    HorizontalTextAlignment="Start"
-                    Text="Primary Care Provider:"
-                    TextColor="{StaticResource Blue1}"
-                    VerticalTextAlignment="Center" />
-                <!--  Detail Section  -->
                 <Grid
-                    Grid.Row="4"
+                    x:Name="lytInfo"
+                    Grid.Row="1"
+                    Margin="0,5,0,20"
                     HorizontalOptions="FillAndExpand"
-                    RowDefinitions="Auto,Auto,Auto"
-                    RowSpacing="5"
+                    IsVisible="{Binding lytInfo}"
                     VerticalOptions="FillAndExpand">
-                    <!--  Name Section  -->
+
                     <Label
-                        Grid.Row="0"
-                        FontSize="14"
+                        x:Name="lblInfo"
+                        FontSize="17"
                         HorizontalTextAlignment="Start"
-                        Text="Name: TERRY L TURNER"
+                        Text="Please review and confirm medical history. If incomplete or incorrect, please go to My Account or Family to update medical information for the patient."
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
-                    <!--  City Section  -->
+                </Grid>
+                <!--  Medical Section  -->
+                <Grid
+                    Grid.Row="2"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
                     <Label
+                        Grid.Row="0"
+                        FontFamily="SanchezSlab"
+                        FontSize="17"
+                        HorizontalTextAlignment="Start"
+                        Text="Medical History:"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center" />
+                    <!--  None Section  -->
+                    <StackLayout
+                        Grid.Row="1"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <ListView
+                            x:Name="MedicalIssuesListView"
+                            HasUnevenRows="True"
+                            HorizontalOptions="FillAndExpand"
+                            ItemsSource="{Binding MedicalIssuesList}"
+                            SeparatorColor="Transparent"
+                            VerticalOptions="FillAndExpand"
+                            VerticalScrollBarVisibility="Never">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="local:MedicalIssue">
+                                    <ViewCell>
+                                        <Label
+                                            HorizontalOptions="FillAndExpand"
+                                            Text="{Binding Value}"
+                                            VerticalOptions="FillAndExpand" />
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Label
+                            HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding IsOtherMEdicalIssueVisible}"
+                            Text="{Binding OtherMedicalIssue}"
+                            VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                </Grid>
+                <!--  Primary Care Provider Section  -->
+                <Grid
+                    Grid.Row="3"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontFamily="SanchezSlab"
+                        FontSize="17"
+                        HorizontalTextAlignment="Start"
+                        Text="Primary Care Provider:"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        x:Name="lblPCP"
                         Grid.Row="1"
                         FontSize="14"
                         HorizontalTextAlignment="Start"
-                        Text="City: HORSESHOE BAY"
-                        TextColor="{StaticResource Black}"
-                        VerticalTextAlignment="Center" />
-                    <!--  State Section  -->
-                    <Label
-                        Grid.Row="2"
-                        FontSize="14"
-                        HorizontalTextAlignment="Start"
-                        Text="State: Texas"
+                        IsVisible="{Binding IslblPCPVisible}"
+                        Text="{Binding lblPCP}"
                         TextColor="{StaticResource Black}"
                         VerticalTextAlignment="Center" />
                 </Grid>
                 <!--  Pharmacy Section  -->
-                <Label
-                    Grid.Row="5"
-                    FontFamily="SanchezSlab"
-                    FontSize="17"
-                    HorizontalTextAlignment="Start" 
-                    Text="Pharmacy:"
-                    TextColor="{StaticResource Blue1}"
-                    VerticalTextAlignment="Center" />
+                <Grid
+                    Grid.Row="4"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto,Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontFamily="SanchezSlab"
+                        FontSize="17"
+                        HorizontalTextAlignment="Start"
+                        Text="Pharmacy:"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center" />
+                    <Label
+                        Grid.Row="1"
+                        FontSize="14"
+                        HorizontalTextAlignment="Start"
+                        IsVisible="{Binding IslblPharmacyVisible}"
+                        Text="{Binding lblPharmacy}"
+                        TextColor="{StaticResource Black}"
+                        VerticalTextAlignment="Center" />
+                    <Image
+                        x:Name="imgCapsule"
+                        Grid.Row="2"
+                        Margin="0"
+                        Aspect="AspectFit"
+                        HeightRequest="42"
+                        HorizontalOptions="Start"
+                        IsVisible="{Binding imgCapsule}"
+                        Source="capsule_logo.png"
+                        VerticalOptions="Center" />
+                    <Image
+                        x:Name="imgCurative"
+                        Grid.Row="3"
+                        Margin="0"
+                        Aspect="AspectFit"
+                        HeightRequest="42"
+                        HorizontalOptions="Start"
+                        IsVisible="{Binding imgCurative}"
+                        Source="curative_lockup_horizontal_a_redorange.png"
+                        VerticalOptions="Center" />
+                </Grid>
                 <!--  Allergies Section  -->
-                <Label
-                    Grid.Row="6"
-                    FontFamily="SanchezSlab"
-                    FontSize="17"
-                    HorizontalTextAlignment="Start"
-                    Text="Allergies:"
-                    TextColor="{StaticResource Blue1}"
-                    VerticalTextAlignment="Center" />
+                <Grid
+                    Grid.Row="5"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontFamily="SanchezSlab"
+                        FontSize="17"
+                        HorizontalTextAlignment="Start"
+                        Text="Allergies:"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center" />
+                    <ListView
+                        x:Name="AllergiesListView"
+                        Grid.Row="1"
+                        HasUnevenRows="True"
+                        HorizontalOptions="FillAndExpand"
+                        ItemsSource="{Binding AllergiesList}"
+                        SeparatorColor="Transparent"
+                        VerticalOptions="FillAndExpand"
+                        VerticalScrollBarVisibility="Never">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:Allergy">
+                                <ViewCell>
+                                    <Label
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="FillAndExpand" />
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
                 <!--  Medications Section  -->
-                <Label
-                    Grid.Row="7"
-                    FontFamily="SanchezSlab"
-                    FontSize="17"
-                    HorizontalTextAlignment="Start"
-                    Text="Medications:"
-                    TextColor="{StaticResource Blue1}"  
-                    VerticalTextAlignment="Center" />
+                <Grid
+                    Grid.Row="6"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontFamily="SanchezSlab"
+                        FontSize="17"
+                        HorizontalTextAlignment="Start"
+                        Text="Medications:"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center" />
+                    <ListView
+                        x:Name="MedicationsListView"
+                        Grid.Row="1"
+                        HasUnevenRows="True"
+                        HorizontalOptions="FillAndExpand"
+                        ItemsSource="{Binding MedicationsList}"
+                        SeparatorColor="Transparent"
+                        VerticalOptions="FillAndExpand"
+                        VerticalScrollBarVisibility="Never">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:Medication">
+                                <ViewCell>
+                                    <Label
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="FillAndExpand" />
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
                 <!--  Surgery Section  -->
-                <Label
+                <Grid
+                    Grid.Row="7"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="10"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontFamily="SanchezSlab"
+                        FontSize="17"
+                        HorizontalTextAlignment="Start"
+                        Text="Surgery:"
+                        TextColor="{StaticResource Blue1}"
+                        VerticalTextAlignment="Center" />
+                    <ListView
+                        x:Name="lytSurgeries"
+                        Grid.Row="1"
+                        HasUnevenRows="True"
+                        HorizontalOptions="FillAndExpand"
+                        ItemsSource="{Binding SurgeryList}"
+                        SeparatorColor="Transparent"
+                        VerticalOptions="FillAndExpand"
+                        VerticalScrollBarVisibility="Never">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:Surgery">
+                                <ViewCell>
+                                    <Label
+                                        HorizontalOptions="FillAndExpand"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="FillAndExpand" />
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <!--  UpdateOrContinue Section  -->
+                <Grid
+                    x:Name="lytUpdateOrContinue"
                     Grid.Row="8"
-                    FontFamily="SanchezSlab"
-                    FontSize="17"
-                    HorizontalTextAlignment="Start"
-                    Text="Surgery:"
-                    TextColor="{StaticResource Blue1}"
-                    VerticalTextAlignment="Center" />
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding lytUpdateOrContinue}"
+                    RowDefinitions="Auto,Auto,Auto"
+                    RowSpacing="20"
+                    VerticalOptions="FillAndExpand">
+                    <Grid
+                        x:Name="lytUpdateMedicalInfo"
+                        Grid.Row="0"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        VerticalOptions="FillAndExpand">
+                        <Grid
+                            Grid.Row="0"
+                            HorizontalOptions="FillAndExpand"
+                            RowDefinitions="Auto,Auto"
+                            VerticalOptions="FillAndExpand">
+                            <Image
+                                HeightRequest="25"
+                                HorizontalOptions="EndAndExpand"
+                                Source="pencil_selected.png"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="25" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UpdateMedicalInfoCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <Label
+                            x:Name="textView2"
+                            Grid.Row="1"
+                            Margin="8,0,0,0"
+                            FontSize="17"
+                            HorizontalOptions="Start"
+                            Text="Update Medical Info"
+                            TextColor="{StaticResource Blue1}"
+                            TextDecorations="Underline"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+                    <Grid
+                        Grid.Row="1"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Button
+                            x:Name="btnContinue"
+                            Margin="50,0"
+                            BackgroundColor="#15B287"
+                            Command="{Binding ContinueCommand}"
+                            FontFamily="SanchezSlab"
+                            FontSize="14"
+                            HeightRequest="55"
+                            HorizontalOptions="FillAndExpand"
+                            IsVisible="{Binding btnContinueVisible}"
+                            Text="Confirm &amp; Continue"
+                            TextColor="{StaticResource White}"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="210" />
+
+                    </Grid>
+                    <Grid
+                        x:Name="lytNoMedicalInfo"
+                        Grid.Row="2"
+                        Margin="0,20,0,20"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding lytNoMedicalInfo}">
+                        <Label
+                            Margin="0"
+                            Padding="0"
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            Text="You must update your medical information before starting a visit. Please click on Update Medical Info to add your medical information."
+                            TextColor="{StaticResource Black}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+
+                </Grid>
             </Grid>
         </ScrollView>
     </Grid>

@@ -28,6 +28,7 @@ public partial class MyMedicalInfoPage : ContentPage
     protected async override void OnAppearing()
     {
         base.OnAppearing();
+		VM.UserName = Helpers.AppGlobalConstants.userInfo.Name; 
         await VM.DisplayMedicalInfo(patientId);
     }
     #endregion

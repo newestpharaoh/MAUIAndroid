@@ -67,9 +67,11 @@
 	  <None Remove="Resources\Images\backicon.svg" />
 	  <None Remove="Resources\Images\book.svg" />
 	  <None Remove="Resources\Images\cabinet.svg" />
+	  <None Remove="Resources\Images\capsule_logo.png" />
 	  <None Remove="Resources\Images\clipboard.svg" />
 	  <None Remove="Resources\Images\closeeye.svg" />
 	  <None Remove="Resources\Images\creditcard.svg" />
+	  <None Remove="Resources\Images\curative_lockup_horizontal_a_redorange.png" />
 	  <None Remove="Resources\Images\downarrow.svg" />
 	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\emptycreditcard.svg" />
@@ -83,6 +85,8 @@
 	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\nmd.png" />
 	  <None Remove="Resources\Images\openeye.svg" />
+	  <None Remove="Resources\Images\pencil.svg" />
+	  <None Remove="Resources\Images\pencil_selected.svg" />
 	  <None Remove="Resources\Images\plus.svg" />
 	  <None Remove="Resources\Images\rightarrow.svg" />
 	  <None Remove="Resources\Images\user.svg" />
@@ -183,7 +187,13 @@
 	  <MauiXaml Update="Views\MyAccount\UpdateDemographicsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\MyMedicalInfoDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\MyMedicalInfo\MyMedicalInfoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\ProviderSelectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Popup\InfoPopupPage.xaml">

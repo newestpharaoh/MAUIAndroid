@@ -58,7 +58,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// To Do: To define Sign Out command
         /// </summary>
         /// <param name="obj"></param>
-
         private async void SignOutAsync(object obj)
         {
             try
