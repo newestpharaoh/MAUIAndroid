@@ -7,6 +7,7 @@ public partial class UpdateDemographicsPage : ContentPage
 {
     //To define the class lavel variable.
     UpdateDemographicsPageViewModel VM;
+
     #region Constructor
     public UpdateDemographicsPage(BasicFamilyMemberInfo bfmi)
 	{
