@@ -15,9 +15,10 @@ public partial class FamilyPage : ContentPage
 			InitializeComponent();
 			this.BindingContext = VM = new FamilyPageViewModel(this.Navigation);
 		}
-		catch (Exception)
-		{
-		}
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
     #endregion
 

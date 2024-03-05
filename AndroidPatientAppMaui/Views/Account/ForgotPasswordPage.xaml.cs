@@ -21,8 +21,7 @@ public partial class ForgotPasswordPage : ContentPage
         }
     }
     #endregion
-
-
+    
     #region Event Handler
  
     #endregion

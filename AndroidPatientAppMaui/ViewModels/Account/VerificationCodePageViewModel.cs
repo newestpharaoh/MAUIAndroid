@@ -18,12 +18,19 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         #region Constructor
         public VerificationCodePageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            VerifySignInCommand = new Command(VerifySignInAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                VerifySignInCommand = new Command(VerifySignInAsync);
 
-            Token = Preferences.Get("AuthToken", string.Empty);
-            Userid = Preferences.Get("UserId", 0);
+                Token = Preferences.Get("AuthToken", string.Empty);
+                Userid = Preferences.Get("UserId", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         #endregion
@@ -72,7 +79,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         {
             try
             {
-                App.Current.MainPage = new Views.MainTabs.MainTabPage();
+                App.Current.MainPage = new Views.MainTabs.MainTabPage("Home");
                 //if (!string.IsNullOrWhiteSpace(VerificationCode))
                 //{
                 //    GlobalState global;
@@ -124,6 +131,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
 
@@ -137,7 +145,10 @@ namespace AndroidPatientAppMaui.ViewModels.Account
             {
                 await Navigation.PopModalAsync();
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
     }

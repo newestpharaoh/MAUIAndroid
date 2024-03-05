@@ -14,8 +14,9 @@ public partial class ChangePasswordPage : ContentPage
             InitializeComponent();
             this.BindingContext = VM = new ChangePasswordPageViewModel(this.Navigation);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Console.WriteLine(ex);
         }
     }
     #endregion

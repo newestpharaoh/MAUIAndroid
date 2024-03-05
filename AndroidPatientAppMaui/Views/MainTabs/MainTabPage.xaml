@@ -15,11 +15,26 @@
     UnselectedTabColor="Gray">
 
     <TabbedPage.Children>
-        <home:HomePage Title="Home" IconImageSource="home.png" />
-        <visit:VisitHistoryPage Title="Visit History" IconImageSource="cabinet.png" />
-        <family:FamilyPage Title="Family" IconImageSource="clipboard.png" />
-        <medicalinfo:MyMedicalInfoPage Title="My Medical Page" IconImageSource="clipboard.png" />
-        <myaccount:MyAccountPage Title="My Account" IconImageSource="user.png" />
+        <home:HomePage
+            x:Name="Home"
+            Title="Home"
+            IconImageSource="home.png" />
+        <visit:VisitHistoryPage
+            x:Name="VisitHistory"
+            Title="Visit History"
+            IconImageSource="cabinet.png" />
+        <family:FamilyPage
+            x:Name="Family"
+            Title="Family"
+            IconImageSource="family.png" />
+        <medicalinfo:MyMedicalInfoPage
+            x:Name="MyMedicalPage"
+            Title="My Medical Page"
+            IconImageSource="clipboard.png" />
+        <myaccount:MyAccountPage
+            x:Name="MyAccount"
+            Title="My Account"
+            IconImageSource="myaccount.png" />
     </TabbedPage.Children>
 
 </TabbedPage>

@@ -15,9 +15,10 @@ public partial class VisitHistoryPage : ContentPage
 			InitializeComponent();
 			this.BindingContext = VM = new VisitHistoryPageViewModel(this.Navigation);
 		}
-		catch (Exception)
-		{
-		}
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 
     #endregion

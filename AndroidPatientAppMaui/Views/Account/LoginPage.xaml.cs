@@ -41,6 +41,7 @@ public partial class LoginPage : ContentPage
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
         }
     }
 
@@ -58,8 +59,7 @@ public partial class LoginPage : ContentPage
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-        }
-
+        } 
     }
     #endregion
 

@@ -20,7 +20,7 @@ public partial class ManageSubscriptionPage : ContentPage
         }
         catch (Exception ex)
         {
-
+            Console.WriteLine(ex);
         }
     }
     #endregion
@@ -36,20 +36,34 @@ public partial class ManageSubscriptionPage : ContentPage
         }
         catch (Exception ex)
         {
-             
+            Console.WriteLine(ex);
         }
     }
     #endregion
   
     private void IconInfo_Tapped(object sender, TappedEventArgs e)
     {
-        opacitygrid.IsVisible = true;
-        InfoBorder.IsVisible = true;
+        try
+        {
+            opacitygrid.IsVisible = true;
+            InfoBorder.IsVisible = true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
      
     private void opacitygrid_Tapped(object sender, TappedEventArgs e)
     {
-        opacitygrid.IsVisible = false;
-        InfoBorder.IsVisible = false;
+        try
+        {
+            opacitygrid.IsVisible = false;
+            InfoBorder.IsVisible = false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 }

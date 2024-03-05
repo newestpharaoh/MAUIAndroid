@@ -17,7 +17,7 @@ public partial class BillingPoliciesPage : ContentPage
         }
         catch (Exception ex)
         {
-
+            Console.WriteLine(ex);
         }
     }
     #endregion
@@ -25,8 +25,15 @@ public partial class BillingPoliciesPage : ContentPage
     #region Event Handler
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
-        await VM.GetBillingPoliciesInfo();
+        try
+        {
+            base.OnAppearing();
+            await VM.GetBillingPoliciesInfo();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
     #endregion
 }

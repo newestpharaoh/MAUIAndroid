@@ -398,7 +398,6 @@
                                             VerticalOptions="CenterAndExpand"
                                             WidthRequest="25" />
                                         <Grid.GestureRecognizers>
-                                            <!--<TapGestureRecognizer Command="{Binding InfoCommand}" />-->
                                             <TapGestureRecognizer Tapped="IconInfo_Tapped" />
                                         </Grid.GestureRecognizers>
                                     </Grid>

@@ -23,15 +23,22 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #region Constructor
         public AccountProfilePageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            UpdateAccountAccessCommand = new Command(UpdateAccountAccessAsync);
-            UpdateMedicalInformationCommand = new Command(UpdateMedicalInformationAsync);
-            UpdateDemographicsCommand = new Command(UpdateDemographicsAsync);
-            lytAddFamilyMemberCommond = new Command(lytAddFamilyMemberAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                UpdateAccountAccessCommand = new Command(UpdateAccountAccessAsync);
+                UpdateMedicalInformationCommand = new Command(UpdateMedicalInformationAsync);
+                UpdateDemographicsCommand = new Command(UpdateDemographicsAsync);
+                lytAddFamilyMemberCommond = new Command(lytAddFamilyMemberAsync);
 
-            Token = Preferences.Get("AuthToken", string.Empty);
-            PatientID = Preferences.Get("PatientID", 0);
+                Token = Preferences.Get("AuthToken", string.Empty);
+                PatientID = Preferences.Get("PatientID", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 
@@ -218,16 +225,23 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 
         private async Task GetUIText()
         {
-            await Task.Run(async () =>
+            try
             {
-                UITopic FamilyAccountNotice = await Globals.Instance.GetUTText("FamilyAccountNotice", "en");
+                await Task.Run(async () =>
+                   {
+                       UITopic FamilyAccountNotice = await Globals.Instance.GetUTText("FamilyAccountNotice", "en");
 
-                if (FamilyAccountNotice != null)
-                {
-                    string familyAccountNoticeString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "FamilyAccountNotice").Text; //Header
-                    string allInfoViewableString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "AllInfoViewable").Text; //Paragraph
-                }
-            });
+                       if (FamilyAccountNotice != null)
+                       {
+                           string familyAccountNoticeString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "FamilyAccountNotice").Text; //Header
+                           string allInfoViewableString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "AllInfoViewable").Text; //Paragraph
+                       }
+                   });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -254,7 +268,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoPage(), false);
+                App.Current.MainPage = new Views.MainTabs.MainTabPage("MyMedicalPage");
+                //await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoPage(), false);
 
             }
             catch (Exception ex)
@@ -317,57 +332,71 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 
         private void lytAddFamilyMemberAsync(object obj)
         {
-            Task.Run(async () =>
+            try
             {
-                await AddFamilyMember().ConfigureAwait(false);
-            });
+                Task.Run(async () =>
+                    {
+                        await AddFamilyMember().ConfigureAwait(false);
+                    });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         private async Task AddFamilyMember()
         {
-            AccountAddFamilyMemberInfo resp = await DataUtility.PatientGetAddFamilyMemberInfoAsync(SettingsValues.ApiURLValue, PatientID, Token).ConfigureAwait(false);
-
-            if (resp != null)
+            try
             {
-                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                {
-                    string msg = string.Empty;
-                    bool proceed = true;
-                    if (resp.FreeFamilyMembersRemaining > 0)
-                    {
-                        msg = $"You have room for {resp.FreeFamilyMembersRemaining} additional family members with your current payment.\n\nThe patient will be added under this plan.";
-                        UserDialog.Alert(msg);
-                    }
-                    else
-                    {
-                        if (resp.CanAddFamilyMember && SettingsValues.ECommerce)
-                        {
-                            //string NoOpenSlots_para2 = "";
-                            System.Threading.Tasks.Task.Run(async () =>
-                            {
-                                UITopic AccountProfile = await Globals.Instance.GetUTText("AccountProfile", "en");
-                                string NoOpenSlots_para2 = AccountProfile.UITextList.Find(i => i.TagName == "NoOpenSlots_para2").Text;
-                                msg = $"You do not have any open slots for additional family members under your current plan. Additional family members may be added at {resp.AddOnCost} per member per month.\n\n";
-                                msg += NoOpenSlots_para2;
-                                UserDialog.Alert(msg);
-                            });
-                            //msg = $"You do not have any open slots for additional family members under your current plan. Additional family members may be added at {resp.AddOnCost} per member per month.\n\nYou will be immediately charged the add-on rate for this month. Your new subscription will begin at the start of the next billing cycle.";
-                            //msg = $"You do not have any open slots for additional family members under your current plan. Additional family members may be added at {resp.AddOnCost} per member per month.\n\nAdd-on charges are processed within 24 hours of purchase. Updated subscription fees will begin at the start of the next billing cycle.";
-                            //msg = $"You do not have any open slots for additional family members under your current plan. Additional family members may be added at {resp.AddOnCost} per member per month.\n\n";
+                AccountAddFamilyMemberInfo resp = await DataUtility.PatientGetAddFamilyMemberInfoAsync(SettingsValues.ApiURLValue, PatientID, Token).ConfigureAwait(false);
 
+                if (resp != null)
+                {
+                    Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                    {
+                        string msg = string.Empty;
+                        bool proceed = true;
+                        if (resp.FreeFamilyMembersRemaining > 0)
+                        {
+                            msg = $"You have room for {resp.FreeFamilyMembersRemaining} additional family members with your current payment.\n\nThe patient will be added under this plan.";
+                            UserDialog.Alert(msg);
                         }
                         else
                         {
-                            msg = "You do not have room on your account to add any more family members.";
-                            proceed = false;
-                        }
-                    }
+                            if (resp.CanAddFamilyMember && SettingsValues.ECommerce)
+                            {
+                                //string NoOpenSlots_para2 = "";
+                                System.Threading.Tasks.Task.Run(async () =>
+                                {
+                                    UITopic AccountProfile = await Globals.Instance.GetUTText("AccountProfile", "en");
+                                    string NoOpenSlots_para2 = AccountProfile.UITextList.Find(i => i.TagName == "NoOpenSlots_para2").Text;
+                                    msg = $"You do not have any open slots for additional family members under your current plan. Additional family members may be added at {resp.AddOnCost} per member per month.\n\n";
+                                    msg += NoOpenSlots_para2;
+                                    UserDialog.Alert(msg);
+                                });
+                                //msg = $"You do not have any open slots for additional family members under your current plan. Additional family members may be added at {resp.AddOnCost} per member per month.\n\nYou will be immediately charged the add-on rate for this month. Your new subscription will begin at the start of the next billing cycle.";
+                                //msg = $"You do not have any open slots for additional family members under your current plan. Additional family members may be added at {resp.AddOnCost} per member per month.\n\nAdd-on charges are processed within 24 hours of purchase. Updated subscription fees will begin at the start of the next billing cycle.";
+                                //msg = $"You do not have any open slots for additional family members under your current plan. Additional family members may be added at {resp.AddOnCost} per member per month.\n\n";
 
-                    if (!proceed)
-                    {
-                        //  UtilsUI.ShowMsgOkScreen(this, msg);
-                    }
-                });
+                            }
+                            else
+                            {
+                                msg = "You do not have room on your account to add any more family members.";
+                                proceed = false;
+                            }
+                        }
+
+                        if (!proceed)
+                        {
+                            //  UtilsUI.ShowMsgOkScreen(this, msg);
+                        }
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
 

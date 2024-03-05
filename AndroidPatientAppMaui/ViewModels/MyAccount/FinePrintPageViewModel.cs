@@ -11,10 +11,17 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #region Constructor
         public FinePrintPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            TermsOfUseCommand = new Command(TermsOfUseAsync);
-            BillingPoliciesCommand = new Command(BillingPoliciesAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                TermsOfUseCommand = new Command(TermsOfUseAsync);
+                BillingPoliciesCommand = new Command(BillingPoliciesAsync);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 
@@ -31,8 +38,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// <summary>
         /// To Do: To define back command
         /// </summary>
-        /// <param name="obj"></param>
-
+        /// <param name="obj"></param> 
         private async void BackAsync(object obj)
         {
             try

@@ -23,7 +23,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
             {
                 Console.WriteLine(ex);
             }
-        
+
         }
 
 
@@ -123,22 +123,22 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         /// TODO : To Apply Register Validations...
         /// </summary>
         private bool ValidateRegister()
-        {          
-                if (string.IsNullOrEmpty(FirstName) || string.IsNullOrWhiteSpace(FirstName))
-                {
-                    IsLoginFieldEmpty = false;
-                    return false;
-                }
-                if (string.IsNullOrEmpty(LastName) || string.IsNullOrWhiteSpace(LastName))
-                {
-                    IsLoginFieldEmpty = false;
-                    return false;
-                }
-                return true;
+        {
+            if (string.IsNullOrEmpty(FirstName) || string.IsNullOrWhiteSpace(FirstName))
+            {
+                IsLoginFieldEmpty = false;
+                return false;
             }
-            
+            if (string.IsNullOrEmpty(LastName) || string.IsNullOrWhiteSpace(LastName))
+            {
+                IsLoginFieldEmpty = false;
+                return false;
+            }
+            return true;
         }
-        #endregion
+
     }
+    #endregion
+}
 
 

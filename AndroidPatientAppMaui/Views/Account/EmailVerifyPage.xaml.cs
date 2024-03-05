@@ -14,16 +14,24 @@ public partial class EmailVerifyPage : ContentPage
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
         }
     }
 
     #region Event Handler
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
-        await VM.GetUserContactAsync();
-        await VM.MaskPhoneNumber();
-        await VM.MaskEmail(); 
+        try
+        {
+            base.OnAppearing();
+            await VM.GetUserContactAsync();
+            await VM.MaskPhoneNumber();
+            await VM.MaskEmail();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
     #endregion
 }

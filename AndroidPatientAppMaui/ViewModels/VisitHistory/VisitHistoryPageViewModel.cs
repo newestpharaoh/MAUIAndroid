@@ -11,7 +11,14 @@ namespace AndroidPatientAppMaui.ViewModels.VisitHistory
         #region Constructor
         public VisitHistoryPageViewModel(INavigation nav)
         {
-            Navigation = nav;
+            try
+            {
+                Navigation = nav;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 

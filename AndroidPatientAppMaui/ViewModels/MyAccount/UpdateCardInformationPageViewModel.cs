@@ -26,11 +26,18 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #region Constructor
         public UpdateCardInformationPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            SaveChangesCommand = new Command(SaveChangesAsync);
-            Token = Preferences.Get("AuthToken", string.Empty);
-            PatientID = Preferences.Get("PatientID", 0);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                SaveChangesCommand = new Command(SaveChangesAsync);
+                Token = Preferences.Get("AuthToken", string.Empty);
+                PatientID = Preferences.Get("PatientID", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 
@@ -353,8 +360,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                         });
                     }
                 }
-            }
-
+            } 
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
@@ -467,6 +473,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
         #endregion

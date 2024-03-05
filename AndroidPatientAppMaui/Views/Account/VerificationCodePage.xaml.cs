@@ -7,8 +7,15 @@ public partial class VerificationCodePage : ContentPage
     VerificationCodePageViewModel VM;
     public VerificationCodePage()
     {
-        InitializeComponent();
-        this.BindingContext = VM = new VerificationCodePageViewModel(this.Navigation);
+        try
+        {
+            InitializeComponent();
+            this.BindingContext = VM = new VerificationCodePageViewModel(this.Navigation);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 
     #region Event Handler

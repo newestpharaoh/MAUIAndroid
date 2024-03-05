@@ -37,6 +37,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
 
         }  
@@ -165,8 +166,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             // Get App settings api..
             try
-            {
-
+            { 
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
                     UserDialog.ShowLoading();
@@ -258,8 +258,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
             catch (Exception ex)
             {
-                UserDialog.HideLoading();
-            }
+                UserDialog.HideLoading(); 
+                Console.WriteLine(ex); 
+        }
         }
 
         /// <summary>
@@ -433,6 +434,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
 
@@ -519,7 +521,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
         }
 

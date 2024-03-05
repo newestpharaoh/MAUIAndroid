@@ -22,8 +22,7 @@ public partial class RegistrationPage : ContentPage
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-        }
-
+        } 
     }
     #endregion
 

@@ -12,7 +12,14 @@ namespace AndroidPatientAppMaui.ViewModels.Family
         #region Constructor
         public FamilyPageViewModel(INavigation nav)
         {
-            Navigation = nav;
+            try
+            {
+                Navigation = nav;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 

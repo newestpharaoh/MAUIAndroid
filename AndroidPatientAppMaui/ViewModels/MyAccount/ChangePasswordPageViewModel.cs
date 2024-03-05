@@ -16,15 +16,22 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #region Constructor
         public ChangePasswordPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            ViewCurrentPasswordCommand = new Command(ViewCurrentPasswordAsync);
-            ViewNewPasswordCommand = new Command(ViewNewPasswordAsync);
-            ViewConfirmPasswordCommand = new Command(ViewConfirmPasswordAsync);
-            ConfirmNewPasswordCommand = new Command(ConfirmNewPasswordAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                ViewCurrentPasswordCommand = new Command(ViewCurrentPasswordAsync);
+                ViewNewPasswordCommand = new Command(ViewNewPasswordAsync);
+                ViewConfirmPasswordCommand = new Command(ViewConfirmPasswordAsync);
+                ConfirmNewPasswordCommand = new Command(ConfirmNewPasswordAsync);
 
-            Token = Preferences.Get("AuthToken", string.Empty);
-            PatientID = Preferences.Get("PatientID", 0);
+                Token = Preferences.Get("AuthToken", string.Empty);
+                PatientID = Preferences.Get("PatientID", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 

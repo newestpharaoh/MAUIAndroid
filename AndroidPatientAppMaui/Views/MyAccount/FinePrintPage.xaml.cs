@@ -15,9 +15,10 @@ public partial class FinePrintPage : ContentPage
 			InitializeComponent();
 			this.BindingContext = VM = new FinePrintPageViewModel(this.Navigation);
 		}
-		catch (Exception ex)
-		{			
-		}
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
     #endregion
 

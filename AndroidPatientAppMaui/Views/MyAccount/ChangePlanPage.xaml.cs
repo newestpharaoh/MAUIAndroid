@@ -14,10 +14,17 @@ public partial class ChangePlanPage : ContentPage
     #region Constructor
     public ChangePlanPage(AccountSubscriptionInfo info, bool isPlanChange)
     {
-        InitializeComponent();
-        this.BindingContext = VM = new ChangePlanPageViewModel(this.Navigation);
-        VM.info = info;
-        VM.planChange = isPlanChange;
+        try
+        {
+            InitializeComponent();
+            this.BindingContext = VM = new ChangePlanPageViewModel(this.Navigation);
+            VM.info = info;
+            VM.planChange = isPlanChange;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
     #endregion
 
@@ -37,28 +44,34 @@ public partial class ChangePlanPage : ContentPage
         }
         catch (Exception ex)
         {
-             
-        }
-
+            Console.WriteLine(ex);
+        } 
     }
 
     #endregion
 
     private void spnrPaymentPlans_SelectedIndexChanged(object sender, EventArgs e)
     {
-        VM.selectedSubscription = (Subscription)spnrPaymentPlans.SelectedItem;
-
-        if (VM.selectedSubscription != null)
+        try
         {
-            // Update the plan description label
-            if (!string.IsNullOrEmpty(VM.selectedSubscription.PlanDescription))
-            {
-                lblPlanDescription.Text = VM.selectedSubscription.PlanDescription.Replace("\\n", "\n");
-            }
+            VM.selectedSubscription = (Subscription)spnrPaymentPlans.SelectedItem;
 
-            // Adjust visibility based on conditions
-            lytContinue.IsVisible = (VM.currentSubscription != null &&
-                                      VM.selectedSubscription.OptionID.Equals(VM.currentSubscription.OptionID)) ? false : true;
-        } 
+            if (VM.selectedSubscription != null)
+            {
+                // Update the plan description label
+                if (!string.IsNullOrEmpty(VM.selectedSubscription.PlanDescription))
+                {
+                    lblPlanDescription.Text = VM.selectedSubscription.PlanDescription.Replace("\\n", "\n");
+                }
+
+                // Adjust visibility based on conditions
+                lytContinue.IsVisible = (VM.currentSubscription != null &&
+                                          VM.selectedSubscription.OptionID.Equals(VM.currentSubscription.OptionID)) ? false : true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 }

@@ -20,15 +20,22 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #region Constructor
         public UpdateDemographicsPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            ChangeProfilePhotoCommand = new Command(ChangeProfilePhotoAsync);
-            ChangePasswordCommand = new Command(ChangePasswordAsync);
-            SaveChangesCommand = new Command(SaveChangesAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                ChangeProfilePhotoCommand = new Command(ChangeProfilePhotoAsync);
+                ChangePasswordCommand = new Command(ChangePasswordAsync);
+                SaveChangesCommand = new Command(SaveChangesAsync);
 
-            Token = Preferences.Get("AuthToken", string.Empty);
-            UserId = Preferences.Get("UserId", 0);
-            PatientID = Preferences.Get("PatientID", 0);
+                Token = Preferences.Get("AuthToken", string.Empty);
+                UserId = Preferences.Get("UserId", 0);
+                PatientID = Preferences.Get("PatientID", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 
@@ -639,7 +646,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// TODO : To Define the Get Update Demographic Method....
+        /// </summary>
+        /// <returns></returns>
         public async Task GetUpdateDemographics()
         {
             // Get App settings api..
@@ -758,8 +768,13 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// TODO : To define the Mask Email....
+        /// </summary>
+        /// <returns></returns>
         public async Task MaskEmail()
         {
             try
@@ -772,23 +787,14 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
-
-        //public async Task MaskPhoneNumber()
-        //{
-        //    try
-        //    {
-        //        if (!string.IsNullOrWhiteSpace(patientProfile.PrimaryPhone))
-        //        {
-        //           // ResultPhonenumber = "***-***-" + patientProfile.PrimaryPhone.Substring(patientProfile.PrimaryPhone.Length - 4);
-        //            ResultPhonenumber =  Regex.Replace(patientProfile.PrimaryPhone, @"\d(?=(?:\D*\d){0,3}\D*$)", "*");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //    }
-        //}
+         
+        /// <summary>
+        /// TODO : To Define the Mask Phone Number;
+        /// </summary>
+        /// <returns></returns>
         public async Task MaskPhoneNumber()
         {
             try
@@ -807,7 +813,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
             catch (Exception ex)
             {
-                // Handle the exception
+                Console.WriteLine(ex);
             }
         }
 
@@ -951,7 +957,11 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
             catch (Exception ex)
-            { UserDialog.HideLoading(); await Task.CompletedTask; }
+            { 
+                UserDialog.HideLoading();
+                await Task.CompletedTask;
+                Console.WriteLine(ex);
+            }
         }
 
 

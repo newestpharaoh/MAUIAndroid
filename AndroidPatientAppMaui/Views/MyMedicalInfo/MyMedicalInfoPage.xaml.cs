@@ -4,32 +4,44 @@ namespace AndroidPatientAppMaui.Views.MyMedicalInfo;
 
 public partial class MyMedicalInfoPage : ContentPage
 {
-	//To define the class lavel variable.
-	MyMedicalInfoPageViewModel VM;
-	int patientId;
+    //To define the class lavel variable.
+    MyMedicalInfoPageViewModel VM;
+    int PatientID;
 
     #region Constructor
     public MyMedicalInfoPage()
-	{
-		try
-		{
+    {
+        try
+        {
+            InitializeComponent();
+            this.BindingContext = VM = new MyMedicalInfoPageViewModel(this.Navigation);
 
-			InitializeComponent();
-			this.BindingContext = VM = new MyMedicalInfoPageViewModel(this.Navigation);
-		}
-		catch (Exception)
-		{
-		}
-	}
+            PatientID = Preferences.Get("PatientID", 0);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
     #endregion
 
     #region Event Handler
-	 
+    /// <summary>
+    /// TODO : To define the on Appearing...
+    /// </summary>
     protected async override void OnAppearing()
     {
-        base.OnAppearing();
-		VM.UserName = Helpers.AppGlobalConstants.userInfo.Name; 
-        await VM.DisplayMedicalInfo(patientId);
+        try
+        {
+            base.OnAppearing();
+            VM.UserName = Helpers.AppGlobalConstants.userInfo.Name;
+            await VM.DisplayMedicalInfo(PatientID); 
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
     #endregion
 }

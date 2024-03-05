@@ -10,11 +10,18 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
     {
         public ProviderSelectionPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            //BackCommand = new Command(BackAsync); 
+            try
+            {
+                Navigation = nav;
+                //BackCommand = new Command(BackAsync); 
 
-            //Token = Preferences.Get("AuthToken", string.Empty);
-            //PatientID = Preferences.Get("PatientID", 0);
+                //Token = Preferences.Get("AuthToken", string.Empty);
+                //PatientID = Preferences.Get("PatientID", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }

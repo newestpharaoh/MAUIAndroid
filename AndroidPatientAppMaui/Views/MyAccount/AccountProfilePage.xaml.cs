@@ -6,27 +6,41 @@ namespace AndroidPatientAppMaui.Views.MyAccount;
 public partial class AccountProfilePage : ContentPage
 { //To define the class lavel variable.
     AccountProfilePageViewModel VM;
+
+    #region Constructor
     public AccountProfilePage()
-    {  
-        #region Constructor
+    {   
         try
         {
             InitializeComponent();
             this.BindingContext = VM = new AccountProfilePageViewModel(this.Navigation);
         }
         catch (Exception ex)
-        { }
+        {
+            Console.WriteLine(ex);
+        }
     }
     #endregion
 
     #region Event Handler
+
+    /// <summary>
+    /// TODO : To Define the on Appearing....
+    /// </summary>
     protected override void OnAppearing()
     {
-        base.OnAppearing();
-        updateGrid.IsVisible = false;
-        arrowimg.Source = "rightarrow.png";
+        try
+        {
+            base.OnAppearing();
+            updateGrid.IsVisible = false;
+            arrowimg.Source = "rightarrow.png";
 
-        VM.GetMembers();
+            VM.GetMembers();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
     /// <summary>
     /// TODO: To Define DownArrow Tapped
@@ -35,15 +49,22 @@ public partial class AccountProfilePage : ContentPage
     /// <param name="e"></param>
     private void DownArrow_Tapped(object sender, TappedEventArgs e)
     {
-        if (updateGrid.IsVisible)
+        try
         {
-            updateGrid.IsVisible = false;
-            arrowimg.Source = "rightarrow.png";
+            if (updateGrid.IsVisible)
+            {
+                updateGrid.IsVisible = false;
+                arrowimg.Source = "rightarrow.png";
+            }
+            else
+            {
+                updateGrid.IsVisible = true;
+                arrowimg.Source = "downarrow.png";
+            }
         }
-        else
+        catch (Exception ex)
         {
-            updateGrid.IsVisible = true;
-            arrowimg.Source = "downarrow.png";
+            Console.WriteLine(ex);
         }
     } 
     #endregion

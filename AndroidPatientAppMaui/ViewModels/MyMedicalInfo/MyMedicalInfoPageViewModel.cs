@@ -22,14 +22,21 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         MedicalInfo medicalInfo;
         public MyMedicalInfoPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            UpdateMedicalInfoCommand = new Command(UpdateMedicalInfoAsync);
-            EditCommand = new Command(EditAsync);
-            ContinueCommand = new Command(ContinueAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                UpdateMedicalInfoCommand = new Command(UpdateMedicalInfoAsync);
+                EditCommand = new Command(EditAsync);
+                ContinueCommand = new Command(ContinueAsync);
 
-            Token = Preferences.Get("AuthToken", string.Empty);
-            PatientID = Preferences.Get("PatientID", 0);
+                Token = Preferences.Get("AuthToken", string.Empty);
+                PatientID = Preferences.Get("PatientID", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         #endregion
@@ -303,7 +310,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
                 await Navigation.PopModalAsync();
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         /// <summary>
         /// To define the Update Medical Info button command.
@@ -317,6 +327,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -331,6 +342,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -346,6 +358,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -360,6 +373,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
         public async Task DisplayMedicalInfo(int patientId)
@@ -372,21 +386,20 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     UserDialog.ShowLoading();
                     await Task.Run(async () =>
                     {
-                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        nonVisit = true;
+                        if (nonVisit)
                         {
-                            nonVisit = true;
-                            if (nonVisit)
-                            {
-                                lytEditMedicalHistory = true;
-                                UserName =Helpers.AppGlobalConstants.userInfo.Name;
-                            }
-                            else
-                            {
-                                lytInfo = true;
-                                lytUpdateOrContinue = true;
-                                UserName = $"Visit for {Helpers.AppGlobalConstants.userInfo.Name}";
-                            }
-
+                            lytEditMedicalHistory = true;
+                            UserName = Helpers.AppGlobalConstants.userInfo.Name;
+                        }
+                        else
+                        {
+                            lytInfo = true;
+                            lytUpdateOrContinue = true;
+                            UserName = $"Visit for {Helpers.AppGlobalConstants.userInfo.Name}";
+                        }
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        { 
                             medicalInfo = await DataUtility.PatientGetMedicalHistoryAsync(SettingsValues.ApiURLValue, Token, PatientID).ConfigureAwait(false);
                             List<MedicalIssue> issues = await DataUtility.GetMedicalIssuesAsync(SettingsValues.ApiURLValue).ConfigureAwait(false);
                             if (medicalInfo != null)
@@ -497,6 +510,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
         #endregion

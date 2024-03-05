@@ -12,14 +12,21 @@ using System.Threading.Tasks;
 
 namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
-   public class TermsOfUsePageViewModel : BaseViewModel
+    public class TermsOfUsePageViewModel : BaseViewModel
     {
         public string AppName = Preferences.Get("AppName", string.Empty);
         #region Constructor 
         public TermsOfUsePageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 
@@ -79,7 +86,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                     OnPropertyChanged("Subscription");
                 }
             }
-        } 
+        }
         private string _Account;
         public string Account
         {
@@ -184,7 +191,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-         private string _MonthlySubscrPlan;
+        private string _MonthlySubscrPlan;
         public string MonthlySubscrPlan
         {
             get { return _MonthlySubscrPlan; }
@@ -197,7 +204,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-         private string _RefundsCancellations;
+        private string _RefundsCancellations;
         public string RefundsCancellations
         {
             get { return _RefundsCancellations; }
@@ -248,7 +255,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             // Get App settings api..
             try
-            { 
+            {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
                     UserDialog.ShowLoading();
@@ -259,52 +266,71 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             UITopic TermsOfUse = await Globals.Instance.GetUTText("TermsOfUse", "en");
                             if (TermsOfUse != null)
                             {
-                                //Headers
-                                string termsOfUse = TermsOfUse.UITextList.Find(i => i.TagName == "TermsOfUse").Text;
-                                string welcome = TermsOfUse.UITextList.Find(i => i.TagName == "Welcome").Text;
-                                string subscr = TermsOfUse.UITextList.Find(i => i.TagName == "Subscr").Text;
-                                string account = TermsOfUse.UITextList.Find(i => i.TagName == "Account").Text;
-                                string membershipAccess = TermsOfUse.UITextList.Find(i => i.TagName == "MembershipAccess").Text;
-                                string paidAccess = TermsOfUse.UITextList.Find(i => i.TagName == "PaidAccess").Text;
-                                string refundsCancellations = TermsOfUse.UITextList.Find(i => i.TagName == "RefundsCancellations").Text;
-                                //Paragraphs
-                                string arcInfo = TermsOfUse.UITextList.Find(i => i.TagName == "ARCInfo").Text;
-                                string texasResident = TermsOfUse.UITextList.Find(i => i.TagName == "TexasResident").Text;
-                                string useOfService = TermsOfUse.UITextList.Find(i => i.TagName == "UseOfService").Text;
-                                string purchaseInfo = TermsOfUse.UITextList.Find(i => i.TagName == "PurchaseInfo").Text;
-                                string cancelPolicies = TermsOfUse.UITextList.Find(i => i.TagName == "NoRefunds").Text;
+                                try
+                                {
+                                    //Headers
+                                    string termsOfUse = TermsOfUse.UITextList.Find(i => i.TagName == "TermsOfUse").Text;
+                                    string welcome = TermsOfUse.UITextList.Find(i => i.TagName == "Welcome").Text;
+                                    string subscr = TermsOfUse.UITextList.Find(i => i.TagName == "Subscr").Text;
+                                    string account = TermsOfUse.UITextList.Find(i => i.TagName == "Account").Text;
+                                    string membershipAccess = TermsOfUse.UITextList.Find(i => i.TagName == "MembershipAccess").Text;
+                                    string paidAccess = TermsOfUse.UITextList.Find(i => i.TagName == "PaidAccess").Text;
+                                    string refundsCancellations = TermsOfUse.UITextList.Find(i => i.TagName == "RefundsCancellations").Text;
+                                    //Paragraphs
+                                    string arcInfo = TermsOfUse.UITextList.Find(i => i.TagName == "ARCInfo").Text;
+                                    string texasResident = TermsOfUse.UITextList.Find(i => i.TagName == "TexasResident").Text;
+                                    string useOfService = TermsOfUse.UITextList.Find(i => i.TagName == "UseOfService").Text;
+                                    string purchaseInfo = TermsOfUse.UITextList.Find(i => i.TagName == "PurchaseInfo").Text;
+                                    string cancelPolicies = TermsOfUse.UITextList.Find(i => i.TagName == "NoRefunds").Text;
 
-                                string myWelcome = String.Format(welcome, AppName);
-                                string myARCInfo = String.Format(arcInfo, AppName);
-                                string myTexasResident = String.Format(texasResident, AppName.Replace(" ", ""));
-                                string myCancelPolicies = String.Format(cancelPolicies, AppName);
-                                string myUseOfService = useOfService.Replace("{break}", "\n\n");
-                                string myPurchaseInfo = purchaseInfo.Replace("{break}", "\n\n");
+                                    string myWelcome = String.Format(welcome, AppName);
+                                    string myARCInfo = String.Format(arcInfo, AppName);
+                                    string myTexasResident = String.Format(texasResident, AppName.Replace(" ", ""));
+                                    string myCancelPolicies = String.Format(cancelPolicies, AppName);
+                                    string myUseOfService = useOfService.Replace("{break}", "\n\n");
+                                    string myPurchaseInfo = purchaseInfo.Replace("{break}", "\n\n");
 
-                                string seventyTwoHourPlan = TermsOfUse.UITextList.Find(i => i.TagName == "72HourPlan").Text; ;
-                                string individualFamily365Plan = TermsOfUse.UITextList.Find(i => i.TagName == "IndivFamily365Plan").Text;
-                                string monthlySubscrPlan = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscrPlan").Text;
-
-                                TermsOfUseName = termsOfUse;
-                                PageTitle = myWelcome;
-                                PageAccess = myARCInfo;
-                                Subscription = subscr;
-                                Account = account;
-                                TexasResistent = myTexasResident;
-                                MembershipAccess = membershipAccess;
-                                UseOfService = myUseOfService;
-                                PaidAccess = paidAccess;
-                                PurchaseInfo = myPurchaseInfo;
-                                SeventyTwoHourPlan = "     •  " + seventyTwoHourPlan;
-                                IndividualFamily365Plan = "     •  " + individualFamily365Plan;
-                                MonthlySubscrPlan = monthlySubscrPlan.Replace("{break}", "\n\n")
-                                             .Replace("{color:#14B38A}", "")
-                                             .Replace("{color}", "");
-
-                                RefundsCancellations = refundsCancellations;
-                                CancelPolicies = myCancelPolicies;
+                                    string seventyTwoHourPlan = TermsOfUse.UITextList.Find(i => i.TagName == "72HourPlan").Text; ;
+                                    string individualFamily365Plan = TermsOfUse.UITextList.Find(i => i.TagName == "IndivFamily365Plan").Text;
+                                    string monthlySubscrPlan = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscrPlan").Text;
+                                    if (termsOfUse != null) 
+                                        TermsOfUseName = termsOfUse; 
+                                    if (myWelcome != null) 
+                                        PageTitle = myWelcome; 
+                                    if (myARCInfo != null) 
+                                        PageAccess = myARCInfo; 
+                                    if (subscr != null) 
+                                        Subscription = subscr;
+                                    if (account != null)
+                                        Account = account;
+                                    if (myTexasResident != null)
+                                        TexasResistent = myTexasResident;
+                                    if (membershipAccess != null)
+                                        MembershipAccess = membershipAccess;
+                                    if (myUseOfService != null)
+                                        UseOfService = myUseOfService;
+                                    if (paidAccess != null)
+                                        PaidAccess = paidAccess;
+                                    if (myPurchaseInfo != null)
+                                        PurchaseInfo = myPurchaseInfo;
+                                    if (seventyTwoHourPlan != null)
+                                        SeventyTwoHourPlan = "     •  " + seventyTwoHourPlan;
+                                    if (individualFamily365Plan != null)
+                                        IndividualFamily365Plan = "     •  " + individualFamily365Plan;
+                                    if (monthlySubscrPlan != null)
+                                        MonthlySubscrPlan = monthlySubscrPlan.Replace("{break}", "\n\n")
+                                                 .Replace("{color:#14B38A}", "")
+                                                 .Replace("{color}", "");
+                                    if (refundsCancellations != null)
+                                        RefundsCancellations = refundsCancellations;
+                                    if (RefundsCancellations != null)
+                                        CancelPolicies = myCancelPolicies;
+                                }
+                                catch (Exception ex)
+                                {
+                                }
                             }
-                        }); 
+                        });
                     }).ConfigureAwait(false);
                 }
                 else
@@ -317,6 +343,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
         #endregion

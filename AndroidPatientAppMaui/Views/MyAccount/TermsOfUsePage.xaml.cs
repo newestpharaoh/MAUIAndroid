@@ -15,18 +15,25 @@ public partial class TermsOfUsePage : ContentPage
 			InitializeComponent();
             this.BindingContext = VM = new TermsOfUsePageViewModel(this.Navigation);
         }
-		catch (Exception ex)
-		{
-
-		}
-	}
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
     #endregion
 
     #region Event Handler
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
-        await VM.GetTermsOfUseInfo();
+        try
+        {
+            base.OnAppearing();
+            await VM.GetTermsOfUseInfo();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
     #endregion
 }

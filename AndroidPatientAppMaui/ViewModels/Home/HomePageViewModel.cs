@@ -21,11 +21,18 @@ namespace AndroidPatientAppMaui.ViewModels.Home
         #region Constructor
         public HomePageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            SignOutCommand = new Command(SignOutAsync);
+            try
+            {
+                Navigation = nav;
+                SignOutCommand = new Command(SignOutAsync);
 
-            Token = Preferences.Get("AuthToken", string.Empty);
-            Userid = Preferences.Get("UserId", 0);
+                Token = Preferences.Get("AuthToken", string.Empty);
+                Userid = Preferences.Get("UserId", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 
@@ -145,8 +152,9 @@ namespace AndroidPatientAppMaui.ViewModels.Home
             }
             catch (Exception ex)
             {
-                UserDialog.HideLoading();
-            }
+                UserDialog.HideLoading(); 
+                Console.WriteLine(ex);
+            } 
         }
 
         /// <summary>

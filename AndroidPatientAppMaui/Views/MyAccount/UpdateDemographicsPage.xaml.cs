@@ -17,13 +17,17 @@ public partial class UpdateDemographicsPage : ContentPage
             this.BindingContext = VM = new UpdateDemographicsPageViewModel(this.Navigation);
             VM.member = bfmi;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Console.WriteLine(ex);
         }
     }
     #endregion
 
     #region Event Handler
+    /// <summary>
+    /// TODO : To define the on appearing method...
+    /// </summary>
     protected override async void OnAppearing()
     {
         try
@@ -34,12 +38,15 @@ public partial class UpdateDemographicsPage : ContentPage
            
         }
         catch (Exception ex)
-        { 
+        {
+            Console.WriteLine(ex);
         }
     }
-    #endregion
-
-
+    /// <summary>
+    ///  TODO : To define the Title picker Sected Index Changed event... 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void spnrTitle_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -47,34 +54,41 @@ public partial class UpdateDemographicsPage : ContentPage
             VM.Title = string.Empty;
             if (VM.patientProfile != null)
             {
-                var item =sender as Picker; 
+                var item = sender as Picker;
                 VM.patientProfile.Title = item.SelectedItem.ToString();
             }
         }
         catch (Exception ex)
-        { 
+        {
+            Console.WriteLine(ex);
         }
     }
-
+    /// <summary>
+    ///  TODO : To define the Gender picker Selecected change event...
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void spnrGender_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
         {
             VM.spnrGender = string.Empty;
             if (VM.patientProfile != null)
-            {
-                //Picker picker = (Picker)sender;
-                //string selectedGender = (string)picker.SelectedItem;
+            { 
                 var item = sender as Picker;
                 VM.patientProfile.Gender = item.SelectedItem.ToString();
             }
         }
         catch (Exception ex)
         {
-
+            Console.WriteLine(ex);
         }
     }
-
+    /// <summary>
+    /// TODO : To Define the Relationship picker Selected index change event...
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void spnrRelationship_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -98,14 +112,19 @@ public partial class UpdateDemographicsPage : ContentPage
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
         }
     }
-
+    /// <summary>
+    /// TODO : To define the Language Selected Index changed event...
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void spnrLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
         {
-            VM.spnrLanguage = string.Empty; 
+            VM.spnrLanguage = string.Empty;
             var item = sender as Picker;
             string selectedLanguage = item.SelectedItem.ToString();
 
@@ -118,9 +137,14 @@ public partial class UpdateDemographicsPage : ContentPage
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
         }
     }
-
+    /// <summary>
+    /// TODO : To define the state picker selected index change event....
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void spnrState_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -133,7 +157,9 @@ public partial class UpdateDemographicsPage : ContentPage
             }
         }
         catch (Exception ex)
-        { 
+        {
+            Console.WriteLine(ex);
         }
     }
+    #endregion 
 }

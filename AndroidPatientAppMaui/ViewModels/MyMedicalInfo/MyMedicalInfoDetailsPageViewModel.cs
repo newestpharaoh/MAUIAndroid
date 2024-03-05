@@ -10,7 +10,14 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
     {
         public MyMedicalInfoDetailsPageViewModel(INavigation nav)
         {
-            Navigation = nav;
+			try
+			{
+				Navigation = nav;
+			}
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }

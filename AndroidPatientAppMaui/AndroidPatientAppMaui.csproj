@@ -75,6 +75,7 @@
 	  <None Remove="Resources\Images\downarrow.svg" />
 	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\emptycreditcard.svg" />
+	  <None Remove="Resources\Images\family.svg" />
 	  <None Remove="Resources\Images\greeninfoicon.svg" />
 	  <None Remove="Resources\Images\greyinfoicon.svg" />
 	  <None Remove="Resources\Images\handshake.svg" />
@@ -83,6 +84,7 @@
 	  <None Remove="Resources\Images\infoicon.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logout.svg" />
+	  <None Remove="Resources\Images\myaccount.svg" />
 	  <None Remove="Resources\Images\nmd.png" />
 	  <None Remove="Resources\Images\openeye.svg" />
 	  <None Remove="Resources\Images\pencil.svg" />
@@ -193,9 +195,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MyMedicalInfo\ProviderSelectionPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Popup\InfoPopupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\VisitHistory\VisitHistoryPage.xaml">

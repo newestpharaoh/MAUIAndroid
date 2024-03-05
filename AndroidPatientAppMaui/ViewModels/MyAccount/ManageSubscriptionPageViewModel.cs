@@ -1,12 +1,6 @@
 ﻿using Acr.UserDialogs;
 using CommonLibraryCoreMaui;
-using CommonLibraryCoreMaui.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-using System.Threading.Tasks;
-using AndroidPatientAppMaui.Views.Popup;
+using CommonLibraryCoreMaui.Models; 
 using AndroidPatientAppMaui.Views.MyAccount;
 using CommunityToolkit.Maui.Views;
 
@@ -25,16 +19,22 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         public ManageSubscriptionPage manageSubscriptionP;
         public ManageSubscriptionPageViewModel(INavigation nav, ManageSubscriptionPage manageSubscriptionPage)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            ChangePlanCommand = new Command(ChangePlanAsync);
-            UpdatePaymentCommand = new Command(UpdatePaymentAsync);
-            DownloadOrderSummary = new Command(DownloadOrderSummaryAsync);
-            InfoCommand = new Command(InfoCommandAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                ChangePlanCommand = new Command(ChangePlanAsync);
+                UpdatePaymentCommand = new Command(UpdatePaymentAsync);
+                DownloadOrderSummary = new Command(DownloadOrderSummaryAsync); 
 
-            Token = Preferences.Get("AuthToken", string.Empty);
-            Userid = Preferences.Get("UserId", 0);
-            manageSubscriptionP = manageSubscriptionPage;
+                Token = Preferences.Get("AuthToken", string.Empty);
+                Userid = Preferences.Get("UserId", 0);
+                manageSubscriptionP = manageSubscriptionPage;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
          
         #endregion
@@ -43,8 +43,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         public Command BackCommand { get; set; }
         public Command ChangePlanCommand { get; set; }
         public Command UpdatePaymentCommand { get; set; }
-        public Command DownloadOrderSummary { get; set; }
-        public Command InfoCommand { get; set; }
+        public Command DownloadOrderSummary { get; set; } 
         #endregion
 
         #region Properties
@@ -759,13 +758,15 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// TODO : To define the Patient Subscription Info....
+        /// </summary>
+        /// <returns></returns>
         public async Task GetPatientSubscriptionInfo()
         {
             // Get App settings api..
             try
-            {
-
+            { 
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
                     UserDialog.ShowLoading();
@@ -999,6 +1000,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
 
@@ -1017,9 +1019,13 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 //    await OpenFile(order).ConfigureAwait(false);
                 //}
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
             finally
             {
-            }
+            } 
         }
 
         /// <summary>
@@ -1070,24 +1076,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             {
                 Console.WriteLine(ex);
             }
-        }
-        /// <summary>
-        /// To Do: To define Info command
-        /// </summary>
-        /// <param name="obj"></param>
-
-        private async void InfoCommandAsync(object obj)
-        {
-            try
-            {
-                var infoPopup = new InfoPopupPage(this, manageSubscriptionP);
-                manageSubscriptionP.ShowPopup(infoPopup);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
+        } 
         public async Task GetBillingPoliciesInfo()
         {
             // Get App settings api..
@@ -1103,55 +1092,124 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             UITopic TermsOfUse = await Globals.Instance.GetUTText("TermsOfUse", "en");
                             if (TermsOfUse != null)
                             {
-                                //Headers
-                                string billingPolicies = TermsOfUse.UITextList.Find(i => i.TagName == "BillingPolicies").Text;
-                                string updatingCreditCard = TermsOfUse.UITextList.Find(i => i.TagName == "UpdatingCreditCard").Text;
-                                string cancellation = TermsOfUse.UITextList.Find(i => i.TagName == "Cancellation").Text;
-                                string subscriptionPlanChanges = TermsOfUse.UITextList.Find(i => i.TagName == "SubscriptionPlanChanges").Text;
-                                string monthlySubscriptionPlan = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule").Text;
+                                try
+                                {
+                                    //Headers
+                                    string billingPolicies = TermsOfUse.UITextList.Find(i => i.TagName == "BillingPolicies").Text;
+                                    string updatingCreditCard = TermsOfUse.UITextList.Find(i => i.TagName == "UpdatingCreditCard").Text;
+                                    string cancellation = TermsOfUse.UITextList.Find(i => i.TagName == "Cancellation").Text;
+                                    string subscriptionPlanChanges = TermsOfUse.UITextList.Find(i => i.TagName == "SubscriptionPlanChanges").Text;
+                                    string monthlySubscriptionPlan = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule").Text;
 
-                                string tablePurchaseDate = TermsOfUse.UITextList.Find(i => i.TagName == "Table_PurchaseDate").Text;
-                                string tableAutoRenewalDate = TermsOfUse.UITextList.Find(i => i.TagName == "Table_AutoRenewalDate").Text;
-                                //
-                                //Paragraphs
-                                string updateCC = TermsOfUse.UITextList.Find(i => i.TagName == "CreditCardInfo").Text;
-                                string noRefunds = TermsOfUse.UITextList.Find(i => i.TagName == "CancelPolicies").Text;
-                                string changePlanInfo = TermsOfUse.UITextList.Find(i => i.TagName == "ChangePlanInfo").Text;
-                                string monthlySubscriptionPlanP1 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1").Text;
-                                string monthlySubscriptionPlanP1B1 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1_B1").Text;
-                                string monthlySubscriptionPlanP1B2 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1_B2").Text;
-                                string table_1st_28_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_1st_28_Col1").Text;
-                                string table_29th_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_29th_Col1").Text;
-                                string table_30th_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_30th_Col1").Text;
-                                string table_31st_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_31st_Col1").Text;
+                                    string tablePurchaseDate = TermsOfUse.UITextList.Find(i => i.TagName == "Table_PurchaseDate").Text;
+                                    string tableAutoRenewalDate = TermsOfUse.UITextList.Find(i => i.TagName == "Table_AutoRenewalDate").Text;
+                                    //
+                                    //Paragraphs
+                                    string updateCC = TermsOfUse.UITextList.Find(i => i.TagName == "CreditCardInfo").Text;
+                                    string noRefunds = TermsOfUse.UITextList.Find(i => i.TagName == "CancelPolicies").Text;
+                                    string changePlanInfo = TermsOfUse.UITextList.Find(i => i.TagName == "ChangePlanInfo").Text;
+                                    string monthlySubscriptionPlanP1 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1").Text;
+                                    string monthlySubscriptionPlanP1B1 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1_B1").Text;
+                                    string monthlySubscriptionPlanP1B2 = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscriptionPlanBillingSchedule_P1_B2").Text;
+                                    string table_1st_28_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_1st_28_Col1").Text;
+                                    string table_29th_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_29th_Col1").Text;
+                                    string table_30th_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_30th_Col1").Text;
+                                    string table_31st_Col1 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_31st_Col1").Text;
 
-                                string table_1st_28_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_1st_28_Col2").Text.Replace("{break}", "\n\n");
-                                string table_29th_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_29th_Col2").Text.Replace("{break}", "\n\n");
-                                string table_30th_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_30th_Col2").Text.Replace("{break}", "\n\n");
-                                string table_31st_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_31st_Col2").Text.Replace("{break}", "\n\n");
+                                    string table_1st_28_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_1st_28_Col2").Text.Replace("{break}", "\n\n");
+                                    string table_29th_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_29th_Col2").Text.Replace("{break}", "\n\n");
+                                    string table_30th_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_30th_Col2").Text.Replace("{break}", "\n\n");
+                                    string table_31st_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_31st_Col2").Text.Replace("{break}", "\n\n");
 
-                                BillingPoliciesName = billingPolicies;
-                                MonthlySubscriptionPlan = monthlySubscriptionPlan;
-                                MonthlySubscriptionPlanP1 = monthlySubscriptionPlanP1;
-                                MonthlySubscriptionPlanP1B1 = "• " + monthlySubscriptionPlanP1B1;
-                                MonthlySubscriptionPlanP1B2 = "• " + monthlySubscriptionPlanP1B2;
-                                TablePurchaseDate = tablePurchaseDate;
-                                TableAutoRenewalDate = tableAutoRenewalDate;
-                                Table_1st_28_Col1 = table_1st_28_Col1;
-                                Table_1st_28_Col2 = table_1st_28_Col2;
-                                Table_29th_Col1 = table_29th_Col1;
-                                Table_29th_Col2 = table_29th_Col2;
-                                Table_30th_Col1 = table_30th_Col1;
-                                Table_30th_Col2 = table_30th_Col2;
-                                Table_31th_Col1 = table_31st_Col1;
-                                Table_31th_Col2 = table_31st_Col2;
-                                UpdatingCreditCardName = updatingCreditCard;
-                                UpdatingCreditCard = updateCC;
-                                ChangePlanInfo = subscriptionPlanChanges;
-                                SubscriptionPlanChanges = changePlanInfo;
-                                NoRefunds = cancellation;
-                                string myNoRefunds = String.Format(noRefunds, AppName);
-                                Cancellation = myNoRefunds;
+                                    if (billingPolicies != null)
+                                    {
+                                        BillingPoliciesName = billingPolicies;
+                                    }
+                                    if (monthlySubscriptionPlan != null)
+                                    {
+                                        MonthlySubscriptionPlan = monthlySubscriptionPlan;
+                                    }
+                                    if (monthlySubscriptionPlanP1 != null)
+                                    {
+                                        MonthlySubscriptionPlanP1 = monthlySubscriptionPlanP1;
+                                    }
+                                    if (monthlySubscriptionPlanP1B1 != null)
+                                    {
+                                        MonthlySubscriptionPlanP1B1 = "• " + monthlySubscriptionPlanP1B1;
+                                    }
+                                    if (monthlySubscriptionPlanP1B2 != null)
+                                    {
+                                        MonthlySubscriptionPlanP1B2 = "• " + monthlySubscriptionPlanP1B2;
+                                    }
+                                    if (tablePurchaseDate != null)
+                                    {
+                                        TablePurchaseDate = tablePurchaseDate;
+                                    }
+                                    if (tableAutoRenewalDate != null)
+                                    {
+                                        TableAutoRenewalDate = tableAutoRenewalDate;
+                                    }
+                                    if (table_1st_28_Col1 != null)
+                                    {
+                                        Table_1st_28_Col1 = table_1st_28_Col1;
+                                    }
+                                    if (table_1st_28_Col2 != null)
+                                    {
+                                        Table_1st_28_Col2 = table_1st_28_Col2;
+                                    }
+                                    if (table_29th_Col1 != null)
+                                    {
+                                        Table_29th_Col1 = table_29th_Col1;
+                                    }
+                                    if (table_29th_Col2 != null)
+                                    {
+                                        Table_29th_Col2 = table_29th_Col2;
+                                    }
+                                    if (table_30th_Col1 != null)
+                                    {
+                                        Table_30th_Col1 = table_30th_Col1;
+                                    }
+                                    if (table_30th_Col2 != null)
+                                    {
+                                        Table_30th_Col2 = table_30th_Col2;
+                                    }
+                                    if (table_31st_Col1 != null)
+                                    {
+                                        Table_31th_Col1 = table_31st_Col1;
+                                    }
+                                    if (table_31st_Col2 != null)
+                                    {
+                                        Table_31th_Col2 = table_31st_Col2;
+                                    }
+                                    if (updatingCreditCard != null)
+                                    {
+                                        UpdatingCreditCardName = updatingCreditCard;
+                                    }
+                                    if (updateCC != null)
+                                    {
+                                        UpdatingCreditCard = updateCC;
+                                    }
+                                    if (subscriptionPlanChanges != null)
+                                    {
+                                        ChangePlanInfo = subscriptionPlanChanges;
+                                    }
+                                    if (changePlanInfo != null)
+                                    {
+                                        SubscriptionPlanChanges = changePlanInfo;
+                                    }
+                                    if (cancellation != null)
+                                    {
+                                        NoRefunds = cancellation;
+                                    }
+                                    string myNoRefunds = String.Format(noRefunds, AppName);
+                                    if (myNoRefunds != null)
+                                    {
+                                        Cancellation = myNoRefunds;
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                }
                             }
                         });
                     }).ConfigureAwait(false);
@@ -1166,6 +1224,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
         #endregion

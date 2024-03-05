@@ -19,16 +19,23 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         public string CustomerServicePhone = Preferences.Get("CustomerServicePhone", string.Empty);
         public UpdateAccountAccessPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
-            YesCommand = new Command(YesAsync);
-            SubmitCommand = new Command(SubmitAsync);
-            RemoveUserSubmitCommand = new Command(RemoveUserSubmitAsync);
-            ContinueToManageSubsCommand = new Command(ContinueToManageSubsAsync);
-            ReactivateUserSubmitCommand = new Command(ReactivateUserSubmitAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+                YesCommand = new Command(YesAsync);
+                SubmitCommand = new Command(SubmitAsync);
+                RemoveUserSubmitCommand = new Command(RemoveUserSubmitAsync);
+                ContinueToManageSubsCommand = new Command(ContinueToManageSubsAsync);
+                ReactivateUserSubmitCommand = new Command(ReactivateUserSubmitAsync);
 
-            Token = Preferences.Get("AuthToken", string.Empty);
-            PatientID = Preferences.Get("PatientID", 0);
+                Token = Preferences.Get("AuthToken", string.Empty);
+                PatientID = Preferences.Get("PatientID", 0);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 
@@ -547,6 +554,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -629,6 +637,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -676,7 +685,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
             catch (Exception ex)
-            { }
+            {
+                Console.WriteLine(ex);
+            }
         }
         /// <summary>
         /// TODO : To Define Continue To Submmit Button Command.....
@@ -684,20 +695,27 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// <param name="obj"></param>
         private async void SubmitAsync(object obj)
         {
-            StatusResponse resp = await DataUtility.DeactivateFamilyMemberAsync(SettingsValues.ApiURLValue, PatientID, am.PatientID, Token).ConfigureAwait(false);
-            if (resp != null)
+            try
             {
-                if (resp.StatusCode == StatusCode.Success || resp.StatusCode == StatusCode.SuccessSeePayload)
+                StatusResponse resp = await DataUtility.DeactivateFamilyMemberAsync(SettingsValues.ApiURLValue, PatientID, am.PatientID, Token).ConfigureAwait(false);
+                if (resp != null)
                 {
-                    string newMonthlyTotal = string.Empty;
-
-                    if (resp.StatusCode == StatusCode.SuccessSeePayload)
+                    if (resp.StatusCode == StatusCode.Success || resp.StatusCode == StatusCode.SuccessSeePayload)
                     {
-                        newMonthlyTotal = resp.Payload;
-                    }
+                        string newMonthlyTotal = string.Empty;
 
-                    UserDialog.Alert(newMonthlyTotal);
+                        if (resp.StatusCode == StatusCode.SuccessSeePayload)
+                        {
+                            newMonthlyTotal = resp.Payload;
+                        }
+
+                        UserDialog.Alert(newMonthlyTotal);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -743,6 +761,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -751,38 +770,45 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// <param name="obj"></param>
         private async void RemoveUserSubmitAsync(object obj)
         {
-            string newEmail = txtNewEmailTxt;
-
-            StatusResponse resp2 = await DataUtility.RemoveFamilyMemberAsync(SettingsValues.ApiURLValue, PatientID, am.PatientID, newEmail, true, Token).ConfigureAwait(false);
-
-            if (resp2 != null)
+            try
             {
-                if (resp2.StatusCode == StatusCode.Success || resp2.StatusCode == StatusCode.SuccessSeePayload)
-                {
-                    string newMonthlyTotal = string.Empty;
+                string newEmail = txtNewEmailTxt;
 
-                    if (resp2.StatusCode == StatusCode.SuccessSeePayload)
+                StatusResponse resp2 = await DataUtility.RemoveFamilyMemberAsync(SettingsValues.ApiURLValue, PatientID, am.PatientID, newEmail, true, Token).ConfigureAwait(false);
+
+                if (resp2 != null)
+                {
+                    if (resp2.StatusCode == StatusCode.Success || resp2.StatusCode == StatusCode.SuccessSeePayload)
                     {
-                        newMonthlyTotal = resp2.Payload;
+                        string newMonthlyTotal = string.Empty;
+
+                        if (resp2.StatusCode == StatusCode.SuccessSeePayload)
+                        {
+                            newMonthlyTotal = resp2.Payload;
+                        }
+
+                        UserDialog.Alert(newMonthlyTotal);
+
                     }
-
-                    UserDialog.Alert(newMonthlyTotal);
-
-                }
-                else if (resp2.StatusCode == StatusCode.EmailAlreadyInUse)
-                {
-                    Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                    else if (resp2.StatusCode == StatusCode.EmailAlreadyInUse)
                     {
-                        UserDialog.Alert("Email Already In Use");
-                    });
-                }
-                else
-                {
-                    Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            UserDialog.Alert("Email Already In Use");
+                        });
+                    }
+                    else
                     {
-                        UserDialog.Alert("There was an error. Please try again.");
-                    });
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            UserDialog.Alert("There was an error. Please try again.");
+                        });
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
         /// <summary>
@@ -791,20 +817,27 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         /// <param name="obj"></param>
         private async void ReactivateUserSubmitAsync(object obj)
         {
-            StatusResponse reactResp = await DataUtility.ReactivateFamilyMemberAsync(SettingsValues.ApiURLValue, PatientID, am.PatientID, Token).ConfigureAwait(false);
-             
-            string newMonthlyTotal = string.Empty;
-
-            if (reactResp != null)
+            try
             {
-                if (reactResp.StatusCode == StatusCode.Success || reactResp.StatusCode == StatusCode.SuccessSeePayload) ;
-                if (reactResp.StatusCode == StatusCode.SuccessSeePayload)
-                {
-                    newMonthlyTotal = reactResp.Payload;
-                }
-            }
+                StatusResponse reactResp = await DataUtility.ReactivateFamilyMemberAsync(SettingsValues.ApiURLValue, PatientID, am.PatientID, Token).ConfigureAwait(false);
 
-            UserDialog.Alert(newMonthlyTotal);
+                string newMonthlyTotal = string.Empty;
+
+                if (reactResp != null)
+                {
+                    if (reactResp.StatusCode == StatusCode.Success || reactResp.StatusCode == StatusCode.SuccessSeePayload) ;
+                    if (reactResp.StatusCode == StatusCode.SuccessSeePayload)
+                    {
+                        newMonthlyTotal = reactResp.Payload;
+                    }
+                }
+
+                UserDialog.Alert(newMonthlyTotal);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         /// <summary>
         /// TODO : To Define Reactive User Button.....
@@ -849,7 +882,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
             catch (Exception ex)
-            { 
+            {
+                Console.WriteLine(ex);
             }
         }
         #endregion

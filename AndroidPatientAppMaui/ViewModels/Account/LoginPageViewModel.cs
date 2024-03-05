@@ -22,11 +22,18 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         #region Constructor
         public LoginPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            ViewPasswordCommand = new Command(ViewPasswordAsync);
-            ForgotPasswordCommand = new Command(ForgotPasswordAsync);
-            SignInCommand = new Command(SignInAsync);
-            RegisterCommand = new Command(RegisterAsync);
+            try
+            {
+                Navigation = nav;
+                ViewPasswordCommand = new Command(ViewPasswordAsync);
+                ForgotPasswordCommand = new Command(ForgotPasswordAsync);
+                SignInCommand = new Command(SignInAsync);
+                RegisterCommand = new Command(RegisterAsync);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         #endregion
@@ -100,6 +107,10 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         #endregion
 
         #region Methods
+        /// <summary>
+        /// TODO : To define the Get App Setting Method....
+        /// </summary>
+        /// <returns></returns>
         public async Task GetAppSettings()
         {
             // Get App settings api..
@@ -144,6 +155,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
 
@@ -153,10 +165,17 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         /// <param name="obj"></param>
         private async void ViewPasswordAsync(object obj)
         {
-            if (IsPassword == true)
-                IsPassword = false;
-            else
-                IsPassword = true;
+            try
+            {
+                if (IsPassword == true)
+                    IsPassword = false;
+                else
+                    IsPassword = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
 
@@ -166,7 +185,14 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         /// <param name="obj"></param>
         private async void ForgotPasswordAsync(object obj)
         {
-            await Navigation.PushModalAsync(new Views.ForgotPasswordPage(), false);
+            try
+            {
+                await Navigation.PushModalAsync(new Views.ForgotPasswordPage(), false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -270,7 +296,14 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         /// <param name="obj"></param>
         private async void RegisterAsync(object obj)
         {
-            await Navigation.PushModalAsync(new Views.RegistrationPage(), false);
+            try
+            {
+                await Navigation.PushModalAsync(new Views.RegistrationPage(), false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         /// <summary>

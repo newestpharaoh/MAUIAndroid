@@ -15,12 +15,10 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         public ForgotPasswordPageViewModel(INavigation nav)
         {
             try
-            {
-
+            { 
                 Navigation = nav;
                 BackCommand = new Command(BackAsync);
-                SubmitCommand = new Command(SubmitAsync);
-
+                SubmitCommand = new Command(SubmitAsync); 
             }
             catch (Exception ex)
             {
@@ -98,8 +96,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
         /// <summary>
         /// To Do: To define back command
         /// </summary>
-        /// <param name="obj"></param>
-
+        /// <param name="obj"></param> 
         private async void BackAsync(object obj)
         {
             try

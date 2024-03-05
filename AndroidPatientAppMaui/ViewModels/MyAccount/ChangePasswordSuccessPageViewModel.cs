@@ -11,8 +11,15 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #region Constructor
         public ChangePasswordSuccessPageViewModel(INavigation nav)
         {
-            Navigation = nav;
-            BackCommand = new Command(BackAsync);
+            try
+            {
+                Navigation = nav;
+                BackCommand = new Command(BackAsync);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         #endregion
 

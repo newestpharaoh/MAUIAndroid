@@ -14,13 +14,18 @@ public partial class MyAccountPage : ContentPage
             InitializeComponent();
             this.BindingContext = VM = new MyAccountPageViewModel(this.Navigation);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Console.WriteLine(ex);
         }
     }
     #endregion
 
     #region Event Handler
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+    }
     #endregion
 
 }

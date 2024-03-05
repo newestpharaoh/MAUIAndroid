@@ -4,10 +4,22 @@ namespace AndroidPatientAppMaui.Views.MyMedicalInfo;
 
 public partial class ProviderSelectionPage : ContentPage
 {
-	ProviderSelectionPageViewModel VM;
+    ProviderSelectionPageViewModel VM;
+    #region Constructor
     public ProviderSelectionPage(string PatientName)
-	{
-		InitializeComponent();
-        this.BindingContext = VM = new ProviderSelectionPageViewModel(this.Navigation);
+    {
+        try
+        {
+            InitializeComponent();
+            this.BindingContext = VM = new ProviderSelectionPageViewModel(this.Navigation);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
+    #endregion
+
+    #region Event Handler
+    #endregion
 }
