@@ -13,13 +13,15 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 {
     public class MyMedicalInfoPageViewModel : BaseViewModel
     {
-        #region Constructor
+       
         //To define the class level variable.
         string Token = string.Empty;
         int PatientID = 0;
         bool nonVisit = false;
         bool family = false;
         MedicalInfo medicalInfo;
+
+        #region Constructor
         public MyMedicalInfoPageViewModel(INavigation nav)
         {
             try

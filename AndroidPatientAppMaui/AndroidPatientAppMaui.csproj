@@ -76,8 +76,11 @@
 	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\emptycreditcard.svg" />
 	  <None Remove="Resources\Images\family.svg" />
+	  <None Remove="Resources\Images\greenbin.svg" />
 	  <None Remove="Resources\Images\greeninfoicon.svg" />
+	  <None Remove="Resources\Images\greenplus.svg" />
 	  <None Remove="Resources\Images\greyinfoicon.svg" />
+	  <None Remove="Resources\Images\grrenpencil.svg" />
 	  <None Remove="Resources\Images\handshake.svg" />
 	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\ic_launcher.png" />

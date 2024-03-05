@@ -354,91 +354,29 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                     string table_30th_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_30th_Col2").Text.Replace("{break}", "\n\n");
                                     string table_31st_Col2 = TermsOfUse.UITextList.Find(i => i.TagName == "Table_31st_Col2").Text.Replace("{break}", "\n\n");
 
-                                    if (billingPolicies != null)
-                                    {
-                                        BillingPoliciesName = billingPolicies;
-                                    }
-                                    if (monthlySubscriptionPlan != null)
-                                    {
-                                        MonthlySubscriptionPlan = monthlySubscriptionPlan;
-                                    }
-                                    if (monthlySubscriptionPlanP1 != null)
-                                    {
-                                        MonthlySubscriptionPlanP1 = monthlySubscriptionPlanP1;
-                                    }
-                                    if (monthlySubscriptionPlanP1B1 != null)
-                                    {
-                                        MonthlySubscriptionPlanP1B1 = "• " + monthlySubscriptionPlanP1B1;
-                                    }
-                                    if (monthlySubscriptionPlanP1B2 != null)
-                                    {
-                                        MonthlySubscriptionPlanP1B2 = "• " + monthlySubscriptionPlanP1B2;
-                                    }
-                                    if (tablePurchaseDate != null)
-                                    {
-                                        TablePurchaseDate = tablePurchaseDate;
-                                    }
-                                    if (tableAutoRenewalDate != null)
-                                    {
-                                        TableAutoRenewalDate = tableAutoRenewalDate;
-                                    }
-                                    if (table_1st_28_Col1 != null)
-                                    {
-                                        Table_1st_28_Col1 = table_1st_28_Col1;
-                                    }
-                                    if (table_1st_28_Col2 != null)
-                                    {
-                                        Table_1st_28_Col2 = table_1st_28_Col2;
-                                    }
-                                    if (table_29th_Col1 != null)
-                                    {
-                                        Table_29th_Col1 = table_29th_Col1;
-                                    }
-                                    if (table_29th_Col2 != null)
-                                    {
-                                        Table_29th_Col2 = table_29th_Col2;
-                                    }
-                                    if (table_30th_Col1 != null)
-                                    {
-                                        Table_30th_Col1 = table_30th_Col1;
-                                    }
-                                    if (table_30th_Col2 != null)
-                                    {
-                                        Table_30th_Col2 = table_30th_Col2;
-                                    }
-                                    if (table_31st_Col1 != null)
-                                    {
-                                        Table_31th_Col1 = table_31st_Col1;
-                                    }
-                                    if (table_31st_Col2 != null)
-                                    {
-                                        Table_31th_Col2 = table_31st_Col2;
-                                    }
-                                    if (updatingCreditCard != null)
-                                    {
-                                        UpdatingCreditCardName = updatingCreditCard;
-                                    }
-                                    if (updateCC != null)
-                                    {
-                                        UpdatingCreditCard = updateCC;
-                                    }
-                                    if (subscriptionPlanChanges != null)
-                                    {
-                                        ChangePlanInfo = subscriptionPlanChanges;
-                                    }
-                                    if (changePlanInfo != null)
-                                    {
-                                        SubscriptionPlanChanges = changePlanInfo;
-                                    }
-                                    if (cancellation != null)
-                                    {
-                                        NoRefunds = cancellation;
-                                    }
+                                    BillingPoliciesName = billingPolicies != null ? billingPolicies : string.Empty;
+                                    MonthlySubscriptionPlan = monthlySubscriptionPlan != null ? monthlySubscriptionPlan : string.Empty;
+                                    MonthlySubscriptionPlanP1 = monthlySubscriptionPlanP1 != null ? monthlySubscriptionPlanP1 : string.Empty;
+                                    MonthlySubscriptionPlanP1B1 = monthlySubscriptionPlanP1B1 != null ? "• " + monthlySubscriptionPlanP1B1 : string.Empty;
+                                    MonthlySubscriptionPlanP1B2 = monthlySubscriptionPlanP1B2 != null ? "• " + monthlySubscriptionPlanP1B2 : string.Empty;
+                                    TablePurchaseDate = tablePurchaseDate != null ? tablePurchaseDate : string.Empty;
+                                    TableAutoRenewalDate = tableAutoRenewalDate != null ? tableAutoRenewalDate : string.Empty;
+                                    Table_1st_28_Col1 = table_1st_28_Col1 != null ? table_1st_28_Col1 : string.Empty;
+                                    Table_1st_28_Col2 = table_1st_28_Col2 != null ? table_1st_28_Col2 : string.Empty;
+                                    Table_29th_Col1 = table_29th_Col1 != null ? table_29th_Col1 : string.Empty;
+                                    Table_29th_Col2 = table_29th_Col2 != null ? table_29th_Col2 : string.Empty;
+                                    Table_30th_Col1 = table_30th_Col1 != null ? table_30th_Col1 : string.Empty;
+                                    Table_30th_Col2 = table_30th_Col2 != null ? table_30th_Col2 : string.Empty;
+                                    Table_31th_Col1 = table_31st_Col1 != null ? table_31st_Col1 : string.Empty;
+                                    Table_31th_Col2 = table_31st_Col2 != null ? table_31st_Col2 : string.Empty;
+                                    UpdatingCreditCardName = updatingCreditCard != null ? updatingCreditCard : string.Empty;
+                                    UpdatingCreditCard = updateCC != null ? updateCC : string.Empty;
+                                    ChangePlanInfo = subscriptionPlanChanges != null ? subscriptionPlanChanges : string.Empty;
+                                    SubscriptionPlanChanges = changePlanInfo != null ? changePlanInfo : string.Empty;
+                                    NoRefunds = cancellation != null ? cancellation : string.Empty;
                                     string myNoRefunds = String.Format(noRefunds, AppName);
-                                    if (myNoRefunds != null)
-                                    {
-                                        Cancellation = myNoRefunds;
-                                    }
+                                    Cancellation = myNoRefunds != null ? myNoRefunds : string.Empty;
+
                                 }
                                 catch (Exception ex)
                                 { 

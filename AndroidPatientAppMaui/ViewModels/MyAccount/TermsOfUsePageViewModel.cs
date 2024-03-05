@@ -293,38 +293,24 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                     string seventyTwoHourPlan = TermsOfUse.UITextList.Find(i => i.TagName == "72HourPlan").Text; ;
                                     string individualFamily365Plan = TermsOfUse.UITextList.Find(i => i.TagName == "IndivFamily365Plan").Text;
                                     string monthlySubscrPlan = TermsOfUse.UITextList.Find(i => i.TagName == "MonthlySubscrPlan").Text;
-                                    if (termsOfUse != null) 
-                                        TermsOfUseName = termsOfUse; 
-                                    if (myWelcome != null) 
-                                        PageTitle = myWelcome; 
-                                    if (myARCInfo != null) 
-                                        PageAccess = myARCInfo; 
-                                    if (subscr != null) 
-                                        Subscription = subscr;
-                                    if (account != null)
-                                        Account = account;
-                                    if (myTexasResident != null)
-                                        TexasResistent = myTexasResident;
-                                    if (membershipAccess != null)
-                                        MembershipAccess = membershipAccess;
-                                    if (myUseOfService != null)
-                                        UseOfService = myUseOfService;
-                                    if (paidAccess != null)
-                                        PaidAccess = paidAccess;
-                                    if (myPurchaseInfo != null)
-                                        PurchaseInfo = myPurchaseInfo;
-                                    if (seventyTwoHourPlan != null)
-                                        SeventyTwoHourPlan = "     •  " + seventyTwoHourPlan;
-                                    if (individualFamily365Plan != null)
-                                        IndividualFamily365Plan = "     •  " + individualFamily365Plan;
-                                    if (monthlySubscrPlan != null)
-                                        MonthlySubscrPlan = monthlySubscrPlan.Replace("{break}", "\n\n")
-                                                 .Replace("{color:#14B38A}", "")
-                                                 .Replace("{color}", "");
-                                    if (refundsCancellations != null)
-                                        RefundsCancellations = refundsCancellations;
-                                    if (RefundsCancellations != null)
-                                        CancelPolicies = myCancelPolicies;
+                                    TermsOfUseName = termsOfUse != null ? termsOfUse : string.Empty;
+                                    PageTitle = myWelcome != null ? myWelcome : string.Empty;
+                                    PageAccess = myARCInfo != null ? myARCInfo : string.Empty;
+                                    Subscription = subscr != null ? subscr : string.Empty;
+                                    Account = account != null ? account : string.Empty;
+                                    TexasResistent = myTexasResident != null ? myTexasResident : string.Empty;
+                                    MembershipAccess = membershipAccess != null ? membershipAccess : string.Empty;
+                                    UseOfService = myUseOfService != null ? myUseOfService : string.Empty;
+                                    PaidAccess = paidAccess != null ? paidAccess : string.Empty;
+                                    PurchaseInfo = myPurchaseInfo != null ? myPurchaseInfo : string.Empty;
+                                    SeventyTwoHourPlan = seventyTwoHourPlan != null ? "     •  " + seventyTwoHourPlan : string.Empty;
+                                    IndividualFamily365Plan = individualFamily365Plan != null ? "     •  " + individualFamily365Plan : string.Empty;
+                                    MonthlySubscrPlan = monthlySubscrPlan != null ? monthlySubscrPlan.Replace("{break}", "\n\n")
+             .Replace("{color:#14B38A}", "")
+             .Replace("{color}", "") : string.Empty;
+                                    RefundsCancellations = refundsCancellations != null ? refundsCancellations : string.Empty;
+                                    CancelPolicies = myCancelPolicies != null ? myCancelPolicies : string.Empty;
+
                                 }
                                 catch (Exception ex)
                                 {

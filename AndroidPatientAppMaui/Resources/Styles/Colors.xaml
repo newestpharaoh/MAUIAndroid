@@ -10,6 +10,7 @@
     <Color x:Key="Gray3">#EEEEEE</Color>
     <Color x:Key="Gray4">#666666</Color>
     <Color x:Key="Gray5">#333333</Color>
+    <Color x:Key="Gray6">#2c3e50</Color>
 
     <Color x:Key="Blue1">#3D8FCD</Color>
     <Color x:Key="Blue2">#89BADF</Color>
@@ -48,6 +49,7 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
     <Color x:Key="Black1">#999999</Color>
+
 
 
 

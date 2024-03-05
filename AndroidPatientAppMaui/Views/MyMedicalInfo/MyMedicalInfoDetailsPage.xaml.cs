@@ -13,7 +13,9 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
 		{
 			InitializeComponent();
 			this.BindingContext = VM = new MyMedicalInfoDetailsPageViewModel(this.Navigation);
-		}
+            VM.medicalInfo = medicalInfo;
+
+        }
         catch (Exception ex)
         {
             Console.WriteLine(ex);
@@ -22,5 +24,28 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
     #endregion
 
     #region Event Handler
+    protected override async void OnAppearing()
+    {
+        try
+        {
+            base.OnAppearing();
+            await VM.LoadMedicalIssues();
+        }
+        catch (Exception ex)
+        {
+             
+        }
+    }
     #endregion
+
+    private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        try
+        {
+
+        }catch(Exception ex)
+        {
+
+        }
+    }
 }
