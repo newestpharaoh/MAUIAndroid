@@ -30,6 +30,7 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         {
             base.OnAppearing();
             await VM.LoadMedicalIssues();
+            await VM.DisplayMedicalInfoDeails();
         }
         catch (Exception ex)
         {

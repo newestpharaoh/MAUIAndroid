@@ -216,7 +216,7 @@
                     <Grid
                         x:Name="lytPCPSelected"
                         Grid.Row="1"
-                        ColumnDefinitions="Auto,Auto"
+                        ColumnDefinitions="Auto,60"
                         HorizontalOptions="FillAndExpand"
                         IsVisible="{Binding lytPCPSelected}"
                         VerticalOptions="FillAndExpand">
@@ -236,27 +236,27 @@
                             VerticalOptions="FillAndExpand">
                             <Grid
                                 Grid.Column="0"
-                                HeightRequest="40"
+                                HeightRequest="30"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand"
-                                WidthRequest="40">
+                                WidthRequest="30">
                                 <Image
                                     Aspect="AspectFit"
-                                    HeightRequest="30"
+                                    HeightRequest="20"
                                     HorizontalOptions="CenterAndExpand"
                                     Source="greenpencil.png"
                                     VerticalOptions="CenterAndExpand"
-                                    WidthRequest="30" />
+                                    WidthRequest="20" />
                             </Grid>
                             <Grid
                                 Grid.Column="1"
-                                HeightRequest="40"
+                                HeightRequest="30"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand"
-                                WidthRequest="40">
+                                WidthRequest="30">
                                 <Image
                                     Aspect="AspectFit"
-                                    HeightRequest="30"
+                                    HeightRequest="20"
                                     HorizontalOptions="CenterAndExpand"
                                     Source="greenbin.png"
                                     VerticalOptions="CenterAndExpand"
@@ -315,6 +315,7 @@
                                 Grid.Column="0"
                                 FontSize="14"
                                 HorizontalOptions="FillAndExpand"
+                                IsVisible="{Binding lblPharmacySelectedVisible}"
                                 Text="{Binding lblPharmacySelected}"
                                 TextColor="Black"
                                 VerticalOptions="FillAndExpand" />
@@ -469,7 +470,7 @@
                             HasUnevenRows="True"
                             HorizontalOptions="FillAndExpand"
                             IsVisible="{Binding lstMedicationsIsVisible}"
-                            ItemsSource="{Binding AllergiesList}"
+                            ItemsSource="{Binding MedicationsList}"
                             RowHeight="20"
                             SeparatorColor="Transparent"
                             VerticalOptions="FillAndExpand"
@@ -540,8 +541,7 @@
                         <ListView
                             HasUnevenRows="True"
                             HorizontalOptions="FillAndExpand"
-                            IsVisible="{Binding lstSurgeriesIsVisible}"
-                            ItemsSource="{Binding SurgeriesList}"
+                            ItemsSource="{Binding SurgeryList}"
                             RowHeight="20"
                             SeparatorColor="Transparent"
                             VerticalOptions="FillAndExpand"
@@ -558,6 +558,7 @@
                                                 Grid.Column="1"
                                                 FontSize="12"
                                                 HorizontalOptions="FillAndExpand"
+                                                Text="{Binding Name}"
                                                 TextColor="Black"
                                                 VerticalOptions="CenterAndExpand" />
                                         </Grid>
@@ -599,7 +600,35 @@
                     Text="Save Successful"
                     TextColor="#89C742"
                     VerticalOptions="Center" />
+                <!--  Save Button  -->
+                <Grid
+                    Grid.Row="8"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Button
+                        x:Name="btnContinue"
+                        Margin="50,0"
+                        BackgroundColor="#15B287"
+                        Command="{Binding SaveCommand}"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HeightRequest="55"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Save"
+                        TextColor="{StaticResource White}"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="180" />
 
+                </Grid>
+                <Label
+                    Grid.Row="9"
+                    Margin="10,20,10,10"
+                    FontSize="12"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Required fields (*) need to be completed before proceeding."
+                    TextColor="Black"
+                    VerticalOptions="FillAndExpand" />
             </Grid>
         </ScrollView>
     </Grid>

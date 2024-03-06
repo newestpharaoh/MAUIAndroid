@@ -1,4 +1,5 @@
-﻿using CommonLibraryCoreMaui;
+﻿using Acr.UserDialogs;
+using CommonLibraryCoreMaui;
 using CommonLibraryCoreMaui.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         bool patientIsCurative = false;
         bool patientIsEligibleForCurative = false;
         public MedicalInfo medicalInfo;
+        AdditionalFamilyMember additionalFamilyMember;
         #region Constructor
         public MyMedicalInfoDetailsPageViewModel(INavigation nav)
         {
@@ -51,8 +53,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private ObservableCollection<Allergy> _AllergiesList = new ObservableCollection<Allergy>();
-        public ObservableCollection<Allergy> AllergiesList
+        private List<Allergy> _AllergiesList = new List<Allergy>();
+        public List<Allergy> AllergiesList
         {
             get { return _AllergiesList; }
             set
@@ -64,8 +66,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private ObservableCollection<Medication> _MedicationsList = new ObservableCollection<Medication>();
-        public ObservableCollection<Medication> MedicationsList
+        private List<Medication> _MedicationsList = new List<Medication>();
+        public List<Medication> MedicationsList
         {
             get { return _MedicationsList; }
             set
@@ -77,8 +79,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private ObservableCollection<Surgery> _SurgeryList = new ObservableCollection<Surgery>();
-        public ObservableCollection<Surgery> SurgeryList
+        private List<Surgery> _SurgeryList = new List<Surgery>();
+        public List<Surgery> SurgeryList
         {
             get { return _SurgeryList; }
             set
@@ -89,7 +91,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     OnPropertyChanged("SurgeryList");
                 }
             }
-        } 
+        }
         private string _UserName = Helpers.AppGlobalConstants.userInfo.Name;
         public string UserName
         {
@@ -152,6 +154,19 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 {
                     _lblPharmacySelected = value;
                     OnPropertyChanged("lblPharmacySelected");
+                }
+            }
+        }
+        private bool _lblPharmacySelectedVisible ;
+        public bool lblPharmacySelectedVisible
+        {
+            get { return _lblPharmacySelectedVisible; }
+            set
+            {
+                if (_lblPharmacySelectedVisible != value)
+                {
+                    _lblPharmacySelectedVisible = value;
+                    OnPropertyChanged("lblPharmacySelectedVisible");
                 }
             }
         }
@@ -300,8 +315,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private bool _lytAddPharmacy;
-        public bool lytAddPharmacy
+        private bool _lytAddPharmacy = true;
+        public bool lytAddPharmacy 
         {
             get { return _lytAddPharmacy; }
             set
@@ -313,7 +328,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private bool _lytAddSurgery;
+        private bool _lytAddSurgery = true;
         public bool lytAddSurgery
         {
             get { return _lytAddSurgery; }
@@ -326,7 +341,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private bool _lytAddMedication;
+        private bool _lytAddMedication = true;
         public bool lytAddMedication
         {
             get { return _lytAddMedication; }
@@ -339,7 +354,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private bool _lytAddAllergy;
+        private bool _lytAddAllergy = true;
         public bool lytAddAllergy
         {
             get { return _lytAddAllergy; }
@@ -409,6 +424,193 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
 
             }
+        }
+
+        public async Task DisplayMedicalInfoDeails()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+
+                            if (additionalFamilyMember != null)
+                            {
+                                if (medicalInfo is null)
+                                {
+                                    medicalInfo = new MedicalInfo();
+                                }
+
+                                await GetPharmacyFromPrimaryAccount().ConfigureAwait(false);
+
+                                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                {
+                                    //btnContinue.Click -= BtnAddFamilyMember_Click;
+                                    //btnContinue.Click += BtnAddFamilyMember_Click;
+                                });
+                            }
+                            else
+                            {
+                                RegistrationState reg;
+                                // await LoginNewUser(reg.Email, reg.Password).ConfigureAwait(false);
+
+                                //Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                //{
+                                //    lblHeaderIsvisble = true;
+                                //    if (!reg.IsSelfPay)
+                                //    {
+                                //        lblHeader = "Step 3 of 3";
+                                //    }
+                                //    else
+                                //    {
+                                //        lblHeader = "Step 4 of 4";
+                                //    }
+
+                                //    if (medicalInfo is null)
+                                //    {
+                                //        medicalInfo = new MedicalInfo();
+                                //        medicalInfo.PatientID = PatientID;  
+                                //    }
+                                //    else
+                                //    {
+                                //        lblHeaderIsvisble = false; 
+                                //    }
+                                //});
+                            }
+
+                            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                            {
+
+                                UpdateSurgeriesList();
+                                UpdateMedicationsList();
+                                UpdateAllergiesList();
+
+                                if (medicalInfo.PCP != null)
+                                {
+                                    lblPCPSelected = medicalInfo.PCP.Preview;
+                                    lytPCPSelected = true;
+                                    lytAddPCP = false;
+                                }
+
+                                if (medicalInfo.Pharmacy != null)
+                                {
+                                    if (medicalInfo.Pharmacy.IsCapsule)
+                                    {
+                                        lblPharmacySelectedVisible = false;
+                                        imgCapsule = true;
+                                        //imgCapsule.SetImageResource(Resource.Id.curative_lockup_horizontal_a_redorange_300px().getDrawable(R.drawable.monkey, getApplicationContext().getTheme()));
+                                    }
+                                    else if (medicalInfo.Pharmacy.IsCurative)
+                                    {
+                                        lblPharmacySelectedVisible = false;
+                                        imgCurative = true;
+                                    }
+                                    else
+                                    {
+                                        lblPharmacySelectedVisible = true;
+                                        lblPharmacySelected = medicalInfo.Pharmacy.ToString();
+                                        imgCapsule = false;
+                                        if (imgCurative != null) imgCurative = false;
+                                    }
+
+                                    lblPharmacySelectedVisible = true;
+                                    lytAddPharmacy = false;
+                                }
+
+                                if (!string.IsNullOrEmpty(medicalInfo.OtherMedicalIssue))
+                                {
+                                    txtOtherMedicalIssue = medicalInfo.OtherMedicalIssue;
+                                    chkOtherMedicalIssue = true;
+                                    //txtOtherMedicalIssue.Enabled = true;
+                                }
+                                 
+                            });
+
+                            await LoadMedicalIssues().ConfigureAwait(false);
+                        });
+
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+                Console.WriteLine(ex);
+            }
+        }
+        private void UpdateSurgeriesList()
+        {
+            var surgeriesList = medicalInfo.Surgeries.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
+            foreach (Surgery surgury in surgeriesList)
+            {
+                if (!SurgeryList.Any(a => a.Name == surgury.Name))
+                {
+                    SurgeryList.Add(surgury);
+                }
+            }
+
+        } 
+        private void UpdateMedicationsList()
+        {
+            //medicationsAdapter = new PatientRegistrationMedicalItemAdapter(this, Resources, medicalInfo.Medications.Cast<IPatientRegistrationMedicalInfoListItem>().ToList());
+            //lstMedications.Adapter = medicationsAdapter;
+            //ListViewHeightHelper.SetListViewHeightBasedOnChildren(lstMedications, true);
+            var medicationList = medicalInfo.Medications.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
+            foreach (Medication medication in medicationList)
+            {
+                if (!MedicationsList.Any(a => a.Name == medication.Name))
+                {
+                    MedicationsList.Add(medication);
+                }
+            }
+        }
+
+
+        private void UpdateAllergiesList()
+        {
+            var allergiesList = medicalInfo.Allergies.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
+            foreach (Allergy allergy in allergiesList)
+            {
+                if (!AllergiesList.Any(a => a.Name == allergy.Name))
+                {
+                    AllergiesList.Add(allergy);
+                }
+            }
+            //allergiesAdapter = new PatientRegistrationMedicalItemAdapter(this, Resources, medicalInfo.Allergies.Cast<IPatientRegistrationMedicalInfoListItem>().ToList());
+            //lstAllergies.Adapter = allergiesAdapter;
+            //ListViewHeightHelper.SetListViewHeightBasedOnChildren(lstAllergies, true);
+        }
+        private async Task<bool> LoginNewUser(string username, string pwd)
+        {
+            TokenResponse resp = await DataUtility.GetTokenResponseAsync(SettingsValues.ApiURLValue, username, pwd, "").ConfigureAwait(false);
+
+            if (resp != null)
+            {
+                if (!string.IsNullOrEmpty(resp.access_token) && resp.expires_in != null)
+                {
+                    UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, resp.userid, true, Token).ConfigureAwait(false);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        private async Task GetPharmacyFromPrimaryAccount()
+        {
+            MedicalInfo mi = await DataUtility.PatientGetMedicalHistoryAsync(SettingsValues.ApiURLValue, Token, PatientID).ConfigureAwait(false);
+            if (mi != null) this.medicalInfo.Pharmacy = mi.Pharmacy;
         }
         #endregion
     }
