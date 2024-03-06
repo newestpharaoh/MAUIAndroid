@@ -5,16 +5,24 @@ namespace CommonLibraryCoreMaui.Models
     [Description("Allergy"), DialogTitle("Allergies")]
     public class Allergy : PrimaryIssue, IPatientRegistrationMedicalInfoItem, IPatientRegistrationMedicalInfoListItem
     {
-		public Allergy()
-		{
-			IssueType = PrimaryIssueType.Allergy;
-		}
+        public Allergy()
+        {
+            IssueType = PrimaryIssueType.Allergy;
+        }
 
         public string Preview
         {
             get
             {
                 return string.Format("{0}\n\n{1}", this.Name, !string.IsNullOrEmpty(this.Description) ? $"Comments:\n\n{this.Description}" : "");
+            }
+        }
+
+        public string AllergyName
+        {
+            get
+            {
+                return string.Format("{0}", this.Name);
             }
         }
     }

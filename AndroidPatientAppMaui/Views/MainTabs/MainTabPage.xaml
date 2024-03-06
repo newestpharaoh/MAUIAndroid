@@ -18,6 +18,33 @@
         <home:HomePage
             x:Name="Home"
             Title="Home"
+            ControlTemplate="{Binding home:HomePage}"
+            IconImageSource="home.png" />
+        <visit:VisitHistoryPage
+            x:Name="VisitHistory"
+            Title="Visit History"
+            ControlTemplate="{Binding visit:VisitHistoryPage}"
+            IconImageSource="cabinet.png" />
+        <family:FamilyPage
+            x:Name="Family"
+            Title="Family"
+            ControlTemplate="{Binding family:FamilyPage}"
+            IconImageSource="family.png" />
+        <medicalinfo:MyMedicalInfoPage
+            x:Name="MyMedicalPage"
+            Title="My Medical Page"
+            ControlTemplate="{Binding medicalinfo:MyMedicalInfoPage}"
+            IconImageSource="clipboard.png" />
+        <myaccount:MyAccountPage
+            x:Name="MyAccount"
+            Title="My Account"
+            ControlTemplate="{Binding myaccount:MyAccountPage}"
+            IconImageSource="myaccount.png" />
+    </TabbedPage.Children>
+    <!--<TabbedPage.Children>
+        <home:HomePage
+            x:Name="Home"
+            Title="Home"
             IconImageSource="home.png" />
         <visit:VisitHistoryPage
             x:Name="VisitHistory"
@@ -35,6 +62,6 @@
             x:Name="MyAccount"
             Title="My Account"
             IconImageSource="myaccount.png" />
-    </TabbedPage.Children>
+    </TabbedPage.Children>-->
 
 </TabbedPage>

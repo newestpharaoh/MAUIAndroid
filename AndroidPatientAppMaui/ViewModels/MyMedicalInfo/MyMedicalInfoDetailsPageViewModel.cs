@@ -20,6 +20,13 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         bool patientIsEligibleForCurative = false;
         public MedicalInfo medicalInfo;
         AdditionalFamilyMember additionalFamilyMember;
+
+        const int PCP_REQUEST_CODE = 2;
+        const int SURGERY_REQUEST_CODE = 3;
+        const int MEDICATION_REQUEST_CODE = 4;
+        const int ALLERGY_REQUEST_CODE = 5;
+        const int PHARMACY_REQUEST_CODE = 6;
+
         #region Constructor
         public MyMedicalInfoDetailsPageViewModel(INavigation nav)
         {
@@ -53,8 +60,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private List<Allergy> _AllergiesList = new List<Allergy>();
-        public List<Allergy> AllergiesList
+        private ObservableCollection<Allergy> _AllergiesList = new ObservableCollection<Allergy>();
+        public ObservableCollection<Allergy> AllergiesList
         {
             get { return _AllergiesList; }
             set
@@ -66,8 +73,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private List<Medication> _MedicationsList = new List<Medication>();
-        public List<Medication> MedicationsList
+        private ObservableCollection<Medication> _MedicationsList = new ObservableCollection<Medication>();
+        public ObservableCollection<Medication> MedicationsList
         {
             get { return _MedicationsList; }
             set
@@ -79,8 +86,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private List<Surgery> _SurgeryList = new List<Surgery>();
-        public List<Surgery> SurgeryList
+        private ObservableCollection<Surgery> _SurgeryList = new ObservableCollection<Surgery>();
+        public ObservableCollection<Surgery> SurgeryList
         {
             get { return _SurgeryList; }
             set
@@ -157,7 +164,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private bool _lblPharmacySelectedVisible ;
+        private bool _lblPharmacySelectedVisible;
         public bool lblPharmacySelectedVisible
         {
             get { return _lblPharmacySelectedVisible; }
@@ -262,7 +269,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
         }
 
-        private bool _lytPharmacySelected = false;
+        private bool _lytPharmacySelected = true;
         public bool lytPharmacySelected
         {
             get { return _lytPharmacySelected; }
@@ -276,7 +283,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
         }
 
-        private bool _AllergiesIsVisible = false;
+        private bool _AllergiesIsVisible = true;
         public bool AllergiesIsVisible
         {
             get { return _AllergiesIsVisible; }
@@ -316,7 +323,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
         }
         private bool _lytAddPharmacy = true;
-        public bool lytAddPharmacy 
+        public bool lytAddPharmacy
         {
             get { return _lytAddPharmacy; }
             set
@@ -407,14 +414,21 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 
                         foreach (var issue in issues)
                         {
-                            //if (medicalInfo != null)
-                            //        {
-                            //            if (medicalInfo.MedicalIssues.Contains(issue.ID)) chk.Checked = true;
-                            //        }
-                            MedicalIssuesList.Add(issue);
+                            if (medicalInfo != null)
+                            {
+                                if (!MedicalIssuesList.Any(a => a.ID == issue.ID))
+                                {
+                                    if (medicalInfo.MedicalIssues.Contains(issue.ID))
+                                    { issue.IsChecked = true; }
+                                    MedicalIssuesList.Add(issue);
+                                }
+
+                            }
+
                         }
+                        var a = MedicalIssuesList;
                         lytOtherMedicalIssueVisible = true;
-                        CurativeCheckDTO respGetCurative = await DataUtility.GetCurativeEligibilityForHomeViewDialogAsync(SettingsValues.ApiURLValue, medicalInfo.PatientID, Token).ConfigureAwait(false);
+                        CurativeCheckDTO respGetCurative = await DataUtility.GetCurativeEligibilityForHomeViewDialogAsync(SettingsValues.ApiURLValue, PatientID, Token).ConfigureAwait(false);
                         patientIsCurative = respGetCurative.CurativeEligibilityForHomeViewDialog;
                         patientIsEligibleForCurative = respGetCurative.IsCurative;
                     });
@@ -528,7 +542,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                                     chkOtherMedicalIssue = true;
                                     //txtOtherMedicalIssue.Enabled = true;
                                 }
-                                 
+
                             });
 
                             await LoadMedicalIssues().ConfigureAwait(false);
@@ -549,7 +563,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
-        private void UpdateSurgeriesList()
+        public void UpdateSurgeriesList()
         {
             var surgeriesList = medicalInfo.Surgeries.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
             foreach (Surgery surgury in surgeriesList)
@@ -560,8 +574,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
 
-        } 
-        private void UpdateMedicationsList()
+        }
+        public void UpdateMedicationsList()
         {
             //medicationsAdapter = new PatientRegistrationMedicalItemAdapter(this, Resources, medicalInfo.Medications.Cast<IPatientRegistrationMedicalInfoListItem>().ToList());
             //lstMedications.Adapter = medicationsAdapter;
@@ -575,17 +589,23 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-
-
-        private void UpdateAllergiesList()
+        public void UpdateAllergiesList()
         {
-            var allergiesList = medicalInfo.Allergies.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
-            foreach (Allergy allergy in allergiesList)
+            try
             {
-                if (!AllergiesList.Any(a => a.Name == allergy.Name))
+                var allergiesList = medicalInfo.Allergies.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
+                foreach (Allergy allergy in allergiesList)
                 {
-                    AllergiesList.Add(allergy);
+                    if (!AllergiesList.Any(a => a.Name == allergy.Name))
+                    {
+                        AllergiesList.Add(allergy);
+                    }
                 }
+
+                var a = AllergiesList;
+            }
+            catch (Exception ex)
+            {
             }
             //allergiesAdapter = new PatientRegistrationMedicalItemAdapter(this, Resources, medicalInfo.Allergies.Cast<IPatientRegistrationMedicalInfoListItem>().ToList());
             //lstAllergies.Adapter = allergiesAdapter;
