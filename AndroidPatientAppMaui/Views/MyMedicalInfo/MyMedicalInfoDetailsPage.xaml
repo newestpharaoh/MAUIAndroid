@@ -212,6 +212,9 @@
                             Text="Add Primary Care Provider"
                             TextColor="{StaticResource Black}"
                             VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding lytAddPCPCommand}" />
+                        </Grid.GestureRecognizers>
                     </Grid>
                     <Grid
                         x:Name="lytPCPSelected"
@@ -247,6 +250,9 @@
                                     Source="grrenpencil.png"
                                     VerticalOptions="CenterAndExpand"
                                     WidthRequest="20" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding imgEditPCPCommand}" />
+                                </Grid.GestureRecognizers>
                             </Grid>
                             <Grid
                                 Grid.Column="1"
@@ -261,6 +267,9 @@
                                     Source="greenbin.png"
                                     VerticalOptions="CenterAndExpand"
                                     WidthRequest="20" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ImgDeletePCPCommand}" />
+                                </Grid.GestureRecognizers>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -301,6 +310,9 @@
                             Text="Add Pharmacy"
                             TextColor="{StaticResource Black}"
                             VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding lytAddPharmacyCommand}" />
+                        </Grid.GestureRecognizers>
                     </Grid>
                     <Grid
                         x:Name="lytPharmacySelected"
@@ -358,6 +370,9 @@
                                     Source="grrenpencil.png"
                                     VerticalOptions="CenterAndExpand"
                                     WidthRequest="20" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding imgEditPharmacyCommand}" />
+                                </Grid.GestureRecognizers>
                             </Grid>
                             <Grid
                                 Grid.Column="1"
@@ -372,6 +387,9 @@
                                     Source="greenbin.png"
                                     VerticalOptions="CenterAndExpand"
                                     WidthRequest="20" />
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding imgDeletePharmacyCommand}" />
+                                </Grid.GestureRecognizers>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -436,6 +454,9 @@
                                                     Source="grrenpencil.png"
                                                     VerticalOptions="CenterAndExpand"
                                                     WidthRequest="20" />
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="imgEditAllergy_Tapped" />
+                                                </Grid.GestureRecognizers>
                                             </Grid>
                                             <Grid
                                                 Grid.Column="1"
@@ -450,6 +471,9 @@
                                                     Source="greenbin.png"
                                                     VerticalOptions="CenterAndExpand"
                                                     WidthRequest="20" />
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="imgDeleteAllergy_Tapped" />
+                                                </Grid.GestureRecognizers>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -477,6 +501,9 @@
                             Text="Add Allergy"
                             TextColor="{StaticResource Black}"
                             VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding lytAddAllergyCommand}" />
+                        </Grid.GestureRecognizers>
                     </Grid>
                 </Grid>
                 <!--  Medications Section  -->
@@ -538,6 +565,9 @@
                                                     Source="grrenpencil.png"
                                                     VerticalOptions="CenterAndExpand"
                                                     WidthRequest="20" />
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="imgEditMedication_Tapped" />
+                                                </Grid.GestureRecognizers>
                                             </Grid>
                                             <Grid
                                                 Grid.Column="1"
@@ -552,6 +582,9 @@
                                                     Source="greenbin.png"
                                                     VerticalOptions="CenterAndExpand"
                                                     WidthRequest="20" />
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="imgDeleteMedication_Tapped" />
+                                                </Grid.GestureRecognizers>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -579,6 +612,9 @@
                             Text="Add Medication"
                             TextColor="{StaticResource Black}"
                             VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding lytAddMedicationCommand}" />
+                        </Grid.GestureRecognizers>
                     </Grid>
                 </Grid>
                 <!--  Surgeries Section  -->
@@ -607,7 +643,7 @@
                         VerticalOptions="FillAndExpand"
                         VerticalScrollBarVisibility="Never">
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="local:Surgery">
+                            <DataTemplate>
                                 <ViewCell>
                                     <Grid
                                         ColumnDefinitions="*,Auto"
@@ -641,6 +677,9 @@
                                                     Source="grrenpencil.png"
                                                     VerticalOptions="CenterAndExpand"
                                                     WidthRequest="20" />
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="imgEditSurgery_Tapped" />
+                                                </Grid.GestureRecognizers>
                                             </Grid>
                                             <Grid
                                                 Grid.Column="1"
@@ -655,6 +694,9 @@
                                                     Source="greenbin.png"
                                                     VerticalOptions="CenterAndExpand"
                                                     WidthRequest="20" />
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="imgDeleteSurgery_Tapped" />
+                                                </Grid.GestureRecognizers>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -682,6 +724,9 @@
                             Text="Add Surgery"
                             TextColor="{StaticResource Black}"
                             VerticalOptions="Center" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding lytAddSurgeryCommand}" />
+                        </Grid.GestureRecognizers>
                     </Grid>
                 </Grid>
                 <!--  Success Section  -->

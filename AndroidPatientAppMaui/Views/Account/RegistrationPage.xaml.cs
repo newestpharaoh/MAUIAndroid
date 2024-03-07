@@ -9,11 +9,11 @@ public partial class RegistrationPage : ContentPage
 {
 
     //TODO : To Define Local Class Level Variables...
-   RegistrationPageViewModel VM;
+    RegistrationPageViewModel VM;
 
     #region Constructor
     public RegistrationPage()
-	{
+    {
         try
         {
             InitializeComponent();
@@ -22,11 +22,15 @@ public partial class RegistrationPage : ContentPage
         catch (Exception ex)
         {
             Console.WriteLine(ex);
-        } 
+        }
     }
     #endregion
 
     #region Event Handler
-
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await VM.GetDeatils();
+    }
     #endregion
 }

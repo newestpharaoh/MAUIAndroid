@@ -419,7 +419,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 if (_txtDOB != value)
                 {
                     _txtDOB = value;
-                    OnPropertyChanged(nameof(txtDOB));
+                    OnPropertyChanged("txtDOB");
                 }
             }
         }

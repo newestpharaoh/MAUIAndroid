@@ -140,7 +140,11 @@
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
 
-                    <controls:CustomDatePicker x:Name="myDatePicker" HeightRequest="45" />
+                    <controls:CustomDatePicker
+                        x:Name="myDatePicker"
+                        Date="{Binding txtDOB}"
+                        Format="MM/dd/yyyy"
+                        HeightRequest="45" />
                 </Grid>
             </Grid>
             <!--  Error message Section  -->

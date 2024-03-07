@@ -1,12 +1,8 @@
 ﻿using Acr.UserDialogs;
 using CommonLibraryCoreMaui;
-using CommonLibraryCoreMaui.Models;
-using System;
-using System.Collections.Generic;
+using CommonLibraryCoreMaui.Models; 
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel; 
 
 namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 {
@@ -21,6 +17,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public MedicalInfo medicalInfo;
         AdditionalFamilyMember additionalFamilyMember;
 
+        Allergy allergy;
+
         const int PCP_REQUEST_CODE = 2;
         const int SURGERY_REQUEST_CODE = 3;
         const int MEDICATION_REQUEST_CODE = 4;
@@ -34,16 +32,36 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
                 Navigation = nav;
                 BackCommand = new Command(BackAsync);
+                lytAddSurgeryCommand = new Command(lytAddSurgeryAsync);
+                lytAddPCPCommand = new Command(lytAddPCPAsync);
+                lytAddPharmacyCommand = new Command(lytAddPharmacyAsync);
+                lytAddAllergyCommand = new Command(lytAddAllergyAsync);
+                lytAddMedicationCommand = new Command(lytAddMedicationAsync);
+                imgEditPCPCommand = new Command(imgEditPCPAsync);
+                ImgDeletePCPCommand = new Command(ImgDeletePCPAsync);
+                imgDeletePharmacyCommand = new Command(imgDeletePharmacyAsync);
+                imgEditPharmacyCommand = new Command(imgEditPharmacyAsync);
+                AllergySaveCommand = new Command(AllergySaveAsync);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-        }
+        } 
         #endregion
 
         #region Command 
         public Command BackCommand { get; set; }
+        public Command lytAddSurgeryCommand { get; set; }
+        public Command lytAddPCPCommand { get; set; }
+        public Command lytAddPharmacyCommand { get; set; }
+        public Command lytAddAllergyCommand { get; set; }
+        public Command lytAddMedicationCommand { get; set; }
+        public Command imgEditPCPCommand { get; set; }
+        public Command ImgDeletePCPCommand { get; set; }
+        public Command imgEditPharmacyCommand { get; set; }
+        public Command imgDeletePharmacyCommand { get; set; }
+        public Command AllergySaveCommand { get; set; }
         #endregion
 
         #region Properties
@@ -373,8 +391,46 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     OnPropertyChanged("lytAddAllergy");
                 }
             }
+        } 
+        private string _txtAllergy;
+        public string txtAllergy
+        {
+            get { return _txtAllergy; }
+            set
+            {
+                if (_txtAllergy != value)
+                {
+                    _txtAllergy = value;
+                    OnPropertyChanged("txtAllergy");
+                }
+            }
         }
-
+        private string _txtComments;
+        public string txtComments
+        {
+            get { return _txtComments; }
+            set
+            {
+                if (_txtComments != value)
+                {
+                    _txtComments = value;
+                    OnPropertyChanged("txtComments");
+                }
+            }
+        }
+        private string _lblHeading = "Add Allergy";
+        public string lblHeading
+        {
+            get { return _lblHeading; }
+            set
+            {
+                if (_lblHeading != value)
+                {
+                    _lblHeading = value;
+                    OnPropertyChanged("lblHeading");
+                }
+            }
+        }
         #endregion
 
 
@@ -565,28 +621,36 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         }
         public void UpdateSurgeriesList()
         {
-            var surgeriesList = medicalInfo.Surgeries.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
-            foreach (Surgery surgury in surgeriesList)
+            try
             {
-                if (!SurgeryList.Any(a => a.Name == surgury.Name))
+                var surgeriesList = medicalInfo.Surgeries.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
+                foreach (Surgery surgury in surgeriesList)
                 {
-                    SurgeryList.Add(surgury);
+                    if (!SurgeryList.Any(a => a.Name == surgury.Name))
+                    {
+                        SurgeryList.Add(surgury);
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+            }
         }
         public void UpdateMedicationsList()
         {
-            //medicationsAdapter = new PatientRegistrationMedicalItemAdapter(this, Resources, medicalInfo.Medications.Cast<IPatientRegistrationMedicalInfoListItem>().ToList());
-            //lstMedications.Adapter = medicationsAdapter;
-            //ListViewHeightHelper.SetListViewHeightBasedOnChildren(lstMedications, true);
-            var medicationList = medicalInfo.Medications.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
-            foreach (Medication medication in medicationList)
+            try
             {
-                if (!MedicationsList.Any(a => a.Name == medication.Name))
+                var medicationList = medicalInfo.Medications.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
+                foreach (Medication medication in medicationList)
                 {
-                    MedicationsList.Add(medication);
+                    if (!MedicationsList.Any(a => a.Name == medication.Name))
+                    {
+                        MedicationsList.Add(medication);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
             }
         }
         public void UpdateAllergiesList()
@@ -607,30 +671,397 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             catch (Exception ex)
             {
             }
-            //allergiesAdapter = new PatientRegistrationMedicalItemAdapter(this, Resources, medicalInfo.Allergies.Cast<IPatientRegistrationMedicalInfoListItem>().ToList());
-            //lstAllergies.Adapter = allergiesAdapter;
-            //ListViewHeightHelper.SetListViewHeightBasedOnChildren(lstAllergies, true);
         }
         private async Task<bool> LoginNewUser(string username, string pwd)
         {
-            TokenResponse resp = await DataUtility.GetTokenResponseAsync(SettingsValues.ApiURLValue, username, pwd, "").ConfigureAwait(false);
-
-            if (resp != null)
+            try
             {
-                if (!string.IsNullOrEmpty(resp.access_token) && resp.expires_in != null)
+                TokenResponse resp = await DataUtility.GetTokenResponseAsync(SettingsValues.ApiURLValue, username, pwd, "").ConfigureAwait(false);
+
+                if (resp != null)
                 {
-                    UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, resp.userid, true, Token).ConfigureAwait(false);
+                    if (!string.IsNullOrEmpty(resp.access_token) && resp.expires_in != null)
+                    {
+                        UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, resp.userid, true, Token).ConfigureAwait(false);
 
-                    return true;
+                        return true;
+                    }
                 }
-            }
 
-            return false;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
         private async Task GetPharmacyFromPrimaryAccount()
         {
-            MedicalInfo mi = await DataUtility.PatientGetMedicalHistoryAsync(SettingsValues.ApiURLValue, Token, PatientID).ConfigureAwait(false);
-            if (mi != null) this.medicalInfo.Pharmacy = mi.Pharmacy;
+            try
+            {
+                MedicalInfo mi = await DataUtility.PatientGetMedicalHistoryAsync(SettingsValues.ApiURLValue, Token, PatientID).ConfigureAwait(false);
+                if (mi != null) this.medicalInfo.Pharmacy = mi.Pharmacy;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private async void lytAddSurgeryAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoSurgeryPage(null, 1), false);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private async void lytAddPCPAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSearch(null, 1), false);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private async void lytAddPharmacyAsync(object obj)
+        {
+            try
+            {
+                if (patientIsCurative || patientIsEligibleForCurative)
+                {
+                    ProcessCurative();
+                }
+                else
+                {
+                    ProcessCapsule();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private void ProcessCapsule()
+        {
+            try
+            {
+                Task.Run(async () =>
+                   {
+                       PatientProfile patientProfile = await DataUtility.GetPatientProfileAsync(SettingsValues.ApiURLValue, Token, PatientID).ConfigureAwait(false);
+                       bool capsuleEligible = await DataUtility.GetZipCapsuleEligibilityAsync(SettingsValues.ApiURLValue, patientProfile.Zip, Token).ConfigureAwait(false);
+                       Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                       {
+                           // ShowCapsuleMedicalInfo(patientProfile.Zip, patientProfile.PatientID, capsuleEligible);
+                       });
+                   });
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void ProcessCurative()
+        {
+            try
+            {
+                Task.Run(async () =>
+                    {
+                        PatientProfile patientProfile = await DataUtility.GetPatientProfileAsync(SettingsValues.ApiURLValue, Token, PatientID).ConfigureAwait(false);
+                        CurativeCheckDTO respGetCurative = await DataUtility.GetCurativeEligibilityForHomeViewDialogAsync(SettingsValues.ApiURLValue, medicalInfo.PatientID, Token).ConfigureAwait(false);
+                        StatusResponse respUpdateCurative = await DataUtility.UpdateCurativeEligibilityForHomeViewDialogAsync(SettingsValues.ApiURLValue, PatientID, false, Token).ConfigureAwait(false);
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            //ShowCurativeMedicalInfo(patientProfile.PatientID);
+                        });
+                    });
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private async void lytAddAllergyAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoAllergy(null, 1,this), false);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private async void lytAddMedicationAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoMedication(null, 1), false);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private async void ImgDeletePCPAsync(object obj)
+        {
+            try
+            {
+                DeleteMedicalItem(medicalInfo.PCP);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private async void imgDeletePharmacyAsync(object obj)
+        {
+            try
+            {
+                DeleteMedicalItem(medicalInfo.Pharmacy);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private string GetDescription(Type type)
+        {
+            var descriptions = (DescriptionAttribute[])
+                type.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (descriptions.Length == 0)
+            {
+                return null;
+            }
+            return descriptions[0].Description;
+        }
+        private string GetDialogTitle(Type type)
+        {
+            var descriptions = (DialogTitle[])
+                type.GetCustomAttributes(typeof(DialogTitle), false);
+
+            if (descriptions.Length == 0)
+            {
+                return null;
+            }
+            return descriptions[0].Name;
+        }
+
+        private async void DeleteMedicalItem(IPatientRegistrationMedicalInfoItem item)
+        {
+            string description = GetDescription(item.GetType()) ?? string.Empty;
+            string title = GetDialogTitle(item.GetType()) ?? string.Empty;
+            string confirmationMessage = $"Delete this {description.ToLower()}?";
+            bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
+
+            if (answer)
+            {
+                if (item is PCP)
+                {
+                    medicalInfo.PCP = null;
+                    lytPCPSelected = false;
+                    lytAddPCP = true;
+                }
+                else if (item is Pharmacy)
+                {
+                    medicalInfo.Pharmacy = null;
+                    lytPharmacySelected = false;
+                    lytAddPharmacy = true;
+                    Pharmacy ph = (Pharmacy)item;
+                    if (ph.IsCurative)
+                    {
+                        patientIsEligibleForCurative = true;
+                    }
+                }
+            };
+
+        }
+        public async void DeleteMedicalListItem(IPatientRegistrationMedicalInfoListItem item)
+        {
+            string description = GetDescription(item.GetType()) ?? string.Empty;
+            string title = GetDialogTitle(item.GetType()) ?? string.Empty;
+            string confirmationMessage = $"Delete this {description.ToLower()}?";
+            bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
+            if (answer)
+            {
+                if (item is Surgery)
+                {
+                    medicalInfo.Surgeries.RemoveAt(item.Position);
+                    UpdateSurgeriesList();
+                }
+                else if (item is Allergy)
+                {
+                    medicalInfo.Allergies.RemoveAt(item.Position);
+                    UpdateAllergiesList();
+                }
+                else if (item is Medication)
+                {
+                    medicalInfo.Medications.RemoveAt(item.Position);
+                    UpdateMedicationsList();
+                } 
+            }; 
+        }
+        private async void imgEditPCPAsync(object obj)
+        {
+            try
+            {
+                EditMedicalItem(medicalInfo.PCP);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private async void imgEditPharmacyAsync(object obj)
+        {
+            try
+            {
+                EditMedicalItem(medicalInfo.Pharmacy);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        public async void EditMedicalItem(IPatientRegistrationMedicalInfoItem item)
+        {
+            if (item is Pharmacy)
+            {
+                if (medicalInfo.Pharmacy.IsCurative || patientIsCurative && !medicalInfo.Pharmacy.IsCurative && medicalInfo.Pharmacy.PharmacyString == "")
+                {
+
+                    ProcessCurative();
+                }
+                else if (((Pharmacy)item).IsCapsule)
+                {
+                    ProcessCapsule();
+                }
+                else
+                {
+                    await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPharmacy(item, PHARMACY_REQUEST_CODE), false);
+
+                }
+            }
+            else if (item is PCP)
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPAdd(item, PCP_REQUEST_CODE), false);
+
+            }
+        }
+        public async void EditMedicalListItem(IPatientRegistrationMedicalInfoListItem item)
+        {
+            if (item is Surgery)
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoSurgeryPage(item, SURGERY_REQUEST_CODE), false);
+
+            }
+            else if (item is Allergy)
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoAllergy(item, ALLERGY_REQUEST_CODE,this), false);
+
+            }
+            else if (item is Medication)
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoMedication(item, MEDICATION_REQUEST_CODE), false);
+
+            }
+        }
+
+        public void UpdateCapsulePharmacy()
+        {
+            Pharmacy px = new Pharmacy() { IsCapsule = true };
+            medicalInfo.Pharmacy = px;
+            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+            {
+                lytPharmacySelected = true;
+                lytAddPharmacy = false;
+                lblPharmacySelectedVisible = false;
+                imgCapsule = true;
+                //
+            });
+        }
+
+        public void UpdateCurativePharmacy()
+        {
+            Pharmacy px = new Pharmacy() { IsCurative = true };
+            medicalInfo.Pharmacy = px;
+            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+            {
+                lytPharmacySelected = true;
+                lytAddPharmacy = false;
+                lblPharmacySelectedVisible = false;
+                imgCurative = true;
+                //
+            });
+        }
+        public async Task DisplayAllergyDeails()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            if (allergy != null)
+                            {
+                                txtAllergy = allergy.Name;
+                                txtComments = allergy.Description;
+                                lblHeading = "Edit Allergy";
+                            }
+
+                        });
+
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+                Console.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
+        /// ToDo: To define the Save command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void AllergySaveAsync(object obj)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtAllergy.Trim()))
+                {
+                    if (allergy != null)
+                    {
+                        allergy.Name = txtAllergy;
+                        allergy.Description = txtComments;
+                        AllergiesList.Add(allergy);
+                    }
+                    else
+                    {
+                        Allergy allergy = new Allergy()
+                        {
+                            Name = txtAllergy,
+                            Description = txtComments
+                        };
+                        AllergiesList.Add(allergy);
+                    }
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    UserDialog.Alert("Please fill all the required fields!");
+                }
+            }
+            catch (Exception ex)
+            {
+            }
         }
         #endregion
     }

@@ -51,7 +51,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #endregion
 
         #region Properties  
-        private string _UserName;
+        private string _UserName = Helpers.AppGlobalConstants.userInfo.Name;
         public string UserName
         {
             get { return _UserName; }
@@ -164,8 +164,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             {
                                 try
                                 {
-                                    UserName = Helpers.AppGlobalConstants.userInfo.Name;
-                                    lblPlan = $"Plan: {info.CurrentSubscriptionPlan}";
+                                    UserName = UserName!= null ? Helpers.AppGlobalConstants.userInfo.Name : String.Empty;
+                                    lblPlan = info.CurrentSubscriptionPlan != null ? $"Plan: {info.CurrentSubscriptionPlan}" : string.Empty;
                                     if (info.CanAddFamilyMembers)
                                     {
                                         aafmi = await DataUtility.PatientGetAddFamilyMemberInfoAsync(SettingsValues.ApiURLValue, PatientID, Token).ConfigureAwait(false);
@@ -181,11 +181,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                                     familyAccountNoticeString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "FamilyAccountNotice").Text; //Header
                                                     allInfoViewableString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "AllInfoViewable").Text; //Paragraph
                                                 }
-                                            });
-
-                                            lblPlan = $"Plan: {info.CurrentSubscriptionPlan}";
-                                            familyAcctNoticeTV = familyAccountNoticeString;
-                                            allInfoViewableTV = allInfoViewableString;
+                                            }); 
+                                            lblPlan = info.CurrentSubscriptionPlan != null ? $"Plan: {info.CurrentSubscriptionPlan}" : string.Empty;
+                                            familyAcctNoticeTV = familyAccountNoticeString != null ? familyAccountNoticeString : string.Empty; 
+                                            allInfoViewableTV = allInfoViewableString != null ? allInfoViewableString : string.Empty; 
 
                                             //list.SetAdapter(new Adapters.AccountProfilesExpandableListAdapter(this, info.AccountMembers, Resources));
                                             if (info.IsFamilyPlan)//(info.CurrentSubscriptionPlan == "Family Subscription" || info.CurrentSubscriptionPlan == "Family 365 Plan")

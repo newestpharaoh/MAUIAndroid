@@ -197,6 +197,24 @@
 	  <MauiXaml Update="Views\MyMedicalInfo\MyMedicalInfoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoAllergy.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoMedication.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoPCPAdd.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoPCPSearch.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoPharmacy.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoSurgeryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\MyMedicalInfo\ProviderSelectionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 {
-    public class ProviderSelectionPageViewModel : BaseViewModel
+    public class PatientRegistrationMedicalInfoPCPSearchViewModel : BaseViewModel
     {
-        public ProviderSelectionPageViewModel(INavigation nav)
+        public PatientRegistrationMedicalInfoPCPSearchViewModel(INavigation nav)
         {
             try
             {
-                Navigation = nav; 
+                Navigation = nav;
             }
             catch (Exception ex)
             {

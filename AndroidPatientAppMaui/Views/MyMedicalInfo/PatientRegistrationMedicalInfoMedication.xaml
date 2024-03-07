@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.MyMedicalInfo.PatientRegistrationMedicalInfoMedication"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
+    Title="PatientRegistrationMedicalInfoMedication">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="{Binding UserName}"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="12,10"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="12"
+                VerticalOptions="FillAndExpand">
+                <!--  Add Medication Section  -->
+                <Label
+                    x:Name="lblHeading"
+                    Grid.Row="0"
+                    FontFamily="SanchezSlab"
+                    FontSize="17"
+                    HorizontalTextAlignment="Start"
+                    Text="Add Medication"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <!--  Medications Name Section  -->
+                <Grid
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Medication Name*"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray3}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            x:Name="txtMedication"
+                            FontSize="14"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding txtMedication}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+                <!--  Frequency Section  -->
+                <Label
+                    Grid.Row="2"
+                    FontAttributes="Bold"
+                    FontSize="12"
+                    HorizontalTextAlignment="Start"
+                    Text="Please include dosage and frequency. Ex. 10mg once a day."
+                    TextColor="{StaticResource Black}"
+                    VerticalTextAlignment="Center" />
+                <!--  Editor Section  -->
+                <Grid
+                    Grid.Row="3"
+                    Padding="10,10"
+                    BackgroundColor="{StaticResource Gray3}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <controls:CustomEditor
+                        x:Name="txtComments"
+                        Background="{StaticResource Gray3}"
+                        HeightRequest="200"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Start"
+                        Text=""
+                        VerticalOptions="Start" />
+                </Grid>
+                <!--  Save Button Section  -->
+                <Button
+                    x:Name="btnSave"
+                    Grid.Row="4"
+                    Margin="50,0"
+                    BackgroundColor="#15B287"
+                    Command="{Binding SaveCommand}"
+                    FontFamily="SanchezSlab"
+                    FontSize="14"
+                    HeightRequest="55"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Save"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="180" />
+                <Label
+                    Grid.Row="5"
+                    FontSize="12"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Required fields (*) need to be completed before proceeding."
+                    TextColor="Black"
+                    VerticalOptions="FillAndExpand" />
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
