@@ -531,7 +531,7 @@
                         VerticalOptions="FillAndExpand"
                         VerticalScrollBarVisibility="Never">
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="local:Medication">
+                            <DataTemplate>
                                 <ViewCell>
                                     <Grid
                                         ColumnDefinitions="*,Auto"

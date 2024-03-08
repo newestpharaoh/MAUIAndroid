@@ -14,7 +14,7 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
             InitializeComponent();
             this.BindingContext = VM = new MyMedicalInfoDetailsPageViewModel(this.Navigation);
             VM.medicalInfo = medicalInfo;
-
+            VM.UpdateList();
         }
         catch (Exception ex)
         {
@@ -31,7 +31,6 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
             base.OnAppearing();
             await VM.LoadMedicalIssues();
             await VM.DisplayMedicalInfoDeails();
-            await VM.DisplayAllergyDeails();
         }
         catch (Exception ex)
         {
@@ -42,7 +41,7 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
     private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
         try
-        { 
+        {
             var chk = sender as CheckBox;
             //if (chk.Text.ToLower() == "none" && chk.Checked)
             //{
@@ -86,14 +85,14 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         }
     }
 
-    private void imgEditAllergy_Tapped(object sender, TappedEventArgs e)
+    private async void imgEditAllergy_Tapped(object sender, TappedEventArgs e)
     {
         try
         {
             var selecteditem = (sender as Grid).BindingContext as Allergy;
             if (selecteditem != null)
             {
-                VM.EditMedicalListItem(selecteditem);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoAllergy(selecteditem, VM.ALLERGY_REQUEST_CODE, VM), false);
             }
         }
         catch (Exception ex)
@@ -101,14 +100,29 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         }
     }
 
-    private void imgDeleteAllergy_Tapped(object sender, TappedEventArgs e)
+    private async void imgDeleteAllergy_Tapped(object sender, TappedEventArgs e)
     {
         try
         {
             var selecteditem = (sender as Grid).BindingContext as Allergy;
             if (selecteditem != null)
             {
-                VM.DeleteMedicalListItem(selecteditem);
+                //VM.DeleteMedicalListItem(selecteditem);
+                foreach (var item in VM.AllergiesList)
+                {
+                    if (item.Name == selecteditem.Name && item.Description == selecteditem.Description)
+                    {
+                        string description = VM.GetDescription(item.GetType()) ?? string.Empty;
+                        string title = VM.GetDialogTitle(item.GetType()) ?? string.Empty;
+                        string confirmationMessage = $"Delete this {description.ToLower()}?";
+                        bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
+
+                        if (answer)
+                        {
+                            VM.AllergiesList.Remove(item);
+                        }
+                    }
+                }
             }
         }
         catch (Exception ex)
@@ -116,14 +130,14 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         }
     }
 
-    private void imgEditMedication_Tapped(object sender, TappedEventArgs e)
+    private async void imgEditMedication_Tapped(object sender, TappedEventArgs e)
     {
         try
         {
             var selecteditem = (sender as Grid).BindingContext as Medication;
             if (selecteditem != null)
             {
-                VM.EditMedicalListItem(selecteditem);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoMedication(selecteditem, VM.MEDICATION_REQUEST_CODE, VM), false);
             }
         }
         catch (Exception ex)
@@ -131,14 +145,28 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         }
     }
 
-    private void imgDeleteMedication_Tapped(object sender, TappedEventArgs e)
+    private async void imgDeleteMedication_Tapped(object sender, TappedEventArgs e)
     {
         try
         {
             var selecteditem = (sender as Grid).BindingContext as Medication;
             if (selecteditem != null)
             {
-                VM.DeleteMedicalListItem(selecteditem);
+                foreach (var item in VM.MedicationsList)
+                {
+                    if (item.Name == selecteditem.Name && item.Description == selecteditem.Description)
+                    {
+                        string description = VM.GetDescription(item.GetType()) ?? string.Empty;
+                        string title = VM.GetDialogTitle(item.GetType()) ?? string.Empty;
+                        string confirmationMessage = $"Delete this {description.ToLower()}?";
+                        bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
+
+                        if (answer)
+                        {
+                            VM.MedicationsList.Remove(item);
+                        }
+                    }
+                }
             }
         }
         catch (Exception ex)
@@ -146,29 +174,43 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         }
     }
 
-    private void imgEditSurgery_Tapped(object sender, TappedEventArgs e)
-    {
-        try
-        {
-            var selecteditem = (sender as Grid).BindingContext as Medication;
-            if (selecteditem != null)
-            {
-                VM.EditMedicalListItem(selecteditem);
-            }
-        }
-        catch (Exception ex)
-        {
-        }
-    }
-
-    private void imgDeleteSurgery_Tapped(object sender, TappedEventArgs e)
+    private async void imgEditSurgery_Tapped(object sender, TappedEventArgs e)
     {
         try
         {
             var selecteditem = (sender as Grid).BindingContext as Surgery;
             if (selecteditem != null)
             {
-                VM.DeleteMedicalListItem(selecteditem);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoSurgeryPage(selecteditem, VM.SURGERY_REQUEST_CODE, VM), false);
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    private async void imgDeleteSurgery_Tapped(object sender, TappedEventArgs e)
+    {
+        try
+        {
+            var selecteditem = (sender as Grid).BindingContext as Surgery;
+            if (selecteditem != null)
+            {
+                foreach (var item in VM.SurgeryList)
+                {
+                    if (item.Name == selecteditem.Name && item.Description == selecteditem.Description)
+                    {
+                        string description = VM.GetDescription(item.GetType()) ?? string.Empty;
+                        string title = VM.GetDialogTitle(item.GetType()) ?? string.Empty;
+                        string confirmationMessage = $"Delete this {description.ToLower()}?";
+                        bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
+
+                        if (answer)
+                        {
+                            VM.SurgeryList.Remove(item);
+                        }
+                    }
+                }
             }
         }
         catch (Exception ex)

@@ -32,7 +32,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         #endregion
 
         #region Properties
-        private string _BillingPoliciesName;
+        private string _BillingPoliciesName = string.Empty;
         public string BillingPoliciesName
         {
             get { return _BillingPoliciesName; }
@@ -45,7 +45,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _MonthlySubscriptionPlan;
+        private string _MonthlySubscriptionPlan = string.Empty;
         public string MonthlySubscriptionPlan
         {
             get { return _MonthlySubscriptionPlan; }
@@ -58,7 +58,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _MonthlySubscriptionPlanP1;
+        private string _MonthlySubscriptionPlanP1 = string.Empty;
         public string MonthlySubscriptionPlanP1
         {
             get { return _MonthlySubscriptionPlanP1; }
@@ -71,7 +71,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _MonthlySubscriptionPlanP1B1;
+        private string _MonthlySubscriptionPlanP1B1 = string.Empty;
         public string MonthlySubscriptionPlanP1B1
         {
             get { return _MonthlySubscriptionPlanP1B1; }
@@ -84,7 +84,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _MonthlySubscriptionPlanP1B2;
+        private string _MonthlySubscriptionPlanP1B2 = string.Empty;
         public string MonthlySubscriptionPlanP1B2
         {
             get { return _MonthlySubscriptionPlanP1B2; }
@@ -97,7 +97,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _TablePurchaseDate;
+        private string _TablePurchaseDate = string.Empty;
         public string TablePurchaseDate
         {
             get { return _TablePurchaseDate; }
@@ -110,7 +110,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _TableAutoRenewalDate;
+        private string _TableAutoRenewalDate = string.Empty;
         public string TableAutoRenewalDate
         {
             get { return _TableAutoRenewalDate; }
@@ -123,7 +123,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Table_1st_28_Col1;
+        private string _Table_1st_28_Col1 = string.Empty;
         public string Table_1st_28_Col1
         {
             get { return _Table_1st_28_Col1; }
@@ -136,7 +136,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Table_1st_28_Col2;
+        private string _Table_1st_28_Col2 = string.Empty;
         public string Table_1st_28_Col2
         {
             get { return _Table_1st_28_Col2; }
@@ -149,7 +149,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Table_29th_Col1;
+        private string _Table_29th_Col1 = string.Empty;
         public string Table_29th_Col1
         {
             get { return _Table_29th_Col1; }
@@ -162,7 +162,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Table_29th_Col2;
+        private string _Table_29th_Col2 = string.Empty;
         public string Table_29th_Col2
         {
             get { return _Table_29th_Col2; }
@@ -175,7 +175,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Table_30th_Col1;
+        private string _Table_30th_Col1 = string.Empty;
         public string Table_30th_Col1
         {
             get { return _Table_30th_Col1; }
@@ -188,7 +188,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Table_30th_Col2;
+        private string _Table_30th_Col2 = string.Empty;
         public string Table_30th_Col2
         {
             get { return _Table_30th_Col2; }
@@ -201,7 +201,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Table_31th_Col1;
+        private string _Table_31th_Col1 = string.Empty;
         public string Table_31th_Col1
         {
             get { return _Table_31th_Col1; }
@@ -214,7 +214,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Table_31th_Col2;
+        private string _Table_31th_Col2 = string.Empty;
         public string Table_31th_Col2
         {
             get { return _Table_31th_Col2; }
@@ -227,7 +227,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _UpdatingCreditCardName;
+        private string _UpdatingCreditCardName = string.Empty;
         public string UpdatingCreditCardName
         {
             get { return _UpdatingCreditCardName; }
@@ -240,7 +240,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _UpdatingCreditCard;
+        private string _UpdatingCreditCard = string.Empty;
         public string UpdatingCreditCard
         {
             get { return _UpdatingCreditCard; }
@@ -253,7 +253,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _ChangePlanInfo;
+        private string _ChangePlanInfo = string.Empty;
         public string ChangePlanInfo
         {
             get { return _ChangePlanInfo; }
@@ -266,7 +266,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _SubscriptionPlanChanges;
+        private string _SubscriptionPlanChanges = string.Empty;
         public string SubscriptionPlanChanges
         {
             get { return _SubscriptionPlanChanges; }
@@ -279,7 +279,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _NoRefunds;
+        private string _NoRefunds = string.Empty;
         public string NoRefunds
         {
             get { return _NoRefunds; }
@@ -292,7 +292,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-        private string _Cancellation;
+        private string _Cancellation = string.Empty;
         public string Cancellation
         {
             get { return _Cancellation; }
@@ -379,7 +379,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 
                                 }
                                 catch (Exception ex)
-                                { 
+                                {
+                                    Console.WriteLine(ex);
                                 }
                             }
                         });
@@ -395,6 +396,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             catch (Exception ex)
             {
                 UserDialog.HideLoading();
+                Console.WriteLine(ex);
             }
         }
 

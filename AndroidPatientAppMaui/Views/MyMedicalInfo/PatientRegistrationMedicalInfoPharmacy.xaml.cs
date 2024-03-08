@@ -5,10 +5,19 @@ namespace AndroidPatientAppMaui.Views.MyMedicalInfo;
 
 public partial class PatientRegistrationMedicalInfoPharmacy : ContentPage
 {
-	PatientRegistrationMedicalInfoPharmacyViewModel VM;
-    public PatientRegistrationMedicalInfoPharmacy(IPatientRegistrationMedicalInfoItem item,int code)
-	{
-		InitializeComponent();
-        this.BindingContext = VM = new PatientRegistrationMedicalInfoPharmacyViewModel(this.Navigation);
+    MyMedicalInfoDetailsPageViewModel VM;
+    #region Constructor
+    public PatientRegistrationMedicalInfoPharmacy(IPatientRegistrationMedicalInfoItem item, int code, MyMedicalInfoDetailsPageViewModel pageViewModel)
+    {
+        InitializeComponent();
+        this.BindingContext = VM = pageViewModel;
     }
+    #endregion
+
+    #region Event Handler
+    private void StatePicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    #endregion
 }

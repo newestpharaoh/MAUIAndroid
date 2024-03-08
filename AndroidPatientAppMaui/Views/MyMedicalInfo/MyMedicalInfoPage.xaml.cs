@@ -6,7 +6,7 @@ public partial class MyMedicalInfoPage : ContentPage
 {
     //To define the class lavel variable.
     MyMedicalInfoPageViewModel VM;
-    int PatientID;
+    int PatientID = Helpers.AppGlobalConstants.userInfo.PatientID;
 
     #region Constructor
     public MyMedicalInfoPage()

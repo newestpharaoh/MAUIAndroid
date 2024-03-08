@@ -5,10 +5,23 @@ namespace AndroidPatientAppMaui.Views.MyMedicalInfo;
 
 public partial class PatientRegistrationMedicalInfoSurgeryPage : ContentPage
 {
-	PatientRegistrationMedicalInfoSurgeryViewModel VM;
-    public PatientRegistrationMedicalInfoSurgeryPage(IPatientRegistrationMedicalInfoListItem item, int code)
+    MyMedicalInfoDetailsPageViewModel VM;
+    #region Constructor
+    public PatientRegistrationMedicalInfoSurgeryPage(Surgery surgery, int code, MyMedicalInfoDetailsPageViewModel pageViewModel)
     {
-		InitializeComponent();
-        this.BindingContext = VM = new PatientRegistrationMedicalInfoSurgeryViewModel(this.Navigation);
+        InitializeComponent();
+        this.BindingContext = VM = pageViewModel;
+
+        VM.surgery = surgery;
     }
+    #endregion
+
+    #region Event Handler
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        VM.DisplaySurguryDetails();
+    }
+    #endregion
 }

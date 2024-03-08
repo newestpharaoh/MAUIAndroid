@@ -70,7 +70,7 @@
                     FontFamily="SanchezSlab"
                     FontSize="17"
                     HorizontalTextAlignment="Start"
-                    Text="Add Medication"
+                    Text="{Binding lblMedicationHeading}"
                     TextColor="{StaticResource Blue1}"
                     VerticalTextAlignment="Center" />
                 <!--  Medications Name Section  -->
@@ -126,7 +126,7 @@
                         HeightRequest="200"
                         HorizontalOptions="FillAndExpand"
                         HorizontalTextAlignment="Start"
-                        Text=""
+                        Text="{Binding txtMedicationComments}"
                         VerticalOptions="Start" />
                 </Grid>
                 <!--  Save Button Section  -->
@@ -135,7 +135,7 @@
                     Grid.Row="4"
                     Margin="50,0"
                     BackgroundColor="#15B287"
-                    Command="{Binding SaveCommand}"
+                    Command="{Binding MedicationSaveCommand}"
                     FontFamily="SanchezSlab"
                     FontSize="14"
                     HeightRequest="55"

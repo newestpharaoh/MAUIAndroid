@@ -63,7 +63,7 @@
                 RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
                 RowSpacing="12"
                 VerticalOptions="FillAndExpand">
-                <!--  Add Medication Section  -->
+                <!--  Add Allergy Section  -->
                 <Label
                     x:Name="lblHeading"
                     Grid.Row="0"

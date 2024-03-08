@@ -6,10 +6,22 @@ namespace AndroidPatientAppMaui.Views.MyMedicalInfo;
 public partial class PatientRegistrationMedicalInfoAllergy : ContentPage
 {
     MyMedicalInfoDetailsPageViewModel VM;
-	public PatientRegistrationMedicalInfoAllergy(IPatientRegistrationMedicalInfoListItem item, int code, MyMedicalInfoDetailsPageViewModel pageViewModel)
+    #region Constructor
+    public PatientRegistrationMedicalInfoAllergy(Allergy allergy, int code, MyMedicalInfoDetailsPageViewModel pageViewModel)
     {
-		InitializeComponent();
+        InitializeComponent();
         this.BindingContext = VM = pageViewModel;
 
+        VM.allergy = allergy;
     }
+    #endregion
+
+    #region Event Handler
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        VM.DisplayAllergyDeails();
+    }
+    #endregion
 }

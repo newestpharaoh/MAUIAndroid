@@ -875,14 +875,19 @@
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
                             <controls:CustomEntry
+                                x:Name="txtZipCode"
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
                                 IsVisible="{Binding ZipcodeIsVisble}"
-                                Keyboard="Default"
+                                Keyboard="Numeric"
+                                Placeholder="Enter Zip Code"
                                 Text="{Binding txtZipcode}"
-                                VerticalOptions="FillAndExpand" />
-
+                                VerticalOptions="FillAndExpand">
+                                <controls:CustomEntry.Behaviors>
+                                    <toolkit:MaskedBehavior Mask="XXXXX" />
+                                </controls:CustomEntry.Behaviors>
+                            </controls:CustomEntry>
                         </Grid>
                     </Grid>
                     <!--  Error Section  -->

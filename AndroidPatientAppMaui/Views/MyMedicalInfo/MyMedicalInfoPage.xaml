@@ -86,7 +86,7 @@
                     Margin="0,5,0,20"
                     HorizontalOptions="FillAndExpand"
                     IsVisible="{Binding lytInfo}"
-                    VerticalOptions="FillAndExpand"> 
+                    VerticalOptions="FillAndExpand">
                     <Label
                         x:Name="lblInfo"
                         FontSize="17"

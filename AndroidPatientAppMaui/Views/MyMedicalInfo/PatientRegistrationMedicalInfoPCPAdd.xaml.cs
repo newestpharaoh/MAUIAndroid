@@ -5,10 +5,26 @@ namespace AndroidPatientAppMaui.Views.MyMedicalInfo;
 
 public partial class PatientRegistrationMedicalInfoPCPAdd : ContentPage
 {
-	PatientRegistrationMedicalInfoPCPAddViewModel VM;
-    public PatientRegistrationMedicalInfoPCPAdd(IPatientRegistrationMedicalInfoItem item, int code)
+    MyMedicalInfoDetailsPageViewModel VM;
+    #region Constructor
+    public PatientRegistrationMedicalInfoPCPAdd(IPatientRegistrationMedicalInfoItem item, int code, MyMedicalInfoDetailsPageViewModel pageViewModel)
 	{
 		InitializeComponent();
-        this.BindingContext = VM = new PatientRegistrationMedicalInfoPCPAddViewModel(this.Navigation);
+        this.BindingContext = VM = pageViewModel;
+         
+    }
+    #endregion
+
+    #region Event Handler
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing(); 
+    }
+    #endregion
+
+    private void StatePicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }

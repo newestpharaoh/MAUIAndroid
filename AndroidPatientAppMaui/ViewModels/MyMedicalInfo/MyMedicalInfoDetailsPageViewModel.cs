@@ -1,8 +1,8 @@
 ﻿using Acr.UserDialogs;
 using CommonLibraryCoreMaui;
-using CommonLibraryCoreMaui.Models; 
+using CommonLibraryCoreMaui.Models;
 using System.Collections.ObjectModel;
-using System.ComponentModel; 
+using System.ComponentModel;
 
 namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 {
@@ -17,13 +17,16 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public MedicalInfo medicalInfo;
         AdditionalFamilyMember additionalFamilyMember;
 
-        Allergy allergy;
+        public Allergy allergy;
+        public Medication medication;
+        public Surgery surgery;
+        public Pharmacy pharmacy;
 
-        const int PCP_REQUEST_CODE = 2;
-        const int SURGERY_REQUEST_CODE = 3;
-        const int MEDICATION_REQUEST_CODE = 4;
-        const int ALLERGY_REQUEST_CODE = 5;
-        const int PHARMACY_REQUEST_CODE = 6;
+        public int PCP_REQUEST_CODE = 2;
+        public int SURGERY_REQUEST_CODE = 3;
+        public int MEDICATION_REQUEST_CODE = 4;
+        public int ALLERGY_REQUEST_CODE = 5;
+        public int PHARMACY_REQUEST_CODE = 6;
 
         #region Constructor
         public MyMedicalInfoDetailsPageViewModel(INavigation nav)
@@ -42,12 +45,17 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 imgDeletePharmacyCommand = new Command(imgDeletePharmacyAsync);
                 imgEditPharmacyCommand = new Command(imgEditPharmacyAsync);
                 AllergySaveCommand = new Command(AllergySaveAsync);
+                MedicationSaveCommand = new Command(MedicationSaveAsync);
+                SurgurySaveCommand = new Command(SurgurySaveAsync);
+
+                //  UpdateList();
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
-        } 
+        }
         #endregion
 
         #region Command 
@@ -62,6 +70,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public Command imgEditPharmacyCommand { get; set; }
         public Command imgDeletePharmacyCommand { get; set; }
         public Command AllergySaveCommand { get; set; }
+        public Command MedicationSaveCommand { get; set; }
+        public Command SurgurySaveCommand { get; set; }
         #endregion
 
         #region Properties
@@ -391,7 +401,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     OnPropertyChanged("lytAddAllergy");
                 }
             }
-        } 
+        }
         private string _txtAllergy;
         public string txtAllergy
         {
@@ -418,6 +428,58 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
+        private string _txtMedication;
+        public string txtMedication
+        {
+            get { return _txtMedication; }
+            set
+            {
+                if (_txtMedication != value)
+                {
+                    _txtMedication = value;
+                    OnPropertyChanged("txtMedication");
+                }
+            }
+        }
+        private string _txtSurgery;
+        public string txtSurgery
+        {
+            get { return _txtSurgery; }
+            set
+            {
+                if (_txtSurgery != value)
+                {
+                    _txtSurgery = value;
+                    OnPropertyChanged("txtSurgery");
+                }
+            }
+        }
+        private string _txtMedicationComments;
+        public string txtMedicationComments
+        {
+            get { return _txtMedicationComments; }
+            set
+            {
+                if (_txtMedicationComments != value)
+                {
+                    _txtMedicationComments = value;
+                    OnPropertyChanged("txtMedicationComments");
+                }
+            }
+        }
+        private string _txtSurguryComments;
+        public string txtSurguryComments
+        {
+            get { return _txtSurguryComments; }
+            set
+            {
+                if (_txtSurguryComments != value)
+                {
+                    _txtSurguryComments = value;
+                    OnPropertyChanged("txtSurguryComments");
+                }
+            }
+        }
         private string _lblHeading = "Add Allergy";
         public string lblHeading
         {
@@ -431,11 +493,61 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
+        private string _lblMedicationHeading = "Add Medication";
+        public string lblMedicationHeading
+        {
+            get { return _lblMedicationHeading; }
+            set
+            {
+                if (_lblMedicationHeading != value)
+                {
+                    _lblMedicationHeading = value;
+                    OnPropertyChanged("lblMedicationHeading");
+                }
+            }
+        }
+        private string _lblPCPHeading = "Add Primary Care Provider";
+        public string lblPCPHeading
+        {
+            get { return _lblPCPHeading; }
+            set
+            {
+                if (_lblPCPHeading != value)
+                {
+                    _lblPCPHeading = value;
+                    OnPropertyChanged("lblPCPHeading");
+                }
+            }
+        }
+        private string _lblSurgeryHeading = "Add Surgery";
+        public string lblSurgeryHeading
+        {
+            get { return _lblSurgeryHeading; }
+            set
+            {
+                if (_lblSurgeryHeading != value)
+                {
+                    _lblSurgeryHeading = value;
+                    OnPropertyChanged("lblSurgeryHeading");
+                }
+            }
+        }
+        private string _lblPharmacyHeading = "Add Pharmacy";
+        public string lblPharmacyHeading
+        {
+            get { return _lblPharmacyHeading; }
+            set
+            {
+                if (_lblPharmacyHeading != value)
+                {
+                    _lblPharmacyHeading = value;
+                    OnPropertyChanged("lblPharmacyHeading");
+                }
+            }
+        }
         #endregion
 
-
-        #region Methods
-
+        #region Methods 
         /// <summary>
         /// To define the back button command.
         /// </summary>
@@ -623,14 +735,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                var surgeriesList = medicalInfo.Surgeries.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
-                foreach (Surgery surgury in surgeriesList)
-                {
-                    if (!SurgeryList.Any(a => a.Name == surgury.Name))
-                    {
-                        SurgeryList.Add(surgury);
-                    }
-                }
+                var surgeriesList = SurgeryList.ToList();
+                SurgeryList = new ObservableCollection<Surgery>(surgeriesList);
             }
             catch (Exception ex)
             {
@@ -640,14 +746,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                var medicationList = medicalInfo.Medications.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
-                foreach (Medication medication in medicationList)
-                {
-                    if (!MedicationsList.Any(a => a.Name == medication.Name))
-                    {
-                        MedicationsList.Add(medication);
-                    }
-                }
+                var medicationList = MedicationsList.ToList();
+                MedicationsList = new ObservableCollection<Medication>(medicationList);
             }
             catch (Exception ex)
             {
@@ -657,16 +757,24 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                var allergiesList = medicalInfo.Allergies.Cast<IPatientRegistrationMedicalInfoListItem>().ToList();
-                foreach (Allergy allergy in allergiesList)
-                {
-                    if (!AllergiesList.Any(a => a.Name == allergy.Name))
-                    {
-                        AllergiesList.Add(allergy);
-                    }
-                }
+                var allergiesList = AllergiesList.ToList();
+                AllergiesList = new ObservableCollection<Allergy>(allergiesList);
+            }
+            catch (Exception ex)
+            {
+            }
 
-                var a = AllergiesList;
+        }
+        public void UpdateList()
+        {
+            try
+            {
+                var allergiesList = medicalInfo.Allergies.ToList();
+                var medicalList = medicalInfo.Medications.ToList();
+                var SurguryList = medicalInfo.Surgeries.ToList();
+                AllergiesList = new ObservableCollection<Allergy>(allergiesList);
+                MedicationsList = new ObservableCollection<Medication>(medicalList);
+                SurgeryList = new ObservableCollection<Surgery>(SurguryList);
             }
             catch (Exception ex)
             {
@@ -710,7 +818,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoSurgeryPage(null, 1), false);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoSurgeryPage(null, 1, this), false);
             }
             catch (Exception ex)
             {
@@ -785,7 +893,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoAllergy(null, 1,this), false);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoAllergy(null, 1, this), false);
             }
             catch (Exception ex)
             {
@@ -795,7 +903,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoMedication(null, 1), false);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoMedication(null, 1, this), false);
             }
             catch (Exception ex)
             {
@@ -822,7 +930,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
         }
 
-        private string GetDescription(Type type)
+        public string GetDescription(Type type)
         {
             var descriptions = (DescriptionAttribute[])
                 type.GetCustomAttributes(typeof(DescriptionAttribute), false);
@@ -833,7 +941,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
             return descriptions[0].Description;
         }
-        private string GetDialogTitle(Type type)
+        public string GetDialogTitle(Type type)
         {
             var descriptions = (DialogTitle[])
                 type.GetCustomAttributes(typeof(DialogTitle), false);
@@ -896,8 +1004,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 {
                     medicalInfo.Medications.RemoveAt(item.Position);
                     UpdateMedicationsList();
-                } 
-            }; 
+                }
+            };
         }
         private async void imgEditPCPAsync(object obj)
         {
@@ -921,60 +1029,53 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         }
         public async void EditMedicalItem(IPatientRegistrationMedicalInfoItem item)
         {
-            if (item is Pharmacy)
+            try
             {
-                if (medicalInfo.Pharmacy.IsCurative || patientIsCurative && !medicalInfo.Pharmacy.IsCurative && medicalInfo.Pharmacy.PharmacyString == "")
+                if (item is Pharmacy)
                 {
+                    if (medicalInfo.Pharmacy.IsCurative || patientIsCurative && !medicalInfo.Pharmacy.IsCurative && medicalInfo.Pharmacy.PharmacyString == "")
+                    {
 
-                    ProcessCurative();
+                        ProcessCurative();
+                    }
+                    else if (((Pharmacy)item).IsCapsule)
+                    {
+                        ProcessCapsule();
+                    }
+                    else
+                    {
+                        await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPharmacy(item, PHARMACY_REQUEST_CODE, this), false);
+                    }
                 }
-                else if (((Pharmacy)item).IsCapsule)
+                else if (item is PCP)
                 {
-                    ProcessCapsule();
-                }
-                else
-                {
-                    await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPharmacy(item, PHARMACY_REQUEST_CODE), false);
+                    await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPAdd(item, PCP_REQUEST_CODE, this), false);
 
                 }
             }
-            else if (item is PCP)
+            catch (Exception ex)
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPAdd(item, PCP_REQUEST_CODE), false);
-
             }
         }
-        public async void EditMedicalListItem(IPatientRegistrationMedicalInfoListItem item)
-        {
-            if (item is Surgery)
-            {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoSurgeryPage(item, SURGERY_REQUEST_CODE), false);
 
-            }
-            else if (item is Allergy)
-            {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoAllergy(item, ALLERGY_REQUEST_CODE,this), false);
-
-            }
-            else if (item is Medication)
-            {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoMedication(item, MEDICATION_REQUEST_CODE), false);
-
-            }
-        }
 
         public void UpdateCapsulePharmacy()
         {
-            Pharmacy px = new Pharmacy() { IsCapsule = true };
-            medicalInfo.Pharmacy = px;
-            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+            try
             {
-                lytPharmacySelected = true;
-                lytAddPharmacy = false;
-                lblPharmacySelectedVisible = false;
-                imgCapsule = true;
-                //
-            });
+                Pharmacy px = new Pharmacy() { IsCapsule = true };
+                medicalInfo.Pharmacy = px;
+                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                {
+                    lytPharmacySelected = true;
+                    lytAddPharmacy = false;
+                    lblPharmacySelectedVisible = false;
+                    imgCapsule = true;
+                });
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         public void UpdateCurativePharmacy()
@@ -1004,11 +1105,80 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                         {
                             if (allergy != null)
                             {
+                                lblHeading = "Edit Allergy";
                                 txtAllergy = allergy.Name;
                                 txtComments = allergy.Description;
-                                lblHeading = "Edit Allergy";
                             }
+                        });
 
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+                Console.WriteLine(ex);
+            }
+        }
+        public async Task DisplayMedicationDetails()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            if (medication != null)
+                            {
+                                lblMedicationHeading = "Edit Medication";
+                                txtMedication = medication.Name;
+                                txtMedicationComments = medication.Description;
+                            }
+                        });
+
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+                Console.WriteLine(ex);
+            }
+        }
+        public async Task DisplaySurguryDetails()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            if (surgery != null)
+                            {
+                                lblMedicationHeading = "Edit Surgery";
+                                txtSurgery = surgery.Name;
+                                txtSurguryComments = surgery.Description;
+                            }
                         });
 
                     }).ConfigureAwait(false);
@@ -1039,9 +1209,12 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 {
                     if (allergy != null)
                     {
-                        allergy.Name = txtAllergy;
-                        allergy.Description = txtComments;
-                        AllergiesList.Add(allergy);
+                        var indx = AllergiesList.IndexOf(allergy);
+                        if (indx != -1)
+                        {
+                            AllergiesList[indx].Name = txtAllergy;
+                            AllergiesList[indx].Description = txtComments;
+                        }
                     }
                     else
                     {
@@ -1051,6 +1224,84 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                             Description = txtComments
                         };
                         AllergiesList.Add(allergy);
+                    }
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    UserDialog.Alert("Please fill all the required fields!");
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        /// <summary>
+        /// ToDo: To define the Save command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void MedicationSaveAsync(object obj)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtMedication.Trim()))
+                {
+                    if (medication != null)
+                    {
+                        var indx = MedicationsList.IndexOf(medication);
+                        if (indx != -1)
+                        {
+                            MedicationsList[indx].Name = txtMedication;
+                            MedicationsList[indx].Description = txtMedicationComments;
+                        }
+                    }
+                    else
+                    {
+                        Medication medication = new Medication()
+                        {
+                            Name = txtMedication,
+                            Description = txtMedicationComments,
+                        };
+                        MedicationsList.Add(medication);
+                    }
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    UserDialog.Alert("Please fill all the required fields!");
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        /// <summary>
+        /// ToDo: To define the Save command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void SurgurySaveAsync(object obj)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtSurgery.Trim()))
+                {
+                    if (surgery != null)
+                    {
+                        var indx = SurgeryList.IndexOf(surgery);
+                        if (indx != -1)
+                        {
+                            SurgeryList[indx].Name = txtSurgery;
+                            SurgeryList[indx].Description = txtSurguryComments;
+                        }
+                    }
+                    else
+                    {
+                        Surgery surgery = new Surgery()
+                        {
+                            Name = txtSurgery,
+                            Description = txtSurguryComments,
+                        };
+                        SurgeryList.Add(surgery);
                     }
                     await Navigation.PopModalAsync();
                 }
