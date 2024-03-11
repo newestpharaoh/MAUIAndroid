@@ -211,7 +211,7 @@
                             WidthRequest="15" />
                         <controls:CustomPicker
                             Margin="1,10"
-                            HorizontalTextAlignment="Start"
+                            HorizontalTextAlignment="Start" TextColor="Transparent"
                             ItemsSource="{Binding StatesList}"
                             SelectedIndexChanged="StatePicker_SelectedIndexChanged"
                             VerticalTextAlignment="Center" />

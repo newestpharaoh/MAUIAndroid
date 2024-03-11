@@ -12,8 +12,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         string Token = string.Empty;
         int PatientID = 0;
         int noneIndex;
-        bool patientIsCurative = false;
-        bool patientIsEligibleForCurative = false;
+        public bool patientIsCurative = false;
+        public bool patientIsEligibleForCurative = false;
         public MedicalInfo medicalInfo;
         AdditionalFamilyMember additionalFamilyMember;
 
@@ -21,6 +21,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public Medication medication;
         public Surgery surgery;
         public Pharmacy pharmacy;
+        public PCP pcp;
 
         public int PCP_REQUEST_CODE = 2;
         public int SURGERY_REQUEST_CODE = 3;
@@ -47,6 +48,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 AllergySaveCommand = new Command(AllergySaveAsync);
                 MedicationSaveCommand = new Command(MedicationSaveAsync);
                 SurgurySaveCommand = new Command(SurgurySaveAsync);
+                PharmacySaveCommand = new Command(PharmacySaveAsync);
+                PCPSaveCommand = new Command(PCPSaveAsync);
+                PCPCancelCommand = new Command(PCPCancelAsync);
+                PCPSearchCommand = new Command(PCPSearchAsync);
 
                 //  UpdateList();
 
@@ -72,9 +77,26 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public Command AllergySaveCommand { get; set; }
         public Command MedicationSaveCommand { get; set; }
         public Command SurgurySaveCommand { get; set; }
+        public Command PharmacySaveCommand { get; set; }
+        public Command PCPSaveCommand { get; set; }
+        public Command PCPCancelCommand { get; set; }
+        public Command PCPSearchCommand { get; set; }
         #endregion
 
         #region Properties
+        private ObservableCollection<PCP> _listPrimaryCareProviders = new ObservableCollection<PCP>();
+        public ObservableCollection<PCP> listPrimaryCareProviders
+        {
+            get { return _listPrimaryCareProviders; }
+            set
+            {
+                if (_listPrimaryCareProviders != value)
+                {
+                    _listPrimaryCareProviders = value;
+                    OnPropertyChanged("listPrimaryCareProviders");
+                }
+            }
+        }
         private ObservableCollection<MedicalIssue> _MedicalIssuesList = new ObservableCollection<MedicalIssue>();
         public ObservableCollection<MedicalIssue> MedicalIssuesList
         {
@@ -192,6 +214,19 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
+        private Pharmacy _PharmacySelected;
+        public Pharmacy PharmacySelected
+        {
+            get { return _PharmacySelected; }
+            set
+            {
+                if (_PharmacySelected != value)
+                {
+                    _PharmacySelected = value;
+                    OnPropertyChanged("PharmacySelected");
+                }
+            }
+        }
         private bool _lblPharmacySelectedVisible;
         public bool lblPharmacySelectedVisible
         {
@@ -202,6 +237,58 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 {
                     _lblPharmacySelectedVisible = value;
                     OnPropertyChanged("lblPharmacySelectedVisible");
+                }
+            }
+        }
+        private bool _BtnContinueUpdate = false;
+        public bool BtnContinueUpdate
+        {
+            get { return _BtnContinueUpdate; }
+            set
+            {
+                if (_BtnContinueUpdate != value)
+                {
+                    _BtnContinueUpdate = value;
+                    OnPropertyChanged("BtnContinueUpdate");
+                }
+            }
+        }
+        private bool _BtnContinueRegistration = false;
+        public bool BtnContinueRegistration
+        {
+            get { return _BtnContinueRegistration; }
+            set
+            {
+                if (_BtnContinueRegistration != value)
+                {
+                    _BtnContinueRegistration = value;
+                    OnPropertyChanged("BtnContinueRegistration");
+                }
+            }
+        }
+        private bool _BtnAddFamilyMember = false;
+        public bool BtnAddFamilyMember
+        {
+            get { return _BtnAddFamilyMember; }
+            set
+            {
+                if (_BtnAddFamilyMember != value)
+                {
+                    _BtnAddFamilyMember = value;
+                    OnPropertyChanged("BtnAddFamilyMember");
+                }
+            }
+        }
+        private bool _lblNoResultsFound = false;
+        public bool lblNoResultsFound
+        {
+            get { return _lblNoResultsFound; }
+            set
+            {
+                if (_lblNoResultsFound != value)
+                {
+                    _lblNoResultsFound = value;
+                    OnPropertyChanged("lblNoResultsFound");
                 }
             }
         }
@@ -519,6 +606,19 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
+        private string _lblPCPSearchHeading = "Find Your Primary Care Provider";
+        public string lblPCPSearchHeading
+        {
+            get { return _lblPCPSearchHeading; }
+            set
+            {
+                if (_lblPCPSearchHeading != value)
+                {
+                    _lblPCPSearchHeading = value;
+                    OnPropertyChanged("lblPCPSearchHeading");
+                }
+            }
+        }
         private string _lblSurgeryHeading = "Add Surgery";
         public string lblSurgeryHeading
         {
@@ -542,6 +642,224 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 {
                     _lblPharmacyHeading = value;
                     OnPropertyChanged("lblPharmacyHeading");
+                }
+            }
+        }
+        private string _txtName;
+        public string txtName
+        {
+            get { return _txtName; }
+            set
+            {
+                if (_txtName != value)
+                {
+                    _txtName = value;
+                    OnPropertyChanged("txtName");
+                }
+            }
+        }
+        private string _txtAddress1;
+        public string txtAddress1
+        {
+            get { return _txtAddress1; }
+            set
+            {
+                if (_txtAddress1 != value)
+                {
+                    _txtAddress1 = value;
+                    OnPropertyChanged("txtAddress1");
+                }
+            }
+        }
+        private string _txtCity;
+        public string txtCity
+        {
+            get { return _txtCity; }
+            set
+            {
+                if (_txtCity != value)
+                {
+                    _txtCity = value;
+                    OnPropertyChanged("txtCity");
+                }
+            }
+        }
+        private string _StateLbl;
+        public string StateLbl
+        {
+            get { return _StateLbl; }
+            set
+            {
+                if (_StateLbl != value)
+                {
+                    _StateLbl = value;
+                    OnPropertyChanged("StateLbl");
+                }
+            }
+        }
+        private List<string> _StatesList = CommonLibraryCoreMaui.Theme.Values.States;
+        public List<string> StatesList
+        {
+            get { return _StatesList; }
+            set
+            {
+                if (_StatesList != value)
+
+                {
+                    _StatesList = value;
+                    OnPropertyChanged("StatesList");
+                }
+            }
+        }
+        private string _StatePCPLbl;
+        public string StatePCPLbl
+        {
+            get { return _StatePCPLbl; }
+            set
+            {
+                if (_StatePCPLbl != value)
+                {
+                    _StatePCPLbl = value;
+                    OnPropertyChanged("StatePCPLbl");
+                }
+            }
+        }
+        private string _StatePCPSearchLbl;
+        public string StatePCPSearchLbl
+        {
+            get { return _StatePCPSearchLbl; }
+            set
+            {
+                if (_StatePCPSearchLbl != value)
+                {
+                    _StatePCPSearchLbl = value;
+                    OnPropertyChanged("StatePCPSearchLbl");
+                }
+            }
+        }
+        private List<string> _StatesPCPList = CommonLibraryCoreMaui.Theme.Values.States;
+        public List<string> StatesPCPList
+        {
+            get { return _StatesPCPList; }
+            set
+            {
+                if (_StatesPCPList != value)
+
+                {
+                    _StatesPCPList = value;
+                    OnPropertyChanged("StatesPCPList");
+                }
+            }
+        }
+        private List<string> _StatesPCPSearchList = CommonLibraryCoreMaui.Theme.Values.States;
+        public List<string> StatesPCPSearchList
+        {
+            get { return _StatesPCPSearchList; }
+            set
+            {
+                if (_StatesPCPSearchList != value)
+
+                {
+                    _StatesPCPSearchList = value;
+                    OnPropertyChanged("StatesPCPSearchList");
+                }
+            }
+        }
+        private string _txtZipCode;
+        public string txtZipCode
+        {
+            get { return _txtZipCode; }
+            set
+            {
+                if (_txtZipCode != value)
+
+                {
+                    _txtZipCode = value;
+                    OnPropertyChanged("txtZipCode");
+                }
+            }
+        }
+        private string _txtPhoneNumber;
+        public string txtPhoneNumber
+        {
+            get { return _txtPhoneNumber; }
+            set
+            {
+                if (_txtPhoneNumber != value)
+
+                {
+                    _txtPhoneNumber = value;
+                    OnPropertyChanged("txtPhoneNumber");
+                }
+            }
+        }
+        private string _txtPCPFirstName;
+        public string txtPCPFirstName
+        {
+            get { return _txtPCPFirstName; }
+            set
+            {
+                if (_txtPCPFirstName != value)
+
+                {
+                    _txtPCPFirstName = value;
+                    OnPropertyChanged("txtPCPFirstName");
+                }
+            }
+        }
+        private string _txtPCPSearchFirstName;
+        public string txtPCPSearchFirstName
+        {
+            get { return _txtPCPSearchFirstName; }
+            set
+            {
+                if (_txtPCPSearchFirstName != value)
+
+                {
+                    _txtPCPSearchFirstName = value;
+                    OnPropertyChanged("txtPCPSearchFirstName");
+                }
+            }
+        }
+        private string _txtPCPLastName;
+        public string txtPCPLastName
+        {
+            get { return _txtPCPLastName; }
+            set
+            {
+                if (_txtPCPLastName != value)
+
+                {
+                    _txtPCPLastName = value;
+                    OnPropertyChanged("txtPCPLastName");
+                }
+            }
+        }
+        private string _txtPCPSearchLastName;
+        public string txtPCPSearchLastName
+        {
+            get { return _txtPCPSearchLastName; }
+            set
+            {
+                if (_txtPCPSearchLastName != value)
+
+                {
+                    _txtPCPSearchLastName = value;
+                    OnPropertyChanged("txtPCPSearchLastName");
+                }
+            }
+        }
+        private string _btnPCPAddTxt = "Add";
+        public string btnPCPAddTxt
+        {
+            get { return _btnPCPAddTxt; }
+            set
+            {
+                if (_btnPCPAddTxt != value)
+
+                {
+                    _btnPCPAddTxt = value;
+                    OnPropertyChanged("btnPCPAddTxt");
                 }
             }
         }
@@ -632,6 +950,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 
                                 Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                                 {
+                                    //BtnAddFamilyMember = true;
                                     //btnContinue.Click -= BtnAddFamilyMember_Click;
                                     //btnContinue.Click += BtnAddFamilyMember_Click;
                                 });
@@ -653,68 +972,72 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                                 //        lblHeader = "Step 4 of 4";
                                 //    }
 
-                                //    if (medicalInfo is null)
-                                //    {
-                                //        medicalInfo = new MedicalInfo();
-                                //        medicalInfo.PatientID = PatientID;  
-                                //    }
-                                //    else
-                                //    {
-                                //        lblHeaderIsvisble = false; 
-                                //    }
-                                //});
-                            }
-
-                            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                            {
-
-                                UpdateSurgeriesList();
-                                UpdateMedicationsList();
-                                UpdateAllergiesList();
-
-                                if (medicalInfo.PCP != null)
+                                if (medicalInfo is null)
                                 {
-                                    lblPCPSelected = medicalInfo.PCP.Preview;
-                                    lytPCPSelected = true;
-                                    lytAddPCP = false;
+                                    medicalInfo = new MedicalInfo();
+                                    medicalInfo.PatientID = PatientID;
+                                    BtnContinueRegistration = true;
+                                }
+                                else
+                                {
+                                    lblHeaderIsvisble = false;
+                                    BtnContinueUpdate = true;
                                 }
 
-                                if (medicalInfo.Pharmacy != null)
+                                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                                 {
-                                    if (medicalInfo.Pharmacy.IsCapsule)
+
+                                    UpdateSurgeriesList();
+                                    UpdateMedicationsList();
+                                    UpdateAllergiesList();
+
+                                    if (medicalInfo.PCP != null)
                                     {
-                                        lblPharmacySelectedVisible = false;
-                                        imgCapsule = true;
-                                        //imgCapsule.SetImageResource(Resource.Id.curative_lockup_horizontal_a_redorange_300px().getDrawable(R.drawable.monkey, getApplicationContext().getTheme()));
+                                        lblPCPSelected = medicalInfo.PCP.Preview;
+                                        lytPCPSelected = true;
+                                        lytAddPCP = false;
+
                                     }
-                                    else if (medicalInfo.Pharmacy.IsCurative)
+
+                                    if (medicalInfo.Pharmacy != null)
                                     {
-                                        lblPharmacySelectedVisible = false;
-                                        imgCurative = true;
-                                    }
-                                    else
-                                    {
+                                        if (medicalInfo.Pharmacy.IsCapsule)
+                                        {
+                                            lblPharmacySelectedVisible = false;
+                                            imgCapsule = true;
+                                            //imgCapsule.SetImageResource(Resource.Id.curative_lockup_horizontal_a_redorange_300px().getDrawable(R.drawable.monkey, getApplicationContext().getTheme()));
+                                        }
+                                        else if (medicalInfo.Pharmacy.IsCurative)
+                                        {
+                                            lblPharmacySelectedVisible = false;
+                                            imgCurative = true;
+                                        }
+                                        else
+                                        {
+                                            lblPharmacySelectedVisible = true;
+                                            lblPharmacySelected = medicalInfo.Pharmacy.ToString();
+                                            imgCapsule = false;
+                                            if (imgCurative != null) imgCurative = false;
+                                        }
+
                                         lblPharmacySelectedVisible = true;
-                                        lblPharmacySelected = medicalInfo.Pharmacy.ToString();
-                                        imgCapsule = false;
-                                        if (imgCurative != null) imgCurative = false;
+                                        lytAddPharmacy = false;
                                     }
 
-                                    lblPharmacySelectedVisible = true;
-                                    lytAddPharmacy = false;
-                                }
+                                    if (!string.IsNullOrEmpty(medicalInfo.OtherMedicalIssue))
+                                    {
+                                        txtOtherMedicalIssue = medicalInfo.OtherMedicalIssue;
+                                        chkOtherMedicalIssue = true;
+                                        //txtOtherMedicalIssue.Enabled = true;
+                                    }
 
-                                if (!string.IsNullOrEmpty(medicalInfo.OtherMedicalIssue))
-                                {
-                                    txtOtherMedicalIssue = medicalInfo.OtherMedicalIssue;
-                                    chkOtherMedicalIssue = true;
-                                    //txtOtherMedicalIssue.Enabled = true;
-                                }
-
-                            });
-
+                                });
+                            }
                             await LoadMedicalIssues().ConfigureAwait(false);
+
                         });
+
+
 
                     }).ConfigureAwait(false);
                 }
@@ -828,7 +1151,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSearch(null, 1), false);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSearch(null, 1, this), false);
             }
             catch (Exception ex)
             {
@@ -851,7 +1174,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
-        private void ProcessCapsule()
+        public void ProcessCapsule()
         {
             try
             {
@@ -869,8 +1192,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
-
-        private void ProcessCurative()
+        public void ProcessCurative()
         {
             try
             {
@@ -929,7 +1251,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
-
         public string GetDescription(Type type)
         {
             var descriptions = (DescriptionAttribute[])
@@ -952,7 +1273,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
             return descriptions[0].Name;
         }
-
         private async void DeleteMedicalItem(IPatientRegistrationMedicalInfoItem item)
         {
             string description = GetDescription(item.GetType()) ?? string.Empty;
@@ -1021,6 +1341,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
+
                 EditMedicalItem(medicalInfo.Pharmacy);
             }
             catch (Exception ex)
@@ -1044,21 +1365,18 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     }
                     else
                     {
-                        await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPharmacy(item, PHARMACY_REQUEST_CODE, this), false);
+                        await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPharmacy(medicalInfo.Pharmacy, PHARMACY_REQUEST_CODE, this), false);
                     }
                 }
                 else if (item is PCP)
                 {
-                    await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPAdd(item, PCP_REQUEST_CODE, this), false);
-
+                    await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPAdd(medicalInfo.PCP, PCP_REQUEST_CODE, this), false);
                 }
             }
             catch (Exception ex)
             {
             }
         }
-
-
         public void UpdateCapsulePharmacy()
         {
             try
@@ -1077,7 +1395,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
-
         public void UpdateCurativePharmacy()
         {
             Pharmacy px = new Pharmacy() { IsCurative = true };
@@ -1175,7 +1492,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                         {
                             if (surgery != null)
                             {
-                                lblMedicationHeading = "Edit Surgery";
+                                lblSurgeryHeading = "Edit Surgery";
                                 txtSurgery = surgery.Name;
                                 txtSurguryComments = surgery.Description;
                             }
@@ -1196,9 +1513,119 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+        public async Task DisplayPharmacyDetails()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            if (pharmacy != null)
+                            {
+                                txtName = pharmacy.BusinessName;
+                                txtCity = pharmacy.City;
+                                txtAddress1 = pharmacy.StreetAddress1;
+                                if (!string.IsNullOrEmpty(pharmacy.ZipCode))
+                                {
+                                    txtZipCode = pharmacy.ZipCode;
+                                }
+                                StateLbl = pharmacy.State;
+                                //  spnrState.SelectState(pharmacy.State);
+                                txtPhoneNumber = pharmacy.Description;
+                                lblPharmacyHeading = "Edit Pharmacy";
+                            }
+                        });
 
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+                Console.WriteLine(ex);
+            }
+        }
+        public async Task DisplayPCPDetails()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+                            if (pcp != null)
+                            {
+                                txtPCPFirstName = pcp.FirstName;
+                                txtPCPLastName = pcp.LastName;
+                                StatePCPLbl = pcp.State;
+                                // spnrState.SelectState(pcp.State);
+                                lblPCPHeading = "Edit Primary Care Provider";
+                                btnPCPAddTxt = "Save";
+                            }
+                        });
+
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+                Console.WriteLine(ex);
+            }
+        }
+        public async Task DisplayPCPSelectDetails()
+        {
+            // Get App settings api..
+            try
+            {
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+                {
+                    UserDialog.ShowLoading();
+                    await Task.Run(async () =>
+                    {
+                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                        {
+
+                        });
+
+                    }).ConfigureAwait(false);
+                }
+                else
+                {
+                    UserDialogs.Instance.HideLoading();
+                    await App.Current.MainPage.DisplayAlert("", "No Network Connection found, Please Connect to Internet first.", "OK");
+                }
+                UserDialog.HideLoading();
+            }
+            catch (Exception ex)
+            {
+                UserDialog.HideLoading();
+                Console.WriteLine(ex);
+            }
+        }
         /// <summary>
-        /// ToDo: To define the Save command
+        /// ToDo: To define the Allergy Save command
         /// </summary>
         /// <param name="obj"></param>
         private async void AllergySaveAsync(object obj)
@@ -1237,7 +1664,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
         }
         /// <summary>
-        /// ToDo: To define the Save command
+        /// ToDo: To define the Medication Save command
         /// </summary>
         /// <param name="obj"></param>
         private async void MedicationSaveAsync(object obj)
@@ -1276,7 +1703,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
         }
         /// <summary>
-        /// ToDo: To define the Save command
+        /// ToDo: To define the Surgury Save command
         /// </summary>
         /// <param name="obj"></param>
         private async void SurgurySaveAsync(object obj)
@@ -1314,6 +1741,110 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// ToDo: To define the Pharmacy Save command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void PharmacySaveAsync(object obj)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtName.Trim()) && !string.IsNullOrEmpty(txtZipCode.Trim()) && !string.IsNullOrEmpty(txtAddress1.Trim()))
+                {
+                    if (pharmacy != null)
+                    {
+                        pharmacy.BusinessName = txtName;
+                        pharmacy.City = txtCity;
+                        pharmacy.State = StateLbl;
+                        pharmacy.StreetAddress1 = txtAddress1;
+                        pharmacy.ZipCode = txtZipCode;
+                        pharmacy.Description = txtPhoneNumber;
+                    }
+                    else
+                    {
+                        txtName = pharmacy.BusinessName;
+                        txtCity = pharmacy.City;
+                        StateLbl = pharmacy.State;
+                        txtAddress1 = pharmacy.StreetAddress1;
+                        txtZipCode = pharmacy.ZipCode;
+                        txtPhoneNumber = pharmacy.Description;
+                    }
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    UserDialog.Alert("Please fill all the required fields!");
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        /// <summary>
+        /// ToDo: To define the PCP ave command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void PCPSaveAsync(object obj)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtPCPFirstName.Trim()) && !string.IsNullOrEmpty(txtPCPLastName.Trim()))
+                {
+                    if (pcp != null)
+                    {
+                        pcp.FirstName = txtPCPFirstName;
+                        pcp.LastName = txtPCPLastName;
+                        pcp.State = StatePCPLbl;
+                    }
+                    else
+                    {
+                        txtPCPFirstName = pcp.FirstName;
+                        txtPCPLastName = pcp.LastName;
+                        StatePCPLbl = pcp.State;
+                    }
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    UserDialog.Alert("Please fill all the required fields!");
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        /// <summary>
+        /// ToDo: To define the PCP Cancel command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void PCPCancelAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PopModalAsync();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        /// <summary>
+        /// ToDo: To define the PCP Search command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void PCPSearchAsync(object obj)
+        {
+            try
+            {
+                var firstname = txtPCPSearchFirstName;
+                var lastname = txtPCPSearchLastName;
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSelect(firstname, lastname, this), false);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+
         #endregion
     }
 }
