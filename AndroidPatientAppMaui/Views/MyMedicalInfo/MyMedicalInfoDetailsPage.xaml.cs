@@ -37,53 +37,7 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
 
         }
     }
-
-    private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-        try
-        {
-            var chk = sender as CheckBox;
-            //if (chk.Text.ToLower() == "none" && chk.Checked)
-            //{
-            //    medicalInfo.MedicalIssues.Clear();
-
-            //    for (int i = 0; i < lytMedicalHistory.ChildCount; i++)
-            //    {
-            //        CheckBox checkbox = lytMedicalHistory.GetChildAt(i) as CheckBox;
-            //        if (checkbox != null)
-            //        {
-            //            if (checkbox.Text.ToLower() != "none")
-            //            {
-            //                checkbox.Checked = false;
-            //            }
-            //        }
-            //    }
-
-            //    chkOtherMedicalIssue.Checked = false;
-            //    txtOtherMedicalIssue.Enabled = false;
-
-            //    txtOtherMedicalIssue.Text = string.Empty;
-
-            //    VM.medicalInfo.MedicalIssues.Add((int)chk.Tag);
-            //}
-            //else
-            //{
-            //    if (chk.Checked)
-            //    {
-            //        medicalInfo.MedicalIssues.Add((int)chk.Tag);
-            //        UncheckNoneCheckbox();
-            //    }
-            //    else
-            //    {
-            //        medicalInfo.MedicalIssues.Remove((int)chk.Tag);
-            //    }
-            //}
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
+     
     private async void imgEditPharmacy_Tapped(object sender, TappedEventArgs e)
     {
         try

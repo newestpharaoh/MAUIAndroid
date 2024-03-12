@@ -13,7 +13,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 {
     public class MyMedicalInfoPageViewModel : BaseViewModel
     {
-       
+
         //To define the class level variable.
         string Token = string.Empty;
         int PatientID = 0;
@@ -302,6 +302,23 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         #endregion
 
         #region Methods
+        public void UpdateList()
+        {
+            try
+            {
+                var medicalissue = MedicalIssuesList.Where(a => a.IsChecked == true).ToList();
+                var allergiesList = medicalInfo.Allergies.ToList();
+                var medicalList = medicalInfo.Medications.ToList();
+                var SurguryList = medicalInfo.Surgeries.ToList();
+                MedicalIssuesList = new ObservableCollection<MedicalIssue>(medicalissue);
+                AllergiesList = new ObservableCollection<Allergy>(allergiesList);
+                MedicationsList = new ObservableCollection<Medication>(medicalList);
+                SurgeryList = new ObservableCollection<Surgery>(SurguryList);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
         /// <summary>
         /// To define the back button command.
         /// </summary>
@@ -401,7 +418,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                             UserName = $"Visit for {Helpers.AppGlobalConstants.userInfo.Name}";
                         }
                         Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                        { 
+                        {
                             medicalInfo = await DataUtility.PatientGetMedicalHistoryAsync(SettingsValues.ApiURLValue, Token, PatientID).ConfigureAwait(false);
                             List<MedicalIssue> issues = await DataUtility.GetMedicalIssuesAsync(SettingsValues.ApiURLValue).ConfigureAwait(false);
                             if (medicalInfo != null)
@@ -417,10 +434,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                                             {
                                                 MedicalIssuesList.Add(mi);
                                             }
-
                                         }
                                     }
-
                                     if (!string.IsNullOrEmpty(medicalInfo.OtherMedicalIssue))
                                     {
                                         IsOtherMEdicalIssueVisible = true;

@@ -36,7 +36,8 @@ public partial class MyMedicalInfoPage : ContentPage
         {
             base.OnAppearing();
             VM.UserName = Helpers.AppGlobalConstants.userInfo.Name;
-            await VM.DisplayMedicalInfo(PatientID); 
+            await VM.DisplayMedicalInfo(PatientID);
+             VM.UpdateList();
         }
         catch (Exception ex)
         {

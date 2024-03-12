@@ -16,6 +16,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public bool patientIsEligibleForCurative = false;
         public MedicalInfo medicalInfo;
         AdditionalFamilyMember additionalFamilyMember;
+        List<MedicalIssue> issues;
 
         public Allergy allergy;
         public Medication medication;
@@ -52,9 +53,13 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 PCPSaveCommand = new Command(PCPSaveAsync);
                 PCPCancelCommand = new Command(PCPCancelAsync);
                 PCPSearchCommand = new Command(PCPSearchAsync);
+                BtnContinueUpdateCommand = new Command(BtnContinueUpdateAsync);
+                BtnContinueRegistrationCommand = new Command(BtnContinueRegistrationAsync);
+                BtnAddFamilyMemberCommand = new Command(BtnAddFamilyMemberAsync);
 
-                //  UpdateList();
 
+                Token = Preferences.Get("AuthToken", string.Empty);
+                PatientID = Preferences.Get("PatientID", 0);
             }
             catch (Exception ex)
             {
@@ -81,6 +86,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public Command PCPSaveCommand { get; set; }
         public Command PCPCancelCommand { get; set; }
         public Command PCPSearchCommand { get; set; }
+        public Command BtnContinueUpdateCommand { get; set; }
+        public Command BtnContinueRegistrationCommand { get; set; }
+        public Command BtnAddFamilyMemberCommand { get; set; }
         #endregion
 
         #region Properties
@@ -224,6 +232,19 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 {
                     _PharmacySelected = value;
                     OnPropertyChanged("PharmacySelected");
+                }
+            }
+        }
+        private bool _IsChecked = false;
+        public bool IsChecked
+        {
+            get { return _IsChecked; }
+            set
+            {
+                if (_IsChecked != value)
+                {
+                    _IsChecked = value;
+                    OnPropertyChanged("IsChecked");
                 }
             }
         }
@@ -489,7 +510,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtAllergy;
+        private string _txtAllergy = string.Empty;
         public string txtAllergy
         {
             get { return _txtAllergy; }
@@ -502,7 +523,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtComments;
+        private string _txtComments = string.Empty;
         public string txtComments
         {
             get { return _txtComments; }
@@ -885,7 +906,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                List<MedicalIssue> issues = await DataUtility.GetMedicalIssuesAsync(SettingsValues.ApiURLValue).ConfigureAwait(false);
+                issues = await DataUtility.GetMedicalIssuesAsync(SettingsValues.ApiURLValue).ConfigureAwait(false);
                 if (issues != null)
                 {
                     Application.Current.MainPage.Dispatcher.Dispatch(async () =>
@@ -893,9 +914,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                         MedicalIssue none = issues.FirstOrDefault(x => x.Value.ToLower().Equals("none"));
                         if (none != null)
                         {
-                            int noneIndex = issues.IndexOf(none);
-                            issues.RemoveAt(noneIndex);
+                            int ni = issues.IndexOf(none);
+                            issues.RemoveAt(ni);
                             issues.Insert(0, none);
+                            noneIndex = 0;
                         }
 
                         foreach (var issue in issues)
@@ -906,17 +928,23 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                                 {
                                     if (medicalInfo.MedicalIssues.Contains(issue.ID))
                                     { issue.IsChecked = true; }
+                                    else
+                                    {
+                                        issue.IsChecked = false;
+                                    }
                                     MedicalIssuesList.Add(issue);
                                 }
 
                             }
 
                         }
-                        var a = MedicalIssuesList;
                         lytOtherMedicalIssueVisible = true;
-                        CurativeCheckDTO respGetCurative = await DataUtility.GetCurativeEligibilityForHomeViewDialogAsync(SettingsValues.ApiURLValue, PatientID, Token).ConfigureAwait(false);
-                        patientIsCurative = respGetCurative.CurativeEligibilityForHomeViewDialog;
-                        patientIsEligibleForCurative = respGetCurative.IsCurative;
+                        CurativeCheckDTO respGetCurative = await DataUtility.GetCurativeEligibilityForHomeViewDialogAsync(SettingsValues.ApiURLValue, medicalInfo.PatientID, Token).ConfigureAwait(false);
+                        if (respGetCurative != null)
+                        {
+                            patientIsCurative = respGetCurative.CurativeEligibilityForHomeViewDialog;
+                            patientIsEligibleForCurative = respGetCurative.IsCurative;
+                        }
                     });
                 }
             }
@@ -1092,9 +1120,11 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
+                var medicalissue = MedicalIssuesList.Where(a => a.IsChecked == true).ToList();
                 var allergiesList = medicalInfo.Allergies.ToList();
                 var medicalList = medicalInfo.Medications.ToList();
                 var SurguryList = medicalInfo.Surgeries.ToList();
+                MedicalIssuesList = new ObservableCollection<MedicalIssue>(medicalissue);
                 AllergiesList = new ObservableCollection<Allergy>(allergiesList);
                 MedicationsList = new ObservableCollection<Medication>(medicalList);
                 SurgeryList = new ObservableCollection<Surgery>(SurguryList);
@@ -1838,6 +1868,141 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 var firstname = txtPCPSearchFirstName;
                 var lastname = txtPCPSearchLastName;
                 await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSelect(firstname, lastname, this), false);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        private bool ValidateMedicalInfo()
+        {
+
+            if (medicalInfo != null)
+            {
+                if (medicalInfo.PCP is null || medicalInfo.Pharmacy is null ||
+                    (medicalInfo.MedicalIssues.Count == 0 && !chkOtherMedicalIssue) ||
+                    (chkOtherMedicalIssue && string.IsNullOrEmpty(txtOtherMedicalIssue.Trim())))
+                {
+                    UserDialog.Alert("Please fill all the required fields!");
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+        private void CheckForOtherMedicalIssue()
+        {
+            if (!string.IsNullOrEmpty(txtOtherMedicalIssue))
+            {
+                if (medicalInfo != null) medicalInfo.OtherMedicalIssue = txtOtherMedicalIssue;
+            }
+            else
+            {
+                if (medicalInfo != null) medicalInfo.OtherMedicalIssue = string.Empty;
+            }
+        }
+        /// <summary>
+        /// ToDo: To define the Btn Continue Update command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void BtnContinueUpdateAsync(object obj)
+        {
+            try
+            {
+                if (ValidateMedicalInfo())
+                {
+                    CheckForOtherMedicalIssue();
+
+                    medicalInfo.MedicalIssues = MedicalIssuesList.Where(a => a.IsChecked == true).Select(x => x.ID).ToList();
+                    medicalInfo.Allergies = AllergiesList.ToList();
+                    medicalInfo.Medications = MedicationsList.ToList();
+                    medicalInfo.Surgeries = SurgeryList.ToList();
+
+                    StatusResponse resp = await DataUtility.UpdateMedicalHistoryAsync(SettingsValues.ApiURLValue, medicalInfo, Token).ConfigureAwait(false);
+                    if (resp != null)
+                    {
+
+                        if (patientIsCurative)
+                        {
+                            var homeDialogVisible = medicalInfo.Pharmacy == null || !medicalInfo.Pharmacy.IsCurative ? true : false;
+                            StatusResponse respUpdateCurative = await DataUtility.UpdateCurativeEligibilityForHomeViewDialogAsync(SettingsValues.ApiURLValue, medicalInfo.PatientID, homeDialogVisible, Token).ConfigureAwait(false);
+                        }
+
+                        if (resp.StatusCode == StatusCode.Saved)
+                        {
+                            await Navigation.PopModalAsync();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        /// <summary>
+        /// ToDo: To define the Btn Continue Registration command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void BtnContinueRegistrationAsync(object obj)
+        {
+            try
+            {
+                if (ValidateMedicalInfo())
+                {
+                    CheckForOtherMedicalIssue();
+
+                    StatusResponse resp = await DataUtility.RegistrationStep4Async(SettingsValues.ApiURLValue, medicalInfo).ConfigureAwait(false);
+                    if (resp != null)
+                    {
+                        switch (resp.StatusCode)
+                        {
+                            case StatusCode.Success:
+                            case StatusCode.Saved:
+                               RegistrationState reg = new RegistrationState(); 
+                                //using (RegistrationStateHelper registrationStateHelper = new RegistrationStateHelper(this))
+                                //{
+                                //    reg = registrationStateHelper.GetState();
+                                //}
+
+                                bool ret = await LoginNewUser(reg.Email, reg.Password).ConfigureAwait(false);
+                                if (ret)
+                                {
+                                    await Navigation.PushModalAsync(new Views.Home.HomePage(), false);
+                                }
+                                break;
+                            default:
+                                UserDialog.Alert("There was an error please try again.");
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        /// <summary>
+        /// ToDo: To define the Btn Add Family Member  command
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void BtnAddFamilyMemberAsync(object obj)
+        {
+            try
+            {
+                if (ValidateMedicalInfo())
+                {
+                    CheckForOtherMedicalIssue();
+                    //additionalFamilyMember.MedicalHistory = medicalInfo;
+
+                    //using (AccountAddFamilyMemberStateHelper afmStateHelper = new AccountAddFamilyMemberStateHelper(this))
+                    //{
+                    //    afmStateHelper.AddAdditionalFamilyMember(additionalFamilyMember);
+                    //}
+                    //Finish();
+                }
             }
             catch (Exception ex)
             {
