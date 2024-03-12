@@ -257,9 +257,7 @@ namespace AndroidPatientAppMaui.ViewModels.Account
                                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.Token = resp.access_token;
                                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.UserId = resp.userid;
                                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.TokenExpirationDate = DateTime.Now.AddSeconds(Convert.ToInt32(resp.expires_in));
-
                                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.LoginEmail = Email;
-
                                     Preferences.Set("AuthToken", resp.access_token);
                                     Preferences.Set("UserId", resp.userid);
                                     await Navigation.PushModalAsync(new Views.Account.EmailVerifyPage(), false);
