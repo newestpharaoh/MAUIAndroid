@@ -25,19 +25,18 @@ public partial class PatientRegistrationMedicalInfoPharmacy : ContentPage
     private void StatePicker_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
-        { 
+        {
+
             VM.StateLbl = string.Empty;
-            if (VM.pharmacy != null)
+
+            Picker picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+            if (selectedIndex != -1)
             {
-                Picker picker = (Picker)sender;
-                int selectedIndex = picker.SelectedIndex;
-                if (selectedIndex != -1)
-                {
-                  //  VM.pharmacy.State = (string)picker.SelectedItem;
-                    VM.StateLbl = (string)picker.SelectedItem;
-                    
-                }
+                //  VM.pharmacy.State = (string)picker.SelectedItem;
+                VM.StateLbl = (string)picker.SelectedItem; 
             }
+
         }
         catch (Exception ex)
         {

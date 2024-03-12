@@ -20,9 +20,5 @@ public partial class PatientRegistrationMedicalInfoPCPSelect : ContentPage
         base.OnAppearing();
         await VM.DisplayPCPSelectDetails();
     }
-
-    private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-
-    }
+     
 }

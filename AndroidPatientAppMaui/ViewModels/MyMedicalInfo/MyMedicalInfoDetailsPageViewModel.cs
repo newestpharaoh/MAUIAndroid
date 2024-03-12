@@ -536,7 +536,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtMedication;
+        private string _txtMedication = string.Empty;
         public string txtMedication
         {
             get { return _txtMedication; }
@@ -549,7 +549,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtSurgery;
+        private string _txtSurgery = string.Empty;
         public string txtSurgery
         {
             get { return _txtSurgery; }
@@ -666,7 +666,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtName;
+        private string _txtName = string.Empty;
         public string txtName
         {
             get { return _txtName; }
@@ -679,7 +679,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtAddress1;
+        private string _txtAddress1 = string.Empty;
         public string txtAddress1
         {
             get { return _txtAddress1; }
@@ -692,7 +692,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtCity;
+        private string _txtCity = string.Empty;
         public string txtCity
         {
             get { return _txtCity; }
@@ -786,7 +786,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtZipCode;
+        private string _txtZipCode = string.Empty;
         public string txtZipCode
         {
             get { return _txtZipCode; }
@@ -800,7 +800,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtPhoneNumber;
+        private string _txtPhoneNumber = string.Empty;
         public string txtPhoneNumber
         {
             get { return _txtPhoneNumber; }
@@ -814,7 +814,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtPCPFirstName;
+        private string _txtPCPFirstName = string.Empty;
         public string txtPCPFirstName
         {
             get { return _txtPCPFirstName; }
@@ -828,7 +828,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtPCPSearchFirstName;
+        private string _txtPCPSearchFirstName = string.Empty;
         public string txtPCPSearchFirstName
         {
             get { return _txtPCPSearchFirstName; }
@@ -842,7 +842,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtPCPLastName;
+        private string _txtPCPLastName = string.Empty;
         public string txtPCPLastName
         {
             get { return _txtPCPLastName; }
@@ -856,7 +856,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _txtPCPSearchLastName;
+        private string _txtPCPSearchLastName = string.Empty;
         public string txtPCPSearchLastName
         {
             get { return _txtPCPSearchLastName; }
@@ -1120,6 +1120,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
+                pharmacy = new Pharmacy();
                 var medicalissue = MedicalIssuesList.Where(a => a.IsChecked == true).ToList();
                 var allergiesList = medicalInfo.Allergies.ToList();
                 var medicalList = medicalInfo.Medications.ToList();
@@ -1199,6 +1200,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 {
                     ProcessCapsule();
                 }
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPharmacy(null, 1, this), false);
             }
             catch (Exception ex)
             {
@@ -1792,12 +1794,21 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     }
                     else
                     {
-                        txtName = pharmacy.BusinessName;
-                        txtCity = pharmacy.City;
-                        StateLbl = pharmacy.State;
-                        txtAddress1 = pharmacy.StreetAddress1;
-                        txtZipCode = pharmacy.ZipCode;
-                        txtPhoneNumber = pharmacy.Description;
+                        pharmacy = new Pharmacy();
+                        pharmacy.BusinessName = txtName;
+                        pharmacy.City = txtCity;
+                        pharmacy.State = StateLbl;
+                        pharmacy.StreetAddress1 = txtAddress1;
+                        pharmacy.ZipCode = txtZipCode;
+                        pharmacy.Description = txtPhoneNumber;
+                         
+                        //pharmacy = new Pharmacy();
+                        //txtName = pharmacy != null ? pharmacy.BusinessName : ""; 
+                        //txtCity = pharmacy != null ? pharmacy.City : "";
+                        //StateLbl = pharmacy != null ? pharmacy.State : "";
+                        //txtAddress1 = pharmacy != null ? pharmacy.StreetAddress1 : "";
+                        //txtZipCode = pharmacy != null ? pharmacy.ZipCode : "";
+                        //txtPhoneNumber = pharmacy != null ? pharmacy.Description : "";
                     }
                     await Navigation.PopModalAsync();
                 }
@@ -1961,7 +1972,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                         {
                             case StatusCode.Success:
                             case StatusCode.Saved:
-                               RegistrationState reg = new RegistrationState(); 
+                                RegistrationState reg = new RegistrationState();
                                 //using (RegistrationStateHelper registrationStateHelper = new RegistrationStateHelper(this))
                                 //{
                                 //    reg = registrationStateHelper.GetState();

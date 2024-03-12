@@ -8,11 +8,11 @@ public partial class PatientRegistrationMedicalInfoPCPAdd : ContentPage
     MyMedicalInfoDetailsPageViewModel VM;
     #region Constructor
     public PatientRegistrationMedicalInfoPCPAdd(PCP pcp, int code, MyMedicalInfoDetailsPageViewModel pageViewModel)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         this.BindingContext = VM = pageViewModel;
 
-        VM.pcp = pcp; 
+        VM.pcp = pcp;
     }
     #endregion
 
@@ -28,17 +28,16 @@ public partial class PatientRegistrationMedicalInfoPCPAdd : ContentPage
         try
         {
             VM.StatePCPLbl = string.Empty;
-            if (VM.pcp != null)
-            {
-                Picker picker = (Picker)sender;
-                int selectedIndex = picker.SelectedIndex;
-                if (selectedIndex != -1)
-                {
-                    //  VM.pharmacy.State = (string)picker.SelectedItem;
-                    VM.StatePCPLbl = (string)picker.SelectedItem;
 
-                }
+            Picker picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+            if (selectedIndex != -1)
+            {
+                //  VM.pharmacy.State = (string)picker.SelectedItem;
+                VM.StatePCPLbl = (string)picker.SelectedItem;
+
             }
+
         }
         catch (Exception ex)
         {
