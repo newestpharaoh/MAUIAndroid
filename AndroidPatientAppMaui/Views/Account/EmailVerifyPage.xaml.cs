@@ -25,8 +25,6 @@ public partial class EmailVerifyPage : ContentPage
         {
             base.OnAppearing();
             await VM.GetUserContactAsync();
-            await VM.MaskPhoneNumber();
-            await VM.MaskEmail();
         }
         catch (Exception ex)
         {

@@ -137,7 +137,7 @@
                     Grid.Column="0"
                     ControlTemplate="{StaticResource ThemeRadioTemplate}"
                     GroupName="CancellationReasons"
-                    Value="Text" />
+                    Value="text" />
                 <Label
                     Grid.Row="0"
                     Grid.Column="1"
@@ -148,7 +148,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Text  " />
-                            <Span Text="{Binding ResultPhonenumber}" />
+                            <Span Text="{Binding PhoneNumber}" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -156,7 +156,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     ControlTemplate="{StaticResource ThemeRadioTemplate}"
-                    Value="Email" />
+                    Value="email" />
                 <Label
                     Grid.Row="1"
                     Grid.Column="1"
@@ -167,7 +167,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Email  " />
-                            <Span Text="{Binding ResultEmail}" />
+                            <Span Text="{Binding Email}" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
