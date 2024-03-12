@@ -3,11 +3,205 @@
     x:Class="AndroidPatientAppMaui.Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSearch"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
     Title="PatientRegistrationMedicalInfoPCPSearch">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="{Binding UserName}"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="2"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="12,10"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="12"
+                VerticalOptions="FillAndExpand">
+                <!--  Primary Care Provider Heading Section  -->
+                <Label
+                    x:Name="lblHeading"
+                    Grid.Row="0"
+                    FontFamily="SanchezSlab"
+                    FontSize="17"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding lblPCPSearchHeading}"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalTextAlignment="Center" />
+                <!--  First Name Section  -->
+                <Grid
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        x:Name="lblFirstName"
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="First Name"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray3}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            x:Name="txtFirstName"
+                            FontSize="14"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding txtPCPSearchFirstName}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+                <!--  Last Name Section  -->
+                <Grid
+                    Grid.Row="2"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        x:Name="lblLastName"
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Last Name"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray3}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <controls:CustomEntry
+                            x:Name="txtLastName"
+                            FontSize="14"
+                            HeightRequest="35"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Default"
+                            Text="{Binding txtPCPSearchLastName}"
+                            VerticalOptions="FillAndExpand" />
+                    </Grid>
+                </Grid>
+                <!--  State Section  -->
+                <Grid
+                    Grid.Row="3"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="5"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        x:Name="lblState"
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        Text="State *"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                    <Grid
+                        Grid.Row="1"
+                        Padding="10,0"
+                        BackgroundColor="{StaticResource Gray3}"
+                        HeightRequest="35"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="FillAndExpand"
+                            Text="{Binding StatePCPSearchLbl}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Image
+                            Margin="0,0,10,0"
+                            HeightRequest="10"
+                            HorizontalOptions="EndAndExpand"
+                            Source="downarrow.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="15" />
+                        <controls:CustomPicker
+                            Margin="1,10"
+                            HorizontalTextAlignment="Start"
+                            ItemsSource="{Binding StatesPCPSearchList}"
+                            SelectedIndexChanged="StatePicker_SelectedIndexChanged"
+                            TextColor="Transparent"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </Grid>
+                <!--  Search Buttons  -->
+                <Grid
+                    Grid.Row="4"
+                    ColumnSpacing="10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Button
+                        x:Name="btnSearch"
+                        Margin="0,15"
+                        BackgroundColor="#15B287"
+                        Command="{Binding PCPSearchCommand}"
+                        FontFamily="SanchezSlab"
+                        FontSize="14"
+                        HeightRequest="55"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Search"
+                        TextColor="{StaticResource White}"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="180" />
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </Grid>
 </ContentPage>

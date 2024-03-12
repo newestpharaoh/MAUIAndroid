@@ -209,6 +209,9 @@
 	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoPCPSearch.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoPCPSelect.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\MyMedicalInfo\PatientRegistrationMedicalInfoPharmacy.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

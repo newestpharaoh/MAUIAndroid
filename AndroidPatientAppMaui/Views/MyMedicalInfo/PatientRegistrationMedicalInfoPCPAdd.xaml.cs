@@ -7,24 +7,44 @@ public partial class PatientRegistrationMedicalInfoPCPAdd : ContentPage
 {
     MyMedicalInfoDetailsPageViewModel VM;
     #region Constructor
-    public PatientRegistrationMedicalInfoPCPAdd(IPatientRegistrationMedicalInfoItem item, int code, MyMedicalInfoDetailsPageViewModel pageViewModel)
+    public PatientRegistrationMedicalInfoPCPAdd(PCP pcp, int code, MyMedicalInfoDetailsPageViewModel pageViewModel)
 	{
 		InitializeComponent();
         this.BindingContext = VM = pageViewModel;
-         
+
+        VM.pcp = pcp; 
     }
     #endregion
 
     #region Event Handler
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
-        base.OnAppearing(); 
+        base.OnAppearing();
+        await VM.DisplayPCPDetails();
     }
-    #endregion
-
     private void StatePicker_SelectedIndexChanged(object sender, EventArgs e)
     {
+        try
+        {
+            VM.StatePCPLbl = string.Empty;
+            if (VM.pcp != null)
+            {
+                Picker picker = (Picker)sender;
+                int selectedIndex = picker.SelectedIndex;
+                if (selectedIndex != -1)
+                {
+                    //  VM.pharmacy.State = (string)picker.SelectedItem;
+                    VM.StatePCPLbl = (string)picker.SelectedItem;
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
 
     }
+    #endregion 
 }

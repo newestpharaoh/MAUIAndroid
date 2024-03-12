@@ -84,7 +84,28 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
 
         }
     }
-
+    private async void imgEditPharmacy_Tapped(object sender, TappedEventArgs e)
+    {
+        try
+        {
+            var selecteditem = (sender as Grid).BindingContext as Pharmacy;
+            if (VM.medicalInfo.Pharmacy.IsCurative || VM.patientIsCurative && !VM.medicalInfo.Pharmacy.IsCurative && VM.medicalInfo.Pharmacy.PharmacyString == "")
+            {
+                VM.ProcessCurative();
+            }
+            else if ((selecteditem).IsCapsule)
+            {
+                VM.ProcessCapsule();
+            } 
+            if (selecteditem != null)
+            {
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPharmacy(selecteditem, VM.PHARMACY_REQUEST_CODE, VM), false);
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+    }
     private async void imgEditAllergy_Tapped(object sender, TappedEventArgs e)
     {
         try
@@ -217,6 +238,7 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         {
         }
     }
+
     #endregion
 
 
