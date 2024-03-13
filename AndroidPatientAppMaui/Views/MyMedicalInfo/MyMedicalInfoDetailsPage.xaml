@@ -323,10 +323,11 @@
                         <Grid
                             Grid.Column="0"
                             HorizontalOptions="FillAndExpand"
+                            RowDefinitions="Auto,Auto,Auto"
                             VerticalOptions="FillAndExpand">
                             <Label
                                 x:Name="lblPharmacySelected"
-                                Grid.Column="0"
+                                Grid.Row="0"
                                 FontSize="14"
                                 HorizontalOptions="FillAndExpand"
                                 IsVisible="{Binding lblPharmacySelectedVisible}"
@@ -335,6 +336,7 @@
                                 VerticalOptions="FillAndExpand" />
                             <Image
                                 x:Name="imgCapsule"
+                                Grid.Row="1"
                                 Margin="0"
                                 Aspect="AspectFit"
                                 HeightRequest="42"
@@ -343,6 +345,7 @@
                                 Source="capsule_logo.png" />
                             <Image
                                 x:Name="imgCurative"
+                                Grid.Row="2"
                                 Margin="0"
                                 Aspect="AspectFit"
                                 HeightRequest="37"

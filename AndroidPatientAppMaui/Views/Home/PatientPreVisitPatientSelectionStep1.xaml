@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.Home.PatientPreVisitPatientSelectionStep1"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="PatientPreVisitPatientSelectionStep1">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="ThemeRadioTemplate">
+            <Grid
+                Padding="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid>
+                    <Grid
+                        HeightRequest="25"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill"
+                        WidthRequest="25">
+                        <Ellipse
+                            Fill="White"
+                            HeightRequest="21"
+                            Stroke="#000000"
+                            StrokeThickness="5"
+                            WidthRequest="21" />
+
+                        <Ellipse
+                            x:Name="check"
+                            Fill="#000000"
+                            HeightRequest="10"
+                            Stroke="#000000"
+                            WidthRequest="10" />
+                    </Grid>
+                    <!--  This enables us to put in dynamic content  -->
+                    <ContentPresenter />
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="check" Property="Opacity" Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter TargetName="check" Property="Opacity" Value="0" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+        </ControlTemplate>
+    </ContentPage.Resources>
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,Auto,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Start Visit"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+        <!--  serious medical emergency Section  -->
+        <Grid
+            x:Name="lytVisitDetails"
+            Grid.Row="2"
+            Padding="10"
+            BackgroundColor="{StaticResource Gray3}">
+            <Label
+                FontAttributes="Bold"
+                FontSize="12"
+                HorizontalTextAlignment="Center"
+                Text="For a serious medical emergency, call 9-1-1."
+                TextColor="{StaticResource Red1}"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="3"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="12,10"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="12"
+                VerticalOptions="FillAndExpand">
+                <!--  Heading Section  -->
+                <Label
+                    Grid.Row="0"
+                    Margin="0,20,0,0"
+                    FontFamily="SanchezSlab"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Who is this visit for?"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalOptions="FillAndExpand" />
+                <!--  Radio button section  -->
+                <Grid
+                    Grid.Row="1"
+                    ColumnDefinitions="40*,60*"
+                    ColumnSpacing="0"
+                    RowDefinitions="35,35"
+                    RowSpacing="0">
+                    <RadioButton
+                        x:Name="rbMe"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                        HorizontalOptions="EndAndExpand"
+                        IsChecked="{Binding rbtnVisitForMe}"
+                        Value="Me" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontSize="15"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Me"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="CenterAndExpand" />
+                    <RadioButton
+                        x:Name="rbSomeoneElse"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                        HorizontalOptions="EndAndExpand"
+                        IsChecked="{Binding rbtnVisitForSomeoneElse}"
+                        Value="SomeoneElse" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        FontSize="15"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Someone Else"
+                        TextColor="{StaticResource Black}"
+                        VerticalOptions="CenterAndExpand" />
+
+
+                </Grid>
+                <!--  NotInTexas Section  -->
+                <Label
+                    Grid.Row="2"
+                    Margin="0,30,0,0"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding lblNotInTexas}"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalOptions="FillAndExpand" />
+                <!--  SorryYall Section  -->
+                <Label
+                    Grid.Row="3"
+                    Margin="0,10,0,0"
+                    FontSize="14"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    VerticalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Sorry y'all! " TextColor="{StaticResource Blue1}" />
+                            <Span Text="In compliance with " TextColor="{StaticResource Black}" />
+                            <Span
+                                FontAttributes="Italic"
+                                Text="governing rules and regulations, "
+                                TextColor="{StaticResource Green1}" />
+                            <Span Text="{Binding AppNametxt}" TextColor="{StaticResource Black}" />
+                            <Span Text=" physicians can only prescribe for and treat* patients currently located within the state of Texas at the time of service." TextColor="{StaticResource Black}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <!--  I have read and agree  Section  -->
+                <Grid
+                    Grid.Row="4"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    VerticalOptions="FillAndExpand">
+                    <Grid
+                        Grid.Row="0"
+                        ColumnDefinitions="40,*"
+                        HeightRequest="30"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <CheckBox
+                            Grid.Column="0"
+                            HorizontalOptions="Start"
+                            IsChecked="{Binding chkAgree}"
+                            VerticalOptions="Center"
+                            Color="Black" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="I have read and agree."
+                            TextColor="Black"
+                            VerticalOptions="CenterAndExpand" />
+
+                    </Grid>
+                    <Label
+                        x:Name="lblSomeCirumstances"
+                        Grid.Row="1"
+                        FontAttributes="Italic"
+                        FontSize="10"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="*in some circumstances physicians are still able to provide guidance"
+                        TextColor="Black"
+                        VerticalOptions="CenterAndExpand" />
+                </Grid>
+                <!--  Continue Button Section  -->
+                <Button
+                    x:Name="btnContinue"
+                    Grid.Row="5"
+                    Margin="50,45,50,0"
+                    BackgroundColor="#15B287"
+                    Command="{Binding ContinueCommand}"
+                    FontFamily="SanchezSlab"
+                    FontSize="14"
+                    HeightRequest="55"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding btnContinue}"
+                    Text="Continue"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="180" />
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

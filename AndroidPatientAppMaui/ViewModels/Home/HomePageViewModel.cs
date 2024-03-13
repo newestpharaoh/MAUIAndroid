@@ -25,6 +25,7 @@ namespace AndroidPatientAppMaui.ViewModels.Home
             {
                 Navigation = nav;
                 SignOutCommand = new Command(SignOutAsync);
+                StartVisitCommand = new Command(StartVisitAsync);
 
                 Token = Preferences.Get("AuthToken", string.Empty);
                 Userid = Preferences.Get("UserId", 0);
@@ -38,6 +39,7 @@ namespace AndroidPatientAppMaui.ViewModels.Home
 
         #region Command
         public Command SignOutCommand { get; set; }
+        public Command StartVisitCommand { get; set; }
         #endregion
 
         #region Properties
@@ -119,7 +121,7 @@ namespace AndroidPatientAppMaui.ViewModels.Home
         {
             // Get App settings api..
             try
-            { 
+            {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
                     UserDialog.ShowLoading();
@@ -152,9 +154,9 @@ namespace AndroidPatientAppMaui.ViewModels.Home
             }
             catch (Exception ex)
             {
-                UserDialog.HideLoading(); 
+                UserDialog.HideLoading();
                 Console.WriteLine(ex);
-            } 
+            }
         }
 
         /// <summary>
@@ -166,19 +168,60 @@ namespace AndroidPatientAppMaui.ViewModels.Home
         {
             try
             {
-                bool answer = await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No"); 
+                bool answer = await App.Current.MainPage.DisplayAlert("Sign Out", "Are you sure you want to sign out?", "Yes", "No");
                 if (answer)
                 {
                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.Token = "";
                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.UserId = 0;
                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.TokenExpirationDate = DateTime.Now;
                     AndroidPatientAppMaui.Helpers.AppGlobalConstants.LoginEmail = "";
-                    AndroidPatientAppMaui.Helpers.AppGlobalConstants.userInfo =new UserInfo();
+                    AndroidPatientAppMaui.Helpers.AppGlobalConstants.userInfo = new UserInfo();
                     Preferences.Set("AuthToken", "");
                     Preferences.Set("UserId", 0);
                     Preferences.Set("PatientID", 0);
                     await Navigation.PushModalAsync(new LoginPage(), false);
-                } 
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
+        /// To Do: To define Start Visit Button command....
+        /// </summary>
+        /// <param name="obj"></param>
+
+        private async void StartVisitAsync(object obj)
+        {
+            try
+            {
+                StatusResponse info = await DataUtility.GetRemainingVisitCountAsync(SettingsValues.ApiURLValue, Helpers.AppGlobalConstants.userInfo.LoginID, Token).ConfigureAwait(false);
+                if (info != null)
+                {
+                    if (info.StatusCode == StatusCode.SuccessSeePayload)
+                    {
+                        if (int.TryParse(info.Payload, out int remainingVisitCount))
+                        {
+                            if (remainingVisitCount > 0)
+                            {
+                                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                                {
+                                    if (Helpers.AppGlobalConstants.userInfo.Domain == "Star" || Helpers.AppGlobalConstants.userInfo.Domain == "Star Kids")
+                                    {
+                                        await Navigation.PushModalAsync(new Views.Home.PatientPreVisitForSomeoneElse(), false);
+                                    }
+                                    else
+                                    {
+                                       
+                                        await Navigation.PushModalAsync(new Views.Home.PatientPreVisitPatientSelectionStep1(), false);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

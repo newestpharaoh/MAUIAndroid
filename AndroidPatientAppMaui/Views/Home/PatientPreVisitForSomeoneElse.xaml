@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.Home.PatientPreVisitForSomeoneElse"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:AndroidPatientAppMaui.CustomControls"
+    Title="PatientPreVisitForSomeoneElse">
+    <!--  Main Grid  -->
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="50,1,Auto,*"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <!--  Header Section  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="50,*,50"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <!--  Back image Section  -->
+            <Grid
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="FillAndExpand"
+                    Source="backicon.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="25" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalTextAlignment="Center"
+                Text="Start Visit"
+                TextColor="Black"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  BoxView Section  -->
+        <BoxView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray1}"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+        <Grid
+            x:Name="lytVisitDetails"
+            Grid.Row="2"
+            Padding="10"
+            BackgroundColor="{StaticResource Gray3}">
+            <Label
+                FontAttributes="Bold"
+                FontSize="12"
+                HorizontalTextAlignment="Center"
+                Text="For a serious medical emergency, call 9-1-1."
+                TextColor="{StaticResource Red1}"
+                VerticalTextAlignment="Center" />
+        </Grid>
+        <!--  ScrollView Section  -->
+        <ScrollView
+            Grid.Row="3"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Never">
+            <!--  Body Section  -->
+            <Grid
+                Padding="12,10"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                RowSpacing="12"
+                VerticalOptions="FillAndExpand">
+                <!--  Heading Section  -->
+                <Label
+                    Grid.Row="0"
+                    FontFamily="SanchezSlab"
+                    FontSize="14"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Select YOUR name"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalOptions="FillAndExpand" />
+                <!--  YourName Section  -->
+                <Grid
+                    Grid.Row="1"
+                    Padding="10,0"
+                    BackgroundColor="{StaticResource Gray3}"
+                    HeightRequest="35"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding spnrYourName}"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Center" />
+                    <Image
+                        Margin="0,0,10,0"
+                        HeightRequest="10"
+                        HorizontalOptions="EndAndExpand"
+                        Source="downarrow.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="15" />
+                    <controls:CustomPicker
+                        Margin="1,10"
+                        HorizontalTextAlignment="Start"
+                        ItemsSource="{Binding spnrYourNameList}"
+                        SelectedIndexChanged="spnrYourNamePicker_SelectedIndexChanged"
+                        TextColor="Transparent"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <!--  OtherPatient Section  -->
+                <Grid
+                    x:Name="lytOtherPatient"
+                    Grid.Row="2"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding lytOtherPatient}"
+                    RowDefinitions="Auto,Auto"
+                    VerticalOptions="FillAndExpand">
+                    <Grid
+                        Grid.Row="0"
+                        HorizontalOptions="FillAndExpand"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="10"
+                        VerticalOptions="FillAndExpand">
+                        <Grid
+                            Grid.Row="0"
+                            HorizontalOptions="FillAndExpand"
+                            RowDefinitions="Auto,Auto"
+                            RowSpacing="5"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                x:Name="lblName"
+                                Grid.Row="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Please enter your name:"
+                                TextColor="Black"
+                                VerticalOptions="FillAndExpand" />
+                            <Grid
+                                Grid.Row="1"
+                                Padding="10,0"
+                                BackgroundColor="{StaticResource Gray3}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <controls:CustomEntry
+                                    x:Name="txtOtherGuardianName"
+                                    FontSize="14"
+                                    HeightRequest="35"
+                                    HorizontalOptions="FillAndExpand"
+                                    Keyboard="Default"
+                                    Placeholder="Please enter your name"
+                                    Text="{Binding txtOtherGuardianName}"
+                                    VerticalOptions="FillAndExpand" />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            Grid.Row="1"
+                            HorizontalOptions="FillAndExpand"
+                            RowDefinitions="Auto,Auto"
+                            RowSpacing="5"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Row="0"
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Relationship to patient:"
+                                TextColor="Black"
+                                VerticalOptions="FillAndExpand" />
+                            <Grid
+                                Grid.Row="1"
+                                Padding="10,0"
+                                BackgroundColor="{StaticResource Gray3}"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                <Label
+                                    FontSize="14"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="{Binding spnrRelationship}"
+                                    VerticalOptions="FillAndExpand"
+                                    VerticalTextAlignment="Center" />
+                                <Image
+                                    Margin="0,0,10,0"
+                                    HeightRequest="10"
+                                    HorizontalOptions="EndAndExpand"
+                                    Source="downarrow.png"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="15" />
+                                <controls:CustomPicker
+                                    Margin="1,10"
+                                    HorizontalTextAlignment="Start"
+                                    ItemsSource="{Binding spnrRelationshipList}"
+                                    SelectedIndexChanged="spnrRelationshipPicker_SelectedIndexChanged"
+                                    TextColor="Transparent"
+                                    VerticalTextAlignment="Center" />
+
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            Grid.Row="2"
+                            Padding="10,0"
+                            BackgroundColor="{StaticResource Gray3}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <controls:CustomEntry
+                                x:Name="txtOtherRelationship"
+                                FontSize="14"
+                                HeightRequest="35"
+                                HorizontalOptions="FillAndExpand"
+                                Keyboard="Default"
+                                Text="{Binding txtOtherRelationship}"
+                                VerticalOptions="FillAndExpand" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <!--  BoxView Section  -->
+                <BoxView
+                    Grid.Row="3"
+                    BackgroundColor="{StaticResource Gray1}"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                <!--  Select PATIENT name Section  -->
+                <Label
+                    Grid.Row="4"
+                    FontFamily="SanchezSlab"
+                    FontSize="14"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="Select PATIENT name"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalOptions="FillAndExpand" />
+                <!--  spnr Patient Name Section  -->
+                <Grid
+                    Grid.Row="5"
+                    Padding="10,0"
+                    BackgroundColor="{StaticResource Gray3}"
+                    HeightRequest="35"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding spnrPatientName}"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Center" />
+                    <Image
+                        Margin="0,0,10,0"
+                        HeightRequest="10"
+                        HorizontalOptions="EndAndExpand"
+                        Source="downarrow.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="15" />
+                    <controls:CustomPicker
+                        Margin="1,10"
+                        HorizontalTextAlignment="Start"
+                        ItemsSource="{Binding spnrPatientNameList}"
+                        SelectedIndexChanged="spnrPatientNamePicker_SelectedIndexChanged"
+                        TextColor="Transparent"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <!--  NotInTexas Section  -->
+                <Label
+                    Grid.Row="6"
+                    FontFamily="SanchezSlab"
+                    FontSize="18"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding lblNotInTexas}"
+                    TextColor="{StaticResource Blue1}"
+                    VerticalOptions="FillAndExpand" />
+                <!--  SorryYall Section  -->
+                <Label
+                    Grid.Row="7"
+                    FontSize="14"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    VerticalOptions="FillAndExpand">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Sorry y'all! " TextColor="{StaticResource Blue1}" />
+                            <Span Text="In compliance with " TextColor="{StaticResource Black}" />
+                            <Span
+                                FontAttributes="Italic"
+                                Text="governing rules and regulations"
+                                TextColor="{StaticResource Green1}" />
+                            <Span Text=", NormanMD physicians can only prescribe for and treat* patients currently located within the state of Texas at the time of service." TextColor="{StaticResource Black}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <!--  I have read and agree  Section  -->
+                <Grid
+                    Grid.Row="8"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    VerticalOptions="FillAndExpand">
+                    <Grid
+                        Grid.Row="0"
+                        ColumnDefinitions="40,*"
+                        HeightRequest="30"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <CheckBox
+                            Grid.Column="0"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            Color="Black" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="12"
+                            HorizontalOptions="FillAndExpand"
+                            Text="I have read and agree."
+                            TextColor="Black"
+                            VerticalOptions="CenterAndExpand" />
+
+                    </Grid>
+                    <Label
+                        x:Name="lblSomeCirumstances"
+                        Grid.Row="1"
+                        FontAttributes="Italic"
+                        FontSize="10"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="*in some circumstances physicians are still able to provide guidance"
+                        TextColor="Black"
+                        VerticalOptions="CenterAndExpand" />
+                </Grid>
+                <!--  Continue Button Section  -->
+                <Button
+                    x:Name="btnContinue"
+                    Grid.Row="9"
+                    Margin="50,45,50,0"
+                    BackgroundColor="#15B287"
+                    Command="{Binding PharmacySaveCommand}"
+                    FontFamily="SanchezSlab"
+                    FontSize="14"
+                    HeightRequest="55"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding btnContinue}"
+                    Text="Continue"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="FillAndExpand"
+                    WidthRequest="180" />
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

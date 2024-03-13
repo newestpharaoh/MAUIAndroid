@@ -902,6 +902,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// TODO : To define Load Medical issue List.....
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadMedicalIssues()
         {
             try
@@ -953,7 +957,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 
             }
         }
-
+        /// <summary>
+        /// TODO : To define Display Medical Info Details.....
+        /// </summary>
+        /// <returns></returns>
         public async Task DisplayMedicalInfoDeails()
         {
             // Get App settings api..
@@ -1024,7 +1031,6 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                                         lblPCPSelected = medicalInfo.PCP.Preview;
                                         lytPCPSelected = true;
                                         lytAddPCP = false;
-
                                     }
 
                                     if (medicalInfo.Pharmacy != null)
@@ -1045,10 +1051,13 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                                             lblPharmacySelectedVisible = true;
                                             lblPharmacySelected = medicalInfo.Pharmacy.ToString();
                                             imgCapsule = false;
-                                            if (imgCurative != null) imgCurative = false;
+                                            if (imgCurative != null)
+                                                imgCurative = false;
                                         }
 
+                                        lytPharmacySelected = true;
                                         lblPharmacySelectedVisible = true;
+                                        lblPharmacySelected = medicalInfo.Pharmacy.ToString();
                                         lytAddPharmacy = false;
                                     }
 
@@ -1082,6 +1091,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// TODO : To define update surgeries List...
+        /// </summary>
         public void UpdateSurgeriesList()
         {
             try
@@ -1093,6 +1105,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define update medication list....
+        /// </summary>
         public void UpdateMedicationsList()
         {
             try
@@ -1104,6 +1119,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define update allergies list....
+        /// </summary>
         public void UpdateAllergiesList()
         {
             try
@@ -1116,6 +1134,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
 
         }
+        /// <summary>
+        /// TODO : To define All updated list.....
+        /// </summary>
         public void UpdateList()
         {
             try
@@ -1134,6 +1155,12 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define login new user .....
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
         private async Task<bool> LoginNewUser(string username, string pwd)
         {
             try
@@ -1157,6 +1184,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 return false;
             }
         }
+        /// <summary>
+        /// TODO : to define get pharmacy from primary account...
+        /// </summary>
+        /// <returns></returns>
         private async Task GetPharmacyFromPrimaryAccount()
         {
             try
@@ -1168,6 +1199,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define Add surgery click event...
+        /// </summary>
+        /// <param name="obj"></param>
         private async void lytAddSurgeryAsync(object obj)
         {
             try
@@ -1178,6 +1213,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define Add PCP click event...
+        /// </summary>
+        /// <param name="obj"></param>
         private async void lytAddPCPAsync(object obj)
         {
             try
@@ -1188,6 +1227,11 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+
+        /// <summary>
+        /// TODO : To define Add pharmacy click event...
+        /// </summary>
+        /// <param name="obj"></param>
         private async void lytAddPharmacyAsync(object obj)
         {
             try
@@ -1206,6 +1250,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define process capsule...
+        /// </summary>
         public void ProcessCapsule()
         {
             try
@@ -1224,6 +1271,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : to define Process Curative...
+        /// </summary>
         public void ProcessCurative()
         {
             try
@@ -1243,6 +1293,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define Add Allergy click event...
+        /// </summary>
+        /// <param name="obj"></param>
         private async void lytAddAllergyAsync(object obj)
         {
             try
@@ -1253,6 +1307,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define Add Medication click event...
+        /// </summary>
+        /// <param name="obj"></param>
         private async void lytAddMedicationAsync(object obj)
         {
             try
@@ -1263,6 +1321,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define Delete PCP click event...
+        /// </summary>
+        /// <param name="obj"></param>
         private async void ImgDeletePCPAsync(object obj)
         {
             try
@@ -1273,6 +1335,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define Delete Pharmacy click event...
+        /// </summary>
+        /// <param name="obj"></param>
         private async void imgDeletePharmacyAsync(object obj)
         {
             try
@@ -1283,82 +1349,132 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define Get Description....
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public string GetDescription(Type type)
         {
-            var descriptions = (DescriptionAttribute[])
-                type.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-            if (descriptions.Length == 0)
+            try
             {
+                var descriptions = (DescriptionAttribute[])
+                      type.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                if (descriptions.Length == 0)
+                {
+                    return null;
+                }
+                return descriptions[0].Description;
+            }
+            catch (Exception ex)
+            {
+
                 return null;
             }
-            return descriptions[0].Description;
         }
+        /// <summary>
+        /// TODO : To define Get Dialog Title....
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public string GetDialogTitle(Type type)
         {
-            var descriptions = (DialogTitle[])
-                type.GetCustomAttributes(typeof(DialogTitle), false);
+            try
+            {
+                var descriptions = (DialogTitle[])
+                        type.GetCustomAttributes(typeof(DialogTitle), false);
 
-            if (descriptions.Length == 0)
+                if (descriptions.Length == 0)
+                {
+                    return null;
+                }
+                return descriptions[0].Name;
+            }
+            catch (Exception ex)
             {
                 return null;
             }
-            return descriptions[0].Name;
         }
+        /// <summary>
+        /// TODO : To Define Delete Medical Items....
+        /// </summary>
+        /// <param name="item"></param>
         private async void DeleteMedicalItem(IPatientRegistrationMedicalInfoItem item)
         {
-            string description = GetDescription(item.GetType()) ?? string.Empty;
-            string title = GetDialogTitle(item.GetType()) ?? string.Empty;
-            string confirmationMessage = $"Delete this {description.ToLower()}?";
-            bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
-
-            if (answer)
+            try
             {
-                if (item is PCP)
+                string description = GetDescription(item.GetType()) ?? string.Empty;
+                string title = GetDialogTitle(item.GetType()) ?? string.Empty;
+                string confirmationMessage = $"Delete this {description.ToLower()}?";
+                bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
+
+                if (answer)
                 {
-                    medicalInfo.PCP = null;
-                    lytPCPSelected = false;
-                    lytAddPCP = true;
-                }
-                else if (item is Pharmacy)
-                {
-                    medicalInfo.Pharmacy = null;
-                    lytPharmacySelected = false;
-                    lytAddPharmacy = true;
-                    Pharmacy ph = (Pharmacy)item;
-                    if (ph.IsCurative)
+                    if (item is PCP)
                     {
-                        patientIsEligibleForCurative = true;
+                        medicalInfo.PCP = null;
+                        lytPCPSelected = false;
+                        lytAddPCP = true;
                     }
-                }
-            };
+                    else if (item is Pharmacy)
+                    {
+                        medicalInfo.Pharmacy = null;
+                        lytPharmacySelected = false;
+                        lytAddPharmacy = true;
+                        Pharmacy ph = (Pharmacy)item;
+                        if (ph.IsCurative)
+                        {
+                            patientIsEligibleForCurative = true;
+                        }
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+            }
 
         }
+        /// <summary>
+        /// TODO : To define Delete Medical list Item...
+        /// </summary>
+        /// <param name="item"></param>
         public async void DeleteMedicalListItem(IPatientRegistrationMedicalInfoListItem item)
         {
-            string description = GetDescription(item.GetType()) ?? string.Empty;
-            string title = GetDialogTitle(item.GetType()) ?? string.Empty;
-            string confirmationMessage = $"Delete this {description.ToLower()}?";
-            bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
-            if (answer)
+            try
             {
-                if (item is Surgery)
+                string description = GetDescription(item.GetType()) ?? string.Empty;
+                string title = GetDialogTitle(item.GetType()) ?? string.Empty;
+                string confirmationMessage = $"Delete this {description.ToLower()}?";
+                bool answer = await Application.Current.MainPage.DisplayAlert(title, confirmationMessage, "Yes", "No");
+                if (answer)
                 {
-                    medicalInfo.Surgeries.RemoveAt(item.Position);
-                    UpdateSurgeriesList();
-                }
-                else if (item is Allergy)
-                {
-                    medicalInfo.Allergies.RemoveAt(item.Position);
-                    UpdateAllergiesList();
-                }
-                else if (item is Medication)
-                {
-                    medicalInfo.Medications.RemoveAt(item.Position);
-                    UpdateMedicationsList();
-                }
-            };
+                    if (item is Surgery)
+                    {
+                        medicalInfo.Surgeries.RemoveAt(item.Position);
+                        UpdateSurgeriesList();
+                    }
+                    else if (item is Allergy)
+                    {
+                        medicalInfo.Allergies.RemoveAt(item.Position);
+                        UpdateAllergiesList();
+                    }
+                    else if (item is Medication)
+                    {
+                        medicalInfo.Medications.RemoveAt(item.Position);
+                        UpdateMedicationsList();
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                 
+            }
         }
+        /// <summary>
+        /// TODO : To define Edit PCP Click event...
+        /// </summary>
+        /// <param name="obj"></param>
         private async void imgEditPCPAsync(object obj)
         {
             try
@@ -1369,6 +1485,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : To define edit pharmacy click event....
+        /// </summary>
+        /// <param name="obj"></param>
         private async void imgEditPharmacyAsync(object obj)
         {
             try
@@ -1409,6 +1529,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : to define Update Capsule Pharmacy....
+        /// </summary>
         public void UpdateCapsulePharmacy()
         {
             try
@@ -1427,19 +1550,33 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
             }
         }
+        /// <summary>
+        /// TODO : TO define Update Curative Pharmacy
+        /// </summary>
         public void UpdateCurativePharmacy()
         {
-            Pharmacy px = new Pharmacy() { IsCurative = true };
-            medicalInfo.Pharmacy = px;
-            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+            try
             {
-                lytPharmacySelected = true;
-                lytAddPharmacy = false;
-                lblPharmacySelectedVisible = false;
-                imgCurative = true;
-                //
-            });
+                Pharmacy px = new Pharmacy() { IsCurative = true };
+                medicalInfo.Pharmacy = px;
+                Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                {
+                    lytPharmacySelected = true;
+                    lytAddPharmacy = false;
+                    lblPharmacySelectedVisible = false;
+                    imgCurative = true;
+                    //
+                });
+            }
+            catch (Exception ex)
+            { 
+            }
         }
+
+        /// <summary>
+        /// TODO : to define display allergy details....
+        /// </summary>
+        /// <returns></returns>
         public async Task DisplayAllergyDeails()
         {
             // Get App settings api..
@@ -1475,6 +1612,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// TODO : to define Display Medication Details .....
+        /// </summary>
+        /// <returns></returns>
         public async Task DisplayMedicationDetails()
         {
             // Get App settings api..
@@ -1510,6 +1651,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// TODO : To define display surgury details....
+        /// </summary>
+        /// <returns></returns>
         public async Task DisplaySurguryDetails()
         {
             // Get App settings api..
@@ -1545,6 +1690,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// TODO : to define display pharmacy details....
+        /// </summary>
+        /// <returns></returns>
         public async Task DisplayPharmacyDetails()
         {
             // Get App settings api..
@@ -1588,6 +1737,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// TODO : to define display PCP details...
+        /// </summary>
+        /// <returns></returns>
         public async Task DisplayPCPDetails()
         {
             // Get App settings api..
@@ -1626,6 +1779,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+        /// <summary>
+        /// TODO : To define display PCP Select Details...
+        /// </summary>
+        /// <returns></returns>
         public async Task DisplayPCPSelectDetails()
         {
             // Get App settings api..
@@ -1801,7 +1958,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                         pharmacy.StreetAddress1 = txtAddress1;
                         pharmacy.ZipCode = txtZipCode;
                         pharmacy.Description = txtPhoneNumber;
-                         
+                        medicalInfo.Pharmacy = pharmacy;
+
                         //pharmacy = new Pharmacy();
                         //txtName = pharmacy != null ? pharmacy.BusinessName : ""; 
                         //txtCity = pharmacy != null ? pharmacy.City : "";
@@ -1839,9 +1997,14 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     }
                     else
                     {
-                        txtPCPFirstName = pcp.FirstName;
-                        txtPCPLastName = pcp.LastName;
-                        StatePCPLbl = pcp.State;
+                        pcp = new PCP();
+                        pcp.FirstName = txtPCPFirstName;
+                        pcp.LastName = txtPCPLastName;
+                        pcp.State = StatePCPLbl;
+                        medicalInfo.PCP = pcp;
+                        //txtPCPFirstName = pcp.FirstName;
+                        //txtPCPLastName = pcp.LastName;
+                        //StatePCPLbl = pcp.State;
                     }
                     await Navigation.PopModalAsync();
                 }
@@ -1886,32 +2049,49 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         }
         private bool ValidateMedicalInfo()
         {
-
-            if (medicalInfo != null)
-            {
-                if (medicalInfo.PCP is null || medicalInfo.Pharmacy is null ||
-                    (medicalInfo.MedicalIssues.Count == 0 && !chkOtherMedicalIssue) ||
-                    (chkOtherMedicalIssue && string.IsNullOrEmpty(txtOtherMedicalIssue.Trim())))
+            try
+            { 
+                if (medicalInfo != null)
                 {
-                    UserDialog.Alert("Please fill all the required fields!");
+                    if (medicalInfo.PCP is null || medicalInfo.Pharmacy is null ||
+                        (medicalInfo.MedicalIssues.Count == 0 && !chkOtherMedicalIssue) ||
+                        (chkOtherMedicalIssue && string.IsNullOrEmpty(txtOtherMedicalIssue.Trim())))
+                    {
+                        UserDialog.Alert("Please fill all the required fields!");
+                    }
+                    else
+                    {
+                        return true;
+                    }
+
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
+        /// <summary>
+        /// TODO : to define check for other Medical issue...
+        /// </summary>
+        private void CheckForOtherMedicalIssue()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtOtherMedicalIssue))
+                {
+                    if (medicalInfo != null) medicalInfo.OtherMedicalIssue = txtOtherMedicalIssue;
                 }
                 else
                 {
-                    return true;
+                    if (medicalInfo != null) medicalInfo.OtherMedicalIssue = string.Empty;
                 }
-
             }
-            return false;
-        }
-        private void CheckForOtherMedicalIssue()
-        {
-            if (!string.IsNullOrEmpty(txtOtherMedicalIssue))
+            catch (Exception ex)
             {
-                if (medicalInfo != null) medicalInfo.OtherMedicalIssue = txtOtherMedicalIssue;
-            }
-            else
-            {
-                if (medicalInfo != null) medicalInfo.OtherMedicalIssue = string.Empty;
+                 
             }
         }
         /// <summary>

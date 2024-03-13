@@ -24,6 +24,9 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
     #endregion
 
     #region Event Handler
+    /// <summary>
+    /// TODO : To define OnAppaering......
+    /// </summary>
     protected override async void OnAppearing()
     {
         try
@@ -37,7 +40,11 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
 
         }
     }
-     
+    /// <summary>
+    /// TODO : To define Edit Pharmacy Click event.....
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void imgEditPharmacy_Tapped(object sender, TappedEventArgs e)
     {
         try
@@ -60,6 +67,11 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         {
         }
     }
+    /// <summary>
+    /// TODO : To define Edit Allergy Click event.....
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void imgEditAllergy_Tapped(object sender, TappedEventArgs e)
     {
         try
@@ -74,7 +86,11 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         {
         }
     }
-
+    /// <summary>
+    /// TODO : To define delete Allergy click event....
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void imgDeleteAllergy_Tapped(object sender, TappedEventArgs e)
     {
         try
@@ -104,7 +120,11 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         {
         }
     }
-
+    /// <summary>
+    /// TODO : To define Edit Medication Click event.....
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void imgEditMedication_Tapped(object sender, TappedEventArgs e)
     {
         try
@@ -119,7 +139,11 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         {
         }
     }
-
+    /// <summary>
+    /// TODO : To define Delete Medication click event......
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void imgDeleteMedication_Tapped(object sender, TappedEventArgs e)
     {
         try
@@ -148,7 +172,11 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         {
         }
     }
-
+    /// <summary>
+    /// TODO : To define Edit surgury click event.....
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void imgEditSurgery_Tapped(object sender, TappedEventArgs e)
     {
         try
@@ -163,7 +191,11 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
         {
         }
     }
-
+    /// <summary>
+    /// TODO : To define delete surgury click event......
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void imgDeleteSurgery_Tapped(object sender, TappedEventArgs e)
     {
         try
