@@ -12,6 +12,7 @@ public partial class HomePage : ContentPage
         {
             InitializeComponent();
             this.BindingContext = VM = new HomePageViewModel(this.Navigation);
+            
         }
         catch (Exception ex)
         {

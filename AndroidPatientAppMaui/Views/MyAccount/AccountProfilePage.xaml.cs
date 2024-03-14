@@ -9,7 +9,7 @@ public partial class AccountProfilePage : ContentPage
 
     #region Constructor
     public AccountProfilePage()
-    {   
+    {
         try
         {
             InitializeComponent();
@@ -27,15 +27,15 @@ public partial class AccountProfilePage : ContentPage
     /// <summary>
     /// TODO : To Define the on Appearing....
     /// </summary>
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         try
         {
             base.OnAppearing();
             updateGrid.IsVisible = false;
-            arrowimg.Source = "rightarrow.png";
+          //  arrowimg.Source = "rightarrow.png";
 
-            VM.GetMembers();
+            await VM.GetAccountMembers();
         }
         catch (Exception ex)
         {
@@ -51,21 +51,21 @@ public partial class AccountProfilePage : ContentPage
     {
         try
         {
-            if (updateGrid.IsVisible)
-            {
-                updateGrid.IsVisible = false;
-                arrowimg.Source = "rightarrow.png";
-            }
-            else
-            {
-                updateGrid.IsVisible = true;
-                arrowimg.Source = "downarrow.png";
-            }
+            //if (updateGrid.IsVisible)
+            //{
+            //    updateGrid.IsVisible = false;
+            //    arrowimg.Source = "rightarrow.png";
+            //}
+            //else
+            //{
+            //    updateGrid.IsVisible = true;
+            //    arrowimg.Source = "downarrow.png";
+            //}
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex);
         }
-    } 
+    }
     #endregion
 }

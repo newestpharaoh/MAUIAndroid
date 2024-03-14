@@ -17,6 +17,7 @@ namespace AndroidPatientAppMaui.Helpers
         public static DateTime? TokenExpirationDate;
         public static UserInfo userInfo = new UserInfo();
         public static RegistrationState RegistrationRespModel = new RegistrationState();
+        public static AccountAddFamilyMemberState state = new AccountAddFamilyMemberState();
 
     }
 }

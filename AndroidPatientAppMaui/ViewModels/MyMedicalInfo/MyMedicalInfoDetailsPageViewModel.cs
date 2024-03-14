@@ -15,7 +15,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public bool patientIsCurative = false;
         public bool patientIsEligibleForCurative = false;
         public MedicalInfo medicalInfo;
-        AdditionalFamilyMember additionalFamilyMember;
+        public AdditionalFamilyMember additionalFamilyMember;
         List<MedicalIssue> issues;
 
         public Allergy allergy;
@@ -2186,7 +2186,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 if (ValidateMedicalInfo())
                 {
                     CheckForOtherMedicalIssue();
-                    //additionalFamilyMember.MedicalHistory = medicalInfo;
+                    additionalFamilyMember.MedicalHistory = medicalInfo;
 
                     //using (AccountAddFamilyMemberStateHelper afmStateHelper = new AccountAddFamilyMemberStateHelper(this))
                     //{

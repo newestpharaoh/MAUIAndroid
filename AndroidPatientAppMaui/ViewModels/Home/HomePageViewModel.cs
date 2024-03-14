@@ -133,12 +133,14 @@ namespace AndroidPatientAppMaui.ViewModels.Home
                             try
                             {
                                 Preferences.Set("PatientID", userInfo.PatientID);
-                                AppGlobalConstants.userInfo = userInfo;
+
                                 UserName = $"Welcome, {userInfo.Name}";
                                 string accountStatus = userInfo.IsActive ? "Active" : "Deactivated";
                                 Account = accountStatus;
                                 Insurance = $"You are covered by: {userInfo.Domain}";
                                 Version = $"Version {AppInfo.VersionString}";
+                                Preferences.Set("UserName", userInfo.Name);
+                                AppGlobalConstants.userInfo = userInfo;
                             }
                             catch (Exception ex) { }
                         });
@@ -214,7 +216,6 @@ namespace AndroidPatientAppMaui.ViewModels.Home
                                     }
                                     else
                                     {
-                                       
                                         await Navigation.PushModalAsync(new Views.Home.PatientPreVisitPatientSelectionStep1(), false);
                                     }
                                 });

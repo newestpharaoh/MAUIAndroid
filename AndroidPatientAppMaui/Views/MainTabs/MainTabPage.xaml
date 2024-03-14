@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
     xmlns:family="clr-namespace:AndroidPatientAppMaui.Views.Family"
+    xmlns:familyaccount="clr-namespace:AndroidPatientAppMaui.Views.MyAccount"
     xmlns:home="clr-namespace:AndroidPatientAppMaui.Views.Home"
     xmlns:medicalinfo="clr-namespace:AndroidPatientAppMaui.Views.MyMedicalInfo"
     xmlns:myaccount="clr-namespace:AndroidPatientAppMaui.Views.MyAccount"
@@ -25,10 +26,15 @@
             Title="Visit History"
             ControlTemplate="{Binding visit:VisitHistoryPage}"
             IconImageSource="cabinet.png" />
-        <family:FamilyPage
+        <!--<family:FamilyPage
             x:Name="Family"
             Title="Family"
             ControlTemplate="{Binding family:FamilyPage}"
+            IconImageSource="family.png" />-->
+        <familyaccount:AccountProfilePage
+            x:Name="FamilyAccount"
+            Title="Family"
+            ControlTemplate="{Binding family:AccountProfilePage}"
             IconImageSource="family.png" />
         <medicalinfo:MyMedicalInfoPage
             x:Name="MyMedicalPage"

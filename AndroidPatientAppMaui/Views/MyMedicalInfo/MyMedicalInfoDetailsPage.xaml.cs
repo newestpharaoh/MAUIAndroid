@@ -7,13 +7,14 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
 {
     MyMedicalInfoDetailsPageViewModel VM;
     #region Constructor
-    public MyMedicalInfoDetailsPage(string title, MedicalInfo medicalInfo)
+    public MyMedicalInfoDetailsPage(string title, MedicalInfo medicalInfo, AdditionalFamilyMember additionalFamilyMember)
     {
         try
         {
             InitializeComponent();
             this.BindingContext = VM = new MyMedicalInfoDetailsPageViewModel(this.Navigation);
             VM.medicalInfo = medicalInfo;
+            VM.additionalFamilyMember = additionalFamilyMember;
             VM.UpdateList();
         }
         catch (Exception ex)

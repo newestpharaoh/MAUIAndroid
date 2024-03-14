@@ -388,7 +388,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage(title, medicalInfo), false);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage(title, medicalInfo, null), false);
             }
             catch (Exception ex)
             {

@@ -110,7 +110,7 @@
                     <Grid
                         Grid.Row="0"
                         HorizontalOptions="FillAndExpand"
-                        RowDefinitions="Auto,Auto"
+                        RowDefinitions="Auto,*"
                         RowSpacing="5"
                         VerticalOptions="FillAndExpand">
                         <Grid
@@ -138,7 +138,59 @@
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                         <!--  Account Holder Section  -->
-                        <Grid
+                        <ListView
+                            Grid.Row="1"
+                            HasUnevenRows="True"
+                            HorizontalOptions="FillAndExpand"
+                            ItemsSource="{Binding AccountHolderList}"
+                            SeparatorColor="{StaticResource Gray3}"
+                            VerticalOptions="FillAndExpand"
+                            VerticalScrollBarVisibility="Never">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid
+                                            Padding="10,0"
+                                            ColumnDefinitions="*,*"
+                                            HeightRequest="45"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand">
+                                            <Label
+                                                Grid.Column="0"
+                                                FontSize="14"
+                                                HorizontalOptions="FillAndExpand"
+                                                Text="{Binding DisplayName}"
+                                                TextColor="{StaticResource Black}"
+                                                VerticalOptions="CenterAndExpand" />
+                                            <Grid
+                                                Grid.Column="1"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="FillAndExpand">
+                                                <Label
+                                                    Margin="0,0,20,0"
+                                                    FontAttributes="Italic"
+                                                    FontSize="14"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    Text="{Binding PlanStatus}"
+                                                    TextColor="{StaticResource Black}"
+                                                    VerticalOptions="CenterAndExpand" />
+                                                <Image
+                                                    x:Name="arrowimg"
+                                                    HeightRequest="15"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Source="rightarrow.png"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    WidthRequest="12" />
+                                            </Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="DownArrow_Tapped" />
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <!--<Grid
                             Grid.Row="1"
                             Padding="10,0"
                             ColumnDefinitions="*,*"
@@ -175,7 +227,7 @@
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="DownArrow_Tapped" />
                             </Grid.GestureRecognizers>
-                        </Grid>
+                        </Grid>-->
                     </Grid>
                     <BoxView
                         Grid.Row="1"
