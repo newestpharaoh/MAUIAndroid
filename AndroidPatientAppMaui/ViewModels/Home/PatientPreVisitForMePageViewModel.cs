@@ -96,36 +96,36 @@ namespace AndroidPatientAppMaui.ViewModels.Home
             {
 
             }
-        }      
-                /// <summary>
-                /// To define the back button command.
-                /// </summary>
-                /// <param name="obj"></param>
-                private async void BackAsync(object obj)
-                {
-                    try
-                    {
-                        await Navigation.PopModalAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
-                }
-                /// <summary>
-                /// To define the back button command.
-                /// </summary>
-                /// <param name="obj"></param>
-                private async void ContinueAsync(object obj)
-                {
-                    try
-                    {
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
-                }
-                #endregion
+        }
+        /// <summary>
+        /// To define the back button command.
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void BackAsync(object obj)
+        {
+            try
+            {
+                await Navigation.PopModalAsync();
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        /// <summary>
+        /// To define the back button command.
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void ContinueAsync(object obj)
+        {
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        #endregion
+    }
 }
