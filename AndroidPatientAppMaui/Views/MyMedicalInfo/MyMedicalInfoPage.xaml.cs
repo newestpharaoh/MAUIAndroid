@@ -1,4 +1,5 @@
 using AndroidPatientAppMaui.ViewModels.MyMedicalInfo;
+using CommonLibraryCoreMaui.Models;
 
 namespace AndroidPatientAppMaui.Views.MyMedicalInfo;
 
@@ -6,17 +7,18 @@ public partial class MyMedicalInfoPage : ContentPage
 {
     //To define the class lavel variable.
     MyMedicalInfoPageViewModel VM;
-    int PatientID = Helpers.AppGlobalConstants.userInfo.PatientID;
+   int PatientID = Helpers.AppGlobalConstants.userInfo.PatientID;
 
     #region Constructor
-    public MyMedicalInfoPage()
+    public MyMedicalInfoPage(AccountMember am)
     {
         try
         {
             InitializeComponent();
             this.BindingContext = VM = new MyMedicalInfoPageViewModel(this.Navigation);
 
-            PatientID = Preferences.Get("PatientID", 0);
+           PatientID = am.PatientID;
+            //PatientID = Preferences.Get("PatientID", 0);
 
         }
         catch (Exception ex)

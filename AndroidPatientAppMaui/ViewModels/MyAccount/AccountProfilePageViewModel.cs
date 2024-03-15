@@ -13,7 +13,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
     public class AccountProfilePageViewModel : BaseViewModel
     {  //To define the class level variable.
-        AccountMember am;
+       public AccountMember am;
         public AccountSubscriptionInfo info;
         AccountAddFamilyMemberInfo aafmi;
         string familyAccountNoticeString;
@@ -156,6 +156,19 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 {
                     _lytAdditionalMembersInfo = value;
                     OnPropertyChanged("lytAdditionalMembersInfo");
+                }
+            }
+        }
+         private bool _IsExpanderVisible = false;
+        public bool IsExpanderVisible
+        {
+            get { return _IsExpanderVisible; }
+            set
+            {
+                if (_IsExpanderVisible != value)
+                {
+                    _IsExpanderVisible = value;
+                    OnPropertyChanged("IsExpanderVisible");
                 }
             }
         }
@@ -419,7 +432,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
         {
             try
             {
-                App.Current.MainPage = new Views.MainTabs.MainTabPage("MyMedicalPage");
+                //App.Current.MainPage = new Views.MyMedicalInfo.MyMedicalInfoPage();
+               // App.Current.MainPage = new Views.MainTabs.MainTabPage("MyMedicalPage");
                 //await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoPage(), false);
 
             }

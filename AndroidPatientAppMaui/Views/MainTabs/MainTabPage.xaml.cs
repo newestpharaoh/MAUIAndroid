@@ -26,22 +26,30 @@ public partial class MainTabPage : TabbedPage
 
     protected async override void OnAppearing()
     {
-        base.OnAppearing();
-        UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, Userid, true, Token).ConfigureAwait(false);
-        Helpers.AppGlobalConstants.userInfo = userInfo;
+        try
+        {
+
+            base.OnAppearing();
+            UserInfo userInfo = await DataUtility.GetUserInfo(SettingsValues.ApiURLValue, Userid, true, Token).ConfigureAwait(false);
+            Helpers.AppGlobalConstants.userInfo = userInfo;
 
 
-        if (IsTabChange == "Home")
-            CurrentPage = Children[0];
-        else if (IsTabChange == "VisitHistory")
-            CurrentPage = Children[1];
-        else if (IsTabChange == "FamilyAccount")
-            CurrentPage = Children[2];
-        else if (IsTabChange == "MyMedicalPage")
-            CurrentPage = Children[3];
-        else if (IsTabChange == "MyAccount")
-            CurrentPage = Children[4];
+            if (IsTabChange == "Home")
+                CurrentPage = Children[0];
+            else if (IsTabChange == "VisitHistory")
+                CurrentPage = Children[1];
+            else if (IsTabChange == "FamilyAccount")
+                CurrentPage = Children[2];
+            else if (IsTabChange == "MyMedicalPage")
+                CurrentPage = Children[3];
+            else if (IsTabChange == "MyAccount")
+                CurrentPage = Children[4];
 
-        IsTabChange = string.Empty;
+            IsTabChange = string.Empty;
+        }
+        catch (Exception ex)
+        {
+             
+        }
     }
 }

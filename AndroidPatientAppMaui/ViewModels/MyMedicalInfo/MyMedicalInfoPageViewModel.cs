@@ -16,7 +16,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 
         //To define the class level variable.
         string Token = string.Empty;
-        int PatientID = 0;
+       public  int PatientID = 0;
         bool nonVisit = false;
         bool family = false;
         MedicalInfo medicalInfo;
@@ -419,7 +419,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                         }
                         Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                         {
-                            medicalInfo = await DataUtility.PatientGetMedicalHistoryAsync(SettingsValues.ApiURLValue, Token, PatientID).ConfigureAwait(false);
+                            medicalInfo = await DataUtility.PatientGetMedicalHistoryAsync(SettingsValues.ApiURLValue, Token, patientId).ConfigureAwait(false);
                             List<MedicalIssue> issues = await DataUtility.GetMedicalIssuesAsync(SettingsValues.ApiURLValue).ConfigureAwait(false);
                             if (medicalInfo != null)
                             {

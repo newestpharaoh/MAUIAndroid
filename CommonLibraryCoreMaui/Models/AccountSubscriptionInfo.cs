@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Maui.Controls;
+using System.Collections.Generic;
 
 namespace CommonLibraryCoreMaui.Models
 {
-    public class AccountMember
+    public class AccountMember : BindableObject
     {
         public int PatientID { get; set; }
         public string DisplayName { get; set; }
@@ -14,7 +15,33 @@ namespace CommonLibraryCoreMaui.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PlanStatus { get; set; }
-
+      //  public bool IsExpanded { get; set; }
+        private bool _IsExpanded = false;
+        public bool IsExpanded
+        {
+            get { return _IsExpanded; }
+            set
+            {
+                if (_IsExpanded != value)
+                {
+                    _IsExpanded = value;
+                    OnPropertyChanged("IsExpanded");
+                }
+            }
+        } 
+        private string _ImgArrow = "rightarrow.png";
+        public string ImgArrow
+        {
+            get { return _ImgArrow; }
+            set
+            {
+                if (_ImgArrow != value)
+                {
+                    _ImgArrow = value;
+                    OnPropertyChanged("ImgArrow");
+                }
+            }
+        }
         public string GetPaymentPlanHeaderName ()
         {
             return IsActive ? PaymentPlan : "Deactivated";

@@ -98,7 +98,8 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             {
                 //App.Current.MainPage = new Views.MainTabs.MainTabPage();
                 //  await Navigation.PushModalAsync(new Views.MyAccount.AccountProfilePage(), false);
-                App.Current.MainPage = new Views.MainTabs.MainTabPage("FamilyAccount");
+               // App.Current.MainPage = new Views.MainTabs.MainTabPage("FamilyAccount");
+                App.Current.MainPage = new Views.MyAccount.AccountProfilePage();
             }
             catch (Exception ex)
             {

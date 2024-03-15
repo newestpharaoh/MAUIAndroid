@@ -21,6 +21,10 @@ namespace AndroidPatientAppMaui
                    // fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                     fonts.AddFont("SanchezSlab.ttf", "SanchezSlab");
                 })
+                .ConfigureEffects(effects =>
+                {
+                    effects.AddCompatibilityEffects(typeof(Xamarin.CommunityToolkit.Effects.TouchEffect).Assembly);
+                })
                 .ConfigureLifecycleEvents(events =>
                 {
 #if ANDROID

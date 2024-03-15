@@ -67,8 +67,10 @@
 	  <None Remove="Resources\Images\backicon.svg" />
 	  <None Remove="Resources\Images\book.svg" />
 	  <None Remove="Resources\Images\cabinet.svg" />
+	  <None Remove="Resources\Images\cabinetselected.svg" />
 	  <None Remove="Resources\Images\capsule_logo.png" />
 	  <None Remove="Resources\Images\clipboard.svg" />
+	  <None Remove="Resources\Images\clipboardselected.svg" />
 	  <None Remove="Resources\Images\closeeye.svg" />
 	  <None Remove="Resources\Images\creditcard.svg" />
 	  <None Remove="Resources\Images\curative_lockup_horizontal_a_redorange.png" />
@@ -83,11 +85,15 @@
 	  <None Remove="Resources\Images\grrenpencil.svg" />
 	  <None Remove="Resources\Images\handshake.svg" />
 	  <None Remove="Resources\Images\home.svg" />
+	  <None Remove="Resources\Images\homeselected.svg" />
+	  <None Remove="Resources\Images\homeunfill.svg" />
 	  <None Remove="Resources\Images\ic_launcher.png" />
 	  <None Remove="Resources\Images\infoicon.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\myaccount.svg" />
+	  <None Remove="Resources\Images\myaccountselected.svg" />
+	  <None Remove="Resources\Images\myaccountunfill.svg" />
 	  <None Remove="Resources\Images\nmd.png" />
 	  <None Remove="Resources\Images\openeye.svg" />
 	  <None Remove="Resources\Images\pencil.svg" />
@@ -100,6 +106,8 @@
 	  <None Remove="Resources\Images\userdelete.svg" />
 	  <None Remove="Resources\Images\userlock.svg" />
 	  <None Remove="Resources\Images\userreactivate.svg" />
+	  <None Remove="Resources\Images\userselected.svg" />
+	  <None Remove="Resources\Images\userunfill.svg" />
 	  <None Remove="Resources\Splash\nmdsplash.svg" />
 	</ItemGroup>
 
@@ -114,7 +122,8 @@
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.7" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.Permissions" Version="6.0.1" />
-		<PackageReference Include="Xam.Plugin.Media" Version="6.0.2" /> 
+		<PackageReference Include="Xam.Plugin.Media" Version="6.0.2" />
+		<PackageReference Include="Xamarin.CommunityToolkit.MauiCompat" Version="2.0.2-preview1013" /> 
 	</ItemGroup>
 
 	<ItemGroup>
@@ -131,6 +140,9 @@
  
 
 	<ItemGroup>
+	  <MauiXaml Update="CustomControls\TabComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Account\EmailVerifyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -144,6 +156,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Account\VerificationCodePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Family\FamilyMemberPrivateMedicalInformation.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Family\FamilyPage.xaml">

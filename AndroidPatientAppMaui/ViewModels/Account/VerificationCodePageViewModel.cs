@@ -96,7 +96,8 @@ namespace AndroidPatientAppMaui.ViewModels.Account
                                     {
                                         if (resp.StatusCode == StatusCode.Success)
                                         {
-                                            App.Current.MainPage = new Views.MainTabs.MainTabPage("Home");
+                                            App.Current.MainPage = new Views.Home.HomePage();
+                                            // App.Current.MainPage = new Views.MainTabs.MainTabPage("Home"); 
                                         }
                                         else if (!string.IsNullOrEmpty(resp.Message))
                                         {

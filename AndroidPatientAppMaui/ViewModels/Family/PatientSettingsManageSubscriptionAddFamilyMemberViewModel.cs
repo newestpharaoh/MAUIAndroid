@@ -34,8 +34,6 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 Console.WriteLine(ex);
             }
         }
-
-
         #endregion
 
         #region Command

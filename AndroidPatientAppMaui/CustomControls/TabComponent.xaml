@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AndroidPatientAppMaui.CustomControls.TabComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.Effects;assembly=Xamarin.CommunityToolkit.MauiCompat"
+    BackgroundColor="White">
+    <ContentView.Content>
+        <Grid
+            BackgroundColor="{StaticResource White}"
+            HeightRequest="55"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <Grid
+                Padding="0,0,0,0"
+                BackgroundColor="{StaticResource White}"
+                ColumnDefinitions="*,*,*,*,*"
+                ColumnSpacing="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <!--  Home Tab Section  -->
+                <Grid
+                    x:Name="TabHome"
+                    Grid.Column="0"
+                    Padding="5"
+                    xct:TouchEffect.HoveredAnimationDuration="1"
+                    xct:TouchEffect.HoveredBackgroundColor="White"
+                    xct:TouchEffect.NativeAnimation="True"
+                    xct:TouchEffect.NormalBackgroundColor="Transparent"
+                    xct:TouchEffect.PressedAnimationDuration="1"
+                    xct:TouchEffect.PressedBackgroundColor="LightGray"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="0"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        x:Name="demolable"
+                        Grid.Row="0"
+                        FontSize="12"
+                        HorizontalOptions="CenterAndExpand"
+                        IsVisible="false" />
+                    <Image
+                        Grid.Row="0"
+                        HeightRequest="25"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="home.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="25">
+                        <Image.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Image"
+                                Value="Home">
+                                <Setter Property="Source" Value="homeselected.png" />
+                                <Setter Property="HeightRequest" Value="25" />
+                                <Setter Property="WidthRequest" Value="25" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Label
+                        Grid.Row="1"
+                        FontSize="10"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Home">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Label"
+                                Value="Home">
+                                <Setter Property="TextColor" Value="{StaticResource Black}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TabHome_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!--  Visit History Tab Section  -->
+                <Grid
+                    x:Name="TabVisitHistory"
+                    Grid.Column="1"
+                    Padding="5"
+                    xct:TouchEffect.HoveredAnimationDuration="1"
+                    xct:TouchEffect.HoveredBackgroundColor="White"
+                    xct:TouchEffect.NativeAnimation="True"
+                    xct:TouchEffect.NormalBackgroundColor="Transparent"
+                    xct:TouchEffect.PressedAnimationDuration="1"
+                    xct:TouchEffect.PressedBackgroundColor="LightGray"
+                    ClassId="2"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="0"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Grid.Row="0"
+                        HeightRequest="24"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="cabinet.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="24">
+                        <Image.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Image"
+                                Value="VisitHistory">
+                                <Setter Property="Source" Value="cabinetselected.png" />
+                                <Setter Property="HeightRequest" Value="24" />
+                                <Setter Property="WidthRequest" Value="24" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Label
+                        Grid.Row="1"
+                        FontSize="10"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Visit History">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Label"
+                                Value="VisitHistory">
+                                <Setter Property="TextColor" Value="{StaticResource Black}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TabVisitHistory_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!--  Family Tab Section  -->
+                <Grid
+                    Grid.Column="2"
+                    Padding="5"
+                    xct:TouchEffect.HoveredAnimationDuration="1"
+                    xct:TouchEffect.HoveredBackgroundColor="White"
+                    xct:TouchEffect.NativeAnimation="True"
+                    xct:TouchEffect.NormalBackgroundColor="Transparent"
+                    xct:TouchEffect.PressedAnimationDuration="1"
+                    xct:TouchEffect.PressedBackgroundColor="LightGray"
+                    ClassId="3"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="0"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Grid.Row="0"
+                        HeightRequest="25"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="userunfill.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="25">
+                        <Image.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Image"
+                                Value="Family">
+                                <Setter Property="Source" Value="userselected.png" />
+                                <Setter Property="HeightRequest" Value="25" />
+                                <Setter Property="WidthRequest" Value="25" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Label
+                        Grid.Row="1"
+                        FontSize="10"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Family">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Label"
+                                Value="Family">
+                                <Setter Property="TextColor" Value="{StaticResource Black}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TabFamily_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!--  MyMedical Tab Section  -->
+                <Grid
+                    Grid.Column="3"
+                    Padding="5"
+                    xct:TouchEffect.HoveredAnimationDuration="1"
+                    xct:TouchEffect.HoveredBackgroundColor="White"
+                    xct:TouchEffect.NativeAnimation="True"
+                    xct:TouchEffect.NormalBackgroundColor="Transparent"
+                    xct:TouchEffect.PressedAnimationDuration="1"
+                    xct:TouchEffect.PressedBackgroundColor="LightGray"
+                    ClassId="4"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="0"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Grid.Row="0"
+                        HeightRequest="25"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="clipboard.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="25">
+                        <Image.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Image"
+                                Value="MyMedical">
+                                <Setter Property="Source" Value="clipboardselected.png" />
+                                <Setter Property="HeightRequest" Value="25" />
+                                <Setter Property="WidthRequest" Value="25" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Label
+                        Grid.Row="1"
+                        FontSize="10"
+                        HorizontalOptions="CenterAndExpand"
+                        LineBreakMode="TailTruncation"
+                        Text="My Medical Info">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Label"
+                                Value="MyMedical">
+                                <Setter Property="TextColor" Value="{StaticResource Black}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TabMyMedical_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!--  Account Tab Section  -->
+                <Grid
+                    Grid.Column="4"
+                    Padding="5"
+                    xct:TouchEffect.HoveredAnimationDuration="1"
+                    xct:TouchEffect.HoveredBackgroundColor="White"
+                    xct:TouchEffect.NativeAnimation="True"
+                    xct:TouchEffect.NormalBackgroundColor="Transparent"
+                    xct:TouchEffect.PressedAnimationDuration="1"
+                    xct:TouchEffect.PressedBackgroundColor="LightGray"
+                    ClassId="4"
+                    HorizontalOptions="FillAndExpand"
+                    RowDefinitions="Auto,Auto"
+                    RowSpacing="0"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        Grid.Row="0"
+                        HeightRequest="25"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="myaccountunfill.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="25">
+                        <Image.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Image"
+                                Value="Account">
+                                <Setter Property="Source" Value="myaccountselected.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Label
+                        Grid.Row="1"
+                        FontSize="10"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="My Account">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference demolable}, Path=Text}"
+                                TargetType="Label"
+                                Value="Account">
+                                <Setter Property="TextColor" Value="{StaticResource Black}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TabAccount_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

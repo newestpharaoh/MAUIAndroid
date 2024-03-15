@@ -36,11 +36,11 @@
             Title="Family"
             ControlTemplate="{Binding family:AccountProfilePage}"
             IconImageSource="family.png" />
-        <medicalinfo:MyMedicalInfoPage
+        <!--<medicalinfo:MyMedicalInfoPage
             x:Name="MyMedicalPage"
             Title="My Medical Page"
             ControlTemplate="{Binding medicalinfo:MyMedicalInfoPage}"
-            IconImageSource="clipboard.png" />
+            IconImageSource="clipboard.png" />-->
         <myaccount:MyAccountPage
             x:Name="MyAccount"
             Title="My Account"
