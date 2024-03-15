@@ -22,7 +22,7 @@ namespace AndroidPatientAppMaui.ViewModels.Home
             {
                 Navigation = nav;
                 BackCommand = new Command(BackAsync);
-
+                ContinueCommand = new Command(ContinueAsync);
                 Token = Preferences.Get("AuthToken", string.Empty);
                 Userid = Preferences.Get("UserId", 0);
             }
@@ -35,6 +35,7 @@ namespace AndroidPatientAppMaui.ViewModels.Home
 
         #region Command 
         public Command BackCommand { get; set; }
+        public Command ContinueCommand { get; set; }
         #endregion
 
         #region Properties 
@@ -134,6 +135,30 @@ namespace AndroidPatientAppMaui.ViewModels.Home
                 Console.WriteLine(ex);
             }
         }
+
+        /// <summary>
+        /// To define the back Continue command.
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void ContinueAsync(object obj)
+        {
+            try
+            {
+                if (rbtnVisitForMe)
+                {
+                    await Navigation.PushModalAsync(new Views.Home.PatientPreVisitForMePage(), false);
+
+                }
+                else if(rbtnVisitForSomeoneElse){
+                    await Navigation.PushModalAsync(new Views.Home.PatientPreVisitForSomeoneElse(), false);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
         public async Task GetPaymentInformation()
         {
             // Get App settings api..
@@ -147,7 +172,7 @@ namespace AndroidPatientAppMaui.ViewModels.Home
                         Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                         {
                             AppNametxt = AppName;
-                            StartVisitState startVisit = new StartVisitState();
+                            StartVisitState startVisit = new StartVisitState(); 
                             if (startVisit.VisitForMe != null)
                             {
                                 if ((bool)startVisit.VisitForMe)

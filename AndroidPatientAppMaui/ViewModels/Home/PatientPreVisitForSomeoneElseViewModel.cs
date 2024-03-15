@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CommonLibraryCoreMaui.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +71,20 @@ namespace AndroidPatientAppMaui.ViewModels.Home
                 {
                     _btnContinue = value;
                     OnPropertyChanged("btnContinue");
+                }
+            }
+        }
+
+        private ObservableCollection<AccountMember> _AccountHolderList = new ObservableCollection<AccountMember>();
+        public ObservableCollection<AccountMember> AccountHolderList
+        {
+            get { return _AccountHolderList; }
+            set
+            {
+                if (_AccountHolderList != value)
+                {
+                    _AccountHolderList = value;
+                    OnPropertyChanged("AccountHolderList");
                 }
             }
         }

@@ -4,11 +4,11 @@ namespace AndroidPatientAppMaui.Views.Home;
 
 public partial class PatientPreVisitPatientSelectionStep1 : ContentPage
 {
-	PatientPreVisitPatientSelectionStep1ViewModel VM;
+    PatientPreVisitPatientSelectionStep1ViewModel VM;
     #region Constructor
     public PatientPreVisitPatientSelectionStep1()
-	{
-		InitializeComponent(); 
+    {
+        InitializeComponent();
         this.BindingContext = VM = new PatientPreVisitPatientSelectionStep1ViewModel(this.Navigation);
     }
     #endregion
@@ -19,5 +19,11 @@ public partial class PatientPreVisitPatientSelectionStep1 : ContentPage
         base.OnAppearing();
         await VM.GetPaymentInformation();
     }
+
     #endregion
+
+    private void Agree_CheckedEvent(object sender, CheckedChangedEventArgs e)
+    {
+        btnContinue.IsEnabled = chkAgree.IsChecked;
+    }
 }
