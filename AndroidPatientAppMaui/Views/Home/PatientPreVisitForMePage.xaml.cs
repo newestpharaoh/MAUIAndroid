@@ -24,12 +24,12 @@ public partial class PatientPreVisitForMePage : ContentPage
     {
         try
         {
-            VM.lblMemberName = string.Empty;
-            if (VM. != null)
-            {
-                var item = sender as Picker;
-                VM.patientProfile.Gender = item.SelectedItem.ToString();
-            }
+            //VM.lblMemberName = string.Empty;
+            //if (VM.patientProfile != null)
+            //{
+            //    var item = sender as Picker;
+            //    VM.patientProfile.Gender = item.SelectedItem.ToString();
+            //}
         }
         catch (Exception ex)
         {
