@@ -170,6 +170,9 @@
 	  <MauiXaml Update="Views\Home\HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Home\PatientPreVisitForMePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Home\PatientPreVisitForSomeoneElse.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

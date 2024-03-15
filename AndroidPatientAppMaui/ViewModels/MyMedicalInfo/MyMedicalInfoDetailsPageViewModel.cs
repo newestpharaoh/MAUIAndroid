@@ -11,6 +11,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         //To define the class level variable.
         string Token = string.Empty;
         int PatientID = 0;
+        string selectedState;
         int noneIndex;
         public bool patientIsCurative = false;
         public bool patientIsEligibleForCurative = false;
@@ -28,7 +29,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public int SURGERY_REQUEST_CODE = 3;
         public int MEDICATION_REQUEST_CODE = 4;
         public int ALLERGY_REQUEST_CODE = 5;
-        public int PHARMACY_REQUEST_CODE = 6;
+        public int PHARMACY_REQUEST_CODE = 6;       
 
         #region Constructor
         public MyMedicalInfoDetailsPageViewModel(INavigation nav)
@@ -2041,7 +2042,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             {
                 var firstname = txtPCPSearchFirstName;
                 var lastname = txtPCPSearchLastName;
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSelect(firstname, lastname, this), false);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSelect(firstname,lastname, this), false);
             }
             catch (Exception ex)
             {
