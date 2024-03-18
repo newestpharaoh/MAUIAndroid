@@ -14,6 +14,7 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
             InitializeComponent();
             this.BindingContext = VM = new MyMedicalInfoDetailsPageViewModel(this.Navigation);
             VM.medicalInfo = medicalInfo;
+            VM.UserName = title;
             VM.additionalFamilyMember = additionalFamilyMember;
             VM.UpdateList();
         }

@@ -68,6 +68,7 @@
                     Grid.Row="0"
                     HasUnevenRows="True"
                     HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding listPrimaryCareProvidersVisble}"
                     ItemsSource="{Binding listPrimaryCareProviders}"
                     RowHeight="20"
                     SeparatorColor="Transparent"
@@ -144,6 +145,7 @@
                         FontSize="14"
                         HeightRequest="55"
                         HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding btnSelectEnable}"
                         Text="Select"
                         TextColor="{StaticResource White}"
                         VerticalOptions="FillAndExpand" />

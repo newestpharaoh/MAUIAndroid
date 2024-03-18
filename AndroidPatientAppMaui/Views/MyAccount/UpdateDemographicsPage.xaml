@@ -110,7 +110,7 @@
             <Grid
                 Padding="20,10"
                 HorizontalOptions="FillAndExpand"
-                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+                RowDefinitions="Auto,Auto,Auto,*,Auto,Auto"
                 RowSpacing="10"
                 VerticalOptions="FillAndExpand">
                 <!--  User Image Section  -->
@@ -156,6 +156,7 @@
                         WidthRequest="200" />
                     <!--  Change Password Button Section  -->
                     <Button
+                        x:Name="lytChangePassword"
                         Grid.Row="1"
                         Margin="50,0"
                         Background="{StaticResource Green1}"
@@ -164,6 +165,7 @@
                         FontSize="14"
                         HeightRequest="55"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding lytChangePassword}"
                         Text="Change Password"
                         TextColor="White"
                         VerticalOptions="FillAndExpand"
@@ -271,9 +273,11 @@
 
                             <Label
                                 FontSize="14"
+                                HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
                                 Text="{Binding Title}"
-                                VerticalOptions="FillAndExpand" />
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
                             <Image
                                 Margin="0,0,10,0"
                                 HeightRequest="10"
@@ -288,6 +292,7 @@
                                 ItemsSource="{Binding spnrTitle}"
                                 SelectedIndex="{Binding spnrTitleSelectedIndex}"
                                 SelectedIndexChanged="spnrTitle_SelectedIndexChanged"
+                                TextColor="Transparent"
                                 VerticalTextAlignment="Center" />
                         </Grid>
                     </Grid>
@@ -317,6 +322,7 @@
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
+                                IsEnabled="{Binding txtFirstNameEnable}"
                                 Keyboard="Default"
                                 Text="{Binding txtFirstName}"
                                 VerticalOptions="FillAndExpand" />
@@ -348,6 +354,7 @@
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
+                                IsEnabled="{Binding txtMiddleNameEnable}"
                                 Keyboard="Default"
                                 Text="{Binding txtMiddleName}"
                                 VerticalOptions="FillAndExpand" />
@@ -379,6 +386,7 @@
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
+                                IsEnabled="{Binding txtLastNameEnable}"
                                 Keyboard="Default"
                                 Text="{Binding txtLastName}"
                                 VerticalOptions="FillAndExpand" />
@@ -477,9 +485,11 @@
                             VerticalOptions="FillAndExpand">
                             <Label
                                 FontSize="14"
+                                HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
                                 Text="{Binding spnrGender}"
-                                VerticalOptions="CenterAndExpand" />
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center" />
                             <Image
                                 Margin="0,0,10,0"
                                 HeightRequest="10"
@@ -493,6 +503,7 @@
                                 HorizontalTextAlignment="Start"
                                 ItemsSource="{Binding GenderList}"
                                 SelectedIndexChanged="spnrGender_SelectedIndexChanged"
+                                TextColor="Transparent"
                                 VerticalTextAlignment="Center" />
                         </Grid>
                     </Grid>
@@ -521,9 +532,11 @@
 
                             <Label
                                 FontSize="14"
+                                HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
                                 Text="{Binding spnrLanguage}"
-                                VerticalOptions="FillAndExpand" />
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
                             <Image
                                 Margin="0,0,10,0"
                                 HeightRequest="10"
@@ -538,6 +551,7 @@
                                 ItemsSource="{Binding Languages}"
                                 SelectedIndexChanged="spnrLanguage_SelectedIndexChanged"
                                 SelectedItem="{Binding SelectedLanguage}"
+                                TextColor="Transparent"
                                 VerticalTextAlignment="Center" />
                         </Grid>
                     </Grid>
@@ -567,9 +581,11 @@
                             VerticalOptions="FillAndExpand">
                             <Label
                                 FontSize="14"
+                                HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
                                 Text="{Binding spnrRelationship}"
-                                VerticalOptions="FillAndExpand" />
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
                             <Image
                                 Margin="0,0,10,0"
                                 HeightRequest="10"
@@ -585,6 +601,7 @@
                                 SelectedIndex="{Binding spnrRelationshipselectedindex}"
                                 SelectedIndexChanged="spnrRelationship_SelectedIndexChanged"
                                 SelectedItem="{Binding SelectedRelationship}"
+                                TextColor="Transparent"
                                 VerticalTextAlignment="Center" />
                         </Grid>
                         <Grid
@@ -611,6 +628,7 @@
                     <Grid
                         Grid.Row="9"
                         HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding txtEmailEnable}"
                         RowDefinitions="Auto,Auto"
                         RowSpacing="5"
                         VerticalOptions="FillAndExpand">
@@ -677,6 +695,7 @@
                     <Grid
                         Grid.Row="11"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding AlternatePhoneIsVisible}"
                         RowDefinitions="Auto,Auto"
                         RowSpacing="5"
                         VerticalOptions="FillAndExpand">
@@ -698,7 +717,6 @@
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
-                                IsVisible="{Binding AlternatePhoneIsVisible}"
                                 Keyboard="Numeric"
                                 Placeholder="(___) ___-____"
                                 Text="{Binding txtAlternatePhone}"
@@ -714,6 +732,7 @@
                         x:Name="lytAddress1"
                         Grid.Row="12"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding Address1IsVisible}"
                         RowDefinitions="Auto,Auto"
                         RowSpacing="5"
                         VerticalOptions="FillAndExpand">
@@ -735,7 +754,6 @@
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
-                                IsVisible="{Binding Address1IsVisible}"
                                 Keyboard="Default"
                                 Text="{Binding txtAddress1}"
                                 VerticalOptions="FillAndExpand" />
@@ -746,6 +764,7 @@
                         x:Name="lytAddress2"
                         Grid.Row="13"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding Address2IsVisible}"
                         RowDefinitions="Auto,Auto"
                         RowSpacing="5"
                         VerticalOptions="FillAndExpand">
@@ -768,7 +787,6 @@
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
-                                IsVisible="{Binding Address2IsVisible}"
                                 Keyboard="Default"
                                 Text="{Binding txtAddress2}"
                                 VerticalOptions="FillAndExpand" />
@@ -779,6 +797,7 @@
                         x:Name="lytCity"
                         Grid.Row="14"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding CityIsVisible}"
                         RowDefinitions="Auto,Auto"
                         RowSpacing="5"
                         VerticalOptions="FillAndExpand">
@@ -801,7 +820,6 @@
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
-                                IsVisible="{Binding CityIsVisible}"
                                 Keyboard="Default"
                                 Text="{Binding txtCity}"
                                 VerticalOptions="FillAndExpand" />
@@ -812,6 +830,7 @@
                         x:Name="lytState"
                         Grid.Row="15"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding StateVisible}"
                         RowDefinitions="Auto,Auto"
                         RowSpacing="5"
                         VerticalOptions="FillAndExpand">
@@ -832,9 +851,11 @@
                             VerticalOptions="FillAndExpand">
                             <Label
                                 FontSize="14"
+                                HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
                                 Text="{Binding spnrState}"
-                                VerticalOptions="FillAndExpand" />
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
                             <Image
                                 Margin="0,0,10,0"
                                 HeightRequest="10"
@@ -845,10 +866,9 @@
                             <controls:CustomPicker
                                 Margin="1,10"
                                 HorizontalTextAlignment="Start"
-                                IsVisible="{Binding spnrStateIsVisble}"
                                 ItemsSource="{Binding StatesList}"
                                 SelectedIndexChanged="spnrState_SelectedIndexChanged"
-                                SelectedItem="{Binding SelectedState}"
+                                TextColor="Transparent"
                                 VerticalTextAlignment="Center" />
                         </Grid>
                     </Grid>
@@ -857,6 +877,7 @@
                         x:Name="lytZip"
                         Grid.Row="16"
                         HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding ZipcodeIsVisble}"
                         RowDefinitions="Auto,Auto"
                         RowSpacing="5"
                         VerticalOptions="FillAndExpand">
@@ -879,7 +900,6 @@
                                 FontSize="14"
                                 HeightRequest="35"
                                 HorizontalOptions="FillAndExpand"
-                                IsVisible="{Binding ZipcodeIsVisble}"
                                 Keyboard="Numeric"
                                 Placeholder="Enter Zip Code"
                                 Text="{Binding txtZipcode}"

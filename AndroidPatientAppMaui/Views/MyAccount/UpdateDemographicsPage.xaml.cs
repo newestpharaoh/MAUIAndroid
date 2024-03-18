@@ -33,7 +33,7 @@ public partial class UpdateDemographicsPage : ContentPage
         try
         {
             base.OnAppearing();
-            VM.UserName = Helpers.AppGlobalConstants.userInfo.Name;
+            //VM.UserName = Helpers.AppGlobalConstants.userInfo.Name;
             await VM.GetUpdateDemographics();
            
         }
@@ -51,11 +51,11 @@ public partial class UpdateDemographicsPage : ContentPage
     {
         try
         {
-            VM.Title = string.Empty;
+            VM.Title = string.Empty; 
             if (VM.patientProfile != null)
             {
                 var item = sender as Picker;
-                VM.patientProfile.Title = item.SelectedItem.ToString();
+                VM.Title = item.SelectedItem.ToString();
             }
         }
         catch (Exception ex)
@@ -76,7 +76,7 @@ public partial class UpdateDemographicsPage : ContentPage
             if (VM.patientProfile != null)
             { 
                 var item = sender as Picker;
-                VM.patientProfile.Gender = item.SelectedItem.ToString();
+                VM.spnrGender = item.SelectedItem.ToString();
             }
         }
         catch (Exception ex)
@@ -108,7 +108,7 @@ public partial class UpdateDemographicsPage : ContentPage
                 // Clear the text in the other relationship entry if necessary
             }
 
-            VM.patientProfile.Relationship = selectedRelationship;
+            VM.spnrRelationship = selectedRelationship;
         }
         catch (Exception ex)
         {
@@ -133,7 +133,7 @@ public partial class UpdateDemographicsPage : ContentPage
             else if (selectedLanguage == "Spanish")
                 VM.patientProfile.LanguageID = 2;
 
-            VM.patientProfile.Language = selectedLanguage;
+            VM.spnrLanguage = selectedLanguage;
         }
         catch (Exception ex)
         {
@@ -153,7 +153,7 @@ public partial class UpdateDemographicsPage : ContentPage
             if (VM.patientProfile != null)
             {
                 var item = sender as Picker;
-                VM.patientProfile.State = item.SelectedItem.ToString();
+                VM.spnrState = item.SelectedItem.ToString();
             }
         }
         catch (Exception ex)

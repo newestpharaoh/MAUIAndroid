@@ -8,7 +8,7 @@ public partial class MyMedicalInfoPage : ContentPage
     //To define the class lavel variable.
     MyMedicalInfoPageViewModel VM;
    int PatientID = Helpers.AppGlobalConstants.userInfo.PatientID;
-
+   
     #region Constructor
     public MyMedicalInfoPage(AccountMember am)
     {
@@ -17,7 +17,8 @@ public partial class MyMedicalInfoPage : ContentPage
             InitializeComponent();
             this.BindingContext = VM = new MyMedicalInfoPageViewModel(this.Navigation);
 
-           PatientID = am.PatientID;
+            PatientID = am.PatientID;
+            VM.am = am;
             //PatientID = Preferences.Get("PatientID", 0);
 
         }
@@ -38,7 +39,7 @@ public partial class MyMedicalInfoPage : ContentPage
         {
             base.OnAppearing();
             VM.UserName = Helpers.AppGlobalConstants.userInfo.Name;
-            await VM.DisplayMedicalInfo(PatientID);
+            await VM.DisplayMedicalInfo(PatientID, VM.am);
              VM.UpdateList();
         }
         catch (Exception ex)

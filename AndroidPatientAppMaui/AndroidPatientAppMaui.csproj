@@ -158,6 +158,9 @@
 	  <MauiXaml Update="Views\Account\VerificationCodePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Family\FamilyMemberPrivateInformation.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Family\FamilyMemberPrivateMedicalInformation.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

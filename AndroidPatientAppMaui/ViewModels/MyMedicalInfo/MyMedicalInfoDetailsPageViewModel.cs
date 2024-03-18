@@ -29,7 +29,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public int SURGERY_REQUEST_CODE = 3;
         public int MEDICATION_REQUEST_CODE = 4;
         public int ALLERGY_REQUEST_CODE = 5;
-        public int PHARMACY_REQUEST_CODE = 6;       
+        public int PHARMACY_REQUEST_CODE = 6;
 
         #region Constructor
         public MyMedicalInfoDetailsPageViewModel(INavigation nav)
@@ -311,6 +311,32 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 {
                     _lblNoResultsFound = value;
                     OnPropertyChanged("lblNoResultsFound");
+                }
+            }
+        }
+        private bool _listPrimaryCareProvidersVisble = true;
+        public bool listPrimaryCareProvidersVisble
+        {
+            get { return _listPrimaryCareProvidersVisble; }
+            set
+            {
+                if (_listPrimaryCareProvidersVisble != value)
+                {
+                    _listPrimaryCareProvidersVisble = value;
+                    OnPropertyChanged("listPrimaryCareProvidersVisble");
+                }
+            }
+        }
+        private bool _btnSelectEnable = true;
+        public bool btnSelectEnable
+        {
+            get { return _btnSelectEnable; }
+            set
+            {
+                if (_btnSelectEnable != value)
+                {
+                    _btnSelectEnable = value;
+                    OnPropertyChanged("btnSelectEnable");
                 }
             }
         }
@@ -1469,7 +1495,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
             catch (Exception ex)
             {
-                 
+
             }
         }
         /// <summary>
@@ -1570,7 +1596,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 });
             }
             catch (Exception ex)
-            { 
+            {
             }
         }
 
@@ -1784,20 +1810,58 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         /// TODO : To define display PCP Select Details...
         /// </summary>
         /// <returns></returns>
-        public async Task DisplayPCPSelectDetails()
+        public async Task DisplayPCPSelectDetails( )
         {
             // Get App settings api..
             try
             {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
-                    UserDialog.ShowLoading();
                     await Task.Run(async () =>
-                    {
-                        Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                    { 
+                        try
+                        {
+                            UserDialogs.Instance.ShowLoading("Please wait...", MaskType.Clear);
+
+                            List<PCP> pcps = await  DataUtility.SearchPCPAsync(SettingsValues.ApiURLValue, !string.IsNullOrEmpty(pcp.FirstName) ? pcp.FirstName : null, !string.IsNullOrEmpty(pcp.LastName) ? pcp.LastName : null, null, !string.IsNullOrEmpty(pcp.State) ? pcp.State : null).ConfigureAwait(false);
+
+                            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                            {
+                                if (pcps != null)
+                                {
+                                    if (pcps.Count > 0)
+                                    {
+                                        //primaryCareProvidersAdapter = new PrimaryCareProviderAdapter(this, Resources, pcps);
+                                        //listPrimaryCareProviders.Adapter = primaryCareProvidersAdapter;
+                                        //listPrimaryCareProviders.RemoveHeaderView(header);
+                                        //listPrimaryCareProviders.AddHeaderView(header);
+                                        listPrimaryCareProviders = new ObservableCollection<PCP>(pcps);
+                                    }
+                                    else
+                                    {
+                                        lblNoResultsFound = true;
+                                        listPrimaryCareProvidersVisble = false;
+                                        btnSelectEnable = false;
+                                    }
+                                }
+                                UserDialog.HideLoading();
+                            });
+                            UserDialog.HideLoading();
+                        }
+                        catch (Exception ex)
                         {
 
-                        });
+                            UserDialogs.Instance.HideLoading();
+                            Console.WriteLine(ex.Message);
+                           
+                        }
+                        finally
+                        {
+
+                            UserDialogs.Instance.HideLoading();
+
+                        }
+
 
                     }).ConfigureAwait(false);
                 }
@@ -2040,9 +2104,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                var firstname = txtPCPSearchFirstName;
-                var lastname = txtPCPSearchLastName;
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSelect(firstname,lastname, this), false);
+                var firstName = txtPCPSearchFirstName != null ? txtPCPSearchFirstName : string.Empty ;
+                var state = StatePCPSearchLbl != null ? StatePCPSearchLbl : string.Empty;
+               var lastName = txtPCPSearchLastName != null ? txtPCPSearchLastName : string.Empty;
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSelect(firstName,lastName,state, this), false);
             }
             catch (Exception ex)
             {
@@ -2051,7 +2116,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         private bool ValidateMedicalInfo()
         {
             try
-            { 
+            {
                 if (medicalInfo != null)
                 {
                     if (medicalInfo.PCP is null || medicalInfo.Pharmacy is null ||
@@ -2092,7 +2157,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
             }
             catch (Exception ex)
             {
-                 
+
             }
         }
         /// <summary>

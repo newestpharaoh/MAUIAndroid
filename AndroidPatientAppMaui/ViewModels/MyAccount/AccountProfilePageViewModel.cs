@@ -477,15 +477,22 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 am = info.AccountMembers.FirstOrDefault(x => PatientID == selectedPatientId);
                 if (am != null)
                 {
-                    BasicFamilyMemberInfo bfmi = new BasicFamilyMemberInfo();
-                    bfmi.DisplayName = am.DisplayName;
-                    bfmi.DOB = am.DOB;
-                    bfmi.FirstName = am.FirstName;
-                    bfmi.IsActive = am.IsActive;
-                    bfmi.IsPrimary = am.IsPrimary;
-                    bfmi.LastName = am.LastName;
-                    bfmi.PatientID = am.PatientID;
-                    await Navigation.PushModalAsync(new Views.MyAccount.UpdateDemographicsPage(bfmi), false);
+                    if(am.IsPrivate)
+                    {
+                        await Navigation.PushModalAsync(new Views.Family.FamilyMemberPrivateInformation(), false);
+                    }
+                    if (!am.IsPrimary)
+                    {
+                        BasicFamilyMemberInfo bfmi = new BasicFamilyMemberInfo();
+                        bfmi.DisplayName = am.DisplayName;
+                        bfmi.DOB = am.DOB;
+                        bfmi.FirstName = am.FirstName;
+                        bfmi.IsActive = am.IsActive;
+                        bfmi.IsPrimary = am.IsPrimary;
+                        bfmi.LastName = am.LastName;
+                        bfmi.PatientID = am.PatientID;
+                        await Navigation.PushModalAsync(new Views.MyAccount.UpdateDemographicsPage(bfmi), false);
+                    }
                 }
 
             }

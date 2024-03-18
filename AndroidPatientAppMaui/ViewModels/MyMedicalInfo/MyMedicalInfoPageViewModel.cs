@@ -16,11 +16,11 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 
         //To define the class level variable.
         string Token = string.Empty;
-       public  int PatientID = 0;
+        public int PatientID = 0;
         bool nonVisit = false;
         bool family = false;
-        MedicalInfo medicalInfo;
-
+        public MedicalInfo medicalInfo;
+        public AccountMember am;
         #region Constructor
         public MyMedicalInfoPageViewModel(INavigation nav)
         {
@@ -388,14 +388,14 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage(title, medicalInfo, null), false);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage(UserName, medicalInfo, null), false);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
         }
-        public async Task DisplayMedicalInfo(int patientId)
+        public async Task DisplayMedicalInfo(int patientId, AccountMember am)
         {
             // Get App settings api..
             try
@@ -409,13 +409,13 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                         if (nonVisit)
                         {
                             lytEditMedicalHistory = true;
-                            UserName = Helpers.AppGlobalConstants.userInfo.Name;
+                            UserName = am.DisplayName;
                         }
                         else
                         {
                             lytInfo = true;
                             lytUpdateOrContinue = true;
-                            UserName = $"Visit for {Helpers.AppGlobalConstants.userInfo.Name}";
+                            UserName = $"Visit for {am.DisplayName}";
                         }
                         Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                         {
