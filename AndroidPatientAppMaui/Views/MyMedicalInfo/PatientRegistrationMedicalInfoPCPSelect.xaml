@@ -50,79 +50,113 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand" />
         <!--  ScrollView Section  -->
-        <ScrollView
+        <!--<ScrollView
             Grid.Row="2"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Never">
-            <!--  Body Section  -->
+            VerticalScrollBarVisibility="Never">-->
+        <!--  Body Section  -->
+        <Grid
+            Grid.Row="2"
+            Padding="10,10"
+            HorizontalOptions="FillAndExpand"
+            RowDefinitions="*,Auto"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
             <Grid
-                Padding="12,10"
+                Grid.Row="0"
                 HorizontalOptions="FillAndExpand"
-                RowDefinitions="Auto,Auto,Auto,Auto"
-                RowSpacing="12"
                 VerticalOptions="FillAndExpand">
                 <!--  List View  -->
                 <ListView
                     x:Name="listPrimaryCareProviders"
-                    Grid.Row="0"
-                    HasUnevenRows="True"
+                    HasUnevenRows="True" ItemSelected="listPrimaryCareProviders_ItemSelected"
                     HorizontalOptions="FillAndExpand"
                     IsVisible="{Binding listPrimaryCareProvidersVisble}"
                     ItemsSource="{Binding listPrimaryCareProviders}"
-                    RowHeight="20"
-                    SeparatorColor="Transparent"
+                    SeparatorColor="{StaticResource Gray3}"
                     VerticalOptions="FillAndExpand"
                     VerticalScrollBarVisibility="Never">
+                    <!--  Header Template  -->
+                    <ListView.Header>
+                        <Grid
+                            BackgroundColor="{StaticResource Gray2}"
+                            ColumnDefinitions="*,*,*"
+                            HeightRequest="40"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                Grid.Column="0"
+                                FontSize="14"
+                                HorizontalOptions="StartAndExpand"
+                                Text="Name"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="CenterAndExpand" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="14"
+                                HorizontalOptions="StartAndExpand"
+                                Text="Company"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="CenterAndExpand" />
+                            <Label
+                                Grid.Column="2"
+                                FontSize="14"
+                                HorizontalOptions="StartAndExpand"
+                                Text="Specialty"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="CenterAndExpand" />
+                        </Grid>
+                    </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Grid
-                                    HeightRequest="30"
+                                    ColumnDefinitions="*,*,*"
+                                    HeightRequest="25"
                                     HorizontalOptions="FillAndExpand"
-                                    RowDefinitions="Auto,Auto"
                                     VerticalOptions="FillAndExpand">
                                     <Label
                                         x:Name="lblFirstName"
-                                        Grid.Row="0"
+                                        Grid.Column="0"
                                         FontAttributes="Bold"
                                         FontSize="12"
                                         HorizontalOptions="FillAndExpand"
-                                        Text="{Binding FirstName}"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding DisplayName}"
                                         TextColor="Black"
-                                        VerticalOptions="FillAndExpand" />
+                                        VerticalOptions="CenterAndExpand" />
                                     <Label
-                                        Grid.Row="1"
+                                        Grid.Column="1"
                                         FontAttributes="Bold"
                                         FontSize="12"
                                         HorizontalOptions="FillAndExpand"
-                                        Text="{Binding LastName}"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding PracticeName}"
                                         TextColor="Black"
-                                        VerticalOptions="FillAndExpand" />
+                                        VerticalOptions="CenterAndExpand" />
                                     <Label
-                                        Grid.Row="2"
-                                        FontAttributes="Bold"
+                                        Grid.Column="3"
                                         FontSize="12"
                                         HorizontalOptions="FillAndExpand"
-                                        Text="{Binding Address1}"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding Specialty}"
                                         TextColor="Black"
-                                        VerticalOptions="FillAndExpand" />
-                                    <Label
-                                        Grid.Row="3"
-                                        FontAttributes="Bold"
-                                        FontSize="12"
-                                        HorizontalOptions="FillAndExpand"
-                                        Text="{Binding State}"
-                                        TextColor="Black"
-                                        VerticalOptions="FillAndExpand" />
+                                        VerticalOptions="CenterAndExpand" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="Auto,Auto,Auto"
+                VerticalOptions="FillAndExpand">
                 <Label
                     x:Name="lblNoResultsFound"
-                    Grid.Row="1"
+                    Grid.Row="0"
                     FontSize="12"
                     HorizontalOptions="FillAndExpand"
                     HorizontalTextAlignment="Center"
@@ -132,7 +166,7 @@
                     VerticalOptions="FillAndExpand" />
                 <!--  Select Buttons  -->
                 <Grid
-                    Grid.Row="2"
+                    Grid.Row="1"
                     ColumnSpacing="10"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
@@ -140,7 +174,7 @@
                         x:Name="btnSelect"
                         Margin="0,15"
                         BackgroundColor="#15B287"
-                        Command="{Binding SelectCommand}"
+                        Clicked="btnSelect_Clicked"
                         FontFamily="SanchezSlab"
                         FontSize="14"
                         HeightRequest="55"
@@ -148,20 +182,21 @@
                         IsEnabled="{Binding btnSelectEnable}"
                         Text="Select"
                         TextColor="{StaticResource White}"
-                        VerticalOptions="FillAndExpand" />
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="180" />
                 </Grid>
                 <Label
                     x:Name="lblNotFound"
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Margin="8,10,8,10"
-                    FontSize="17"
+                    FontSize="13"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     Text="Don't see your primary care provider name or group practice?"
-                    TextColor="{StaticResource Blue1}"
-                    TextDecorations="Underline"
+                    TextColor="{StaticResource Green1}"
                     VerticalOptions="Center" />
             </Grid>
-        </ScrollView>
+        </Grid>
+        <!--</ScrollView>-->
     </Grid>
 </ContentPage>

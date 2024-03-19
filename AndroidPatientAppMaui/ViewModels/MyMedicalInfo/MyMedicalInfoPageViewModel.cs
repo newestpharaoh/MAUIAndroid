@@ -388,7 +388,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage(UserName, medicalInfo, null), false);
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage(UserName, medicalInfo, null, null,am), false);
             }
             catch (Exception ex)
             {
@@ -405,24 +405,16 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                     UserDialog.ShowLoading();
                     await Task.Run(async () =>
                     {
-                        nonVisit = true;
-                        if (nonVisit)
-                        {
-                            lytEditMedicalHistory = true;
-                            UserName = am.DisplayName;
-                        }
-                        else
-                        {
-                            lytInfo = true;
-                            lytUpdateOrContinue = true;
-                            UserName = $"Visit for {am.DisplayName}";
-                        }
                         Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                        {
+                        { 
+                            if (am != null)
+                            {
+                                UserName = am.DisplayName;
+                            }
                             medicalInfo = await DataUtility.PatientGetMedicalHistoryAsync(SettingsValues.ApiURLValue, Token, patientId).ConfigureAwait(false);
                             List<MedicalIssue> issues = await DataUtility.GetMedicalIssuesAsync(SettingsValues.ApiURLValue).ConfigureAwait(false);
                             if (medicalInfo != null)
-                            {
+                            { 
                                 if (medicalInfo.MedicalIssues.Count > 0 || !string.IsNullOrEmpty(medicalInfo.OtherMedicalIssue))
                                 {
                                     if (issues != null)

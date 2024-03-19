@@ -7,7 +7,7 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
 {
     MyMedicalInfoDetailsPageViewModel VM;
     #region Constructor
-    public MyMedicalInfoDetailsPage(string title, MedicalInfo medicalInfo, AdditionalFamilyMember additionalFamilyMember)
+    public MyMedicalInfoDetailsPage(string title, MedicalInfo medicalInfo, AdditionalFamilyMember additionalFamilyMember, PCP pCP,AccountMember accountMember)
     {
         try
         {
@@ -15,8 +15,18 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
             this.BindingContext = VM = new MyMedicalInfoDetailsPageViewModel(this.Navigation);
             VM.medicalInfo = medicalInfo;
             VM.UserName = title;
+             
             VM.additionalFamilyMember = additionalFamilyMember;
             VM.UpdateList();
+            if (pCP != null)
+            {
+                VM.medicalInfo.PCP = pCP;
+            }
+            if(accountMember != null)
+            {
+                VM.am = accountMember;
+            }
+
         }
         catch (Exception ex)
         {
@@ -59,7 +69,7 @@ public partial class MyMedicalInfoDetailsPage : ContentPage
             else if ((selecteditem).IsCapsule)
             {
                 VM.ProcessCapsule();
-            } 
+            }
             if (selecteditem != null)
             {
                 await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPharmacy(selecteditem, VM.PHARMACY_REQUEST_CODE, VM), false);

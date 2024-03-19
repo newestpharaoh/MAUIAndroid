@@ -17,6 +17,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         public bool patientIsEligibleForCurative = false;
         public MedicalInfo medicalInfo;
         public AdditionalFamilyMember additionalFamilyMember;
+        public AccountMember am;
         List<MedicalIssue> issues;
 
         public Allergy allergy;
@@ -57,7 +58,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 BtnContinueUpdateCommand = new Command(BtnContinueUpdateAsync);
                 BtnContinueRegistrationCommand = new Command(BtnContinueRegistrationAsync);
                 BtnAddFamilyMemberCommand = new Command(BtnAddFamilyMemberAsync);
-
+              SelectCommand = new Command(SelectAsync);
 
                 Token = Preferences.Get("AuthToken", string.Empty);
                 PatientID = Preferences.Get("PatientID", 0);
@@ -67,11 +68,14 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 Console.WriteLine(ex);
             }
         }
+
+     
         #endregion
 
         #region Command 
         public Command BackCommand { get; set; }
         public Command lytAddSurgeryCommand { get; set; }
+        public Command SelectCommand { get; set; }
         public Command lytAddPCPCommand { get; set; }
         public Command lytAddPharmacyCommand { get; set; }
         public Command lytAddAllergyCommand { get; set; }
@@ -772,7 +776,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
-        private string _StatePCPSearchLbl;
+        private string _StatePCPSearchLbl = "";
         public string StatePCPSearchLbl
         {
             get { return _StatePCPSearchLbl; }
@@ -911,9 +915,44 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                 }
             }
         }
+        private PCP _PcpSelectedItem;
+        public PCP PcpSelectedItem
+        {
+            get { return _PcpSelectedItem; }
+            set
+            {
+                if (_PcpSelectedItem != value)
+
+                {
+                    _PcpSelectedItem = value;
+                    OnPropertyChanged("PcpSelectedItem");
+                }
+            }
+        }
         #endregion
 
         #region Methods 
+        private async void SelectAsync(object obj)
+        {
+            try
+            {
+                if (PcpSelectedItem != null)
+                {
+                    lblPCPSelected = PcpSelectedItem.Preview;
+                    //var intent = new Intent();
+                    //intent.PutExtraMedicalItem(selectedPCP);
+                    //SetResult(Result.Ok, intent);
+                    //Finish();
+                }
+                else
+                {
+                    UserDialog.Alert("Please select Primary Care Provider.");
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
         /// <summary>
         /// To define the back button command.
         /// </summary>
@@ -1012,7 +1051,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 
                                 Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                                 {
-                                    //BtnAddFamilyMember = true;
+                                    BtnAddFamilyMember = true;
                                     //btnContinue.Click -= BtnAddFamilyMember_Click;
                                     //btnContinue.Click += BtnAddFamilyMember_Click;
                                 });
@@ -1810,7 +1849,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         /// TODO : To define display PCP Select Details...
         /// </summary>
         /// <returns></returns>
-        public async Task DisplayPCPSelectDetails( )
+        public async Task DisplayPCPSelectDetails(string firstname, string lastname, string state)
         {
             // Get App settings api..
             try
@@ -1823,10 +1862,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                         {
                             UserDialogs.Instance.ShowLoading("Please wait...", MaskType.Clear);
 
-                            List<PCP> pcps = await  DataUtility.SearchPCPAsync(SettingsValues.ApiURLValue, !string.IsNullOrEmpty(pcp.FirstName) ? pcp.FirstName : null, !string.IsNullOrEmpty(pcp.LastName) ? pcp.LastName : null, null, !string.IsNullOrEmpty(pcp.State) ? pcp.State : null).ConfigureAwait(false);
+                            List<PCP> pcps = await  DataUtility.SearchPCPAsync(SettingsValues.ApiURLValue, !string.IsNullOrEmpty(firstname) ? firstname : null, !string.IsNullOrEmpty(lastname) ? lastname : null, null, !string.IsNullOrEmpty(state) ? state : null).ConfigureAwait(false);
 
-                            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                            {
+                            //Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                            //{
                                 if (pcps != null)
                                 {
                                     if (pcps.Count > 0)
@@ -1845,7 +1884,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
                                     }
                                 }
                                 UserDialog.HideLoading();
-                            });
+                           // });
                             UserDialog.HideLoading();
                         }
                         catch (Exception ex)
@@ -2104,10 +2143,10 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
         {
             try
             {
-                var firstName = txtPCPSearchFirstName != null ? txtPCPSearchFirstName : string.Empty ;
-                var state = StatePCPSearchLbl != null ? StatePCPSearchLbl : string.Empty;
-               var lastName = txtPCPSearchLastName != null ? txtPCPSearchLastName : string.Empty;
-                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSelect(firstName,lastName,state, this), false);
+               // var firstName = txtPCPSearchFirstName != null ? txtPCPSearchFirstName : string.Empty ;
+               // var state = StatePCPSearchLbl != null ? StatePCPSearchLbl : string.Empty;
+              // var lastName = txtPCPSearchLastName != null ? txtPCPSearchLastName : string.Empty;
+                await Navigation.PushModalAsync(new Views.MyMedicalInfo.PatientRegistrationMedicalInfoPCPSelect(txtPCPSearchFirstName, txtPCPSearchLastName, StatePCPSearchLbl, this), false);
             }
             catch (Exception ex)
             {
@@ -2189,7 +2228,12 @@ namespace AndroidPatientAppMaui.ViewModels.MyMedicalInfo
 
                         if (resp.StatusCode == StatusCode.Saved)
                         {
-                            await Navigation.PopModalAsync();
+                            Application.Current.MainPage.Dispatcher.Dispatch(async () =>
+                            {
+                                App.Current.MainPage = new Views.MyMedicalInfo.MyMedicalInfoPage(am);
+                                //await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoPage(null), false);
+                            });
+                            //await Navigation.PopToRootAsync();
                         }
                     }
                 }

@@ -378,7 +378,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
 
                         AdditionalFamilyMember additionalFamilyMember = new AdditionalFamilyMember();
                         additionalFamilyMember.FamilyMemberInformation = patientProfile;
-                        await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage("title", null, additionalFamilyMember), false);
+                        await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage("title", null, additionalFamilyMember, null,null), false);
                         //var intent = new Intent(this, typeof(PatientRegistrationMedicalInfoActivity));
                         //AdditionalFamilyMember additionalFamilyMember = new AdditionalFamilyMember();
                         //additionalFamilyMember.FamilyMemberInformation = member;
