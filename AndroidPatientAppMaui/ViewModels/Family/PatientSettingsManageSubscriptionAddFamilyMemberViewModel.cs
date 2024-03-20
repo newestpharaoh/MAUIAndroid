@@ -115,7 +115,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
             }
         }
 
-        private string _txtOtherRelationship;
+        private string _txtOtherRelationship = string.Empty;
         public string txtOtherRelationship
         {
             get { return _txtOtherRelationship; }
@@ -128,7 +128,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _txtFirstName;
+        private string _txtFirstName = string.Empty;
         public string txtFirstName
         {
             get { return _txtFirstName; }
@@ -141,7 +141,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _txtMiddleName;
+        private string _txtMiddleName = string.Empty;
         public string txtMiddleName
         {
             get { return _txtMiddleName; }
@@ -154,7 +154,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _txtLastName;
+        private string _txtLastName = string.Empty;
         public string txtLastName
         {
             get { return _txtLastName; }
@@ -167,7 +167,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _txtPhoneNumber;
+        private string _txtPhoneNumber = string.Empty;
         public string txtPhoneNumber
         {
             get { return _txtPhoneNumber; }
@@ -193,7 +193,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _Title;
+        private string _Title = string.Empty;
         public string Title
         {
             get => _Title;
@@ -206,7 +206,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _spnrGender;
+        private string _spnrGender = string.Empty;
         public string spnrGender
         {
             get => _spnrGender;
@@ -219,7 +219,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _txtEmail;
+        private string _txtEmail = string.Empty;
         public string txtEmail
         {
             get => _txtEmail;
@@ -232,7 +232,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _spnrRelationship;
+        private string _spnrRelationship = string.Empty;
         public string spnrRelationship
         {
             get => _spnrRelationship;
@@ -258,6 +258,19 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
+        private int _GenderSelectedIndex;
+        public int GenderSelectedIndex
+        {
+            get => _GenderSelectedIndex;
+            set
+            {
+                if (_GenderSelectedIndex != value)
+                {
+                    _GenderSelectedIndex = value;
+                    OnPropertyChanged("GenderSelectedIndex");
+                }
+            }
+        }
         private int _spnrRelationshipselectedindex;
         public int spnrRelationshipselectedindex
         {
@@ -271,7 +284,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _txtAlternatePhone;
+        private string _txtAlternatePhone = string.Empty;
         public string txtAlternatePhone
         {
             get => _txtAlternatePhone;
@@ -310,7 +323,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
         }
-        private string _selectedRelationship;
+        private string _selectedRelationship = string.Empty;
         public string SelectedRelationship
         {
             get => _selectedRelationship;
@@ -324,36 +337,38 @@ namespace AndroidPatientAppMaui.ViewModels.Family
         #endregion
 
         #region Methods
+      
         private async void ContinueAsync(object obj)
         {
             try
             {
-                bool bRelationship = false;
-                if (!string.IsNullOrEmpty(patientProfile.Relationship))
-                {
-                    if (patientProfile.Relationship.IndexOf("box below", StringComparison.InvariantCultureIgnoreCase) > -1)
-                    {
-                        bRelationship = string.IsNullOrEmpty(txtOtherRelationship.Trim());
-                    }
-                }
-                else
-                {
-                    bRelationship = true;
-                }
+                //bool bRelationship = false;
+                //patientProfile = new PatientProfile();
+                //if (!string.IsNullOrEmpty(spnrRelationship))
+                //{
+                //    if (patientProfile.Relationship.IndexOf("box below", StringComparison.InvariantCultureIgnoreCase) > -1)
+                //    {
+                //        bRelationship = string.IsNullOrEmpty(txtOtherRelationship.Trim());
+                //    }
+                //}
+                //else
+                //{
+                //    bRelationship = true;
+                //}
 
                 if (string.IsNullOrEmpty(txtFirstName.Trim()) ||
                  string.IsNullOrEmpty(txtLastName.Trim()) ||
                 string.IsNullOrEmpty(txtPhoneNumber.Trim()) ||
                    string.IsNullOrEmpty(txtDOB.ToString().Trim()) ||
-                 string.IsNullOrEmpty(patientProfile.Gender)||
-                 bRelationship
+                 string.IsNullOrEmpty(spnrGender) ||
+                    string.IsNullOrEmpty(spnrRelationship) 
                  )
                 {
                     UserDialog.Alert("Please fill all the required fields!");
                 }
                 else
                 {
-                     bool isDuplicate;
+                    bool isDuplicate;
                     //using (AccountAddFamilyMemberStateHelper afmStateHelper = new AccountAddFamilyMemberStateHelper(this))
                     //{
                     //    AccountAddFamilyMemberState state = afmStateHelper.GetState();
@@ -368,17 +383,22 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                     }
                     else
                     {
-                        patientProfile.FirstName = txtFirstName.Trim();
-                        patientProfile.LastName = txtLastName.Trim();
-                        patientProfile.MiddleName = txtMiddleName.Trim();
-                        patientProfile.DOB = txtDOB.ToString().Trim();
-                        patientProfile.OtherRelationship = txtOtherRelationship.Trim();
-                        patientProfile.PrimaryPhone = txtPhoneNumber;
+                        patientProfile = new PatientProfile();
+                        patientProfile.FirstName = txtFirstName.Trim() != null ? txtFirstName.Trim() : "";
+                        patientProfile.LastName = txtLastName.Trim() != null ? txtLastName.Trim() : "";
+                        patientProfile.MiddleName = txtMiddleName.Trim() != null ? txtMiddleName.Trim() : "";
+                        patientProfile.DOB = txtDOB.ToString().Trim() != null ? txtDOB.ToString().Trim() : "";
+                        patientProfile.OtherRelationship = txtOtherRelationship.Trim() != null ? txtOtherRelationship.Trim() : "";
+                        patientProfile.PrimaryPhone = txtPhoneNumber != null ? txtPhoneNumber.Trim() : "";
+                        patientProfile.Title = Title != null ? Title.Trim() : "";
+                        patientProfile.Gender = spnrGender != null ? spnrGender.Trim() : "";
+                        patientProfile.Relationship = spnrRelationship != null ? spnrRelationship.Trim() : "";
 
 
                         AdditionalFamilyMember additionalFamilyMember = new AdditionalFamilyMember();
                         additionalFamilyMember.FamilyMemberInformation = patientProfile;
-                        await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage("title", null, additionalFamilyMember, null,null), false);
+                        var title = $"{patientProfile.FirstName} {patientProfile.LastName}";
+                        await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoDetailsPage(title, null, additionalFamilyMember, null, null), false);
                         //var intent = new Intent(this, typeof(PatientRegistrationMedicalInfoActivity));
                         //AdditionalFamilyMember additionalFamilyMember = new AdditionalFamilyMember();
                         //additionalFamilyMember.FamilyMemberInformation = member;
@@ -390,7 +410,7 @@ namespace AndroidPatientAppMaui.ViewModels.Family
                 }
             }
             catch (Exception ex)
-            { 
+            {
             }
         }
 

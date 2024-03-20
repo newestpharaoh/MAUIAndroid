@@ -13,7 +13,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 {
     public class AccountProfilePageViewModel : BaseViewModel
     {  //To define the class level variable.
-       public AccountMember am;
+        public AccountMember am;
         public AccountSubscriptionInfo info;
         AccountAddFamilyMemberInfo aafmi;
         string familyAccountNoticeString;
@@ -36,7 +36,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 
                 Token = Preferences.Get("AuthToken", string.Empty);
                 PatientID = Preferences.Get("PatientID", 0);
-                User = Preferences.Get("UserName",string.Empty);
+                User = Preferences.Get("UserName", string.Empty);
             }
             catch (Exception ex)
             {
@@ -159,7 +159,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 }
             }
         }
-         private bool _IsExpanderVisible = false;
+        private bool _IsExpanderVisible = false;
         public bool IsExpanderVisible
         {
             get { return _IsExpanderVisible; }
@@ -194,7 +194,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                             familyAccountNoticeString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "FamilyAccountNotice").Text; //Header
                             allInfoViewableString = FamilyAccountNotice.UITextList.Find(i => i.TagName == "AllInfoViewable").Text; //Paragraph
                         }
-                        AccountAddFamilyMemberState state = new AccountAddFamilyMemberState();
+                        AccountAddFamilyMemberState state = Helpers.AppGlobalConstants.state;
                         if (state.AdditionalFamilyMembers != null)
                         {
                             if (state.PrimaryPatientID != 0)
@@ -433,7 +433,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             try
             {
                 //App.Current.MainPage = new Views.MyMedicalInfo.MyMedicalInfoPage();
-               // App.Current.MainPage = new Views.MainTabs.MainTabPage("MyMedicalPage");
+                // App.Current.MainPage = new Views.MainTabs.MainTabPage("MyMedicalPage");
                 //await Navigation.PushModalAsync(new Views.MyMedicalInfo.MyMedicalInfoPage(), false);
 
             }
@@ -477,7 +477,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                 am = info.AccountMembers.FirstOrDefault(x => PatientID == selectedPatientId);
                 if (am != null)
                 {
-                    if(am.IsPrivate)
+                    if (am.IsPrivate)
                     {
                         await Navigation.PushModalAsync(new Views.Family.FamilyMemberPrivateInformation(), false);
                     }
@@ -507,9 +507,9 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
             try
             {
                 Task.Run(async () =>
-                    {
-                        await AddFamilyMember().ConfigureAwait(false);
-                    });
+                {
+                    await AddFamilyMember().ConfigureAwait(false);
+                });
             }
             catch (Exception ex)
             {
@@ -577,7 +577,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 
 
             //ReusableDialog dialog = ReusableDialog.Instance(this, null, "Add Family Member", "Confirm", "Cancel", null, true, true, msg);
-            var dialog = await UserDialogs.Instance.ConfirmAsync(msg, "Add Family Member","Confirm", "Cancel");
+            var dialog = await UserDialogs.Instance.ConfirmAsync(msg, "Add Family Member", "Confirm", "Cancel");
 
             if (dialog)
             {
@@ -603,7 +603,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
 
                 //}
                 Helpers.AppGlobalConstants.state = state;
-                await Navigation.PushModalAsync(new Views.Family.PatientSettingsManageSubscriptionAddFamilyMember());
+                await Navigation.PushModalAsync(new Views.Family.PatientSettingsManageSubscriptionAddFamilyMember(state));
 
 
                 //var intent = new Intent(this, typeof(PatientSettingsManageSubscriptionAddFamilyMemberActivity));

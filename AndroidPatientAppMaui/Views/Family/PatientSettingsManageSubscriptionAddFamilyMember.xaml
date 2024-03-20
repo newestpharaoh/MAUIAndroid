@@ -84,7 +84,7 @@
                             FontAttributes="Bold"
                             FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="Title *"
+                            Text="Title"
                             TextColor="Black"
                             VerticalOptions="FillAndExpand" />
                         <Grid
@@ -99,7 +99,8 @@
                                 FontSize="14"
                                 HorizontalOptions="FillAndExpand"
                                 Text="{Binding Title}"
-                                VerticalOptions="FillAndExpand" />
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center" />
                             <Image
                                 Margin="0,0,10,0"
                                 HeightRequest="10"
@@ -114,6 +115,7 @@
                                 ItemsSource="{Binding spnrTitle}"
                                 SelectedIndex="{Binding spnrTitleSelectedIndex}"
                                 SelectedIndexChanged="spnrTitle_SelectedIndexChanged"
+                                TextColor="Transparent"
                                 VerticalTextAlignment="Center" />
                         </Grid>
                     </Grid>
@@ -129,7 +131,7 @@
                             FontAttributes="Bold"
                             FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="First Name *"
+                            Text="First Name*"
                             TextColor="Black"
                             VerticalOptions="FillAndExpand" />
                         <Grid
@@ -191,7 +193,7 @@
                             FontAttributes="Bold"
                             FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="Last Name *"
+                            Text="Last Name*"
                             TextColor="Black"
                             VerticalOptions="FillAndExpand" />
                         <Grid
@@ -210,7 +212,7 @@
                                 VerticalOptions="FillAndExpand" />
                         </Grid>
                     </Grid>
-                    <!--  Date Picker Section  -->
+                    <!--  Date of Birth Section  -->
                     <Grid
                         Grid.Row="5"
                         HorizontalOptions="FillAndExpand"
@@ -236,8 +238,9 @@
                             <controls:CustomDatePicker
                                 x:Name="myDatePicker"
                                 Date="{Binding txtDOB}"
-                                Format="mm/dd/yyyy"
-                                HeightRequest="45" />
+                                Format="MM/dd/yyyy"
+                                HeightRequest="45"
+                                MinimumDate="01/01/1980" />
                         </Grid>
                     </Grid>
                     <!--  Gender Section  -->
@@ -252,7 +255,7 @@
                             FontAttributes="Bold"
                             FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="Gender *"
+                            Text="Gender*"
                             TextColor="Black"
                             VerticalOptions="FillAndExpand" />
                         <Grid
@@ -266,7 +269,8 @@
                                 FontSize="14"
                                 HorizontalOptions="FillAndExpand"
                                 Text="{Binding spnrGender}"
-                                VerticalOptions="CenterAndExpand" />
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center" />
                             <Image
                                 Margin="0,0,10,0"
                                 HeightRequest="10"
@@ -279,7 +283,9 @@
                                 FontSize="12"
                                 HorizontalTextAlignment="Start"
                                 ItemsSource="{Binding GenderList}"
+                                SelectedIndex="{Binding GenderSelectedIndex}"
                                 SelectedIndexChanged="spnrGender_SelectedIndexChanged"
+                                TextColor="Transparent"
                                 VerticalTextAlignment="Center" />
                         </Grid>
                     </Grid>
@@ -297,7 +303,7 @@
                             FontAttributes="Bold"
                             FontSize="12"
                             HorizontalOptions="FillAndExpand"
-                            Text="Relationship to You *"
+                            Text="Relationship to You*"
                             TextColor="Black"
                             VerticalOptions="FillAndExpand" />
                         <Grid
@@ -311,7 +317,8 @@
                                 FontSize="14"
                                 HorizontalOptions="FillAndExpand"
                                 Text="{Binding spnrRelationship}"
-                                VerticalOptions="FillAndExpand" />
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center" />
                             <Image
                                 Margin="0,0,10,0"
                                 HeightRequest="10"
@@ -326,7 +333,7 @@
                                 ItemsSource="{Binding RelationshipList}"
                                 SelectedIndex="{Binding spnrRelationshipselectedindex}"
                                 SelectedIndexChanged="spnrRelationship_SelectedIndexChanged"
-                                SelectedItem="{Binding SelectedRelationship}"
+                                TextColor="Transparent"
                                 VerticalTextAlignment="Center" />
                         </Grid>
                         <Grid

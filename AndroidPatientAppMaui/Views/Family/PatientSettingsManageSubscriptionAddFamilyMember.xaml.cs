@@ -1,4 +1,5 @@
 using AndroidPatientAppMaui.ViewModels.Family;
+using CommonLibraryCoreMaui.Models;
 
 namespace AndroidPatientAppMaui.Views.Family;
 
@@ -6,10 +7,11 @@ public partial class PatientSettingsManageSubscriptionAddFamilyMember : ContentP
 {  //To define the class lavel variable.
     PatientSettingsManageSubscriptionAddFamilyMemberViewModel VM;
     #region Constructor
-    public PatientSettingsManageSubscriptionAddFamilyMember()
-	{
-		InitializeComponent();
+    public PatientSettingsManageSubscriptionAddFamilyMember(AccountAddFamilyMemberState state)
+    {
+        InitializeComponent();
         this.BindingContext = VM = new PatientSettingsManageSubscriptionAddFamilyMemberViewModel(this.Navigation);
+
     }
     #endregion
 
@@ -21,8 +23,9 @@ public partial class PatientSettingsManageSubscriptionAddFamilyMember : ContentP
     {
         try
         {
-            base.OnAppearing(); 
-         //   await VM.GetUpdateFamilyMember();
+            base.OnAppearing();
+            //  await VM.GetDeatils();
+            //   await VM.GetUpdateFamilyMember();
 
         }
         catch (Exception ex)
@@ -40,11 +43,10 @@ public partial class PatientSettingsManageSubscriptionAddFamilyMember : ContentP
         try
         {
             VM.Title = string.Empty;
-            if (VM.patientProfile != null)
-            {
-                var item = sender as Picker;
-                VM.patientProfile.Title = item.SelectedItem.ToString();
-            }
+
+            var item = sender as Picker;
+            VM.Title = item.SelectedItem.ToString();
+
         }
         catch (Exception ex)
         {
@@ -61,11 +63,9 @@ public partial class PatientSettingsManageSubscriptionAddFamilyMember : ContentP
         try
         {
             VM.spnrGender = string.Empty;
-            if (VM.patientProfile != null)
-            {
-                var item = sender as Picker;
-                VM.patientProfile.Gender = item.SelectedItem.ToString();
-            }
+            var item = sender as Picker;
+            VM.spnrGender = item.SelectedItem.ToString();
+
         }
         catch (Exception ex)
         {
@@ -96,12 +96,12 @@ public partial class PatientSettingsManageSubscriptionAddFamilyMember : ContentP
                 // Clear the text in the other relationship entry if necessary
             }
 
-            VM.patientProfile.Relationship = selectedRelationship;
+            VM.spnrRelationship = selectedRelationship;
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex);
         }
-    } 
-    #endregion 
+    }
+    #endregion
 }
