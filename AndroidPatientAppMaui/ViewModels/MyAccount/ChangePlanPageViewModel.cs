@@ -322,7 +322,7 @@ namespace AndroidPatientAppMaui.ViewModels.MyAccount
                                 //Scenario 3: from family to Individual
                                 if (selectedSubscription is IndividualSubscription && (currentSubscription is FamilySubscription || currentSubscription is Family365Subscription))
                                 {
-                                    //intent = new Intent(this, typeof(PatientSettingsManageSubscriptionPlanChangeFamToIndActivity));
+                                    await Navigation.PushModalAsync(new Views.MyAccount.ChangePlan.PatientSettingsManageSubscriptionPlanChangeFamToInd(), false);
 
                                 }
                                 //Scenario 4: fam to Ind365

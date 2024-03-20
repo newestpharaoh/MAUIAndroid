@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AndroidPatientAppMaui.Views.MyAccount.ChangePlan.PatientSettingsManageSubscriptionPlanChangeFamToInd"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="PatientSettingsManageSubscriptionPlanChangeFamToInd">
+    <!--  Main Grid  -->
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid
+            HorizontalOptions="FillAndExpand"
+            RowDefinitions="50,1,*"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <!--  Header Section  -->
+            <Grid
+                Grid.Row="0"
+                ColumnDefinitions="50,*,50"
+                ColumnSpacing="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <!--  Back image Section  -->
+                <Grid
+                    Grid.Column="0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="FillAndExpand"
+                        Source="backicon.png"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="25" />
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalTextAlignment="Center"
+                    Text="Manage Subscriptions"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+            <!--  BoxView Section  -->
+            <BoxView
+                Grid.Row="1"
+                BackgroundColor="{StaticResource Gray1}"
+                HeightRequest="1"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
+
+            <ScrollView
+                Grid.Row="2"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                VerticalScrollBarVisibility="Never">
+                <!--  Body Section  -->
+                <StackLayout
+                    Margin="12,10"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        FontFamily="sanchezslab"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Text="Change Plan"
+                        TextColor="#2c3e50"
+                        VerticalOptions="Start" />
+                    <Label
+                        x:Name="lblPleaseContact"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Text="Changing your subscription will deactivate all family members covered by this plan at the end of the billing cycle."
+                        TextColor="#333333"
+                        VerticalOptions="Start" />
+                    <Label
+                        x:Name="lblBillingSummary"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Text=""
+                        TextColor="#333333"
+                        VerticalOptions="Start" />
+                    <!--  BoxView Section  -->
+                    <BoxView
+                        BackgroundColor="{StaticResource Gray1}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                    <Label
+                        x:Name="lblNewTotal"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Text="{Binding lblNewTotal}"
+                        TextColor="#000000"
+                        VerticalOptions="Start" />
+                    <StackLayout
+                        HorizontalOptions="CenterAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="10"
+                        VerticalOptions="FillAndExpand">
+                        <!--  TextView for Payment Date  -->
+                        <Label
+                            x:Name="lblNewSubscriptionTotalEffectiveDate"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            Text="Payment Date: 6/20/2023: recurring monthly"
+                            TextColor="#333333"
+                            VerticalOptions="StartAndExpand" />
+
+                        <!--  ImageView for Info  -->
+                        <Image
+                            x:Name="iconInfo"
+                            Margin="0"
+                            Aspect="AspectFit"
+                            HeightRequest="18"
+                            Source="greyinfoicon.png"
+                            VerticalOptions="StartAndExpand"
+                            WidthRequest="18">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Info_Clicked" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+
+                    <!--  BoxView Section  -->
+                    <BoxView
+                        BackgroundColor="{StaticResource Gray1}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                    <Label
+                        x:Name="lblContinue"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Text="{Binding lblContinue}"
+                        TextColor="#333333"
+                        VerticalOptions="Start" />
+                    <!--  BoxView Section  -->
+                    <BoxView
+                        BackgroundColor="{StaticResource Gray1}"
+                        HeightRequest="1"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                    <StackLayout
+                        HorizontalOptions="FillAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="0"
+                        VerticalOptions="FillAndExpand">
+                        <Button
+                            x:Name="btnContinue"
+                            Command="{Binding ContinueCommand}"
+                            HeightRequest="50"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Continue"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="120" />
+                        <!--  BoxView Section  -->
+                        <Button
+                            x:Name="btnPrevious"
+                            Command="{Binding CancelCommand}"
+                            HeightRequest="50"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Cancel"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="120" />
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </Grid>
+</ContentPage>
